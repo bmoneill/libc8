@@ -36,7 +36,7 @@ for more information about these functions.
 
 ## Documentation
 
-[Full documentation for libc8](https://boneill02.github.io/libc8/doc/html) is
+[Full documentation for libc8](https://bmoneill.github.io/libc8/doc/html) is
 available on the GitHub pages site.
 
 ## Testing
