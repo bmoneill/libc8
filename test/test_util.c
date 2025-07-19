@@ -76,6 +76,11 @@ void test_parse_int_WhereStringDoesNotContainInt(void) {
     TEST_ASSERT_EQUAL_INT(-1, parse_int(buf));
 }
 
+void test_trim_WhereStringIsOnlyWhitespace(void) {
+    sprintf(buf, "      \t\t");
+    TEST_ASSERT_EQUAL_INT(0, strlen(trim(buf)));
+}
+
 void test_trim_WhereStringHasLeadingWhitespace(void) {
     const char* content = "Hello there";
     sprintf(buf, "        \t\t  %s", content);
@@ -116,5 +121,6 @@ int main(void) {
     RUN_TEST(test_trim_WhereStringHasTrailingWhitespace);
     RUN_TEST(test_trim_leading_WhereStringHasLeadingAndTrailingWhitespace);
     RUN_TEST(test_trim_WhereStringHasNoWhitespace);
+    RUN_TEST(test_trim_WhereStringIsOnlyWhitespace);
     return UNITY_END();
 }

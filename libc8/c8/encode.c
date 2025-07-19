@@ -49,6 +49,7 @@ int c8_encode(const char* s, uint8_t* out, int args) {
     char* scpy;
     int len = strlen(s);
     int count = 0;
+    int validLineCount = 0;
     c8_line_count = line_count(s);
     label_list_t labels;
     symbol_list_t symbols;
@@ -74,12 +75,24 @@ int c8_encode(const char* s, uint8_t* out, int args) {
     c8_lines_unformatted = (char**)malloc(c8_line_count * sizeof(char*));
     for (int i = 0; i < c8_line_count; i++) {
         c8_lines_unformatted[i] = strdup(c8_lines[i]);
-        trim(c8_lines[i]);
+        c8_lines[i] = trim(c8_lines[i]);
+        c8_lines[i] = remove_comment(c8_lines[i]);
         if (strlen(c8_lines[i]) == 0) {
             // empty line
-            free(c8_lines_unformatted[i]);
-            c8_lines_unformatted[i] = NULL;
+            c8_lines[i] = NULL;
+        } else {
+            validLineCount++;
         }
+    }
+
+    if (validLineCount == 0) {
+        VERBOSE_PRINT(args, "No valid tokens found in input");
+        free(scpy);
+        free(symbols.s);
+        free(labels.l);
+        free(c8_lines);
+        free(c8_lines_unformatted);
+        return 0;
     }
 
     VERBOSE_PRINT(args, "Populating identifiers in label map\n");
@@ -87,6 +100,9 @@ int c8_encode(const char* s, uint8_t* out, int args) {
 
     VERBOSE_PRINT(args, "Populating symbol list\n");
     for (int i = 0; i < c8_line_count; i++) {
+        if (c8_lines[i] == NULL) {
+            continue;
+        }
         parse_line(c8_lines[i], i + 1, &symbols, &labels);
     }
 
@@ -199,7 +215,9 @@ static int line_count(const char* s) {
  * @return 1 if success, exception code otherwise
  */
 static int parse_line(char* s, int ln, symbol_list_t* symbols, label_list_t* labels) {
-    if (strlen(s) == 0 || strlen(remove_comment(s)) == 0 || strlen((s = trim(s))) == 0) {
+    s = trim(s);
+    s = remove_comment(s);
+    if (strlen(s) == 0) {
         // empty line
         return 1;
     }

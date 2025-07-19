@@ -56,7 +56,7 @@ void test_remove_comment_WhereStringIsOnlyComment(void) {
 }
 
 void test_c8_encode_WhereStringIsOnlyComment(void) {
-    char* s = "; A comment";
+    const char* s = "; A comment";
     sprintf(buf, "%s\n", s);
     int r = c8_encode(buf, bytecode, 0);
     TEST_ASSERT_EQUAL_INT(0, r);
@@ -65,13 +65,34 @@ void test_c8_encode_WhereStringIsOnlyComment(void) {
 
 void test_line_count_WhereStringHasOneLine(void) {
     const char* s = "ABCD";
+    sprintf(buf, "%s", s);
     TEST_ASSERT_EQUAL_INT(2, line_count(s));
 }
 
 void test_line_count_WhereStringHasMultipleLines(void) {
     const char* s = "ABCD\nEFGH\nIJKL\n";
-    TEST_ASSERT_EQUAL_INT(4, line_count(s));
+    sprintf(buf, "%s", s);
+    TEST_ASSERT_EQUAL_INT(4, line_count(buf));
 }
+
+void test_parse_line_WhereLineIsEmpty(void) {
+    const char* s = "";
+    sprintf(buf, "%s", s);
+    TEST_ASSERT_EQUAL_INT(1, parse_line(buf, 1, &symbols, &labels));
+}
+
+void test_parse_line_WhereLineContainsWhitespace(void) {
+    const char* s = "  ";
+    sprintf(buf, "%s", s);
+    TEST_ASSERT_EQUAL_INT(1, parse_line(buf, 1, &symbols, &labels));
+}
+
+void test_parse_line_WhereLineContainsInstruction(void) {
+    const char *s = "JP V0, $321";
+    sprintf(buf, "%s", s);
+    TEST_ASSERT_EQUAL_INT(1, parse_line(buf, 1, &symbols, &labels));
+}
+
 
 void test_parse_word_WhereWordIsLabelDefinition(void) {
     const char* s = "ldef";
@@ -195,6 +216,12 @@ void test_parse_word_WhereWordIsInvalid(void) {
     TEST_ASSERT_EQUAL_INT(0, symbols.len);
 }
 
+void test_tokenize_WhereStringIsOnlyWhitespace(void) {
+    sprintf(buf, "\t\t      ");
+    char* s[64];
+    TEST_ASSERT_EQUAL_INT(1, tokenize(s, buf, " ", 10));
+}
+
 int main(void) {
     srand(time(NULL));
 
@@ -220,10 +247,13 @@ int main(void) {
     RUN_TEST(test_parse_word_WhereWordIsInt);
     RUN_TEST(test_parse_word_WhereWordIsLabel);
     RUN_TEST(test_parse_word_WhereWordIsInvalid);
+    RUN_TEST(test_tokenize_WhereStringIsOnlyWhitespace);
+    RUN_TEST(test_parse_line_WhereLineIsEmpty);
+    RUN_TEST(test_parse_line_WhereLineContainsWhitespace);
+   RUN_TEST(test_parse_line_WhereLineContainsInstruction);
 
     free(bytecode);
     free(symbols.s);
     free(labels.l);
     return UNITY_END();
-
 }
