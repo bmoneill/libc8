@@ -199,7 +199,9 @@ static int line_count(const char* s) {
  * @return 1 if success, exception code otherwise
  */
 static int parse_line(char* s, int ln, symbol_list_t* symbols, label_list_t* labels) {
-    if (strlen(s) == 0 || strlen(remove_comment(s)) == 0 || strlen((s = trim(s))) == 0) {
+    s = trim(s);
+    s = remove_comment(s);
+    if (strlen(s) == 0) {
         // empty line
         return 1;
     }
