@@ -174,6 +174,26 @@ void test_run_command_WhereCommandIsAddBreakpoint_WithArgument(void) {
     TEST_ASSERT_EQUAL_INT(1, c8.breakpoints[addr]);
 }
 
+void test_run_command_WhereCommandIsRMBreakpoint_WithNoArgument(void) {
+    c8.breakpoints[c8.pc] = 1;
+    cmd.id = CMD_RM_BREAKPOINT;
+    cmd.arg.type = ARG_NONE;
+
+    TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
+    TEST_ASSERT_EQUAL_INT(0, c8.breakpoints[c8.pc]);
+}
+
+void test_run_command_WhereCommandIsRMBreakpoint_WithArgument(void) {
+    int addr = 0x123;
+    c8.breakpoints[addr] = 1;
+    cmd.id = CMD_RM_BREAKPOINT;
+    cmd.arg.type = ARG_ADDR;
+    cmd.arg.value.i = addr;
+
+    TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
+    TEST_ASSERT_EQUAL_INT(0, c8.breakpoints[addr]);
+}
+
 int main(void) {
     srand(time(NULL));
 
@@ -195,6 +215,8 @@ int main(void) {
     RUN_TEST(test_get_command_WhereCommandIsInvalid);
     RUN_TEST(test_run_command_WhereCommandIsAddBreakpoint_WithArgument);
     RUN_TEST(test_run_command_WhereCommandIsAddBreakpoint_WithNoArgument);
+    RUN_TEST(test_run_command_WhereCommandIsRMBreakpoint_WithArgument);
+    RUN_TEST(test_run_command_WhereCommandIsRMBreakpoint_WithNoArgument);
 
     return UNITY_END();
 }
