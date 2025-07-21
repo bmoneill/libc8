@@ -628,11 +628,11 @@ static int set_value(c8_t* c8, cmd_t* cmd) {
     switch (cmd->arg.type) {
     case ARG_NONE:  return 0;
     case ARG_ADDR: c8->mem[cmd->arg.value.i] = cmd->setValue; return 1;
-    case ARG_DT: c8->dt = cmd->arg.value.i; return 1;
-    case ARG_I: c8->I = cmd->arg.value.i; return 1;
-    case ARG_PC: c8->pc = cmd->arg.value.i; return 1;
-    case ARG_SP: c8->sp = cmd->arg.value.i; return 1;
-    case ARG_ST: c8->st = cmd->arg.value.i; return 1;
+    case ARG_DT: c8->dt = cmd->setValue; return 1;
+    case ARG_I: c8->I = cmd->setValue; return 1;
+    case ARG_PC: c8->pc = cmd->setValue; return 1;
+    case ARG_SP: c8->sp = cmd->setValue; return 1;
+    case ARG_ST: c8->st = cmd->setValue; return 1;
     case ARG_V: c8->V[cmd->arg.value.i] = cmd->setValue; return 1;
     case ARG_VK: c8->VK = cmd->arg.value.i; return 1;
     case ARG_BG: c8->colors[0] = cmd->arg.value.i; return 1;
