@@ -212,7 +212,7 @@ int debug_repl(c8_t* c8) {
 static int run_command(c8_t* c8, cmd_t* cmd) {
     switch (cmd->id) {
     case CMD_ADD_BREAKPOINT:
-        if (cmd->arg.type == -1) {
+        if (cmd->arg.type == ARG_NONE) {
             c8->breakpoints[c8->pc] = 1;
         }
         else {
@@ -220,7 +220,7 @@ static int run_command(c8_t* c8, cmd_t* cmd) {
         }
         break;
     case CMD_RM_BREAKPOINT:
-        if (cmd->arg.value.i == -1) {
+        if (cmd->arg.value.i == ARG_NONE) {
             c8->breakpoints[c8->pc] = 0;
         }
         else {

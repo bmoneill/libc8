@@ -15,10 +15,13 @@
 
 char buf[BUFLEN];
 cmd_t cmd;
+c8_t c8;
 
 void setUp() {
     memset(buf, 0, BUFLEN);
     memset(&cmd, 0, sizeof(cmd_t));
+    memset(&c8, 0, sizeof(c8_t));
+    c8.pc = 0x200;
 }
 void tearDown() { }
 
@@ -153,6 +156,24 @@ void test_get_command_WhereCommandIsInvalid(void) {
     TEST_ASSERT_EQUAL_INT(ARG_NONE, cmd.arg.type);
 }
 
+void test_run_command_WhereCommandIsAddBreakpoint_WithNoArgument(void) {
+    cmd.id = CMD_ADD_BREAKPOINT;
+    cmd.arg.type = ARG_NONE;
+
+    TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
+    TEST_ASSERT_EQUAL_INT(1, c8.breakpoints[0x200]);
+}
+
+void test_run_command_WhereCommandIsAddBreakpoint_WithArgument(void) {
+    int addr = 0x246;
+    cmd.id = CMD_ADD_BREAKPOINT;
+    cmd.arg.type = ARG_ADDR;
+    cmd.arg.value.i = addr;
+
+    TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
+    TEST_ASSERT_EQUAL_INT(1, c8.breakpoints[addr]);
+}
+
 int main(void) {
     srand(time(NULL));
 
@@ -172,6 +193,8 @@ int main(void) {
     RUN_TEST(test_get_command_WhereCommandIsHelp);
     RUN_TEST(test_get_command_WhereCommandIsQuit);
     RUN_TEST(test_get_command_WhereCommandIsInvalid);
+    RUN_TEST(test_run_command_WhereCommandIsAddBreakpoint_WithArgument);
+    RUN_TEST(test_run_command_WhereCommandIsAddBreakpoint_WithNoArgument);
 
     return UNITY_END();
 }
