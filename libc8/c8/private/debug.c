@@ -125,6 +125,7 @@ static void print_r_registers(const c8_t*);
 static void print_stack(const c8_t*);
 static void print_v_registers(const c8_t*);
 static void print_value(c8_t*, cmd_t*);
+static int run_command(c8_t*, cmd_t*);
 static void save_flags(const c8_t*, const char*);
 static void save_state(c8_t*, const char*);
 static int set_value(c8_t*, cmd_t*);
@@ -189,34 +190,9 @@ int debug_repl(c8_t* c8) {
     printf("debug > ");
     while (scanf("%63[^\n]", buf) != EOF) {
         if (get_command(&cmd, buf)) {
-            switch (cmd.id) {
-            case CMD_ADD_BREAKPOINT:
-                if (cmd.arg.type == -1) {
-                    c8->breakpoints[c8->pc] = 1;
-                }
-                else {
-                    c8->breakpoints[cmd.arg.value.i] = 1;
-                }
-                break;
-            case CMD_RM_BREAKPOINT:
-                if (cmd.arg.value.i == -1) {
-                    c8->breakpoints[c8->pc] = 0;
-                }
-                else {
-                    c8->breakpoints[cmd.arg.value.i] = 0;
-                }
-                break;
-            case CMD_CONTINUE: return DEBUG_CONTINUE;
-            case CMD_NEXT: return DEBUG_STEP;
-            case CMD_LOAD: load_state(c8, cmd.arg.value.s); break;
-            case CMD_SAVE: save_state(c8, cmd.arg.value.s); break;
-            case CMD_PRINT: print_value(c8, &cmd); break;
-            case CMD_SET: set_value(c8, &cmd); break;
-            case CMD_HELP: print_help(); break;
-            case CMD_QUIT: return DEBUG_QUIT;
-            case CMD_LOADFLAGS: load_flags(c8, cmd.arg.value.s); break;
-            case CMD_SAVEFLAGS: save_flags(c8, cmd.arg.value.s); break;
-            case CMD_NONE: printf("Invalid command\n"); break;
+            int result = run_command(c8, &cmd);
+            if (result != 0) {
+                return result;
             }
         }
         else {
@@ -231,6 +207,40 @@ int debug_repl(c8_t* c8) {
     }
 
     return DEBUG_QUIT; // EOF
+}
+
+static int run_command(c8_t* c8, cmd_t* cmd) {
+    switch (cmd->id) {
+    case CMD_ADD_BREAKPOINT:
+        if (cmd->arg.type == -1) {
+            c8->breakpoints[c8->pc] = 1;
+        }
+        else {
+            c8->breakpoints[cmd->arg.value.i] = 1;
+        }
+        break;
+    case CMD_RM_BREAKPOINT:
+        if (cmd->arg.value.i == -1) {
+            c8->breakpoints[c8->pc] = 0;
+        }
+        else {
+            c8->breakpoints[cmd->arg.value.i] = 0;
+        }
+        break;
+    case CMD_CONTINUE: return DEBUG_CONTINUE;
+    case CMD_NEXT: return DEBUG_STEP;
+    case CMD_LOAD: load_state(c8, cmd->arg.value.s); break;
+    case CMD_SAVE: save_state(c8, cmd->arg.value.s); break;
+    case CMD_PRINT: print_value(c8, cmd); break;
+    case CMD_SET: set_value(c8, cmd); break;
+    case CMD_HELP: print_help(); break;
+    case CMD_QUIT: return DEBUG_QUIT;
+    case CMD_LOADFLAGS: load_flags(c8, cmd->arg.value.s); break;
+    case CMD_SAVEFLAGS: save_flags(c8, cmd->arg.value.s); break;
+    default: printf("Invalid command\n"); break;
+    }
+
+    return 0;
 }
 
 /**
