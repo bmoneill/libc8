@@ -71,6 +71,18 @@ void test_get_command_WhereCommandIsSet(void) {
     TEST_ASSERT_EQUAL_INT(0x200, cmd.setValue);
 }
 
+void test_get_command_WhereCommandIsSet_WhereArgIsAddr(void) {
+    int addr = 0x20;
+    int value = 0x12;
+    sprintf(buf, "set $%03x %d", addr, value);
+
+    TEST_ASSERT_EQUAL_INT(1, get_command(&cmd, buf));
+    TEST_ASSERT_EQUAL_INT(CMD_SET, cmd.id);
+    TEST_ASSERT_EQUAL_INT(ARG_ADDR, cmd.arg.type);
+    TEST_ASSERT_EQUAL_INT(addr, cmd.arg.value.i);
+    TEST_ASSERT_EQUAL_INT(value, cmd.setValue);
+}
+
 void test_get_command_WhereCommandIsLoad(void) {
     const char* s = "load /path/to/file";
     strcpy(buf, s);
@@ -194,9 +206,46 @@ void test_run_command_WhereCommandIsRMBreakpoint_WithArgument(void) {
     TEST_ASSERT_EQUAL_INT(0, c8.breakpoints[addr]);
 }
 
-int main(void) {
-    srand(time(NULL));
+void test_run_command_WhereCommandIsContinue(void) {
+    cmd.id = CMD_CONTINUE;
 
+    TEST_ASSERT_EQUAL_INT(DEBUG_CONTINUE, run_command(&c8, &cmd));
+}
+
+void test_run_command_WhereCommandIsNext(void) {
+    cmd.id = CMD_NEXT;
+
+    TEST_ASSERT_EQUAL_INT(DEBUG_STEP, run_command(&c8, &cmd));
+}
+
+void test_run_command_WhereCommandIsQuit(void) {
+    cmd.id = CMD_QUIT;
+
+    TEST_ASSERT_EQUAL_INT(DEBUG_QUIT, run_command(&c8, &cmd));
+}
+
+void test_run_command_WhereCommandIsSet_WhereArgIsPC(void) {
+    cmd.id = CMD_SET;
+    cmd.arg.type = ARG_PC;
+    cmd.setValue = 0x300;
+
+    TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
+    TEST_ASSERT_EQUAL_INT(0x300, c8.pc);
+}
+
+void test_run_command_WhereCommandIsSet_WhereArgIsADDR(void) {
+    int addr = 0x10;
+    int value = 0x23;
+    cmd.id = CMD_SET;
+    cmd.arg.type = ARG_ADDR;
+    cmd.arg.value.i = addr;
+    cmd.setValue = value;
+
+    TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
+    TEST_ASSERT_EQUAL_INT(value, c8.mem[addr]);
+}
+
+int main(void) {
     UNITY_BEGIN();
 
     RUN_TEST(test_get_command_WhereCommandIsBreak);
@@ -204,6 +253,7 @@ int main(void) {
     RUN_TEST(test_get_command_WhereCommandIsContinue);
     RUN_TEST(test_get_command_WhereCommandIsNext);
     RUN_TEST(test_get_command_WhereCommandIsSet);
+    RUN_TEST(test_get_command_WhereCommandIsSet_WhereArgIsAddr);
     RUN_TEST(test_get_command_WhereCommandIsLoad);
     RUN_TEST(test_get_command_WhereCommandIsSave);
     RUN_TEST(test_get_command_WhereCommandIsLoadFlags);
@@ -217,6 +267,11 @@ int main(void) {
     RUN_TEST(test_run_command_WhereCommandIsAddBreakpoint_WithNoArgument);
     RUN_TEST(test_run_command_WhereCommandIsRMBreakpoint_WithArgument);
     RUN_TEST(test_run_command_WhereCommandIsRMBreakpoint_WithNoArgument);
+    RUN_TEST(test_run_command_WhereCommandIsContinue);
+    RUN_TEST(test_run_command_WhereCommandIsNext);
+    RUN_TEST(test_run_command_WhereCommandIsQuit);
+    RUN_TEST(test_run_command_WhereCommandIsSet_WhereArgIsPC);
+    RUN_TEST(test_run_command_WhereCommandIsSet_WhereArgIsADDR);
 
     return UNITY_END();
 }
