@@ -108,7 +108,7 @@ void test_get_command_WhereCommandIsSaveFlags(void) {
     TEST_ASSERT_EQUAL_STRING("/path/to/flags", cmd.arg.value.s);
 }
 
-void test_command_WhereCommandIsPrint(void) {
+void test_get_command_WhereCommandIsPrint_WithArgument(void) {
     const char* s = "print PC";
     strcpy(buf, s);
 
@@ -117,7 +117,7 @@ void test_command_WhereCommandIsPrint(void) {
     TEST_ASSERT_EQUAL_INT(ARG_PC, cmd.arg.type);
 }
 
-void test_command_WhereCommandIsPrint_WithNoArguments(void) {
+void test_get_command_WhereCommandIsPrint_WithNoArguments(void) {
     const char* s = "print";
     strcpy(buf, s);
 
@@ -126,7 +126,7 @@ void test_command_WhereCommandIsPrint_WithNoArguments(void) {
     TEST_ASSERT_EQUAL_INT(ARG_NONE, cmd.arg.type);
 }
 
-void test_command_WhereCommandIsHelp(void) {
+void test_get_command_WhereCommandIsHelp(void) {
     const char* s = "help";
     strcpy(buf, s);
 
@@ -135,12 +135,21 @@ void test_command_WhereCommandIsHelp(void) {
     TEST_ASSERT_EQUAL_INT(ARG_NONE, cmd.arg.type);
 }
 
-void test_command_WhereCommandIsQuit(void) {
+void test_get_command_WhereCommandIsQuit(void) {
     const char* s = "quit";
     strcpy(buf, s);
 
     TEST_ASSERT_EQUAL_INT(1, get_command(&cmd, buf));
     TEST_ASSERT_EQUAL_INT(CMD_QUIT, cmd.id);
+    TEST_ASSERT_EQUAL_INT(ARG_NONE, cmd.arg.type);
+}
+
+void test_get_command_WhereCommandIsInvalid(void) {
+    const char* s = "invalid";
+    strcpy(buf, s);
+
+    TEST_ASSERT_EQUAL_INT(0, get_command(&cmd, buf));
+    TEST_ASSERT_EQUAL_INT(CMD_NONE, cmd.id);
     TEST_ASSERT_EQUAL_INT(ARG_NONE, cmd.arg.type);
 }
 
@@ -158,10 +167,11 @@ int main(void) {
     RUN_TEST(test_get_command_WhereCommandIsSave);
     RUN_TEST(test_get_command_WhereCommandIsLoadFlags);
     RUN_TEST(test_get_command_WhereCommandIsSaveFlags);
-    RUN_TEST(test_command_WhereCommandIsPrint);
-    RUN_TEST(test_command_WhereCommandIsPrint_WithNoArguments);
-    RUN_TEST(test_command_WhereCommandIsHelp);
-    RUN_TEST(test_command_WhereCommandIsQuit);
+    RUN_TEST(test_get_command_WhereCommandIsPrint_WithArgument);
+    RUN_TEST(test_get_command_WhereCommandIsPrint_WithNoArguments);
+    RUN_TEST(test_get_command_WhereCommandIsHelp);
+    RUN_TEST(test_get_command_WhereCommandIsQuit);
+    RUN_TEST(test_get_command_WhereCommandIsInvalid);
 
     return UNITY_END();
 }
