@@ -15,6 +15,7 @@ c8as [-vV] [-o outputfile] src
 ## Example Code
 
 ```
+.DS "mystring"
 JP mylabel
 
 mysprite:
@@ -33,5 +34,6 @@ DRW V0, V1, 1
 * Binary integers must be formatted with a `0b` prefix.
 * Data bytes may be defined using the `.DB` symbol.
 * 16-bit data words may be defined using the `.DW` symbol.
+* Strings may be defined using the `.DS` symbol.
 * Commas are optional for instruction parameters.
 * This assembler is not case sensitive.
