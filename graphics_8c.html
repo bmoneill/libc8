@@ -100,9 +100,9 @@ $(document).ready(function(){initNavTree('graphics_8c.html',''); initResizable()
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aeb0fee7e25692380f5346f304f4b6e5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8c.html#aeb0fee7e25692380f5346f304f4b6e5a">__attribute__</a> ((weak))</td></tr>
-<tr class="memdesc:aeb0fee7e25692380f5346f304f4b6e5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play sound.  <br /></td></tr>
-<tr class="separator:aeb0fee7e25692380f5346f304f4b6e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9aace1b44b73111e15aa39f06f43456"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8c.html#af9aace1b44b73111e15aa39f06f43456">__attribute__</a> ((weak))</td></tr>
+<tr class="memdesc:af9aace1b44b73111e15aa39f06f43456"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play sound.  <br /></td></tr>
+<tr class="separator:af9aace1b44b73111e15aa39f06f43456"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65f6cffb0713d693a54ad610ca575263"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8c.html#a65f6cffb0713d693a54ad610ca575263">c8_get_pixel</a> (<a class="el" href="structc8__display__t.html">c8_display_t</a> *display, int x, int y)</td></tr>
 <tr class="memdesc:a65f6cffb0713d693a54ad610ca575263"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of (x,y) from <code>display</code>  <br /></td></tr>
 <tr class="separator:a65f6cffb0713d693a54ad610ca575263"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,14 +110,14 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Backend-agnostic graphics-related functions </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aeb0fee7e25692380f5346f304f4b6e5a" name="aeb0fee7e25692380f5346f304f4b6e5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb0fee7e25692380f5346f304f4b6e5a">&#9670;&#160;</a></span>__attribute__()</h2>
+<a id="af9aace1b44b73111e15aa39f06f43456" name="af9aace1b44b73111e15aa39f06f43456"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9aace1b44b73111e15aa39f06f43456">&#9670;&#160;</a></span>__attribute__()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int __attribute__ </td>
+          <td class="memname">__attribute__ </td>
           <td>(</td>
           <td class="paramtype">(weak)&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -131,16 +131,11 @@ Functions</h2></td></tr>
 <p>Render graphics.</p>
 <p>Initialize graphics system.</p>
 <p>Deinitialize graphics system.</p>
-<p>This definition is overridden in libc8_sdl2 by definition in internal/graphics_sdl.c.</p>
-<p>In libc8, this should be overridden by the user if <a class="el" href="chip8_8c.html#a254edf664fcb5e99fcf2035899af220a" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a> is called.</p>
-<p>This definition is overridden in libc8_sdl2 by definition in internal/graphics_sdl.c.</p>
-<p>In libc8, this should be overridden by the user if <a class="el" href="chip8_8c.html#a254edf664fcb5e99fcf2035899af220a" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a> is called.</p>
-<p>This definition is overridden in libc8_sdl2 by definition in internal/graphics_sdl.c.</p>
-<p>In libc8, this should be overridden by the user if <a class="el" href="chip8_8c.html#a254edf664fcb5e99fcf2035899af220a" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a> is called.</p>
-<p>This definition is overridden in libc8_sdl2 by definition in internal/graphics_sdl.c.</p>
-<p>In libc8, this should be overridden by the user if <a class="el" href="chip8_8c.html#a254edf664fcb5e99fcf2035899af220a" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a> is called.</p>
-<p>This definition is overridden in libc8_sdl2 by definition in internal/graphics_sdl.c.</p>
-<p>In libc8, this should be overridden by the user if <a class="el" href="chip8_8c.html#a254edf664fcb5e99fcf2035899af220a" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a> is called. </p>
+<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
+<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
+<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
+<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
+<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support. </p>
 
 </div>
 </div>
