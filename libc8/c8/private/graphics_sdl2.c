@@ -21,7 +21,7 @@ static SDL_Renderer* renderer;
  * Map of all keys to track.
  *
  * * `keyMap[x][0]` is `SDL_Keycode`
- * * `keyMap[x][]` is CHIP-8 keycode
+ * * `keyMap[x][1]` is CHIP-8 keycode
  * * `keyMap[16]` enables debug mode / step,
  * * `keyMap[17]` disables debug mode
  */
