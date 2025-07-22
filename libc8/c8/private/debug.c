@@ -209,40 +209,6 @@ int debug_repl(c8_t* c8) {
     return DEBUG_QUIT; // EOF
 }
 
-static int run_command(c8_t* c8, cmd_t* cmd) {
-    switch (cmd->id) {
-    case CMD_ADD_BREAKPOINT:
-        if (cmd->arg.type == ARG_NONE) {
-            c8->breakpoints[c8->pc] = 1;
-        }
-        else {
-            c8->breakpoints[cmd->arg.value.i] = 1;
-        }
-        break;
-    case CMD_RM_BREAKPOINT:
-        if (cmd->arg.type == ARG_NONE) {
-            c8->breakpoints[c8->pc] = 0;
-        }
-        else {
-            c8->breakpoints[cmd->arg.value.i] = 0;
-        }
-        break;
-    case CMD_CONTINUE: return DEBUG_CONTINUE;
-    case CMD_NEXT: return DEBUG_STEP;
-    case CMD_LOAD: load_state(c8, cmd->arg.value.s); break;
-    case CMD_SAVE: save_state(c8, cmd->arg.value.s); break;
-    case CMD_PRINT: print_value(c8, cmd); break;
-    case CMD_SET: set_value(c8, cmd); break;
-    case CMD_HELP: print_help(); break;
-    case CMD_QUIT: return DEBUG_QUIT;
-    case CMD_LOADFLAGS: load_flags(c8, cmd->arg.value.s); break;
-    case CMD_SAVEFLAGS: save_flags(c8, cmd->arg.value.s); break;
-    default: printf("Invalid command\n"); break;
-    }
-
-    return 0;
-}
-
 /**
  * @brief Check if breakpoint exists at address pc
  *
@@ -579,6 +545,49 @@ static void print_value(c8_t* c8, cmd_t* cmd) {
         break;
     default: break; // Should not be reached
     }
+}
+
+/**
+ * @brief Run the command specified in `cmd`.
+ *
+ * This function executes the command specified in the `cmd` structure.
+ *
+ * @param c8 the current CHIP-8 state
+ * @param cmd the command structure containing the command ID and arguments
+ * @return `DEBUG_CONTINUE`, `DEBUG_STEP`, `DEBUG_QUIT`, or 0
+ */
+static int run_command(c8_t* c8, cmd_t* cmd) {
+    switch (cmd->id) {
+    case CMD_ADD_BREAKPOINT:
+        if (cmd->arg.type == ARG_NONE) {
+            c8->breakpoints[c8->pc] = 1;
+        }
+        else {
+            c8->breakpoints[cmd->arg.value.i] = 1;
+        }
+        break;
+    case CMD_RM_BREAKPOINT:
+        if (cmd->arg.type == ARG_NONE) {
+            c8->breakpoints[c8->pc] = 0;
+        }
+        else {
+            c8->breakpoints[cmd->arg.value.i] = 0;
+        }
+        break;
+    case CMD_CONTINUE: return DEBUG_CONTINUE;
+    case CMD_NEXT: return DEBUG_STEP;
+    case CMD_LOAD: load_state(c8, cmd->arg.value.s); break;
+    case CMD_SAVE: save_state(c8, cmd->arg.value.s); break;
+    case CMD_PRINT: print_value(c8, cmd); break;
+    case CMD_SET: set_value(c8, cmd); break;
+    case CMD_HELP: print_help(); break;
+    case CMD_QUIT: return DEBUG_QUIT;
+    case CMD_LOADFLAGS: load_flags(c8, cmd->arg.value.s); break;
+    case CMD_SAVEFLAGS: save_flags(c8, cmd->arg.value.s); break;
+    default: printf("Invalid command\n"); break;
+    }
+
+    return 0;
 }
 
 /**
