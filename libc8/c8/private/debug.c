@@ -124,11 +124,11 @@ static void print_help(void);
 static void print_r_registers(const c8_t*);
 static void print_stack(const c8_t*);
 static void print_v_registers(const c8_t*);
-static void print_value(c8_t*, cmd_t*);
-static int run_command(c8_t*, cmd_t*);
+static void print_value(c8_t*, const cmd_t*);
+static int run_command(c8_t*, const cmd_t*);
 static void save_flags(const c8_t*, const char*);
-static void save_state(c8_t*, const char*);
-static int set_value(c8_t*, cmd_t*);
+static void save_state(const c8_t*, const char*);
+static int set_value(c8_t*, const cmd_t*);
 
 /**
  * These are string values of all possible argument, ordered to match the
@@ -486,7 +486,7 @@ static void print_stack(const c8_t* c8) {
  * @param c8 the current CHIP-8 state
  * @param cmd the command structure to get the arg from
  */
-static void print_value(c8_t* c8, cmd_t* cmd) {
+static void print_value(c8_t* c8, const cmd_t* cmd) {
     uint16_t pc;
     uint16_t ins;
     int addr;
@@ -556,7 +556,7 @@ static void print_value(c8_t* c8, cmd_t* cmd) {
  * @param cmd the command structure containing the command ID and arguments
  * @return `DEBUG_CONTINUE`, `DEBUG_STEP`, `DEBUG_QUIT`, or 0
  */
-static int run_command(c8_t* c8, cmd_t* cmd) {
+static int run_command(c8_t* c8, const cmd_t* cmd) {
     switch (cmd->id) {
     case CMD_ADD_BREAKPOINT:
         if (cmd->arg.type == ARG_NONE) {
@@ -613,7 +613,7 @@ static void save_flags(const c8_t* c8, const char* path) {
  * @param c8 `c8_t` to save
  * @param path path to save to
  */
-static void save_state(c8_t* c8, const char* path) {
+static void save_state(const c8_t* c8, const char* path) {
     FILE* f = fopen(path, "wb");
     if (!f) {
         printf("Invalid file\n");
@@ -633,7 +633,7 @@ static void save_state(c8_t* c8, const char* path) {
  * @param c8 the current CHIP-8 state
  * @param cmd the command structure
  */
-static int set_value(c8_t* c8, cmd_t* cmd) {
+static int set_value(c8_t* c8, const cmd_t* cmd) {
     switch (cmd->arg.type) {
     case ARG_NONE:  return 0;
     case ARG_ADDR: c8->mem[cmd->arg.value.i] = cmd->setValue; return 1;
