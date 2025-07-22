@@ -260,7 +260,7 @@ int main(void) {
     RUN_TEST(test_tokenize_WhereStringIsOnlyWhitespace);
     RUN_TEST(test_parse_line_WhereLineIsEmpty);
     RUN_TEST(test_parse_line_WhereLineContainsWhitespace);
-   RUN_TEST(test_parse_line_WhereLineContainsInstruction);
+    RUN_TEST(test_parse_line_WhereLineContainsInstruction);
     RUN_TEST(test_parse_line_WhereLineContainsDS);
 
     free(bytecode);
