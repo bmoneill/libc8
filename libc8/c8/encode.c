@@ -230,8 +230,6 @@ static int parse_line(char* s, int ln, symbol_list_t* symbols, label_list_t* lab
 
     // Special case for strings
     if (wc > 1 && is_ds(words[0])) {
-        printf("DS\n");
-
         for (int i = 1; i < wc; i++) {
             const char* word = words[i];
 
