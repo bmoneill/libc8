@@ -80,7 +80,8 @@ int c8_encode(const char* s, uint8_t* out, int args) {
         if (strlen(c8_lines[i]) == 0) {
             // empty line
             c8_lines[i] = NULL;
-        } else {
+        }
+        else {
             validLineCount++;
         }
     }
