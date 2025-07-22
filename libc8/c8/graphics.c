@@ -8,14 +8,13 @@
 
 #include <stdio.h>
 
- /**
-  * @brief Play sound
-  *
-  * This definition is overridden in libc8_sdl2 by definition in
-  * internal/graphics_sdl.c.
-  *
-  * In libc8, this should be overridden by the user if c8_simulate() is called.
-  */
+/**
+ * @brief Play sound
+ *
+ * This function is weak and is overridden by internal/graphics_sdl.c by
+ * default. This can also be overridden by the user when compiling without
+ * SDL2 support.
+ */
 __attribute__((weak)) void c8_beep(void) {
     fprintf(stderr, "c8_beep() not implemented.");
 }
@@ -23,10 +22,9 @@ __attribute__((weak)) void c8_beep(void) {
 /**
  * @brief Deinitialize graphics system
  *
- * This definition is overridden in libc8_sdl2 by definition in
- * internal/graphics_sdl.c.
- *
- * In libc8, this should be overridden by the user if c8_simulate() is called.
+ * This function is weak and is overridden by internal/graphics_sdl.c by
+ * default. This can also be overridden by the user when compiling without
+ * SDL2 support.
  */
 __attribute__((weak)) void c8_deinit_graphics(void) {
     fprintf(stderr, "c8_deinit_graphics() not implemented.");
@@ -35,10 +33,9 @@ __attribute__((weak)) void c8_deinit_graphics(void) {
 /**
  * @brief Initialize graphics system
  *
- * This definition is overridden in libc8_sdl2 by definition in
- * internal/graphics_sdl.c.
- *
- * In libc8, this should be overridden by the user if c8_simulate() is called.
+ * This function is weak and is overridden by internal/graphics_sdl.c by
+ * default. This can also be overridden by the user when compiling without
+ * SDL2 support.
  */
 __attribute__((weak)) uint8_t c8_init_graphics(void) {
     fprintf(stderr, "c8_init_graphics() not implemented.\n");
@@ -48,10 +45,9 @@ __attribute__((weak)) uint8_t c8_init_graphics(void) {
 /**
  * @brief Render graphics
  *
- * This definition is overridden in libc8_sdl2 by definition in
- * internal/graphics_sdl.c.
- *
- * In libc8, this should be overridden by the user if c8_simulate() is called.
+ * This function is weak and is overridden by internal/graphics_sdl.c by
+ * default. This can also be overridden by the user when compiling without
+ * SDL2 support.
  */
 __attribute__((weak)) void c8_render(c8_display_t* display, int* colors) {
     fprintf(stderr, "c8_render() not implemented.");
@@ -60,10 +56,9 @@ __attribute__((weak)) void c8_render(c8_display_t* display, int* colors) {
 /**
  * @brief Grab current keypresses and delay execution to match clockspeed
  *
- * This definition is overridden in libc8_sdl2 by definition in
- * internal/graphics_sdl.c.
- *
- * In libc8, this should be overridden by the user if c8_simulate() is called.
+ * This function is weak and is overridden by internal/graphics_sdl.c by
+ * default. This can also be overridden by the user when compiling without
+ * SDL2 support.
  */
 __attribute__((weak)) int c8_tick(int* key) {
     fprintf(stderr, "tick() not implemented.\n");
