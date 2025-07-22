@@ -93,6 +93,16 @@ void test_parse_line_WhereLineContainsInstruction(void) {
     TEST_ASSERT_EQUAL_INT(1, parse_line(buf, 1, &symbols, &labels));
 }
 
+void test_parse_line_WhereLineContainsDS(void) {
+    const char *s = "Hello";
+    sprintf(buf, ".DS \"%s\"", s);
+
+    parse_line(buf, 1, &symbols, &labels);
+
+    TEST_ASSERT_EQUAL_INT(SYM_DB, symbols.s[0].type);
+    TEST_ASSERT_EQUAL_INT((uint8_t)s[0], symbols.s[0].value);
+    TEST_ASSERT_EQUAL_INT(1, symbols.s[0].ln);
+}
 
 void test_parse_word_WhereWordIsLabelDefinition(void) {
     const char* s = "ldef";
@@ -251,6 +261,7 @@ int main(void) {
     RUN_TEST(test_parse_line_WhereLineIsEmpty);
     RUN_TEST(test_parse_line_WhereLineContainsWhitespace);
    RUN_TEST(test_parse_line_WhereLineContainsInstruction);
+    RUN_TEST(test_parse_line_WhereLineContainsDS);
 
     free(bytecode);
     free(symbols.s);

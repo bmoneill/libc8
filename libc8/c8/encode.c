@@ -227,6 +227,34 @@ static int parse_line(char* s, int ln, symbol_list_t* symbols, label_list_t* lab
     int wc = tokenize(words, s, " ", C8_ENCODE_MAX_WORDS);
     int ret = 0;
 
+    // Special case for strings
+    if (wc > 1 && is_ds(words[0])) {
+        printf("DS\n");
+
+        for (int i = 1; i < wc; i++) {
+            const char* word = words[i];
+
+            if (i > 1) {
+                sym->type = SYM_DB;
+                sym->value = ' ';
+                sym->ln = ln;
+                sym = next_symbol(symbols);
+            }
+
+            for (int j = i == 1 ? 1 : 0; word[j] != '\0'; j++) {
+                if (word[j] == '"' && (i > 1 || j > 0)) {
+                    return 1;
+                }
+                printf("%c", word[j]);
+                sym->type = SYM_DB;
+                sym->value = (uint8_t)word[j];
+                sym->ln = ln;
+                sym = next_symbol(symbols);
+            }
+        }
+        return 1;
+    }
+
     for (int i = 0; i < wc; i++) {
         if (i == wc - 1) {
             i += parse_word(words[i], NULL, ln, sym, labels);

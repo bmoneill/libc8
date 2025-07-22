@@ -167,6 +167,15 @@ int is_db(const char* s) {
 }
 
 /**
+ * @brief Check if given string is a DS identifier
+ *
+ * @return 1 if true, 0 if false
+ */
+int is_ds(const char* s) {
+    return !strcmp(s, S_DS);
+}
+
+/**
  * @brief Check if given string is a DW identifier
  *
  * @return 1 if true, 0 if false

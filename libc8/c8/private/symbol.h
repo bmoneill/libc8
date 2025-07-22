@@ -237,6 +237,7 @@ extern instruction_format_t formats[];
 int build_instruction(instruction_t*, symbol_list_t*, int);
 int is_comment(const char*);
 int is_db(const char*);
+int is_ds(const char*);
 int is_dw(const char*);
 int is_instruction(const char*);
 int is_label_definition(const char*);
