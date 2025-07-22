@@ -19,7 +19,7 @@ c8as [-vV] [-o outputfile] src
 JP mylabel
 
 mysprite:
-DW 0x1234
+.DW 0x1234
 
 mylabel:
 ADD V0, 1
