@@ -26,7 +26,7 @@ static inline void put16(uint8_t*, uint16_t, int);
 static int tokenize(char**, char*, const char*, int);
 static int to_upper(char*);
 static char* remove_comma(char*);
-static int write(uint8_t*, symbol_list_t*, int);
+static int write(uint8_t*, symbol_list_t*);
 
 char** c8_lines;
 char** c8_lines_unformatted;
@@ -114,7 +114,7 @@ int c8_encode(const char* s, uint8_t* out, int args) {
     substitute_labels(&symbols, &labels);
 
     VERBOSE_PRINT(args, "Writing output\n");
-    count = write(out, &symbols, args);
+    count = write(out, &symbols);
 
     free(scpy);
     free(symbols.s);
@@ -226,7 +226,6 @@ static int parse_line(char* s, int ln, symbol_list_t* symbols, const label_list_
     symbol_t* sym = next_symbol(symbols);
     char* words[C8_ENCODE_MAX_WORDS];
     int wc = tokenize(words, s, " ", C8_ENCODE_MAX_WORDS);
-    int ret = 0;
 
     // Special case for strings
     if (wc > 1 && is_ds(words[0])) {
@@ -409,11 +408,10 @@ static int to_upper(char* s) {
  *
  * @param output output array
  * @param symbols symbol list
- * @param args arguments given by user
  *
  * @return length of bytecode
  */
-static int write(uint8_t* output, symbol_list_t* symbols, int args) {
+static int write(uint8_t* output, symbol_list_t* symbols) {
     int ret;
     instruction_t ins;
     int byte = 0;
