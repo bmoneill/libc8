@@ -104,6 +104,7 @@ var symbol_8h =
     [ "build_instruction", "symbol_8h.html#a4f8f69e4aa9c5b1992bcaa9399089463", null ],
     [ "is_comment", "symbol_8h.html#adfa8a54df70d7f90309f7dd4e5fec337", null ],
     [ "is_db", "symbol_8h.html#a089a150c76010d9b0c8dbb76b07be11f", null ],
+    [ "is_ds", "symbol_8h.html#a63aad0bfe64896dfb979fe66947c12ae", null ],
     [ "is_dw", "symbol_8h.html#a7737594a801681a9f1d69cbae8a3f844", null ],
     [ "is_instruction", "symbol_8h.html#a2be724e9fe7e893e048cdb669f53c566", null ],
     [ "is_label", "symbol_8h.html#a1bf41e01ab787983c51a11e62460e0a1", null ],

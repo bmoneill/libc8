@@ -3,6 +3,7 @@ var symbol_8c =
     [ "build_instruction", "symbol_8c.html#a3096628c8eafa82fd4da5b4958e0e546", null ],
     [ "is_comment", "symbol_8c.html#acd6f5c21e24ac959fb123ec4df931e03", null ],
     [ "is_db", "symbol_8c.html#aae9db6252a048392eaecc64a85ca74f6", null ],
+    [ "is_ds", "symbol_8c.html#aae0c03d9a540ee1f404f287f64262a39", null ],
     [ "is_dw", "symbol_8c.html#a84ca9415fa36d4d75498bc2dcd265409", null ],
     [ "is_instruction", "symbol_8c.html#a1d2e87b9b62dde391adcac92957eea2a", null ],
     [ "is_label", "symbol_8c.html#a56e7aaf9e9dc128ee5815a64d1a2dd09", null ],
