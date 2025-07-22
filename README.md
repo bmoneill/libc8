@@ -44,6 +44,7 @@ Testing is done using
 [Unity](https://github.com/ThrowTheSwitch/Unity).
 
 ```shell
+git submodule update
 cmake -DTARGET_GROUP=test -DSDL2=OFF
 make && ctest --verbose
 ```
