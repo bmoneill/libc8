@@ -22,5 +22,5 @@ var exception_8h =
       [ "STACK_UNDERFLOW_EXCEPTION", "exception_8h.html#a402ebff4d96f276dd02c0159707849a3abcd4b9587b726a485b36533272f90ce3", null ]
     ] ],
     [ "handle_exception", "exception_8h.html#a1163ca13067416e6fb2871868b4bf715", null ],
-    [ "c8_exception", "exception_8h.html#a2b504db127ee3d58c7703aa9159c3b07", null ]
+    [ "c8_exception", "exception_8h.html#a220454f62a07328378e890bf6f2488b0", null ]
 ];

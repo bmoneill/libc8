@@ -1,6 +1,12 @@
 var searchData=
 [
-  ['handle_5fexception_0',['handle_exception',['../exception_8c.html#ac37cd7017ba52954f487d180bb35e327',1,'handle_exception(int code):&#160;exception.c'],['../exception_8h.html#a1163ca13067416e6fb2871868b4bf715',1,'handle_exception(int):&#160;exception.c']]],
-  ['has_5fbreakpoint_1',['has_breakpoint',['../debug_8c.html#a85961b83670863209dbc275b4102a098',1,'has_breakpoint(c8_t *c8, uint16_t pc):&#160;debug.c'],['../debug_8h.html#a72fa01efad8af5e22041286aba0adc69',1,'has_breakpoint(c8_t *, uint16_t):&#160;debug.c']]],
-  ['hex_5fto_5fint_2',['hex_to_int',['../util_8c.html#a63dec7a3087ac4070f1fc7709afb6287',1,'hex_to_int(char c):&#160;util.c'],['../util_8h.html#a3272235cd80b8d6bc6e3c6d80d8b5747',1,'hex_to_int(char):&#160;util.c']]]
+  ['is_5fcomment_0',['is_comment',['../symbol_8h.html#adfa8a54df70d7f90309f7dd4e5fec337',1,'is_comment(const char *):&#160;symbol.c'],['../symbol_8c.html#acd6f5c21e24ac959fb123ec4df931e03',1,'is_comment(const char *s):&#160;symbol.c']]],
+  ['is_5fdb_1',['is_db',['../symbol_8c.html#aae9db6252a048392eaecc64a85ca74f6',1,'is_db(const char *s):&#160;symbol.c'],['../symbol_8h.html#a089a150c76010d9b0c8dbb76b07be11f',1,'is_db(const char *):&#160;symbol.c']]],
+  ['is_5fds_2',['is_ds',['../symbol_8c.html#aae0c03d9a540ee1f404f287f64262a39',1,'is_ds(const char *s):&#160;symbol.c'],['../symbol_8h.html#a63aad0bfe64896dfb979fe66947c12ae',1,'is_ds(const char *):&#160;symbol.c']]],
+  ['is_5fdw_3',['is_dw',['../symbol_8c.html#a84ca9415fa36d4d75498bc2dcd265409',1,'is_dw(const char *s):&#160;symbol.c'],['../symbol_8h.html#a7737594a801681a9f1d69cbae8a3f844',1,'is_dw(const char *):&#160;symbol.c']]],
+  ['is_5finstruction_4',['is_instruction',['../symbol_8h.html#a2be724e9fe7e893e048cdb669f53c566',1,'is_instruction(const char *):&#160;symbol.c'],['../symbol_8c.html#a1d2e87b9b62dde391adcac92957eea2a',1,'is_instruction(const char *s):&#160;symbol.c']]],
+  ['is_5flabel_5',['is_label',['../symbol_8c.html#a56e7aaf9e9dc128ee5815a64d1a2dd09',1,'is_label(const char *s, const label_list_t *labels):&#160;symbol.c'],['../symbol_8h.html#a1bf41e01ab787983c51a11e62460e0a1',1,'is_label(const char *, const label_list_t *):&#160;symbol.c']]],
+  ['is_5flabel_5fdefinition_6',['is_label_definition',['../symbol_8c.html#af297e1e49927e696f01cf0ad0aff9e1b',1,'is_label_definition(const char *s):&#160;symbol.c'],['../symbol_8h.html#a3371ee5d526aba6bef32b681a1c2a1f8',1,'is_label_definition(const char *):&#160;symbol.c']]],
+  ['is_5fregister_7',['is_register',['../symbol_8c.html#ae1e2375a8a6e48f04e6cffbefded071d',1,'is_register(const char *s):&#160;symbol.c'],['../symbol_8h.html#a9b4a33469061dfc194e036b99d1b61d2',1,'is_register(const char *):&#160;symbol.c']]],
+  ['is_5freserved_5fidentifier_8',['is_reserved_identifier',['../symbol_8c.html#a36c2e21f342dcd14699575833b998fb0',1,'is_reserved_identifier(const char *s):&#160;symbol.c'],['../symbol_8h.html#ae5c8bb2f7399e744ee6f84eff86fab32',1,'is_reserved_identifier(const char *):&#160;symbol.c']]]
 ];

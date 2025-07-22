@@ -144,8 +144,8 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a2b504db127ee3d58c7703aa9159c3b07"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8h.html#a2b504db127ee3d58c7703aa9159c3b07">c8_exception</a> [<a class="el" href="exception_8h.html#a1f8068b064071d772414a5d15a237509">EXCEPTION_MESSAGE_SIZE</a>]</td></tr>
-<tr class="separator:a2b504db127ee3d58c7703aa9159c3b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a220454f62a07328378e890bf6f2488b0"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8h.html#a220454f62a07328378e890bf6f2488b0">c8_exception</a> [BUFSIZ]</td></tr>
+<tr class="separator:a220454f62a07328378e890bf6f2488b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section note"><dt>Note</dt><dd>NOT EXPORTED</dd></dl>
@@ -177,11 +177,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    { \</div>
-<div class="line">    snprintf(<a class="code hl_variable" href="exception_8h.html#a2b504db127ee3d58c7703aa9159c3b07">c8_exception</a>, <a class="code hl_define" href="exception_8h.html#a1f8068b064071d772414a5d15a237509">EXCEPTION_MESSAGE_SIZE</a>, __VA_ARGS__); \</div>
+<div class="line">    snprintf(<a class="code hl_variable" href="exception_8h.html#a220454f62a07328378e890bf6f2488b0">c8_exception</a>, <a class="code hl_define" href="exception_8h.html#a1f8068b064071d772414a5d15a237509">EXCEPTION_MESSAGE_SIZE</a>, __VA_ARGS__); \</div>
 <div class="line">    handle_exception(code); \</div>
 <div class="line">}</div>
 <div class="ttc" id="aexception_8h_html_a1f8068b064071d772414a5d15a237509"><div class="ttname"><a href="exception_8h.html#a1f8068b064071d772414a5d15a237509">EXCEPTION_MESSAGE_SIZE</a></div><div class="ttdeci">#define EXCEPTION_MESSAGE_SIZE</div><div class="ttdef"><b>Definition:</b> exception.h:13</div></div>
-<div class="ttc" id="aexception_8h_html_a2b504db127ee3d58c7703aa9159c3b07"><div class="ttname"><a href="exception_8h.html#a2b504db127ee3d58c7703aa9159c3b07">c8_exception</a></div><div class="ttdeci">char c8_exception[EXCEPTION_MESSAGE_SIZE]</div><div class="ttdef"><b>Definition:</b> exception.c:60</div></div>
+<div class="ttc" id="aexception_8h_html_a220454f62a07328378e890bf6f2488b0"><div class="ttname"><a href="exception_8h.html#a220454f62a07328378e890bf6f2488b0">c8_exception</a></div><div class="ttdeci">char c8_exception[BUFSIZ]</div><div class="ttdef"><b>Definition:</b> exception.c:60</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -253,8 +253,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a2b504db127ee3d58c7703aa9159c3b07" name="a2b504db127ee3d58c7703aa9159c3b07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b504db127ee3d58c7703aa9159c3b07">&#9670;&#160;</a></span>c8_exception</h2>
+<a id="a220454f62a07328378e890bf6f2488b0" name="a220454f62a07328378e890bf6f2488b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a220454f62a07328378e890bf6f2488b0">&#9670;&#160;</a></span>c8_exception</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -263,7 +263,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">char c8_exception[<a class="el" href="exception_8h.html#a1f8068b064071d772414a5d15a237509">EXCEPTION_MESSAGE_SIZE</a>]</td>
+          <td class="memname">char c8_exception[BUFSIZ]</td>
         </tr>
       </table>
   </td>

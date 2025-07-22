@@ -19,6 +19,6 @@ var exception_8c =
     [ "TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE", "exception_8c.html#af62de7d8fb5f520eacfb91d2aaa06912", null ],
     [ "UNKNOWN_EXCEPTION_MESSAGE", "exception_8c.html#a9599d0e7e81b26fa8fbbf9e700c9df5c", null ],
     [ "handle_exception", "exception_8c.html#ac37cd7017ba52954f487d180bb35e327", null ],
-    [ "c8_exception", "exception_8c.html#a2b504db127ee3d58c7703aa9159c3b07", null ],
+    [ "c8_exception", "exception_8c.html#a220454f62a07328378e890bf6f2488b0", null ],
     [ "exceptions", "exception_8c.html#ad085a791176c79b7eee1d049ddf788dd", null ]
 ];

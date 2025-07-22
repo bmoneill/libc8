@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jump_0',['jump',['../decode_8c.html#a0f2c7e32dd0cf76b15fb77a355405fc0',1,'decode.c']]]
+  ['next_5fsymbol_0',['next_symbol',['../symbol_8c.html#a46f348ff09aef4b9e61af207737eedd8',1,'next_symbol(symbol_list_t *symbols):&#160;symbol.c'],['../symbol_8h.html#acbfebf1e35e8adfcf4c7c485a848e3c3',1,'next_symbol(symbol_list_t *):&#160;symbol.c']]]
 ];

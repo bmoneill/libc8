@@ -100,9 +100,21 @@ $(document).ready(function(){initNavTree('graphics_8c.html',''); initResizable()
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af9aace1b44b73111e15aa39f06f43456"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8c.html#af9aace1b44b73111e15aa39f06f43456">__attribute__</a> ((weak))</td></tr>
-<tr class="memdesc:af9aace1b44b73111e15aa39f06f43456"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play sound.  <br /></td></tr>
-<tr class="separator:af9aace1b44b73111e15aa39f06f43456"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e8bbd8d2fd84b5deada3dd3bdc03ab5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8c.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5">c8_beep</a> (void)</td></tr>
+<tr class="memdesc:a2e8bbd8d2fd84b5deada3dd3bdc03ab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play sound.  <br /></td></tr>
+<tr class="separator:a2e8bbd8d2fd84b5deada3dd3bdc03ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04f712dc6e338364ae5e43e0b6ae9762"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8c.html#a04f712dc6e338364ae5e43e0b6ae9762">c8_deinit_graphics</a> (void)</td></tr>
+<tr class="memdesc:a04f712dc6e338364ae5e43e0b6ae9762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deinitialize graphics system.  <br /></td></tr>
+<tr class="separator:a04f712dc6e338364ae5e43e0b6ae9762"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10c02b36be48214fec64cc6a9d4f20e4"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8c.html#a10c02b36be48214fec64cc6a9d4f20e4">c8_init_graphics</a> (void)</td></tr>
+<tr class="memdesc:a10c02b36be48214fec64cc6a9d4f20e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize graphics system.  <br /></td></tr>
+<tr class="separator:a10c02b36be48214fec64cc6a9d4f20e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eed7591e6be8918285d8798ac4abc26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8c.html#a6eed7591e6be8918285d8798ac4abc26">c8_render</a> (<a class="el" href="structc8__display__t.html">c8_display_t</a> *display, int *colors)</td></tr>
+<tr class="memdesc:a6eed7591e6be8918285d8798ac4abc26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render graphics.  <br /></td></tr>
+<tr class="separator:a6eed7591e6be8918285d8798ac4abc26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af589590e575cd12250c33c39fc22b1f5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8c.html#af589590e575cd12250c33c39fc22b1f5">c8_tick</a> (int *key)</td></tr>
+<tr class="memdesc:af589590e575cd12250c33c39fc22b1f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grab current keypresses and delay execution to match clockspeed.  <br /></td></tr>
+<tr class="separator:af589590e575cd12250c33c39fc22b1f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65f6cffb0713d693a54ad610ca575263"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8c.html#a65f6cffb0713d693a54ad610ca575263">c8_get_pixel</a> (<a class="el" href="structc8__display__t.html">c8_display_t</a> *display, int x, int y)</td></tr>
 <tr class="memdesc:a65f6cffb0713d693a54ad610ca575263"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of (x,y) from <code>display</code>  <br /></td></tr>
 <tr class="separator:a65f6cffb0713d693a54ad610ca575263"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,16 +122,16 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Backend-agnostic graphics-related functions </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="af9aace1b44b73111e15aa39f06f43456" name="af9aace1b44b73111e15aa39f06f43456"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9aace1b44b73111e15aa39f06f43456">&#9670;&#160;</a></span>__attribute__()</h2>
+<a id="a2e8bbd8d2fd84b5deada3dd3bdc03ab5" name="a2e8bbd8d2fd84b5deada3dd3bdc03ab5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e8bbd8d2fd84b5deada3dd3bdc03ab5">&#9670;&#160;</a></span>c8_beep()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">__attribute__ </td>
+          <td class="memname">void c8_beep </td>
           <td>(</td>
-          <td class="paramtype">(weak)&#160;</td>
+          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -127,14 +139,27 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Play sound. </p>
-<p>Grab current keypresses and delay execution to match clockspeed.</p>
-<p>Render graphics.</p>
-<p>Initialize graphics system.</p>
-<p>Deinitialize graphics system.</p>
-<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
-<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
-<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
-<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
+<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support. </p>
+
+</div>
+</div>
+<a id="a04f712dc6e338364ae5e43e0b6ae9762" name="a04f712dc6e338364ae5e43e0b6ae9762"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04f712dc6e338364ae5e43e0b6ae9762">&#9670;&#160;</a></span>c8_deinit_graphics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void c8_deinit_graphics </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deinitialize graphics system. </p>
 <p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support. </p>
 
 </div>
@@ -181,6 +206,79 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to value of (x,y) in <code>display</code> </dd></dl>
+
+</div>
+</div>
+<a id="a10c02b36be48214fec64cc6a9d4f20e4" name="a10c02b36be48214fec64cc6a9d4f20e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10c02b36be48214fec64cc6a9d4f20e4">&#9670;&#160;</a></span>c8_init_graphics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t c8_init_graphics </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize graphics system. </p>
+<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support. </p>
+
+</div>
+</div>
+<a id="a6eed7591e6be8918285d8798ac4abc26" name="a6eed7591e6be8918285d8798ac4abc26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eed7591e6be8918285d8798ac4abc26">&#9670;&#160;</a></span>c8_render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void c8_render </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structc8__display__t.html">c8_display_t</a> *&#160;</td>
+          <td class="paramname"><em>display</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>colors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Render graphics. </p>
+<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support. </p>
+
+</div>
+</div>
+<a id="af589590e575cd12250c33c39fc22b1f5" name="af589590e575cd12250c33c39fc22b1f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af589590e575cd12250c33c39fc22b1f5">&#9670;&#160;</a></span>c8_tick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int c8_tick </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Grab current keypresses and delay execution to match clockspeed. </p>
+<p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support. </p>
 
 </div>
 </div>
