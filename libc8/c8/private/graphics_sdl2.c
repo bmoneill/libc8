@@ -1,5 +1,6 @@
 /**
  * @file c8/private/graphics_sdl2.c
+ * @note NOT EXPORTED
  *
  * SDL2 graphics implementation. When `SDL2` is defined, overrides weak
  * graphics utility function definitions in `graphics.c`.
