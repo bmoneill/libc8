@@ -29,14 +29,14 @@ code, you must implement these functions with your preferred graphics library:
 * `void c8_render(c8_display_t *, int *)`
 * `int c8_tick(int *, int)`
 
-See [this page](https://oneill.sh/doc/libc8/graphics__sdl2_8c.html#a04f712dc6e338364ae5e43e0b6ae9762)
+See [this page](https://bmoneill.github.io/libc8/graphics__sdl2_8c.html)
 for more information about these functions.
 
 **Note**: the `all` and `tools` targets require `SDL2` to be `ON`.
 
 ## Documentation
 
-[Full documentation for libc8](https://bmoneill.github.io/libc8/doc/html) is
+[Full documentation for libc8](https://bmoneill.github.io/libc8) is
 available on the GitHub pages site.
 
 ## Testing
