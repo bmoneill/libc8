@@ -94,14 +94,17 @@ void test_parse_line_WhereLineContainsInstruction(void) {
 }
 
 void test_parse_line_WhereLineContainsDS(void) {
-    const char *s = "Hello";
+    const char *s = "Hello world";
     sprintf(buf, ".DS \"%s\"", s);
 
-    parse_line(buf, 1, &symbols, &labels);
+    int ret = parse_line(buf, 1, &symbols, &labels);
 
-    TEST_ASSERT_EQUAL_INT(SYM_DB, symbols.s[0].type);
-    TEST_ASSERT_EQUAL_INT((uint8_t)s[0], symbols.s[0].value);
-    TEST_ASSERT_EQUAL_INT(1, symbols.s[0].ln);
+    TEST_ASSERT_EQUAL_INT(1, ret);
+    for (int i = 0; s[i] != '\0'; i++) {
+        TEST_ASSERT_EQUAL_INT(SYM_DB, symbols.s[i].type);
+        TEST_ASSERT_EQUAL_INT((uint8_t)s[i], symbols.s[i].value);
+        TEST_ASSERT_EQUAL_INT(1, symbols.s[i].ln);
+    }
 }
 
 void test_parse_word_WhereWordIsLabelDefinition(void) {
