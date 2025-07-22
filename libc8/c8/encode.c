@@ -20,7 +20,7 @@
 static int initialize_labels(label_list_t*);
 static int initialize_symbols(symbol_list_t*);
 static int line_count(const char*);
-static int parse_line(char*, int, symbol_list_t*, label_list_t*);
+static int parse_line(char*, int, symbol_list_t*, const label_list_t*);
 static int parse_word(char*, const char*, int, symbol_t*, const label_list_t*);
 static inline void put16(uint8_t*, uint16_t, int);
 static int tokenize(char**, char*, const char*, int);
@@ -215,7 +215,7 @@ static int line_count(const char* s) {
  *
  * @return 1 if success, exception code otherwise
  */
-static int parse_line(char* s, int ln, symbol_list_t* symbols, label_list_t* labels) {
+static int parse_line(char* s, int ln, symbol_list_t* symbols, const label_list_t* labels) {
     s = trim(s);
     s = remove_comment(s);
     if (strlen(s) == 0) {
