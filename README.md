@@ -6,8 +6,8 @@ This is a C library for interpreting, assembling, and disassembling CHIP-8 and
 SCHIP code, optionally utilizing the [SDL2](https://www.libsdl.org/) library
 for graphics.
 
-An example [assembler](doc/chip8as.md), [disassembler](doc/chip8dis.md), and
-[interpreter](doc/chip8.md) is located in `tools/`.
+An example [assembler](docs/chip8as.md), [disassembler](docs/chip8dis.md), and
+[interpreter](docs/chip8.md) is located in `tools/`.
 
 ## Building
 
