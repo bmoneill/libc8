@@ -16,7 +16,7 @@
   *
   * In libc8, this should be overridden by the user if c8_simulate() is called.
   */
-void __attribute__((weak)) c8_beep(void) {
+__attribute__((weak)) void c8_beep(void) {
     fprintf(stderr, "c8_beep() not implemented.");
 }
 
@@ -28,7 +28,7 @@ void __attribute__((weak)) c8_beep(void) {
  *
  * In libc8, this should be overridden by the user if c8_simulate() is called.
  */
-void __attribute__((weak)) c8_deinit_graphics(void) {
+__attribute__((weak)) void c8_deinit_graphics(void) {
     fprintf(stderr, "c8_deinit_graphics() not implemented.");
 }
 
@@ -40,7 +40,7 @@ void __attribute__((weak)) c8_deinit_graphics(void) {
  *
  * In libc8, this should be overridden by the user if c8_simulate() is called.
  */
-uint8_t __attribute__((weak)) c8_init_graphics(void) {
+__attribute__((weak)) uint8_t c8_init_graphics(void) {
     fprintf(stderr, "c8_init_graphics() not implemented.\n");
     return -1;
 }
@@ -53,7 +53,7 @@ uint8_t __attribute__((weak)) c8_init_graphics(void) {
  *
  * In libc8, this should be overridden by the user if c8_simulate() is called.
  */
-void __attribute__((weak)) c8_render(c8_display_t* display, int* colors) {
+__attribute__((weak)) void c8_render(c8_display_t* display, int* colors) {
     fprintf(stderr, "c8_render() not implemented.");
 }
 
@@ -65,7 +65,7 @@ void __attribute__((weak)) c8_render(c8_display_t* display, int* colors) {
  *
  * In libc8, this should be overridden by the user if c8_simulate() is called.
  */
-int __attribute__((weak)) c8_tick(int* key) {
+__attribute__((weak)) int c8_tick(int* key) {
     fprintf(stderr, "tick() not implemented.\n");
     return -1;
 }
