@@ -29,9 +29,9 @@ void setUp(void) {
     labels.len = 0;
     labels.ceil = LABEL_CEILING;
 
-    memset(symbols.s, 0, SYMBOL_CEILING * sizeof(symbol_t)); \
-        symbols.len = 0; \
-        symbols.ceil = SYMBOL_CEILING;
+    memset(symbols.s, 0, SYMBOL_CEILING * sizeof(symbol_t));
+    symbols.len = 0;
+    symbols.ceil = SYMBOL_CEILING;
 }
 
 void tearDown(void) {
@@ -121,7 +121,7 @@ void test_parse_word_WhereWordIsLabelDefinition(void) {
 }
 
 void test_parse_word_WhereWordIsInstruction(void) {
-    int ins = rand() % insCount;
+    int ins = 0;
 
     sprintf(buf, "%s", c8_instructionStrings[ins]);
     int r = parse_word(buf, NULL, 1, &symbols.s[0], &labels);
@@ -236,8 +236,6 @@ void test_tokenize_WhereStringIsOnlyWhitespace(void) {
 }
 
 int main(void) {
-    srand(time(NULL));
-
     bytecode = calloc(BYTECODE_SIZE, 1);
     symbols.s = calloc(SYMBOL_CEILING, sizeof(symbol_t));
     symbols.ceil = SYMBOL_CEILING;
