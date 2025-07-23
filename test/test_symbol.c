@@ -34,61 +34,7 @@ void setUp(void) {
     symbols.ceil = SYMBOL_CEILING;
 }
 
-void tearDown(void) {
-}
-
-void generate_valid_instruction_symbols(int idx, int ln) {
-    instruction_format_t* fmt = &formats[rand() % fc];
-
-    symbols.s[idx].ln = ln;
-    symbols.s[idx].type = SYM_INSTRUCTION;
-    symbols.s[idx].value = fmt->cmd;
-
-    idx++;
-    symbols.len = idx + fmt->pcount;
-    for (int i = 0; i < fmt->pcount; i++) {
-        symbols.s[idx + i].ln = ln;
-        symbols.s[idx + i].type = fmt->ptype[i];
-        switch (fmt->ptype[i]) {
-        case SYM_R:
-        case SYM_V:
-        case SYM_INT:
-            symbols.s[idx + i].value = rand() % 16;
-            break;
-        default:
-            symbols.s[idx + i].value = 0;
-        }
-    }
-}
-
-void generate_invalid_instruction_symbols(int idx, int ln) {
-    instruction_format_t* fmt = &formats[rand() % fc];
-
-    while (fmt->pcount == 0) {
-        fmt = &formats[rand() % fc];
-    }
-
-    symbols.s[idx].ln = ln;
-    symbols.s[idx].type = SYM_INSTRUCTION;
-    symbols.s[idx].value = fmt->cmd;
-
-    int count = fmt->pcount == 0 ? 1 : 0;
-
-    idx++;
-    symbols.len = idx + fmt->pcount;
-    for (int i = 0; i < count; i++) {
-        symbols.s[idx + i].ln = ln;
-        switch (fmt->ptype[i]) {
-        case SYM_V:
-            symbols.s[idx + i].type = SYM_INT;
-            symbols.s[idx + i].value = rand() % 0x100;
-            break;
-        default:
-            symbols.s[idx + i].type = SYM_V;
-            symbols.s[idx + i].value = rand() % 0x10;
-        }
-    }
-}
+void tearDown(void) { }
 
 void test_is_comment_WhereCommentIsAtEndOfString(void) {
     const char* s = "Hello ; This is a comment";
@@ -488,8 +434,6 @@ void test_substitute_labels_WhereSymbolListContainsNoLabels_WhereLabelListIsEmpt
 }
 
 int main(void) {
-    srand(time(NULL));
-
     symbols.s = calloc(SYMBOL_CEILING, sizeof(symbol_t));
     symbols.ceil = SYMBOL_CEILING;
     labels.l = calloc(LABEL_CEILING, sizeof(label_t));

@@ -45,7 +45,7 @@ void setUp(void) {
 void tearDown(void) {
 }
 
-void test_decode_instruction_should_parse(char* expected, uint16_t ins) {
+void test_decode_instruction_should_parse(const char* expected, uint16_t ins) {
     TEST_ASSERT_EQUAL_STRING(expected, c8_decode_instruction(ins, label_map));
 }
 
