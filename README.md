@@ -16,7 +16,7 @@ cmake .
 cmake --build .
 ```
 
-This will build libc8 as well as the example tools and tests.
+This will build libc8 as well as the example tools.
 
 ### SDL2
 
