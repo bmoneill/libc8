@@ -13,7 +13,7 @@ An example [assembler](docs/chip8as.md), [disassembler](docs/chip8dis.md), and
 
 ```shell
 cmake .
-make
+cmake --build .
 ```
 
 This will build libc8 as well as the example tools and tests.
