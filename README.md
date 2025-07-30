@@ -12,7 +12,7 @@ An example [assembler](docs/chip8as.md), [disassembler](docs/chip8dis.md), and
 ## Building
 
 ```shell
-cmake -DTARGET_GROUP=all .
+cmake .
 make
 ```
 
@@ -49,7 +49,7 @@ cmake -DTARGET_GROUP=test -DSDL2=OFF
 make && ctest --verbose
 ```
 
-**Note**: When built with tests enabled (`test` and `all-test` `TARGET_GROUP`s),
+**Note**: When built with tests enabled (`-DTARGET_GROUP=test`),
 `libc8` will not halt execution after encountering an error, potentially leading
 to undefined behavior.
 
