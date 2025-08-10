@@ -11,6 +11,8 @@ An example [assembler](docs/chip8as.md), [disassembler](docs/chip8dis.md), and
 
 ## Building
 
+### Linux
+
 ```shell
 cmake .
 cmake --build .
