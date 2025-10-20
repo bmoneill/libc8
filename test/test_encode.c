@@ -34,8 +34,7 @@ void setUp(void) {
     symbols.ceil = SYMBOL_CEILING;
 }
 
-void tearDown(void) {
-}
+void tearDown(void) { }
 
 void test_remove_comment_WhereStringHasNoComment(void) {
     const char* s = "String without a comment";

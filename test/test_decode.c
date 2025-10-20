@@ -42,8 +42,7 @@ void setUp(void) {
 	nnn = rand() % 0xFFF;
 }
 
-void tearDown(void) {
-}
+void tearDown(void) { }
 
 void test_decode_instruction_should_parse(const char* expected, uint16_t ins) {
     TEST_ASSERT_EQUAL_STRING(expected, c8_decode_instruction(ins, label_map));

@@ -16,8 +16,7 @@ void setUp(void) {
     memset(buf, 0, BUF_SIZE);
 }
 
-void tearDown(void) {
-}
+void tearDown(void) { }
 
 void test_hex_to_int_WhereStringIsLowercase(void) {
     int n = (rand() % 6) + 10;
