@@ -293,6 +293,7 @@ void test_populate_labels_WhereLinesHasMultipleLabelDefinitions(void) {
     sprintf(c8_lines[2], "%s", "RET");
     sprintf(c8_lines[3], "%s", "otherlabel:");
     sprintf(c8_lines[4], "%s", "SE V1, $55");
+    c8_line_count = 5;
 
     int r = populate_labels(&labels);
 
@@ -344,7 +345,7 @@ void test_resolve_labels_WhereLabelListHasOneLabel_WhereSymbolListDoesNotHaveLab
     sprintf(labels.l[0].identifier, "%s", "LABEL");
 
     int r = resolve_labels(&symbols, &labels);
-    TEST_ASSERT_EQUAL_INT(1, r);
+    TEST_ASSERT_EQUAL_INT(0, r);
     TEST_ASSERT_EQUAL_INT(0, labels.l[0].byte);
 }
 

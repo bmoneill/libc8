@@ -270,7 +270,7 @@ int is_register(const char* s) {
  * @return type of identifier if true, -1 otherwise
  */
 int is_reserved_identifier(const char* s) {
-    for (int i = 0; c8_identifierStrings[i]; i++) {
+    for (int i = 1; c8_identifierStrings[i]; i++) {
         if (!strcmp(s, c8_identifierStrings[i])) {
             return i;
         }
@@ -340,6 +340,7 @@ int populate_labels(label_list_t* labels) {
         }
 
         if (is_label_definition(c8_lines[i])) {
+            printf("GOT HERE\n");
             for (int j = 0; j < labels->len; j++) {
                 if (!strncmp(labels->l[j].identifier, c8_lines[i], strlen(labels->l[j].identifier))) {
                     C8_EXCEPTION(DUPLICATE_LABEL_EXCEPTION, "Duplicate label definition.\nLine %d: %s", i + 1, c8_lines_unformatted[i + 1]);

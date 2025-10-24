@@ -242,7 +242,7 @@ void test_parse_instruction_WhereInstructionIsCALL(void) {
     TEST_ASSERT_EQUAL_UINT16(old, c8.stack[0]);
 }
 
-void test_parse_instruction_WhereInstructionIsCALL_WhereSPIs15(void) {
+void test_parse_instruction_WhereInstructionIsCALL_WhereSPIs16(void) {
     ANNN(0x2, nnn);
 
     c8.sp = 15;

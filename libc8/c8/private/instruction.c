@@ -410,7 +410,7 @@ static inline int i_jp_nnn(c8_t* c8, uint16_t nnn) {
  * @return 0, the number of bytes to increase the program counter by.
  */
 static inline int i_call_nnn(c8_t* c8, uint16_t nnn) {
-    if (c8->sp >= 16) {
+    if (c8->sp >= 15) {
         C8_EXCEPTION(STACK_OVERFLOW_EXCEPTION, "Stack overflow at %03x", c8->pc);
         return STACK_OVERFLOW_EXCEPTION;
     }

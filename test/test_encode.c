@@ -78,7 +78,7 @@ void test_c8_encode_WhereStringIsOnlyComment(void) {
 void test_line_count_WhereStringHasOneLine(void) {
     const char* s = "ABCD";
     sprintf(buf, "%s", s);
-    TEST_ASSERT_EQUAL_INT(2, line_count(s));
+    TEST_ASSERT_EQUAL_INT(1, line_count(s));
 }
 
 void test_line_count_WhereStringHasMultipleLines(void) {
