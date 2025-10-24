@@ -1,23 +1,25 @@
-add_executable(instruction_tests test_instruction.c)
-target_link_libraries(instruction_tests c8 Unity)
-add_test(instruction instruction_tests)
+function(add_libc8_test name)
+    set(test_src "${CMAKE_CURRENT_SOURCE_DIR}/test_${name}.c")
+    set(runner_src "${CMAKE_CURRENT_BINARY_DIR}/test_${name}_runner.c")
 
-add_executable(decode_tests test_decode.c)
-target_link_libraries(decode_tests c8 Unity)
-add_test(decode decode_tests)
+    add_custom_command(
+        OUTPUT ${runner_src}
+        COMMAND ruby ${CMAKE_SOURCE_DIR}/external/Unity/auto/generate_test_runner.rb ${test_src} ${runner_src}
+        DEPENDS ${test_src} ${CMAKE_SOURCE_DIR}/external/Unity/auto/generate_test_runner.rb
+        COMMENT "Generating ${runner_src}"
+    )
 
-add_executable(encode_tests test_encode.c)
-target_link_libraries(encode_tests c8 Unity)
-add_test(encode encode_tests)
+    # Define the test executable
+    add_executable(${name}_tests ${test_src} ${runner_src})
+    target_link_libraries(${name}_tests c8 Unity)
 
-add_executable(symbol_tests test_symbol.c)
-target_link_libraries(symbol_tests c8 Unity)
-add_test(symbol symbol_tests)
+    # Register as a CTest test
+    add_test(NAME ${name} COMMAND ${name}_tests)
+endfunction()
 
-add_executable(util_tests test_util.c)
-target_link_libraries(util_tests c8 Unity)
-add_test(util util_tests)
-
-add_executable(debug_tests test_debug.c)
-target_link_libraries(debug_tests c8 Unity)
-add_test(debug debug_tests)
+add_libc8_test(debug)
+add_libc8_test(decode)
+add_libc8_test(encode)
+add_libc8_test(instruction)
+add_libc8_test(symbol)
+add_libc8_test(util)

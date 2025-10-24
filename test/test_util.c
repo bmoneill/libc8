@@ -13,6 +13,7 @@
 char buf[BUF_SIZE];
 
 void setUp(void) {
+    srand(time(NULL));
     memset(buf, 0, BUF_SIZE);
 }
 
@@ -102,24 +103,4 @@ void test_trim_WhereStringHasNoWhitespace(void) {
     const char* content = "Hello there";
     sprintf(buf, "%s", content);
     TEST_ASSERT_EQUAL_STRING(content, trim(buf));
-}
-
-int main(void) {
-    srand(time(NULL));
-    UNITY_BEGIN();
-    RUN_TEST(test_hex_to_int_WhereStringIsDecimal);
-    RUN_TEST(test_hex_to_int_WhereStringIsLowercase);
-    RUN_TEST(test_hex_to_int_WhereStringIsUppercase);
-    RUN_TEST(test_parse_int_WhereStringIsDecimal);
-    RUN_TEST(test_parse_int_WhereStringIsHexWithDollarPrefix);
-    RUN_TEST(test_parse_int_WhereStringIsHexWithVPrefix);
-    RUN_TEST(test_parse_int_WhereStringIsHexWithXPrefix);
-    RUN_TEST(test_parse_int_WhereStringIsEmpty);
-    RUN_TEST(test_parse_int_WhereStringDoesNotContainInt);
-    RUN_TEST(test_trim_WhereStringHasLeadingWhitespace);
-    RUN_TEST(test_trim_WhereStringHasTrailingWhitespace);
-    RUN_TEST(test_trim_leading_WhereStringHasLeadingAndTrailingWhitespace);
-    RUN_TEST(test_trim_WhereStringHasNoWhitespace);
-    RUN_TEST(test_trim_WhereStringIsOnlyWhitespace);
-    return UNITY_END();
 }

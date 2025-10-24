@@ -41,6 +41,7 @@ uint16_t nnn = 0;
 const uint16_t pc = 0x200;
 
 void setUp(void) {
+    srand(time(NULL));
     /* clear c8_t */
     memset(&c8, 0, sizeof(c8_t));
     c8.pc = 0x200;
@@ -789,72 +790,4 @@ void test_parse_instruction_WhereInstructionIsLDXR_InSCHIPMode(void) {
     for (int i = 0; i < x; i++) {
         TEST_ASSERT_EQUAL_UINT8(c8.V[i], c8.R[i]);
     }
-}
-
-int main(void) {
-    srand(time(NULL));
-    UNITY_BEGIN();
-    RUN_TEST(test_parse_instruction_WhereInstructionIsCLS);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsRET);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSCD_InCHIP8Mode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSCD_InSCHIPMode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSCR_InCHIP8Mode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSCR_InSCHIPMode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSCL_InCHIP8Mode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSCL_InSCHIPMode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsEXIT_InCHIP8Mode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsEXIT_InSCHIPMode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLOW_InCHIP8Mode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLOW_InSCHIPMode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsHIGH_InCHIP8Mode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsHIGH_InSCHIPMode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsJPNNN);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsCALL);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSEXKK_WhereVXEqualsKK);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSEXKK_WhereVXDoesNotEqualKK);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSNEXKK_WhereVXEqualsKK);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSNEXKK_WhereVXDoesNotEqualKK);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSEXY_WhereVsAreEqual);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSEXY_WhereVsAreNotEqual);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDXKK);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsADDXKK_WithCarry);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsADDXKK_WithoutCarry);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDXY);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsORXY);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsANDXY);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsXORXY);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsADDXY_WithCarry);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsADDXY_WithoutCarry);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSUBXY_WithBorrow);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSUBXY_WithoutBorrow);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSHRXY_WithFlag);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSHRXY_WithoutFlag);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSUBNXY_WithFlag);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSUBNXY_WithoutFlag);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSHLXY_WithFlag);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSHLXY_WithoutFlag);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSNEXY_WhereVsAreEqual);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSNEXY_WhereVsAreNotEqual);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDINNN);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsJPV0NNN);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsRNDXKK);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSKPV_WhereKeyIsPressed);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSKPV_WhereKeyIsNotPressed);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSKNPV_WhereKeyIsPressed);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsSKNPV_WhereKeyIsNotPressed);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDXDT);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDXK_WhereKeyIsPressed);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDXK_WhereKeyIsNotPressed);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDDTX);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDSTX);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsADDIX);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDFX);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDHFX_InCHIP8Mode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDHFX_InSCHIPMode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDBX);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDIPX);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDXIP);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDRX_InCHIP8Mode);
-    RUN_TEST(test_parse_instruction_WhereInstructionIsLDXR_InSCHIPMode);
-    return UNITY_END();
 }

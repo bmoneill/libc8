@@ -244,34 +244,3 @@ void test_run_command_WhereCommandIsSet_WhereArgIsADDR(void) {
     TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
     TEST_ASSERT_EQUAL_INT(value, c8.mem[addr]);
 }
-
-int main(void) {
-    UNITY_BEGIN();
-
-    RUN_TEST(test_get_command_WhereCommandIsBreak);
-    RUN_TEST(test_get_command_WhereCommandIsRMBreak);
-    RUN_TEST(test_get_command_WhereCommandIsContinue);
-    RUN_TEST(test_get_command_WhereCommandIsNext);
-    RUN_TEST(test_get_command_WhereCommandIsSet);
-    RUN_TEST(test_get_command_WhereCommandIsSet_WhereArgIsAddr);
-    RUN_TEST(test_get_command_WhereCommandIsLoad);
-    RUN_TEST(test_get_command_WhereCommandIsSave);
-    RUN_TEST(test_get_command_WhereCommandIsLoadFlags);
-    RUN_TEST(test_get_command_WhereCommandIsSaveFlags);
-    RUN_TEST(test_get_command_WhereCommandIsPrint_WithArgument);
-    RUN_TEST(test_get_command_WhereCommandIsPrint_WithNoArguments);
-    RUN_TEST(test_get_command_WhereCommandIsHelp);
-    RUN_TEST(test_get_command_WhereCommandIsQuit);
-    RUN_TEST(test_get_command_WhereCommandIsInvalid);
-    RUN_TEST(test_run_command_WhereCommandIsAddBreakpoint_WithArgument);
-    RUN_TEST(test_run_command_WhereCommandIsAddBreakpoint_WithNoArgument);
-    RUN_TEST(test_run_command_WhereCommandIsRMBreakpoint_WithArgument);
-    RUN_TEST(test_run_command_WhereCommandIsRMBreakpoint_WithNoArgument);
-    RUN_TEST(test_run_command_WhereCommandIsContinue);
-    RUN_TEST(test_run_command_WhereCommandIsNext);
-    RUN_TEST(test_run_command_WhereCommandIsQuit);
-    RUN_TEST(test_run_command_WhereCommandIsSet_WhereArgIsPC);
-    RUN_TEST(test_run_command_WhereCommandIsSet_WhereArgIsADDR);
-
-    return UNITY_END();
-}

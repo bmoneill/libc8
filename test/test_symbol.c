@@ -22,6 +22,24 @@ int fc = 0;
 char* line0;
 
 void setUp(void) {
+    symbols.s = calloc(SYMBOL_CEILING, sizeof(symbol_t));
+    symbols.ceil = SYMBOL_CEILING;
+    labels.l = calloc(LABEL_CEILING, sizeof(label_t));
+    labels.ceil = LABEL_CEILING;
+
+    for (fc = 0; formats[fc].cmd != I_NULL; fc++);
+
+    c8_lines = malloc(MAX_LINE_COUNT * sizeof(char*));
+    line0 = malloc(MAX_LINE_LEN * MAX_LINE_COUNT);
+    for (int i = 0; i < MAX_LINE_COUNT; i++) {
+        c8_lines[i] = line0 + (i * MAX_LINE_LEN);
+    }
+
+    c8_lines_unformatted = malloc(MAX_LINE_COUNT * sizeof(char*));
+    for (int i = 0; i < MAX_LINE_COUNT; i++) {
+        c8_lines_unformatted[i] = line0 + (i * MAX_LINE_LEN);
+    }
+
     memset(&ins, 0, sizeof(instruction_t));
     memset(line0, 0, MAX_LINE_LEN * MAX_LINE_COUNT);
 
@@ -34,7 +52,13 @@ void setUp(void) {
     symbols.ceil = SYMBOL_CEILING;
 }
 
-void tearDown(void) { }
+void tearDown(void) {
+    free(symbols.s);
+    free(labels.l);
+    free(line0);
+    free(c8_lines);
+    free(c8_lines_unformatted);
+}
 
 void test_is_comment_WhereCommentIsAtEndOfString(void) {
     const char* s = "Hello ; This is a comment";
@@ -431,90 +455,4 @@ void test_substitute_labels_WhereSymbolListContainsNoLabels_WhereLabelListIsEmpt
     int r = substitute_labels(&symbols, &labels);
 
     TEST_ASSERT_EQUAL_INT(1, r);
-}
-
-int main(void) {
-    symbols.s = calloc(SYMBOL_CEILING, sizeof(symbol_t));
-    symbols.ceil = SYMBOL_CEILING;
-    labels.l = calloc(LABEL_CEILING, sizeof(label_t));
-    labels.ceil = LABEL_CEILING;
-
-    for (fc = 0; formats[fc].cmd != I_NULL; fc++);
-
-    c8_lines = malloc(MAX_LINE_COUNT * sizeof(char*));
-    line0 = malloc(MAX_LINE_LEN * MAX_LINE_COUNT);
-    for (int i = 0; i < MAX_LINE_COUNT; i++) {
-        c8_lines[i] = line0 + (i * MAX_LINE_LEN);
-    }
-
-    c8_lines_unformatted = malloc(MAX_LINE_COUNT * sizeof(char*));
-    for (int i = 0; i < MAX_LINE_COUNT; i++) {
-        c8_lines_unformatted[i] = line0 + (i * MAX_LINE_LEN);
-    }
-
-    UNITY_BEGIN();
-
-    RUN_TEST(test_is_comment_WhereCommentIsEntireString);
-    RUN_TEST(test_is_comment_WhereCommentIsAtEndOfString);
-    RUN_TEST(test_is_comment_WhereNoCommentIsInString);
-    RUN_TEST(test_is_comment_WhereStringIsEmpty);
-
-    RUN_TEST(test_is_db_WhereStringIsDB);
-    RUN_TEST(test_is_db_WhereStringIsNotDB);
-    RUN_TEST(test_is_db_WhereStringContainsDB);
-    RUN_TEST(test_is_db_WithTrailingChars);
-    RUN_TEST(test_is_db_WhereStringIsEmpty);
-
-    RUN_TEST(test_is_dw_WhereStringIsDW);
-    RUN_TEST(test_is_dw_WhereStringIsNotDW);
-    RUN_TEST(test_is_dw_WhereStringContainsDW);
-    RUN_TEST(test_is_dw_WithTrailingChars);
-    RUN_TEST(test_is_dw_WhereStringIsEmpty);
-
-    RUN_TEST(test_is_instruction_WhereStringIsInstruction);
-    RUN_TEST(test_is_instruction_WhereStringIsNotInstruction);
-    RUN_TEST(test_is_instruction_WhereStringIsEmpty);
-
-    RUN_TEST(test_is_label_definition_WhereStringIsLabelDefinition);
-    RUN_TEST(test_is_label_definition_WhereStringIsNotLabelDefinition);
-    RUN_TEST(test_is_label_definition_WhereStringIsEmpty);
-
-    RUN_TEST(test_is_label_WhereStringIsLabel);
-    RUN_TEST(test_is_label_WhereStringIsNotLabel);
-    RUN_TEST(test_is_label_WhereStringIsEmpty);
-
-    RUN_TEST(test_is_register_WhereStringIsRegister_WhereRegisterIsUppercase);
-    RUN_TEST(test_is_register_WhereStringIsRegister_RegisterIsLowercase);
-    RUN_TEST(test_is_register_WhereStringIsNotRegister);
-    RUN_TEST(test_is_register_WhereStringIsEmpty);
-
-    RUN_TEST(test_is_reserved_identifier_WhereStringIsReservedIdentifier);
-    RUN_TEST(test_is_reserved_identifier_WhereStringIsNotReservedIdentifier);
-    RUN_TEST(test_is_register_WhereStringIsEmpty);
-
-    RUN_TEST(test_next_symbol_WhereSymbolListIsEmpty);
-    RUN_TEST(test_next_symbol_WhereSymbolListIsFull);
-    RUN_TEST(test_next_symbol_WhereSymbolListIsNotEmptyOrFull);
-
-    RUN_TEST(test_populate_labels_WhereLinesHasDuplicateLabelDefinitions);
-    RUN_TEST(test_populate_labels_WhereLinesIsEmpty);
-    RUN_TEST(test_populate_labels_WhereLinesHasMultipleLabelDefinitions);
-    RUN_TEST(test_populate_labels_WhereLabelListIsEmpty);
-
-    RUN_TEST(test_resolve_labels_WhereLabelListHasOneLabel_WhereSymbolListHasLabelDefinition);
-    RUN_TEST(test_resolve_labels_WhereLabelListHasMultipleLabels_WhereSymbolListHasLabelDefinitions);
-    RUN_TEST(test_resolve_labels_WhereSymbolListIsEmpty);
-    RUN_TEST(test_resolve_labels_WhereLabelListIsEmpty);
-
-    RUN_TEST(test_substitute_labels_WhereLabelListContainsAllLabels);
-    RUN_TEST(test_substitute_labels_WhereLabelListIsMissingLabels);
-    RUN_TEST(test_substitute_labels_WhereSymbolListIsEmpty);
-    RUN_TEST(test_substitute_labels_WhereSymbolListContainsNoLabels_WhereLabelListIsEmpty);
-
-    free(symbols.s);
-    free(labels.l);
-    free(line0);
-    free(c8_lines);
-    free(c8_lines_unformatted);
-    return UNITY_END();
 }

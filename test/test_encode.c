@@ -22,6 +22,15 @@ symbol_list_t symbols;
 label_list_t labels;
 
 void setUp(void) {
+    bytecode = calloc(BYTECODE_SIZE, 1);
+    symbols.s = calloc(SYMBOL_CEILING, sizeof(symbol_t));
+    symbols.ceil = SYMBOL_CEILING;
+    labels.l = calloc(LABEL_CEILING, sizeof(label_t));
+    labels.ceil = LABEL_CEILING;
+
+    for (fmtCount = 0; formats[fmtCount].cmd != I_NULL; fmtCount++);
+    for (insCount = 0; c8_instructionStrings[insCount] != NULL; insCount++);
+
     memset(bytecode, 0, BYTECODE_SIZE);
     memset(buf, 0, BUF_SIZE);
 
@@ -34,7 +43,11 @@ void setUp(void) {
     symbols.ceil = SYMBOL_CEILING;
 }
 
-void tearDown(void) { }
+void tearDown(void) {
+    free(bytecode);
+    free(symbols.s);
+    free(labels.l);
+}
 
 void test_remove_comment_WhereStringHasNoComment(void) {
     const char* s = "String without a comment";
@@ -232,39 +245,4 @@ void test_tokenize_WhereStringIsOnlyWhitespace(void) {
     sprintf(buf, "\t\t      ");
     char* s[64];
     TEST_ASSERT_EQUAL_INT(1, tokenize(s, buf, " ", 10));
-}
-
-int main(void) {
-    bytecode = calloc(BYTECODE_SIZE, 1);
-    symbols.s = calloc(SYMBOL_CEILING, sizeof(symbol_t));
-    symbols.ceil = SYMBOL_CEILING;
-    labels.l = calloc(LABEL_CEILING, sizeof(label_t));
-    labels.ceil = LABEL_CEILING;
-
-    for (fmtCount = 0; formats[fmtCount].cmd != I_NULL; fmtCount++);
-    for (insCount = 0; c8_instructionStrings[insCount] != NULL; insCount++);
-
-    UNITY_BEGIN();
-    RUN_TEST(test_remove_comment_WhereStringHasNoComment);
-    RUN_TEST(test_remove_comment_WhereStringHasCommentAtEnd);
-    RUN_TEST(test_remove_comment_WhereStringIsOnlyComment);
-    RUN_TEST(test_c8_encode_WhereStringIsOnlyComment);
-    RUN_TEST(test_parse_word_WhereWordIsDB);
-    RUN_TEST(test_parse_word_WhereWordIsDW);
-    RUN_TEST(test_parse_word_WhereWordIsInstruction);
-    RUN_TEST(test_parse_word_WhereWordIsRegister);
-    RUN_TEST(test_parse_word_WhereWordIsReservedIdentifier);
-    RUN_TEST(test_parse_word_WhereWordIsInt);
-    RUN_TEST(test_parse_word_WhereWordIsLabel);
-    RUN_TEST(test_parse_word_WhereWordIsInvalid);
-    RUN_TEST(test_tokenize_WhereStringIsOnlyWhitespace);
-    RUN_TEST(test_parse_line_WhereLineIsEmpty);
-    RUN_TEST(test_parse_line_WhereLineContainsWhitespace);
-    RUN_TEST(test_parse_line_WhereLineContainsInstruction);
-    RUN_TEST(test_parse_line_WhereLineContainsDS);
-
-    free(bytecode);
-    free(symbols.s);
-    free(labels.l);
-    return UNITY_END();
 }

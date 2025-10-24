@@ -4,12 +4,14 @@ a.c8
 # targets
 *.so
 *.a
+*.o
 tools/chip8
 tools/chip8as
 tools/chip8dis
 
 # debug
 vgcore*
+gmon.out
 
 # cmake
 CMakeFiles
@@ -18,7 +20,11 @@ CMakeCache.txt
 *.tcl
 Makefile
 *_tests
+*_runner.c
 Testing
 
 # etc
-.vscode
+.zed/
+/.clangd
+/compile_commands.json
+/.cache
