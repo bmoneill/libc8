@@ -1,10 +1,10 @@
 #include "unity.h"
 
-#include "c8/private/symbol.c"
-#include "c8/private/exception.h"
-#include "c8/private/util.h"
-#include "c8/encode.h"
 #include "c8/defs.h"
+#include "c8/encode.h"
+#include "c8/private/exception.h"
+#include "c8/private/symbol.c"
+#include "c8/private/util.h"
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -12,25 +12,26 @@
 #include <time.h>
 
 #define MAX_LINE_COUNT 10
-#define MAX_LINE_LEN 50
+#define MAX_LINE_LEN   50
 
 instruction_t ins;
 symbol_list_t symbols;
-label_list_t labels;
-const char* empty = "\0";
-int fc = 0;
-char* line0;
+label_list_t  labels;
+const char*   empty = "\0";
+int           fc    = 0;
+char*         line0;
 
-void setUp(void) {
-    symbols.s = calloc(SYMBOL_CEILING, sizeof(symbol_t));
+void          setUp(void) {
+    symbols.s    = calloc(SYMBOL_CEILING, sizeof(symbol_t));
     symbols.ceil = SYMBOL_CEILING;
-    labels.l = calloc(LABEL_CEILING, sizeof(label_t));
-    labels.ceil = LABEL_CEILING;
+    labels.l     = calloc(LABEL_CEILING, sizeof(label_t));
+    labels.ceil  = LABEL_CEILING;
 
-    for (fc = 0; formats[fc].cmd != I_NULL; fc++);
+    for (fc = 0; formats[fc].cmd != I_NULL; fc++)
+        ;
 
     c8_lines = malloc(MAX_LINE_COUNT * sizeof(char*));
-    line0 = malloc(MAX_LINE_LEN * MAX_LINE_COUNT);
+    line0    = malloc(MAX_LINE_LEN * MAX_LINE_COUNT);
     for (int i = 0; i < MAX_LINE_COUNT; i++) {
         c8_lines[i] = line0 + (i * MAX_LINE_LEN);
     }
@@ -44,11 +45,11 @@ void setUp(void) {
     memset(line0, 0, MAX_LINE_LEN * MAX_LINE_COUNT);
 
     memset(labels.l, 0, LABEL_CEILING * sizeof(label_t));
-    labels.len = 0;
+    labels.len  = 0;
     labels.ceil = LABEL_CEILING;
 
     memset(symbols.s, 0, SYMBOL_CEILING * sizeof(symbol_t));
-    symbols.len = 0;
+    symbols.len  = 0;
     symbols.ceil = SYMBOL_CEILING;
 }
 
@@ -70,22 +71,16 @@ void test_is_comment_WhereCommentIsEntireString(void) {
     TEST_ASSERT_EQUAL_INT(1, is_comment(s));
 }
 
-void test_is_comment_WhereStringIsEmpty(void) {
-    TEST_ASSERT_EQUAL_INT(0, is_comment(empty));
-}
+void test_is_comment_WhereStringIsEmpty(void) { TEST_ASSERT_EQUAL_INT(0, is_comment(empty)); }
 
 void test_is_comment_WhereNoCommentIsInString(void) {
     const char* s = "This is not a comment";
     TEST_ASSERT_EQUAL_INT(0, is_comment(s));
 }
 
-void test_is_db_WhereStringIsDB(void) {
-    TEST_ASSERT_EQUAL_INT(1, is_db(S_DB));
-}
+void test_is_db_WhereStringIsDB(void) { TEST_ASSERT_EQUAL_INT(1, is_db(S_DB)); }
 
-void test_is_db_WhereStringIsNotDB(void) {
-    TEST_ASSERT_EQUAL_INT(0, is_db(S_DW));
-}
+void test_is_db_WhereStringIsNotDB(void) { TEST_ASSERT_EQUAL_INT(0, is_db(S_DW)); }
 
 void test_is_db_WhereStringContainsDB(void) {
     const char* s = "Foo .DB";
@@ -97,17 +92,11 @@ void test_is_db_WithTrailingChars(void) {
     TEST_ASSERT_EQUAL_INT(0, is_db(s));
 }
 
-void test_is_db_WhereStringIsEmpty(void) {
-    TEST_ASSERT_EQUAL_INT(0, is_db(empty));
-}
+void test_is_db_WhereStringIsEmpty(void) { TEST_ASSERT_EQUAL_INT(0, is_db(empty)); }
 
-void test_is_dw_WhereStringIsDW(void) {
-    TEST_ASSERT_EQUAL_INT(1, is_dw(S_DW));
-}
+void test_is_dw_WhereStringIsDW(void) { TEST_ASSERT_EQUAL_INT(1, is_dw(S_DW)); }
 
-void test_is_dw_WhereStringIsNotDW(void) {
-    TEST_ASSERT_EQUAL_INT(0, is_dw(S_DB));
-}
+void test_is_dw_WhereStringIsNotDW(void) { TEST_ASSERT_EQUAL_INT(0, is_dw(S_DB)); }
 
 void test_is_dw_WhereStringContainsDW(void) {
     const char* s = "Foo .DW";
@@ -119,15 +108,14 @@ void test_is_dw_WithTrailingChars(void) {
     TEST_ASSERT_EQUAL_INT(0, is_dw(s));
 }
 
-void test_is_dw_WhereStringIsEmpty(void) {
-    TEST_ASSERT_EQUAL_INT(0, is_dw(empty));
-}
+void test_is_dw_WhereStringIsEmpty(void) { TEST_ASSERT_EQUAL_INT(0, is_dw(empty)); }
 
 void test_is_instruction_WhereStringIsInstruction(void) {
     int ic = 0;
-    for (ic = 0; c8_instructionStrings[ic] != NULL; ic++);
+    for (ic = 0; c8_instructionStrings[ic] != NULL; ic++)
+        ;
 
-    int i = rand() % ic;
+    int  i = rand() % ic;
 
     char s[16];
     strcpy(s, c8_instructionStrings[i]);
@@ -162,9 +150,9 @@ void test_is_label_definition_WhereStringIsEmpty(void) {
 }
 
 void test_is_label_WhereStringIsLabel(void) {
-    const char* s = "L";
+    const char* s    = "L";
 
-    labels.len = 3;
+    labels.len       = 3;
     labels.l[0].byte = rand();
     strcpy(labels.l[0].identifier, "LABEL");
     labels.l[1].byte = rand();
@@ -176,9 +164,9 @@ void test_is_label_WhereStringIsLabel(void) {
 }
 
 void test_is_label_WhereStringIsNotLabel(void) {
-    const char* s = "L";
+    const char* s    = "L";
 
-    labels.len = 3;
+    labels.len       = 3;
     labels.l[0].byte = rand();
     strcpy(labels.l[0].identifier, "LABEL");
     labels.l[1].byte = rand();
@@ -189,9 +177,7 @@ void test_is_label_WhereStringIsNotLabel(void) {
     TEST_ASSERT_EQUAL_INT(-1, is_label("LABEL3", &labels));
 }
 
-void test_is_label_WhereStringIsEmpty(void) {
-    TEST_ASSERT_EQUAL_INT(-1, is_label(empty, &labels));
-}
+void test_is_label_WhereStringIsEmpty(void) { TEST_ASSERT_EQUAL_INT(-1, is_label(empty, &labels)); }
 
 void test_is_register_WhereStringIsRegister_WhereRegisterIsUppercase(void) {
     const char* s = "V1";
@@ -208,15 +194,14 @@ void test_is_register_WhereStringIsNotRegister(void) {
     TEST_ASSERT_EQUAL_INT(-1, is_register(s));
 }
 
-void test_is_register_WhereStringIsEmpty(void) {
-    TEST_ASSERT_EQUAL_INT(-1, is_register(empty));
-}
+void test_is_register_WhereStringIsEmpty(void) { TEST_ASSERT_EQUAL_INT(-1, is_register(empty)); }
 
 void test_is_reserved_identifier_WhereStringIsReservedIdentifier(void) {
     int ic = 0;
-    for (ic = 0; c8_identifierStrings[ic] != NULL; ic++);
+    for (ic = 0; c8_identifierStrings[ic] != NULL; ic++)
+        ;
 
-    int ident = rand() % ic;
+    int  ident = rand() % ic;
 
     char s[16];
     strcpy(s, c8_identifierStrings[ident]);
@@ -236,7 +221,7 @@ void test_is_reserved_identifier_WhereStringIsEmpty(void) {
 
 void test_next_symbol_WhereSymbolListIsEmpty(void) {
     memset(symbols.s, 0, SYMBOL_CEILING);
-    symbols.len = 0;
+    symbols.len  = 0;
     symbols.ceil = SYMBOL_CEILING;
 
     TEST_ASSERT_EQUAL_PTR(&symbols.s[0], next_symbol(&symbols));
@@ -245,8 +230,8 @@ void test_next_symbol_WhereSymbolListIsEmpty(void) {
 void test_next_symbol_WhereSymbolListIsNotEmptyOrFull(void) {
     memset(symbols.s, 0, SYMBOL_CEILING);
 
-    symbols.len = 2;
-    symbols.ceil = SYMBOL_CEILING;
+    symbols.len       = 2;
+    symbols.ceil      = SYMBOL_CEILING;
     symbols.s[0].type = SYM_INSTRUCTION;
     symbols.s[1].type = SYM_IP;
 
@@ -256,8 +241,8 @@ void test_next_symbol_WhereSymbolListIsNotEmptyOrFull(void) {
 void test_next_symbol_WhereSymbolListIsFull(void) {
     memset(symbols.s, SYM_INSTRUCTION, SYMBOL_CEILING);
 
-    symbols.len = SYMBOL_CEILING;
-    symbols.ceil = SYMBOL_CEILING;
+    symbols.len      = SYMBOL_CEILING;
+    symbols.ceil     = SYMBOL_CEILING;
 
     symbol_t* symbol = next_symbol(&symbols);
 
@@ -295,7 +280,7 @@ void test_populate_labels_WhereLinesHasMultipleLabelDefinitions(void) {
     sprintf(c8_lines[4], "%s", "SE V1, $55");
     c8_line_count = 5;
 
-    int r = populate_labels(&labels);
+    int r         = populate_labels(&labels);
 
     TEST_ASSERT_EQUAL_INT(1, r);
     TEST_ASSERT_EQUAL_INT(2, labels.len);
@@ -311,22 +296,22 @@ void test_populate_labels_WhereLinesHasDuplicateLabelDefinitions(void) {
     sprintf(c8_lines[4], "%s", "SE V1, $55");
     c8_line_count = 5;
 
-    int r = populate_labels(&labels);
+    int r         = populate_labels(&labels);
 
     TEST_ASSERT_EQUAL_INT(DUPLICATE_LABEL_EXCEPTION, r);
 }
 
 void test_resolve_labels_WhereLabelListHasOneLabel_WhereSymbolListHasLabelDefinition(void) {
 
-    symbols.len = 3;
-    symbols.s[0].type = SYM_INSTRUCTION;
-    symbols.s[1].type = SYM_LABEL;
+    symbols.len        = 3;
+    symbols.s[0].type  = SYM_INSTRUCTION;
+    symbols.s[1].type  = SYM_LABEL;
     symbols.s[1].value = 0;
-    symbols.s[2].type = SYM_LABEL_DEFINITION;
+    symbols.s[2].type  = SYM_LABEL_DEFINITION;
     symbols.s[2].value = 0;
-    symbols.s[3].type = SYM_INSTRUCTION;
+    symbols.s[3].type  = SYM_INSTRUCTION;
 
-    labels.len = 1;
+    labels.len         = 1;
     sprintf(labels.l[0].identifier, "%s", "LABEL");
 
     int r = resolve_labels(&symbols, &labels);
@@ -336,12 +321,12 @@ void test_resolve_labels_WhereLabelListHasOneLabel_WhereSymbolListHasLabelDefini
 
 void test_resolve_labels_WhereLabelListHasOneLabel_WhereSymbolListDoesNotHaveLabelDefinition(void) {
 
-    symbols.len = 2;
-    symbols.s[0].type = SYM_INSTRUCTION;
-    symbols.s[1].type = SYM_LABEL;
+    symbols.len        = 2;
+    symbols.s[0].type  = SYM_INSTRUCTION;
+    symbols.s[1].type  = SYM_LABEL;
     symbols.s[1].value = 0;
 
-    labels.len = 1;
+    labels.len         = 1;
     sprintf(labels.l[0].identifier, "%s", "LABEL");
 
     int r = resolve_labels(&symbols, &labels);
@@ -351,16 +336,16 @@ void test_resolve_labels_WhereLabelListHasOneLabel_WhereSymbolListDoesNotHaveLab
 
 void test_resolve_labels_WhereLabelListHasMultipleLabels_WhereSymbolListHasLabelDefinitions(void) {
 
-    symbols.len = 5;
-    symbols.s[0].type = SYM_INSTRUCTION;
-    symbols.s[1].type = SYM_LABEL_DEFINITION;
+    symbols.len        = 5;
+    symbols.s[0].type  = SYM_INSTRUCTION;
+    symbols.s[1].type  = SYM_LABEL_DEFINITION;
     symbols.s[1].value = 0;
-    symbols.s[2].type = SYM_INSTRUCTION;
-    symbols.s[3].type = SYM_LABEL_DEFINITION;
+    symbols.s[2].type  = SYM_INSTRUCTION;
+    symbols.s[3].type  = SYM_LABEL_DEFINITION;
     symbols.s[3].value = 1;
-    symbols.s[4].type = SYM_INSTRUCTION;
+    symbols.s[4].type  = SYM_INSTRUCTION;
 
-    labels.len = 2;
+    labels.len         = 2;
     sprintf(labels.l[0].identifier, "%s", "LABEL");
     sprintf(labels.l[1].identifier, "%s", "OTHERLABEL");
 
@@ -379,7 +364,7 @@ void test_resolve_labels_WhereSymbolListIsEmpty(void) {
 
 void test_resolve_labels_WhereLabelListIsEmpty(void) {
 
-    symbols.len = 1;
+    symbols.len       = 1;
     symbols.s[0].type = SYM_DB;
 
     TEST_ASSERT_EQUAL_INT(1, resolve_labels(&symbols, &labels));
@@ -387,24 +372,24 @@ void test_resolve_labels_WhereLabelListIsEmpty(void) {
 
 void test_substitute_labels_WhereLabelListContainsAllLabels(void) {
 
-    symbols.len = 7;
-    symbols.s[0].type = SYM_INSTRUCTION;
-    symbols.s[1].type = SYM_LABEL;
+    symbols.len        = 7;
+    symbols.s[0].type  = SYM_INSTRUCTION;
+    symbols.s[1].type  = SYM_LABEL;
     symbols.s[1].value = 1;
-    symbols.s[2].type = SYM_LABEL_DEFINITION;
+    symbols.s[2].type  = SYM_LABEL_DEFINITION;
     symbols.s[2].value = 0;
-    symbols.s[3].type = SYM_INSTRUCTION;
-    symbols.s[4].type = SYM_LABEL_DEFINITION;
+    symbols.s[3].type  = SYM_INSTRUCTION;
+    symbols.s[4].type  = SYM_LABEL_DEFINITION;
     symbols.s[4].value = 1;
-    symbols.s[5].type = SYM_INSTRUCTION;
-    symbols.s[6].type = SYM_LABEL;
+    symbols.s[5].type  = SYM_INSTRUCTION;
+    symbols.s[6].type  = SYM_LABEL;
     symbols.s[6].value = 0;
 
-    labels.len = 2;
-    labels.l[0].byte = 0x202;
-    labels.l[1].byte = 0x204;
+    labels.len         = 2;
+    labels.l[0].byte   = 0x202;
+    labels.l[1].byte   = 0x204;
 
-    int r = substitute_labels(&symbols, &labels);
+    int r              = substitute_labels(&symbols, &labels);
 
     TEST_ASSERT_EQUAL_INT(1, r);
     TEST_ASSERT_EQUAL_INT(SYM_INT12, symbols.s[1].type);
@@ -415,45 +400,45 @@ void test_substitute_labels_WhereLabelListContainsAllLabels(void) {
 
 void test_substitute_labels_WhereLabelListIsMissingLabels(void) {
 
-    symbols.len = 7;
-    symbols.s[0].type = SYM_INSTRUCTION;
-    symbols.s[1].type = SYM_LABEL;
+    symbols.len        = 7;
+    symbols.s[0].type  = SYM_INSTRUCTION;
+    symbols.s[1].type  = SYM_LABEL;
     symbols.s[1].value = 1;
-    symbols.s[2].type = SYM_LABEL_DEFINITION;
+    symbols.s[2].type  = SYM_LABEL_DEFINITION;
     symbols.s[2].value = 0;
-    symbols.s[3].type = SYM_INSTRUCTION;
-    symbols.s[4].type = SYM_LABEL_DEFINITION;
+    symbols.s[3].type  = SYM_INSTRUCTION;
+    symbols.s[4].type  = SYM_LABEL_DEFINITION;
     symbols.s[4].value = 1;
-    symbols.s[5].type = SYM_INSTRUCTION;
-    symbols.s[6].type = SYM_LABEL;
+    symbols.s[5].type  = SYM_INSTRUCTION;
+    symbols.s[6].type  = SYM_LABEL;
     symbols.s[6].value = 0;
 
-    labels.len = 1;
-    labels.l[0].byte = 0x202;
+    labels.len         = 1;
+    labels.l[0].byte   = 0x202;
 
-    int r = substitute_labels(&symbols, &labels);
+    int r              = substitute_labels(&symbols, &labels);
 
     TEST_ASSERT_EQUAL_INT(INVALID_SYMBOL_EXCEPTION, r);
 }
 
 void test_substitute_labels_WhereSymbolListIsEmpty(void) {
-    labels.len = 1;
+    labels.len       = 1;
     labels.l[0].byte = 0x202;
 
-    int r = substitute_labels(&symbols, &labels);
+    int r            = substitute_labels(&symbols, &labels);
 
     TEST_ASSERT_EQUAL_INT(1, r);
 }
 
 void test_substitute_labels_WhereSymbolListContainsNoLabels_WhereLabelListIsEmpty(void) {
 
-    symbols.len = 4;
+    symbols.len       = 4;
     symbols.s[0].type = SYM_INSTRUCTION;
     symbols.s[1].type = SYM_INSTRUCTION;
     symbols.s[2].type = SYM_INSTRUCTION;
     symbols.s[3].type = SYM_DB;
 
-    int r = substitute_labels(&symbols, &labels);
+    int r             = substitute_labels(&symbols, &labels);
 
     TEST_ASSERT_EQUAL_INT(1, r);
 }

@@ -6,20 +6,20 @@
 
 #include "decode.h"
 
+#include "private/symbol.h"
 #include "defs.h"
-#include "c8/private/symbol.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define DEFINE_LABELS (args & C8_DECODE_DEFINE_LABELS)
+#define DEFINE_LABELS   (args & C8_DECODE_DEFINE_LABELS)
 #define PRINT_ADDRESSES (args & C8_DECODE_PRINT_ADDRESSES)
-#define RESULT_SIZE 32
+#define RESULT_SIZE     32
 
 static void find_labels(FILE*, uint8_t*);
 
-char result[RESULT_SIZE];
+char        result[RESULT_SIZE];
 
 /**
  * @brief Convert bytecode from `input` to assembly and writes it to `output`.
@@ -35,23 +35,22 @@ char result[RESULT_SIZE];
  * optionally OR'd
  */
 void c8_decode(FILE* input, FILE* output, int args) {
-    int c;
+    int      c;
     uint8_t* labelMap = NULL;
-    uint16_t addr = C8_PROG_START;
-    uint16_t ins = 0;
+    uint16_t addr     = C8_PROG_START;
+    uint16_t ins      = 0;
 
     if (DEFINE_LABELS) {
-        labelMap = (uint8_t*)calloc(0x1000, sizeof(uint8_t));
+        labelMap = (uint8_t*) calloc(0x1000, sizeof(uint8_t));
         find_labels(input, labelMap);
         rewind(input);
     }
 
     while ((c = fgetc(input)) != EOF) {
         if (addr % 2 == 0) {
-            ins = ((uint16_t)c) << 8;
-        }
-        else {
-            ins |= (uint16_t)c;
+            ins = ((uint16_t) c) << 8;
+        } else {
+            ins |= (uint16_t) c;
 
             if (DEFINE_LABELS && labelMap[addr]) {
                 fprintf(output, "label%d:\n", labelMap[addr]);
@@ -105,8 +104,7 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
             if (a == 0x0 || a == 0xE || a == 0xF) {
                 // 0x0, 0xE, and 0xF instructions have kk as a mask, so we need to check
                 match = kk == C8_KK(formats[i].base);
-            }
-            else if (a == 0x8) {
+            } else if (a == 0x8) {
                 // 0x8 instructions have b as a mask, so we need to check
                 match = b == C8_B(formats[i].base);
             }
@@ -124,22 +122,33 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
                     case SYM_INT12:
                         if (label_map[nnn]) {
                             snprintf(result + idx, RESULT_SIZE - idx, " label%d", label_map[nnn]);
-                        }
-                        else {
+                        } else {
                             snprintf(result + idx, RESULT_SIZE - idx, " $%03X", nnn);
                         }
                         break;
                     case SYM_INT8:
-                        snprintf(result + idx, RESULT_SIZE - idx, " 0x%02X", (in & formats[i].pmask[j]) >> shift(formats[i].pmask[j]));
+                        snprintf(result + idx,
+                                 RESULT_SIZE - idx,
+                                 " 0x%02X",
+                                 (in & formats[i].pmask[j]) >> shift(formats[i].pmask[j]));
                         break;
                     case SYM_INT4:
-                        snprintf(result + idx, RESULT_SIZE - idx, " 0x%01X", (in & formats[i].pmask[j]) >> shift(formats[i].pmask[j]));
+                        snprintf(result + idx,
+                                 RESULT_SIZE - idx,
+                                 " 0x%01X",
+                                 (in & formats[i].pmask[j]) >> shift(formats[i].pmask[j]));
                         break;
                     case SYM_V:
-                        snprintf(result + idx, RESULT_SIZE - idx, " V%01X", (in & formats[i].pmask[j]) >> shift(formats[i].pmask[j]));
+                        snprintf(result + idx,
+                                 RESULT_SIZE - idx,
+                                 " V%01X",
+                                 (in & formats[i].pmask[j]) >> shift(formats[i].pmask[j]));
                         break;
                     default:
-                        snprintf(result + idx, RESULT_SIZE - idx, " %s", c8_identifierStrings[formats[i].ptype[j]]);
+                        snprintf(result + idx,
+                                 RESULT_SIZE - idx,
+                                 " %s",
+                                 c8_identifierStrings[formats[i].ptype[j]]);
                         break;
                     }
                     idx = strlen(result);
@@ -179,18 +188,17 @@ uint16_t jump(uint16_t in) {
  * @param labelMap where to store the labels
  */
 static void find_labels(FILE* input, uint8_t* labelMap) {
-    uint16_t addr = C8_PROG_START;
-    uint8_t count = 1;
-    uint16_t ins = 0;
+    uint16_t addr  = C8_PROG_START;
+    uint8_t  count = 1;
+    uint16_t ins   = 0;
     uint16_t to;
 
-    int c;
+    int      c;
     while ((c = fgetc(input)) != EOF) {
         if (addr % 2 == 0) {
-            ins = ((uint16_t)c) << 8;
-        }
-        else {
-            ins |= (uint16_t)c;
+            ins = ((uint16_t) c) << 8;
+        } else {
+            ins |= (uint16_t) c;
             if ((to = jump(ins))) {
                 labelMap[to] = count++;
             }

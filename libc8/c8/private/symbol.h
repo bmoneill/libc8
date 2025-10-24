@@ -9,54 +9,53 @@
 #define CHIP8_SYMBOL_H
 
 #include <stdint.h>
-#include <stdlib.h>
 
-#define INSTRUCTION_COUNT 64
-#define LABEL_CEILING 64
+#define INSTRUCTION_COUNT     64
+#define LABEL_CEILING         64
 #define LABEL_IDENTIFIER_SIZE 20
-#define SYMBOL_CEILING 64
+#define SYMBOL_CEILING        64
 
 /* Instruction strings */
-#define S_CLS "CLS"
-#define S_RET "RET"
-#define S_JP "JP"
-#define S_CALL "CALL"
-#define S_SE "SE"
-#define S_SNE "SNE"
-#define S_LD "LD"
-#define S_ADD "ADD"
-#define S_OR "OR"
-#define S_AND "AND"
-#define S_SUB "SUB"
-#define S_SHR "SHR"
-#define S_SUBN "SUBN"
-#define S_SHL "SHL"
-#define S_RND "RND"
-#define S_DRW "DRW"
-#define S_SKP "SKP"
-#define S_SKNP "SKNP"
-#define S_XOR "XOR"
-#define S_SCD "SCD"
-#define S_SCR "SCR"
-#define S_SCL "SCL"
-#define S_EXIT "EXIT"
-#define S_LOW "LOW"
-#define S_HIGH "HIGH"
+#define S_CLS   "CLS"
+#define S_RET   "RET"
+#define S_JP    "JP"
+#define S_CALL  "CALL"
+#define S_SE    "SE"
+#define S_SNE   "SNE"
+#define S_LD    "LD"
+#define S_ADD   "ADD"
+#define S_OR    "OR"
+#define S_AND   "AND"
+#define S_SUB   "SUB"
+#define S_SHR   "SHR"
+#define S_SUBN  "SUBN"
+#define S_SHL   "SHL"
+#define S_RND   "RND"
+#define S_DRW   "DRW"
+#define S_SKP   "SKP"
+#define S_SKNP  "SKNP"
+#define S_XOR   "XOR"
+#define S_SCD   "SCD"
+#define S_SCR   "SCR"
+#define S_SCL   "SCL"
+#define S_EXIT  "EXIT"
+#define S_LOW   "LOW"
+#define S_HIGH  "HIGH"
 #define S_JP_V0 "JP V0,"
 
 /* Reserved identifier strings */
-#define S_K "K"
-#define S_F "F"
-#define S_B "B"
+#define S_K  "K"
+#define S_F  "F"
+#define S_B  "B"
 #define S_DT "DT"
 #define S_ST "ST"
-#define S_I "I"
+#define S_I  "I"
 #define S_IP "[I]"
 #define S_DB ".DB"
 #define S_DW ".DW"
 #define S_DS ".DS"
 #define S_HF "HF"
-#define S_R "R"
+#define S_R  "R"
 
 /**
  * @enum Instruction
@@ -145,10 +144,10 @@ typedef enum {
  */
 typedef struct {
     Instruction cmd;
-    uint16_t base;
-    int pcount;
-    Symbol ptype[3];
-    uint16_t pmask[3];
+    uint16_t    base;
+    int         pcount;
+    Symbol      ptype[3];
+    uint16_t    pmask[3];
 } instruction_format_t;
 
 /**
@@ -166,11 +165,11 @@ typedef struct {
  * @param format corresponding `instruction_format_t` (if valid)
  */
 typedef struct {
-    int line;
-    Instruction cmd;
-    int pcount;
-    Symbol ptype[3];
-    int p[3];
+    int                   line;
+    Instruction           cmd;
+    int                   pcount;
+    Symbol                ptype[3];
+    int                   p[3];
     instruction_format_t* format;
 } instruction_t;
 
@@ -185,7 +184,7 @@ typedef struct {
  */
 typedef struct {
     char identifier[LABEL_IDENTIFIER_SIZE];
-    int byte;
+    int  byte;
 } label_t;
 
 /**
@@ -198,8 +197,8 @@ typedef struct {
  */
 typedef struct {
     label_t* l;
-    int len;
-    int ceil;
+    int      len;
+    int      ceil;
 } label_list_t;
 
 /**
@@ -211,9 +210,9 @@ typedef struct {
  * @param ln line number
  */
 typedef struct {
-    Symbol type;
+    Symbol   type;
     uint16_t value;
-    int ln;
+    int      ln;
 } symbol_t;
 
 /**
@@ -226,28 +225,28 @@ typedef struct {
  */
 typedef struct {
     symbol_t* s;
-    int len;
-    int ceil;
+    int       len;
+    int       ceil;
 } symbol_list_t;
 
-extern const char* c8_instructionStrings[];
-extern const char* c8_identifierStrings[];
+extern const char*          c8_instructionStrings[];
+extern const char*          c8_identifierStrings[];
 extern instruction_format_t formats[];
 
-int build_instruction(instruction_t*, symbol_list_t*, int);
-int is_comment(const char*);
-int is_db(const char*);
-int is_ds(const char*);
-int is_dw(const char*);
-int is_instruction(const char*);
-int is_label_definition(const char*);
-int is_label(const char*, const label_list_t*);
-int is_register(const char*);
-int is_reserved_identifier(const char*);
-symbol_t* next_symbol(symbol_list_t*);
-int populate_labels(label_list_t*);
-int resolve_labels(symbol_list_t*, label_list_t*);
-int shift(uint16_t);
-int substitute_labels(symbol_list_t*, label_list_t*);
+int                         build_instruction(instruction_t*, symbol_list_t*, int);
+int                         is_comment(const char*);
+int                         is_db(const char*);
+int                         is_ds(const char*);
+int                         is_dw(const char*);
+int                         is_instruction(const char*);
+int                         is_label_definition(const char*);
+int                         is_label(const char*, const label_list_t*);
+int                         is_register(const char*);
+int                         is_reserved_identifier(const char*);
+symbol_t*                   next_symbol(symbol_list_t*);
+int                         populate_labels(label_list_t*);
+int                         resolve_labels(symbol_list_t*, label_list_t*);
+int                         shift(uint16_t);
+int                         substitute_labels(symbol_list_t*, label_list_t*);
 
 #endif

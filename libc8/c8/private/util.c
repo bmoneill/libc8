@@ -7,9 +7,6 @@
 
 #include "util.h"
 
-#include "../defs.h"
-#include "exception.h"
-
 #include <ctype.h>
 #include <errno.h>
 #include <stdlib.h>
@@ -51,19 +48,16 @@ int parse_int(const char* s) {
         return -1;
     }
 
-    int result = -1;
+    int   result = -1;
     char* endptr = NULL;
-    errno = 0;
+    errno        = 0;
     if (s[0] == '$' || s[0] == 'x' || s[0] == 'V' || s[0] == 'v') {
         result = strtol(s + 1, &endptr, 16);
-    }
-    else if (len > 2 && s[0] == '0' && s[1] == 'x') {
+    } else if (len > 2 && s[0] == '0' && s[1] == 'x') {
         result = strtol(s + 2, &endptr, 16);
-    }
-    else if (len > 2 && s[0] == '0' && s[1] == 'b') {
+    } else if (len > 2 && s[0] == '0' && s[1] == 'b') {
         result = strtol(s + 2, &endptr, 2);
-    }
-    else {
+    } else {
         result = strtol(s, &endptr, 10);
     }
 
@@ -88,9 +82,9 @@ char* trim(char* s) {
         return NULL;
     }
 
-    int len = strlen(s);
+    int len      = strlen(s);
     int startIdx = 0;
-    int endIdx = len - 1;
+    int endIdx   = len - 1;
 
     while (startIdx < len && isspace(s[startIdx])) {
         startIdx++;

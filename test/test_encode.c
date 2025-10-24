@@ -2,8 +2,8 @@
 
 #include "c8/encode.c"
 
-#include "c8/private/util.h"
 #include "c8/defs.h"
+#include "c8/private/util.h"
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -11,35 +11,37 @@
 #include <time.h>
 
 #define BYTECODE_SIZE (C8_MEMSIZE - C8_PROG_START)
-#define BUF_SIZE (BYTECODE_SIZE * C8_ENCODE_MAX_LINE_LENGTH)
+#define BUF_SIZE      (BYTECODE_SIZE * C8_ENCODE_MAX_LINE_LENGTH)
 
-char buf[BUF_SIZE];
-uint8_t* bytecode;
-int fmtCount;
-int insCount;
+char          buf[BUF_SIZE];
+uint8_t*      bytecode;
+int           fmtCount;
+int           insCount;
 
 symbol_list_t symbols;
-label_list_t labels;
+label_list_t  labels;
 
-void setUp(void) {
-    bytecode = calloc(BYTECODE_SIZE, 1);
-    symbols.s = calloc(SYMBOL_CEILING, sizeof(symbol_t));
+void          setUp(void) {
+    bytecode     = calloc(BYTECODE_SIZE, 1);
+    symbols.s    = calloc(SYMBOL_CEILING, sizeof(symbol_t));
     symbols.ceil = SYMBOL_CEILING;
-    labels.l = calloc(LABEL_CEILING, sizeof(label_t));
-    labels.ceil = LABEL_CEILING;
+    labels.l     = calloc(LABEL_CEILING, sizeof(label_t));
+    labels.ceil  = LABEL_CEILING;
 
-    for (fmtCount = 0; formats[fmtCount].cmd != I_NULL; fmtCount++);
-    for (insCount = 0; c8_instructionStrings[insCount] != NULL; insCount++);
+    for (fmtCount = 0; formats[fmtCount].cmd != I_NULL; fmtCount++)
+        ;
+    for (insCount = 0; c8_instructionStrings[insCount] != NULL; insCount++)
+        ;
 
     memset(bytecode, 0, BYTECODE_SIZE);
     memset(buf, 0, BUF_SIZE);
 
     memset(labels.l, 0, LABEL_CEILING * sizeof(label_t));
-    labels.len = 0;
+    labels.len  = 0;
     labels.ceil = LABEL_CEILING;
 
     memset(symbols.s, 0, SYMBOL_CEILING * sizeof(symbol_t));
-    symbols.len = 0;
+    symbols.len  = 0;
     symbols.ceil = SYMBOL_CEILING;
 }
 
@@ -100,13 +102,13 @@ void test_parse_line_WhereLineContainsWhitespace(void) {
 }
 
 void test_parse_line_WhereLineContainsInstruction(void) {
-    const char *s = "JP V0, $321";
+    const char* s = "JP V0, $321";
     sprintf(buf, "%s", s);
     TEST_ASSERT_EQUAL_INT(1, parse_line(buf, 1, &symbols, &labels));
 }
 
 void test_parse_line_WhereLineContainsDS(void) {
-    const char *s = "Hello world";
+    const char* s = "Hello world";
     sprintf(buf, ".DS \"%s\"", s);
 
     int ret = parse_line(buf, 1, &symbols, &labels);
@@ -114,7 +116,7 @@ void test_parse_line_WhereLineContainsDS(void) {
     TEST_ASSERT_EQUAL_INT(1, ret);
     for (int i = 0; s[i] != '\0'; i++) {
         TEST_ASSERT_EQUAL_INT(SYM_DB, symbols.s[i].type);
-        TEST_ASSERT_EQUAL_INT((uint8_t)s[i], symbols.s[i].value);
+        TEST_ASSERT_EQUAL_INT((uint8_t) s[i], symbols.s[i].value);
         TEST_ASSERT_EQUAL_INT(1, symbols.s[i].ln);
     }
 }
@@ -192,8 +194,8 @@ void test_parse_word_WhereWordIsReservedIdentifier(void) {
 }
 
 void test_parse_word_WhereWordIsInt(void) {
-    int v4 = 8;
-    int v8 = 128;
+    int v4  = 8;
+    int v8  = 128;
     int v12 = 512;
 
     sprintf(buf, "$%x", v4);
@@ -221,7 +223,7 @@ void test_parse_word_WhereWordIsInt(void) {
 
 void test_parse_word_WhereWordIsLabel(void) {
     const char* l = "LABEL";
-    labels.len = 2;
+    labels.len    = 2;
     sprintf(labels.l[0].identifier, "otherlabel");
     sprintf(labels.l[1].identifier, "%s", l);
     sprintf(buf, "%s", l);

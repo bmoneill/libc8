@@ -1,5 +1,5 @@
-#include "c8/encode.h"
 #include "c8/defs.h"
+#include "c8/encode.h"
 
 #include <stdint.h>
 #include <stdio.h>
@@ -10,20 +10,26 @@
 #define VERSION "dev"
 #endif
 
-static int assemble(const char*, const char*, int);
+static int   assemble(const char*, const char*, int);
 static char* dynamic_load(FILE*);
 
-int main(int argc, char* argv[]) {
-    int opt;
-    int args = 0;
+int          main(int argc, char* argv[]) {
+    int         opt;
+    int         args    = 0;
     const char* outpath = "a.c8";
 
     /* Parse args */
     while ((opt = getopt(argc, argv, "o:vV")) != -1) {
         switch (opt) {
-        case 'o': outpath = optarg; break;
-        case 'v': args |= ARG_VERBOSE; break;
-        case 'V': printf("%s %s\n", argv[0], VERSION); exit(EXIT_SUCCESS);
+        case 'o':
+            outpath = optarg;
+            break;
+        case 'v':
+            args |= ARG_VERBOSE;
+            break;
+        case 'V':
+            printf("%s %s\n", argv[0], VERSION);
+            exit(EXIT_SUCCESS);
         default:
             fprintf(stderr, "Usage: %s [-v] [-o outputfile] file\n", argv[0]);
             exit(1);
@@ -44,12 +50,12 @@ int main(int argc, char* argv[]) {
  * @return 1 if success, 0 otherwise
  */
 static int assemble(const char* inpath, const char* outpath, int args) {
-    FILE* in;
-    FILE* out;
-    char* input;
+    FILE*    in;
+    FILE*    out;
+    char*    input;
     uint8_t* output;
-    int len;
-    int romSize = C8_MEMSIZE - C8_PROG_START;
+    int      len;
+    int      romSize = C8_MEMSIZE - C8_PROG_START;
 
     if (!(in = fopen(inpath, "r"))) {
         fprintf(stderr, "Failed to load input file\n");
@@ -62,10 +68,10 @@ static int assemble(const char* inpath, const char* outpath, int args) {
         return 0;
     }
 
-    input = dynamic_load(in);
-    output = (uint8_t*)calloc(romSize, sizeof(uint8_t));
+    input  = dynamic_load(in);
+    output = (uint8_t*) calloc(romSize, sizeof(uint8_t));
 
-    len = c8_encode(input, output, args);
+    len    = c8_encode(input, output, args);
 
     printf("length: %d\n", len);
 
@@ -87,17 +93,17 @@ static int assemble(const char* inpath, const char* outpath, int args) {
  * @return pointer to string
  */
 static char* dynamic_load(FILE* f) {
-    int capacity = BUFSIZ;
-    char* buf = (char*)malloc(capacity);
+    int   capacity = BUFSIZ;
+    char* buf      = (char*) malloc(capacity);
     char* newbuf;
-    char ch;
-    int len = 0;
+    char  ch;
+    int   len = 0;
 
     while ((ch = fgetc(f)) != EOF) {
         if (len >= capacity - 1) {
             capacity *= 2;
-            newbuf = (char*)realloc(buf, capacity);
-            buf = newbuf;
+            newbuf = (char*) realloc(buf, capacity);
+            buf    = newbuf;
         }
 
         buf[len++] = ch;

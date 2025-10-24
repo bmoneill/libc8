@@ -15,7 +15,7 @@
 #define RGB_G(i) ((i >> 8) & 0xFF)
 #define RGB_B(i) (i & 0xFF)
 
-static SDL_Window* window;
+static SDL_Window*   window;
 static SDL_Renderer* renderer;
 
 /**
@@ -27,23 +27,10 @@ static SDL_Renderer* renderer;
  * * `keyMap[17]` disables debug mode
  */
 static int keyMap[18][2] = {
-    { SDLK_1, 1 },
-    { SDLK_2, 2 },
-    { SDLK_3, 3 },
-    { SDLK_4, 0xC },
-    { SDLK_q, 4 },
-    { SDLK_w, 5 },
-    { SDLK_e, 6 },
-    { SDLK_r, 0xD },
-    { SDLK_a, 7 },
-    { SDLK_s, 8 },
-    { SDLK_d, 9 },
-    { SDLK_f, 0xE },
-    { SDLK_z, 0xA },
-    { SDLK_x, 0 },
-    { SDLK_c, 0xB },
-    { SDLK_v, 0xF },
-    { SDLK_p, 16 }, // Enter debug mode
+    { SDLK_1, 1 },   { SDLK_2, 2 },   { SDLK_3, 3 },   { SDLK_4, 0xC }, { SDLK_q, 4 },
+    { SDLK_w, 5 },   { SDLK_e, 6 },   { SDLK_r, 0xD }, { SDLK_a, 7 },   { SDLK_s, 8 },
+    { SDLK_d, 9 },   { SDLK_f, 0xE }, { SDLK_z, 0xA }, { SDLK_x, 0 },   { SDLK_c, 0xB },
+    { SDLK_v, 0xF }, { SDLK_p, 16 }, // Enter debug mode
     { SDLK_m, 17 }, // Leave debug mode
 };
 
@@ -65,10 +52,11 @@ void c8_deinit_graphics(void) {
 uint8_t c8_init_graphics(void) {
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow("CHIP8",
-        SDL_WINDOWPOS_UNDEFINED,
-        SDL_WINDOWPOS_UNDEFINED,
-        C8_DEFAULT_WINDOW_WIDTH, C8_DEFAULT_WINDOW_HEIGHT,
-        SDL_WINDOW_RESIZABLE);
+                              SDL_WINDOWPOS_UNDEFINED,
+                              SDL_WINDOWPOS_UNDEFINED,
+                              C8_DEFAULT_WINDOW_WIDTH,
+                              C8_DEFAULT_WINDOW_HEIGHT,
+                              SDL_WINDOW_RESIZABLE);
     if (!window) {
         return 0;
     }
@@ -100,11 +88,17 @@ void c8_render(c8_display_t* display, int* colors) {
     int dy = 0;
 
     SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, RGB_R(colors[0]), RGB_G(colors[0]),
-        RGB_B(colors[0]), SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer,
+                           RGB_R(colors[0]),
+                           RGB_G(colors[0]),
+                           RGB_B(colors[0]),
+                           SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &winRect);
-    SDL_SetRenderDrawColor(renderer, RGB_R(colors[1]), RGB_G(colors[1]),
-        RGB_B(colors[1]), SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer,
+                           RGB_R(colors[1]),
+                           RGB_G(colors[1]),
+                           RGB_B(colors[1]),
+                           SDL_ALPHA_OPAQUE);
 
     if (display->mode == C8_DISPLAYMODE_HIGH) {
         dx = display->x;
@@ -121,8 +115,11 @@ void c8_render(c8_display_t* display, int* colors) {
         }
     }
 
-    SDL_SetRenderDrawColor(renderer, RGB_R(colors[0]), RGB_G(colors[0]),
-        RGB_B(colors[0]), SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer,
+                           RGB_R(colors[0]),
+                           RGB_G(colors[0]),
+                           RGB_B(colors[0]),
+                           SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &winRect);
 
     SDL_RenderPresent(renderer);
@@ -141,7 +138,7 @@ void c8_render(c8_display_t* display, int* colors) {
  */
 int c8_tick(int* key) {
     SDL_Event e;
-    int ret = -1;
+    int       ret = -1;
     while (SDL_PollEvent(&e)) {
         switch (e.type) {
         case SDL_QUIT:

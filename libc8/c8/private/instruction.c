@@ -7,58 +7,60 @@
  */
 #include "c8/private/instruction.h"
 
-#include "c8/decode.h"
-#include "c8/defs.h"
-#include "c8/font.h"
-#include "c8/private/exception.h"
+#include "../decode.h"
+#include "../defs.h"
+#include "../font.h"
+#include "exception.h"
 
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 #define VERBOSE(c) (c->flags & C8_FLAG_VERBOSE)
 
-#define SCHIP_EXCLUSIVE(c) \
-    if (c->mode == C8_MODE_CHIP8) { \
-        C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION, "SCHIP instruction detected in CHIP-8 mode.\n"); \
-        return INVALID_INSTRUCTION_EXCEPTION; \
+#define SCHIP_EXCLUSIVE(c)                                                                         \
+    if (c->mode == C8_MODE_CHIP8) {                                                                \
+        C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION,                                                \
+                     "SCHIP instruction detected in CHIP-8 mode.\n");                              \
+        return INVALID_INSTRUCTION_EXCEPTION;                                                      \
     }
 
-#define XOCHIP_EXCLUSIVE(c) \
-    if (c->mode != C8_MODE_XOCHIP) { \
-        const char *modeStr = (c->mode == C8_MODE_CHIP8) ? "CHIP-8" : "SCHIP"; \
-        C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION, "XOCHIP instruction detected in %s mode.\n", modeStr); \
-        return INVALID_INSTRUCTION_EXCEPTION; \
+#define XOCHIP_EXCLUSIVE(c)                                                                        \
+    if (c->mode != C8_MODE_XOCHIP) {                                                               \
+        const char* modeStr = (c->mode == C8_MODE_CHIP8) ? "CHIP-8" : "SCHIP";                     \
+        C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION,                                                \
+                     "XOCHIP instruction detected in %s mode.\n",                                  \
+                     modeStr);                                                                     \
+        return INVALID_INSTRUCTION_EXCEPTION;                                                      \
     }
 
-#define QUIRK_BITWISE(c) \
-	if (c->flags & C8_FLAG_QUIRK_BITWISE) { \
-		c->V[0xF] = 0; \
-	}
+#define QUIRK_BITWISE(c)                                                                           \
+    if (c->flags & C8_FLAG_QUIRK_BITWISE) {                                                        \
+        c->V[0xF] = 0;                                                                             \
+    }
 
-#define QUIRK_DRAW(c) \
-	if (c->flags & C8_FLAG_QUIRK_DRAW) { \
-		if () \
-	}
+#define QUIRK_DRAW(c)                                                                              \
+    if (c->flags & C8_FLAG_QUIRK_DRAW) {                                                           \
+        if ()                                                                                      \
+    }
 
-#define QUIRK_LOADSTORE(c) \
-	if (c->flags & C8_FLAG_QUIRK_LOADSTORE) { \
-		c->I += x + 1; \
-	}
+#define QUIRK_LOADSTORE(c)                                                                         \
+    if (c->flags & C8_FLAG_QUIRK_LOADSTORE) {                                                      \
+        c->I += x + 1;                                                                             \
+    }
 
-#define QUIRK_SHIFT(c) \
-	if (c->flags & C8_FLAG_QUIRK_SHIFT) { \
-		y = x; \
-	}
+#define QUIRK_SHIFT(c)                                                                             \
+    if (c->flags & C8_FLAG_QUIRK_SHIFT) {                                                          \
+        y = x;                                                                                     \
+    }
 
 #define BORROWS(x, y) ((((int) x) - y) < 0)
 #define CARRIES(x, y) ((((int) x) + y) > UINT8_MAX)
 
 /* instruction groups */
-static int base_instruction(c8_t*, uint16_t, uint8_t);
-static int bitwise_instruction(c8_t*, uint16_t, uint8_t, uint8_t, uint8_t);
-static int key_instruction(c8_t*, uint16_t, uint8_t, uint8_t);
-static int misc_instruction(c8_t*, uint16_t, uint8_t, uint8_t);
+static int        base_instruction(c8_t*, uint16_t, uint8_t);
+static int        bitwise_instruction(c8_t*, uint16_t, uint8_t, uint8_t, uint8_t);
+static int        key_instruction(c8_t*, uint16_t, uint8_t, uint8_t);
+static int        misc_instruction(c8_t*, uint16_t, uint8_t, uint8_t);
 
 static inline int i_scd_b(c8_t*, uint8_t);
 
@@ -114,7 +116,6 @@ static inline int i_ld_vx_ip(c8_t*, uint8_t);
 static inline int i_ld_r_vx(c8_t*, uint8_t);
 static inline int i_ld_vx_r(c8_t*, uint8_t);
 
-
 /**
  * @brief Execute the instruction at `c8->pc`
  *
@@ -128,7 +129,7 @@ static inline int i_ld_vx_r(c8_t*, uint8_t);
  * error occurs.
  */
 int parse_instruction(c8_t* c8) {
-    uint16_t in = (((uint16_t)c8->mem[c8->pc]) << 8) | c8->mem[c8->pc + 1];
+    uint16_t in = (((uint16_t) c8->mem[c8->pc]) << 8) | c8->mem[c8->pc + 1];
     C8_EXPAND(in);
 
     if (VERBOSE(c8)) {
@@ -136,22 +137,38 @@ int parse_instruction(c8_t* c8) {
     }
 
     switch (a) {
-    case 0x0: return y == 0xC ? i_scd_b(c8, b) : base_instruction(c8, in, kk);
-    case 0x1: return i_jp_nnn(c8, nnn);
-    case 0x2: return i_call_nnn(c8, nnn);
-    case 0x3: return i_se_vx_kk(c8, x, kk);
-    case 0x4: return i_sne_vx_kk(c8, x, kk);
-    case 0x5: return i_se_vx_vy(c8, x, y);
-    case 0x6: return i_ld_vx_kk(c8, x, kk);
-    case 0x7: return i_add_vx_kk(c8, x, kk);
-    case 0x8: return bitwise_instruction(c8, in, x, y, b);
-    case 0x9: return i_sne_vx_vy(c8, x, y);
-    case 0xA: return i_ld_i_nnn(c8, nnn);
-    case 0xB: return i_jp_v0_nnn(c8, nnn);
-    case 0xC: return i_rnd_vx_kk(c8, x, kk);
-    case 0xD: return i_drw_vx_vy_b(c8, x, y, b);
-    case 0xE: return key_instruction(c8, in, x, kk);
-    case 0xF: return misc_instruction(c8, in, x, kk);
+    case 0x0:
+        return y == 0xC ? i_scd_b(c8, b) : base_instruction(c8, in, kk);
+    case 0x1:
+        return i_jp_nnn(c8, nnn);
+    case 0x2:
+        return i_call_nnn(c8, nnn);
+    case 0x3:
+        return i_se_vx_kk(c8, x, kk);
+    case 0x4:
+        return i_sne_vx_kk(c8, x, kk);
+    case 0x5:
+        return i_se_vx_vy(c8, x, y);
+    case 0x6:
+        return i_ld_vx_kk(c8, x, kk);
+    case 0x7:
+        return i_add_vx_kk(c8, x, kk);
+    case 0x8:
+        return bitwise_instruction(c8, in, x, y, b);
+    case 0x9:
+        return i_sne_vx_vy(c8, x, y);
+    case 0xA:
+        return i_ld_i_nnn(c8, nnn);
+    case 0xB:
+        return i_jp_v0_nnn(c8, nnn);
+    case 0xC:
+        return i_rnd_vx_kk(c8, x, kk);
+    case 0xD:
+        return i_drw_vx_vy_b(c8, x, y, b);
+    case 0xE:
+        return key_instruction(c8, in, x, kk);
+    case 0xF:
+        return misc_instruction(c8, in, x, kk);
     default: // unreachable
         C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION, "Unreachable Invalid instruction: %04x", in);
         return INVALID_INSTRUCTION_EXCEPTION;
@@ -160,13 +177,20 @@ int parse_instruction(c8_t* c8) {
 
 static int base_instruction(c8_t* c8, uint16_t in, uint8_t kk) {
     switch (kk) {
-    case 0xE0: return i_cls(c8);
-    case 0xEE: return i_ret(c8);
-    case 0xFB: return i_scr(c8);
-    case 0xFC: return i_scl(c8);
-    case 0xFD: return i_exit(c8);
-    case 0xFE: return i_low(c8);
-    case 0xFF: return i_high(c8);
+    case 0xE0:
+        return i_cls(c8);
+    case 0xEE:
+        return i_ret(c8);
+    case 0xFB:
+        return i_scr(c8);
+    case 0xFC:
+        return i_scl(c8);
+    case 0xFD:
+        return i_exit(c8);
+    case 0xFE:
+        return i_low(c8);
+    case 0xFF:
+        return i_high(c8);
     default:
         C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION, "Invalid instruction: %04x", in);
         return INVALID_INSTRUCTION_EXCEPTION;
@@ -175,15 +199,24 @@ static int base_instruction(c8_t* c8, uint16_t in, uint8_t kk) {
 
 static int bitwise_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t y, uint8_t b) {
     switch (b) {
-    case 0x0: return i_ld_vx_vy(c8, x, y);
-    case 0x1: return i_or_vx_vy(c8, x, y);
-    case 0x2: return i_and_vx_vy(c8, x, y);
-    case 0x3: return i_xor_vx_vy(c8, x, y);
-    case 0x4: return i_add_vx_vy(c8, x, y);
-    case 0x5: return i_sub_vx_vy(c8, x, y);
-    case 0x6: return i_shr_vx_vy(c8, x, y);
-    case 0x7: return i_subn_vx_vy(c8, x, y);
-    case 0xE: return i_shl_vx_vy(c8, x, y);
+    case 0x0:
+        return i_ld_vx_vy(c8, x, y);
+    case 0x1:
+        return i_or_vx_vy(c8, x, y);
+    case 0x2:
+        return i_and_vx_vy(c8, x, y);
+    case 0x3:
+        return i_xor_vx_vy(c8, x, y);
+    case 0x4:
+        return i_add_vx_vy(c8, x, y);
+    case 0x5:
+        return i_sub_vx_vy(c8, x, y);
+    case 0x6:
+        return i_shr_vx_vy(c8, x, y);
+    case 0x7:
+        return i_subn_vx_vy(c8, x, y);
+    case 0xE:
+        return i_shl_vx_vy(c8, x, y);
     default:
         C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION, "Invalid instruction: %04x", in);
         return INVALID_INSTRUCTION_EXCEPTION;
@@ -192,8 +225,10 @@ static int bitwise_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t y, uint
 
 static int key_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t kk) {
     switch (kk) {
-    case 0x9E: return i_skp_vx(c8, x);
-    case 0xA1: return i_sknp_vx(c8, x);
+    case 0x9E:
+        return i_skp_vx(c8, x);
+    case 0xA1:
+        return i_sknp_vx(c8, x);
     default:
         C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION, "Invalid instruction: %04x", in);
         return INVALID_INSTRUCTION_EXCEPTION;
@@ -202,18 +237,30 @@ static int key_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t kk) {
 
 static int misc_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t kk) {
     switch (kk) {
-    case 0x07: return i_ld_vx_dt(c8, x);
-    case 0x0A: return i_ld_vx_k(c8, x);
-    case 0x15: return i_ld_dt_vx(c8, x);
-    case 0x18: return i_ld_st_vx(c8, x);
-    case 0x1E: return i_add_i_vx(c8, x);
-    case 0x29: return i_ld_f_vx(c8, x);
-    case 0x30: return i_ld_hf_vx(c8, x);
-    case 0x33: return i_ld_b_vx(c8, x);
-    case 0x55: return i_ld_ip_vx(c8, x);
-    case 0x65: return i_ld_vx_ip(c8, x);
-    case 0x75: return i_ld_r_vx(c8, x);
-    case 0x85: return i_ld_vx_r(c8, x);
+    case 0x07:
+        return i_ld_vx_dt(c8, x);
+    case 0x0A:
+        return i_ld_vx_k(c8, x);
+    case 0x15:
+        return i_ld_dt_vx(c8, x);
+    case 0x18:
+        return i_ld_st_vx(c8, x);
+    case 0x1E:
+        return i_add_i_vx(c8, x);
+    case 0x29:
+        return i_ld_f_vx(c8, x);
+    case 0x30:
+        return i_ld_hf_vx(c8, x);
+    case 0x33:
+        return i_ld_b_vx(c8, x);
+    case 0x55:
+        return i_ld_ip_vx(c8, x);
+    case 0x65:
+        return i_ld_vx_ip(c8, x);
+    case 0x75:
+        return i_ld_r_vx(c8, x);
+    case 0x85:
+        return i_ld_vx_r(c8, x);
     default:
         C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION, "Invalid instruction: %04x", in);
         return INVALID_INSTRUCTION_EXCEPTION;
@@ -645,7 +692,7 @@ static inline int i_sub_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  */
 static inline int i_shr_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
-    c8->V[x] = c8->V[y] >> 1;
+    c8->V[x]   = c8->V[y] >> 1;
     c8->V[0xF] = c8->V[x] & 0x1;
     return 2;
 }
@@ -664,7 +711,7 @@ static inline int i_shr_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  */
 static inline int i_subn_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
     c8->V[0xF] = !BORROWS(c8->V[y], c8->V[x]);
-    c8->V[x] = c8->V[y] - c8->V[x];
+    c8->V[x]   = c8->V[y] - c8->V[x];
     return 2;
 }
 
@@ -687,7 +734,7 @@ static inline int i_subn_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  */
 static inline int i_shl_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
-    c8->V[x] = c8->V[y] << 1;
+    c8->V[x]   = c8->V[y] << 1;
     c8->V[0xF] = (c8->V[x] >> 7) & 1;
     return 2;
 }
@@ -783,11 +830,11 @@ static inline int i_rnd_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
  */
 static inline int i_drw_vx_vy_b(c8_t* c8, uint8_t x, uint8_t y, uint8_t b) {
     c8->V[0xF] = 0;
-    int dw = C8_LOW_DISPLAY_WIDTH;
-    int dh = C8_LOW_DISPLAY_HEIGHT;
-    int h = 8;
-    int ox = 0;
-    int oy = 0;
+    int dw     = C8_LOW_DISPLAY_WIDTH;
+    int dh     = C8_LOW_DISPLAY_HEIGHT;
+    int h      = 8;
+    int ox     = 0;
+    int oy     = 0;
 
     if (c8->display.mode == C8_DISPLAYMODE_HIGH) {
         if (b == 0) {
@@ -811,7 +858,7 @@ static inline int i_drw_vx_vy_b(c8_t* c8, uint8_t x, uint8_t y, uint8_t b) {
             }
 
             int before = *c8_get_pixel(&c8->display, dx, dy);
-            int pix = c8->mem[c8->I + i];
+            int pix    = c8->mem[c8->I + i];
 
             if (pix & (0x80 >> j)) {
                 if (before) {
@@ -899,7 +946,7 @@ static inline int i_ld_vx_k(c8_t* c8, uint8_t x) {
     }
 
     // Wait for a key press
-    c8->VK = x;
+    c8->VK            = x;
     c8->waitingForKey = 1;
     return 0;
 }
@@ -1002,7 +1049,7 @@ static inline int i_ld_hf_vx(c8_t* c8, uint8_t x) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 static inline int i_ld_b_vx(c8_t* c8, uint8_t x) {
-    c8->mem[c8->I] = (c8->V[x] / 100) % 10; // hundreds
+    c8->mem[c8->I]     = (c8->V[x] / 100) % 10; // hundreds
     c8->mem[c8->I + 1] = (c8->V[x] / 10) % 10; // tens
     c8->mem[c8->I + 2] = c8->V[x] % 10; // ones
     return 2;

@@ -15,9 +15,7 @@
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
  */
-__attribute__((weak)) void c8_beep(void) {
-    fprintf(stderr, "c8_beep() not implemented.");
-}
+__attribute__((weak)) void c8_beep(void) { fprintf(stderr, "c8_beep() not implemented."); }
 
 /**
  * @brief Deinitialize graphics system

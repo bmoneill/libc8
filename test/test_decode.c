@@ -1,60 +1,53 @@
-#include "unity.h"
 #include "c8/decode.c"
-#include "c8/private/exception.h"
 #include "c8/defs.h"
+#include "c8/private/exception.h"
+#include "unity.h"
 
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
-#define FORMAT_A(a) ((a << 12) & 0xF000)
-#define FORMAT_X(x) ((x << 8) & 0x0F00)
-#define FORMAT_Y(y) ((y << 4) & 0x00F0)
-#define FORMAT_B(b) (b & 0x000F)
-#define FORMAT_KK(kk) (kk & 0x00FF)
-#define FORMAT_NNN(nnn) (nnn & 0x0FFF)
-#define BUILD_INSTRUCTION_AXYB(a, x, y, b) \
-	(FORMAT_A(a) | FORMAT_X(x) | FORMAT_Y(y) | FORMAT_B(b))
+#define FORMAT_A(a)                        ((a << 12) & 0xF000)
+#define FORMAT_X(x)                        ((x << 8) & 0x0F00)
+#define FORMAT_Y(y)                        ((y << 4) & 0x00F0)
+#define FORMAT_B(b)                        (b & 0x000F)
+#define FORMAT_KK(kk)                      (kk & 0x00FF)
+#define FORMAT_NNN(nnn)                    (nnn & 0x0FFF)
+#define BUILD_INSTRUCTION_AXYB(a, x, y, b) (FORMAT_A(a) | FORMAT_X(x) | FORMAT_Y(y) | FORMAT_B(b))
 
-#define BUILD_INSTRUCTION_AXKK(a, x, kk) \
-	(FORMAT_A(a) | FORMAT_X(x) | FORMAT_KK(kk))
+#define BUILD_INSTRUCTION_AXKK(a, x, kk) (FORMAT_A(a) | FORMAT_X(x) | FORMAT_KK(kk))
 
-#define BUILD_INSTRUCTION_ANNN(a, nnn) \
-	(FORMAT_A(a) | FORMAT_NNN(nnn))
+#define BUILD_INSTRUCTION_ANNN(a, nnn) (FORMAT_A(a) | FORMAT_NNN(nnn))
 
-#define SHOULD_PARSE(expected, ins) \
+#define SHOULD_PARSE(expected, ins)                                                                \
     TEST_ASSERT_EQUAL_STRING(expected, c8_decode_instruction(ins, label_map));
 
-uint8_t label_map[C8_MEMSIZE];
-char buf[64];
+uint8_t   label_map[C8_MEMSIZE];
+char      buf[64];
 
-int x = 0;
-int y = 0;
-int kk = 0;
-int b = 0;
-int nnn = 0;
+int       x     = 0;
+int       y     = 0;
+int       kk    = 0;
+int       b     = 0;
+int       nnn   = 0;
 const int label = 1;
 
-void setUp(void) {
+void      setUp(void) {
     srand(time(NULL));
     memset(label_map, 0, 4096);
-	x = rand() % 0xF;
-	y = rand() % 0xF;
-	kk = rand() % 0xFF;
-	b = rand() % 0xF;
-	nnn = rand() % 0xFFF;
+    x   = rand() % 0xF;
+    y   = rand() % 0xF;
+    kk  = rand() % 0xFF;
+    b   = rand() % 0xF;
+    nnn = rand() % 0xFFF;
 }
 
-void tearDown(void) { }
+void tearDown(void) {}
 
-void test_decode_instruction_WhereInstructionIsCLS(void) {
-    SHOULD_PARSE("CLS", 0x00E0);
-}
+void test_decode_instruction_WhereInstructionIsCLS(void) { SHOULD_PARSE("CLS", 0x00E0); }
 
-void test_decode_instruction_WhereInstructionIsRET(void) {
-    SHOULD_PARSE("RET", 0x00EE);
-}
+void test_decode_instruction_WhereInstructionIsRET(void) { SHOULD_PARSE("RET", 0x00EE); }
 
 void test_decode_instruction_WhereInstructionIsSCD(void) {
     uint16_t ins = 0x00C0 | b;
@@ -63,28 +56,18 @@ void test_decode_instruction_WhereInstructionIsSCD(void) {
     SHOULD_PARSE(buf, ins);
 }
 
-void test_decode_instruction_WhereInstructionIsSCR(void) {
-    SHOULD_PARSE("SCR", 0x00FB);
-}
+void test_decode_instruction_WhereInstructionIsSCR(void) { SHOULD_PARSE("SCR", 0x00FB); }
 
-void test_decode_instruction_WhereInstructionIsSCL(void) {
-    SHOULD_PARSE("SCL", 0x00FC);
-}
+void test_decode_instruction_WhereInstructionIsSCL(void) { SHOULD_PARSE("SCL", 0x00FC); }
 
-void test_decode_instruction_WhereInstructionIsEXIT(void) {
-    SHOULD_PARSE("EXIT", 0x00FD);
-}
+void test_decode_instruction_WhereInstructionIsEXIT(void) { SHOULD_PARSE("EXIT", 0x00FD); }
 
-void test_decode_instruction_WhereInstructionIsLOW(void) {
-    SHOULD_PARSE("LOW", 0x00FE);
-}
+void test_decode_instruction_WhereInstructionIsLOW(void) { SHOULD_PARSE("LOW", 0x00FE); }
 
-void test_decode_instruction_WhereInstructionIsHIGH(void) {
-    SHOULD_PARSE("HIGH", 0x00FF);
-}
+void test_decode_instruction_WhereInstructionIsHIGH(void) { SHOULD_PARSE("HIGH", 0x00FF); }
 
 void test_decode_instruction_WhereInstructionIsJPNNN(void) {
-    int ins = BUILD_INSTRUCTION_ANNN(1, nnn);
+    int ins        = BUILD_INSTRUCTION_ANNN(1, nnn);
     label_map[nnn] = 0;
 
     sprintf(buf, "JP $%03X", nnn);
@@ -92,7 +75,7 @@ void test_decode_instruction_WhereInstructionIsJPNNN(void) {
 }
 
 void test_decode_instruction_WhereInstructionIsJPNNN_WithLabel(void) {
-    int ins = BUILD_INSTRUCTION_ANNN(1, nnn);
+    int ins        = BUILD_INSTRUCTION_ANNN(1, nnn);
     label_map[nnn] = label;
 
     sprintf(buf, "JP label%d", label);
@@ -100,7 +83,7 @@ void test_decode_instruction_WhereInstructionIsJPNNN_WithLabel(void) {
 }
 
 void test_decode_instruction_WhereInstructionIsCALL(void) {
-    int ins = BUILD_INSTRUCTION_ANNN(2, nnn);
+    int ins        = BUILD_INSTRUCTION_ANNN(2, nnn);
     label_map[nnn] = 0;
 
     sprintf(buf, "CALL $%03X", nnn);
@@ -108,7 +91,7 @@ void test_decode_instruction_WhereInstructionIsCALL(void) {
 }
 
 void test_decode_instruction_WhereInstructionIsCALL_WithLabel(void) {
-    int ins = BUILD_INSTRUCTION_ANNN(2, nnn);
+    int ins        = BUILD_INSTRUCTION_ANNN(2, nnn);
     label_map[nnn] = label;
 
     sprintf(buf, "CALL label%d", label);
@@ -221,7 +204,7 @@ void test_decode_instruction_WhereInstructionIsSNEXY(void) {
 }
 
 void test_decode_instruction_WhereInstructionIsLDINNN(void) {
-    int ins = BUILD_INSTRUCTION_ANNN(0xA, nnn);
+    int ins        = BUILD_INSTRUCTION_ANNN(0xA, nnn);
     label_map[nnn] = 0;
 
     sprintf(buf, "LD I, $%03X", nnn);
@@ -229,7 +212,7 @@ void test_decode_instruction_WhereInstructionIsLDINNN(void) {
 }
 
 void test_decode_instruction_WhereInstructionIsLDINNN_WithLabel(void) {
-    int ins = BUILD_INSTRUCTION_ANNN(0xA, nnn);
+    int ins        = BUILD_INSTRUCTION_ANNN(0xA, nnn);
     label_map[nnn] = label;
 
     sprintf(buf, "LD I, label%d", label);
@@ -237,7 +220,7 @@ void test_decode_instruction_WhereInstructionIsLDINNN_WithLabel(void) {
 }
 
 void test_decode_instruction_WhereInstructionIsJPV0NNN(void) {
-    int ins = BUILD_INSTRUCTION_ANNN(0xB, nnn);
+    int ins        = BUILD_INSTRUCTION_ANNN(0xB, nnn);
     label_map[nnn] = 0;
 
     sprintf(buf, "JP V0, $%03X", nnn);
@@ -245,7 +228,7 @@ void test_decode_instruction_WhereInstructionIsJPV0NNN(void) {
 }
 
 void test_decode_instruction_WhereInstructionIsJPV0NNN_WithLabel(void) {
-    int ins = BUILD_INSTRUCTION_ANNN(0xB, nnn);
+    int ins        = BUILD_INSTRUCTION_ANNN(0xB, nnn);
     label_map[nnn] = label;
 
     sprintf(buf, "JP V0, label%d", label);

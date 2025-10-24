@@ -1,7 +1,7 @@
-#include "unity.h"
-#include "c8/private/util.c"
-#include "c8/private/exception.c"
 #include "c8/defs.h"
+#include "c8/private/exception.c"
+#include "c8/private/util.c"
+#include "unity.h"
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -17,22 +17,22 @@ void setUp(void) {
     memset(buf, 0, BUF_SIZE);
 }
 
-void tearDown(void) { }
+void tearDown(void) {}
 
 void test_hex_to_int_WhereStringIsLowercase(void) {
-    int n = (rand() % 6) + 10;
+    int  n = (rand() % 6) + 10;
     char c = (n + 0x61) - 10;
     TEST_ASSERT_EQUAL_INT(n, hex_to_int(c));
 }
 
 void test_hex_to_int_WhereStringIsUppercase(void) {
-    int n = (rand() % 6) + 10;
+    int  n = (rand() % 6) + 10;
     char c = (n + 0x41) - 10;
     TEST_ASSERT_EQUAL_INT(n, hex_to_int(c));
 }
 
 void test_hex_to_int_WhereStringIsDecimal(void) {
-    int n = rand() % 10;
+    int  n = rand() % 10;
     char c = n + 0x30;
     TEST_ASSERT_EQUAL_INT(n, hex_to_int(c));
 }
@@ -61,9 +61,7 @@ void test_parse_int_WhereStringIsHexWithVPrefix(void) {
     TEST_ASSERT_EQUAL_INT(n, parse_int(buf));
 }
 
-void test_parse_int_WhereStringIsEmpty(void) {
-    TEST_ASSERT_EQUAL_INT(-1, parse_int(buf));
-}
+void test_parse_int_WhereStringIsEmpty(void) { TEST_ASSERT_EQUAL_INT(-1, parse_int(buf)); }
 
 void test_parse_int_WhereIntIsZero(void) {
     int n = 0;

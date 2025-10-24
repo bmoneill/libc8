@@ -6,9 +6,9 @@
 
 #include "encode.h"
 
-#include "private/symbol.h"
 #include "defs.h"
 #include "private/exception.h"
+#include "private/symbol.h"
 #include "private/util.h"
 
 #include <ctype.h>
@@ -17,20 +17,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int initialize_labels(label_list_t*);
-static int initialize_symbols(symbol_list_t*);
-static int line_count(const char*);
-static int parse_line(char*, int, symbol_list_t*, const label_list_t*);
-static int parse_word(char*, const char*, int, symbol_t*, const label_list_t*);
+static int         initialize_labels(label_list_t*);
+static int         initialize_symbols(symbol_list_t*);
+static int         line_count(const char*);
+static int         parse_line(char*, int, symbol_list_t*, const label_list_t*);
+static int         parse_word(char*, const char*, int, symbol_t*, const label_list_t*);
 static inline void put16(uint8_t*, uint16_t, int);
-static int tokenize(char**, char*, const char*, int);
-static int to_upper(char*);
-static char* remove_comma(char*);
-static int write(uint8_t*, symbol_list_t*);
+static int         tokenize(char**, char*, const char*, int);
+static int         to_upper(char*);
+static char*       remove_comma(char*);
+static int         write(uint8_t*, symbol_list_t*);
 
-char** c8_lines;
-char** c8_lines_unformatted;
-int c8_line_count;
+char**             c8_lines;
+char**             c8_lines_unformatted;
+int                c8_line_count;
 
 /**
  * @brief Parse the given string
@@ -47,11 +47,11 @@ int c8_line_count;
  */
 int c8_encode(const char* s, uint8_t* out, int args) {
     char* scpy;
-    int len = strlen(s);
-    int count = 0;
-    int validLineCount = 0;
-    c8_line_count = line_count(s);
-    label_list_t labels;
+    int   len            = strlen(s);
+    int   count          = 0;
+    int   validLineCount = 0;
+    c8_line_count        = line_count(s);
+    label_list_t  labels;
     symbol_list_t symbols;
 
     initialize_labels(&labels);
@@ -60,28 +60,26 @@ int c8_encode(const char* s, uint8_t* out, int args) {
     /* copy string and ensure newline at end */
     if (s[len - 1] == '\n') {
         scpy = strndup(s, len);
-    }
-    else {
-        scpy = strndup(s, len + 1);
-        scpy[len] = '\n';
+    } else {
+        scpy          = strndup(s, len + 1);
+        scpy[len]     = '\n';
         scpy[len + 1] = '\0';
     }
 
     VERBOSE_PRINT(args, "Getting tokens from input");
-    c8_lines = (char**)malloc(c8_line_count * sizeof(char*));
+    c8_lines      = (char**) malloc(c8_line_count * sizeof(char*));
     c8_line_count = tokenize(c8_lines, scpy, "\n", c8_line_count);
 
     /*Copy lines to c8_lines_unformatted */
-    c8_lines_unformatted = (char**)malloc(c8_line_count * sizeof(char*));
+    c8_lines_unformatted = (char**) malloc(c8_line_count * sizeof(char*));
     for (int i = 0; i < c8_line_count; i++) {
         c8_lines_unformatted[i] = strdup(c8_lines[i]);
-        c8_lines[i] = trim(c8_lines[i]);
-        c8_lines[i] = remove_comment(c8_lines[i]);
+        c8_lines[i]             = trim(c8_lines[i]);
+        c8_lines[i]             = remove_comment(c8_lines[i]);
         if (strlen(c8_lines[i]) == 0) {
             // empty line
             c8_lines[i] = NULL;
-        }
-        else {
+        } else {
             validLineCount++;
         }
     }
@@ -157,13 +155,13 @@ char* remove_comment(char* s) {
  * @return 1 if success, exception code otherwise
  */
 static int initialize_labels(label_list_t* labels) {
-    labels->l = (label_t*)calloc(LABEL_CEILING, sizeof(label_t));
+    labels->l = (label_t*) calloc(LABEL_CEILING, sizeof(label_t));
     if (!labels->l) {
         C8_EXCEPTION(MEMORY_ALLOCATION_EXCEPTION, "At function %s", __func__);
         return MEMORY_ALLOCATION_EXCEPTION;
     }
 
-    labels->len = 0;
+    labels->len  = 0;
     labels->ceil = LABEL_CEILING;
     return 1;
 }
@@ -176,13 +174,13 @@ static int initialize_labels(label_list_t* labels) {
  * @return 1 if success, exception code otherwise
  */
 static int initialize_symbols(symbol_list_t* symbols) {
-    symbols->s = (symbol_t*)calloc(SYMBOL_CEILING, sizeof(symbol_t));
+    symbols->s = (symbol_t*) calloc(SYMBOL_CEILING, sizeof(symbol_t));
     if (!symbols->s) {
         C8_EXCEPTION(MEMORY_ALLOCATION_EXCEPTION, "At function %s", __func__);
         return MEMORY_ALLOCATION_EXCEPTION;
     }
 
-    symbols->len = 0;
+    symbols->len  = 0;
     symbols->ceil = SYMBOL_CEILING;
     return 1;
 }
@@ -224,8 +222,8 @@ static int parse_line(char* s, int ln, symbol_list_t* symbols, const label_list_
     }
 
     symbol_t* sym = next_symbol(symbols);
-    char* words[C8_ENCODE_MAX_WORDS];
-    int wc = tokenize(words, s, " ", C8_ENCODE_MAX_WORDS);
+    char*     words[C8_ENCODE_MAX_WORDS];
+    int       wc = tokenize(words, s, " ", C8_ENCODE_MAX_WORDS);
 
     // Special case for strings
     if (wc > 1 && is_ds(words[0])) {
@@ -233,10 +231,10 @@ static int parse_line(char* s, int ln, symbol_list_t* symbols, const label_list_
             const char* word = words[i];
 
             if (i > 1) {
-                sym->type = SYM_DB;
+                sym->type  = SYM_DB;
                 sym->value = ' ';
-                sym->ln = ln;
-                sym = next_symbol(symbols);
+                sym->ln    = ln;
+                sym        = next_symbol(symbols);
             }
 
             for (int j = i == 1 ? 1 : 0; word[j] != '\0'; j++) {
@@ -244,10 +242,10 @@ static int parse_line(char* s, int ln, symbol_list_t* symbols, const label_list_
                     return 1;
                 }
                 printf("%c", word[j]);
-                sym->type = SYM_DB;
-                sym->value = (uint8_t)word[j];
-                sym->ln = ln;
-                sym = next_symbol(symbols);
+                sym->type  = SYM_DB;
+                sym->value = (uint8_t) word[j];
+                sym->ln    = ln;
+                sym        = next_symbol(symbols);
             }
         }
         return 1;
@@ -256,8 +254,7 @@ static int parse_line(char* s, int ln, symbol_list_t* symbols, const label_list_
     for (int i = 0; i < wc; i++) {
         if (i == wc - 1) {
             i += parse_word(words[i], NULL, ln, sym, labels);
-        }
-        else {
+        } else {
             i += parse_word(words[i], words[i + 1], ln, sym, labels);
         }
         sym = next_symbol(symbols);
@@ -277,11 +274,12 @@ static int parse_line(char* s, int ln, symbol_list_t* symbols, const label_list_
  *
  * @return number of words to skip
  */
-static int parse_word(char* s, const char* next, int ln, symbol_t* sym, const label_list_t* labels) {
+static int
+parse_word(char* s, const char* next, int ln, symbol_t* sym, const label_list_t* labels) {
     int value;
     sym->ln = ln;
-    s = remove_comma(s);
-    s = trim(s);
+    s       = remove_comma(s);
+    s       = trim(s);
     to_upper(s);
 
     if (is_label_definition(s) == 1) {
@@ -292,49 +290,39 @@ static int parse_word(char* s, const char* next, int ln, symbol_t* sym, const la
             }
         }
         return 0;
-    }
-    else if ((value = is_instruction(s)) >= 0) {
-        sym->type = SYM_INSTRUCTION;
+    } else if ((value = is_instruction(s)) >= 0) {
+        sym->type  = SYM_INSTRUCTION;
         sym->value = value;
         return 0;
-    }
-    else if (is_db(s) && next) {
-        sym->type = SYM_DB;
+    } else if (is_db(s) && next) {
+        sym->type  = SYM_DB;
         sym->value = parse_int(next);
         return 1;
-    }
-    else if (is_dw(s) && next) {
-        sym->type = SYM_DW;
+    } else if (is_dw(s) && next) {
+        sym->type  = SYM_DW;
         sym->value = parse_int(next);
         return 1;
-    }
-    else if ((value = is_register(s)) >= 0) {
-        sym->type = SYM_V;
+    } else if ((value = is_register(s)) >= 0) {
+        sym->type  = SYM_V;
         sym->value = value;
         return 0;
-    }
-    else if ((value = is_reserved_identifier(s)) >= 0) {
-        sym->type = (Symbol)value;
+    } else if ((value = is_reserved_identifier(s)) >= 0) {
+        sym->type = (Symbol) value;
         return 0;
-    }
-    else if ((value = parse_int(s)) > -1) {
+    } else if ((value = parse_int(s)) > -1) {
         if (value < 0x10) {
             sym->type = SYM_INT4;
-        }
-        else if (value < 0x100) {
+        } else if (value < 0x100) {
             sym->type = SYM_INT8;
-        }
-        else if (value < 0x1000) {
+        } else if (value < 0x1000) {
             sym->type = SYM_INT12;
-        }
-        else {
+        } else {
             sym->type = SYM_INT;
         }
         sym->value = value;
         return 0;
-    }
-    else if ((value = is_label(s, labels)) >= 0) {
-        sym->type = SYM_LABEL;
+    } else if ((value = is_label(s, labels)) >= 0) {
+        sym->type  = SYM_LABEL;
         sym->value = value;
         return 0;
     }
@@ -350,7 +338,7 @@ static int parse_word(char* s, const char* next, int ln, symbol_t* sym, const la
  * @param n index to write to
  */
 static inline void put16(uint8_t* output, uint16_t n, int idx) {
-    output[idx] = (n >> 8) & 0xFF;
+    output[idx]     = (n >> 8) & 0xFF;
     output[idx + 1] = n & 0xFF;
 }
 
@@ -365,11 +353,11 @@ static inline void put16(uint8_t* output, uint16_t n, int idx) {
  * @return number of tokens
  */
 static int tokenize(char** tok, char* s, const char* delim, int maxTokens) {
-    int tokenCount = 0;
-    char* token = strtok(s, delim);
+    int   tokenCount = 0;
+    char* token      = strtok(s, delim);
     while (token && tokenCount < maxTokens) {
         tok[tokenCount++] = token;
-        token = strtok(NULL, delim);
+        token             = strtok(NULL, delim);
     }
 
     return tokenCount;
@@ -412,9 +400,9 @@ static int to_upper(char* s) {
  * @return length of bytecode
  */
 static int write(uint8_t* output, symbol_list_t* symbols) {
-    int ret;
+    int           ret;
     instruction_t ins;
-    int byte = 0;
+    int           byte = 0;
 
     for (int i = 0; i < symbols->len; i++) {
         if (byte >= C8_MEMSIZE - C8_PROG_START) {
@@ -432,10 +420,11 @@ static int write(uint8_t* output, symbol_list_t* symbols) {
         case SYM_DB:
             if (symbols->s[i].value > UINT8_MAX) {
                 C8_EXCEPTION(INVALID_ARGUMENT_EXCEPTION,
-                    "DB value too big.\nLine %d: %s", ln, c8_lines_unformatted[ln]);
+                             "DB value too big.\nLine %d: %s",
+                             ln,
+                             c8_lines_unformatted[ln]);
                 return INVALID_ARGUMENT_EXCEPTION;
-            }
-            else {
+            } else {
                 output[byte] = symbols->s[i].value;
                 byte++;
             }

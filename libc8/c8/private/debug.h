@@ -10,11 +10,12 @@
 
 #include "../chip8.h"
 
-#define DEBUG_QUIT 1
+#define DEBUG_QUIT     1
 #define DEBUG_CONTINUE 2
-#define DEBUG_STEP 3
+#define DEBUG_STEP     3
 
-#define DEBUG_HELP_STRING "Available commands:\n\
+#define DEBUG_HELP_STRING                                                                          \
+    "Available commands:\n\
 break [ADDRESS]: Add breakpoint to PC or ADDRESS, if given\n\
 rmbreak [ADDRESS]: Remove breakpoint at PC or ADDRESS, if given\n\
 continue: Exit debug mode until next breakpoint or completion\n\
@@ -39,7 +40,6 @@ $[address]: Value at given address\n\
 \n\
 If no argument is given to print, it will print all of the above attributes\n\
 except for address values.\n"
-
 
 int debug_repl(c8_t*);
 int has_breakpoint(c8_t*, uint16_t);

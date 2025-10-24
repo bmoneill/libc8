@@ -13,29 +13,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define INVALID_INSTRUCTION_EXCEPTION_MESSAGE "An invalid instruction exists in the input file."
-#define TOO_MANY_LABELS_EXCEPTION_MESSAGE "Too many labels are defined in the input file."
-#define STACK_OVERFLOW_EXCEPTION_MESSAGE "A stack overflow occurred during execution."
-#define INVALID_ARGUMENT_EXCEPTION_MESSAGE "An invalid instruction argument was given."
-#define DUPLICATE_LABEL_EXCEPTION_MESSAGE "A label was defined multiple times."
-#define INVALID_SYMBOL_EXCEPTION_MESSAGE "An invalid symbol exists in the input file."
-#define MEMORY_ALLOCATION_EXCEPTION_MESSAGE "Failed to allocate memory."
-#define UNKNOWN_EXCEPTION_MESSAGE "An unknown error has occurred."
-#define TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE "Too many symbols exist in the input file."
-#define LOAD_FILE_FAILURE_EXCEPTION_MESSAGE "Failed to load file."
-#define FILE_TOO_BIG_EXCEPTION_MESSAGE "The given file is too big."
-#define INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE "Invalid color palette."
-#define INVALID_QUIRK_EXCEPTION_MESSAGE "Invalid quirk."
+#define INVALID_INSTRUCTION_EXCEPTION_MESSAGE            "An invalid instruction exists in the input file."
+#define TOO_MANY_LABELS_EXCEPTION_MESSAGE                "Too many labels are defined in the input file."
+#define STACK_OVERFLOW_EXCEPTION_MESSAGE                 "A stack overflow occurred during execution."
+#define INVALID_ARGUMENT_EXCEPTION_MESSAGE               "An invalid instruction argument was given."
+#define DUPLICATE_LABEL_EXCEPTION_MESSAGE                "A label was defined multiple times."
+#define INVALID_SYMBOL_EXCEPTION_MESSAGE                 "An invalid symbol exists in the input file."
+#define MEMORY_ALLOCATION_EXCEPTION_MESSAGE              "Failed to allocate memory."
+#define UNKNOWN_EXCEPTION_MESSAGE                        "An unknown error has occurred."
+#define TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE               "Too many symbols exist in the input file."
+#define LOAD_FILE_FAILURE_EXCEPTION_MESSAGE              "Failed to load file."
+#define FILE_TOO_BIG_EXCEPTION_MESSAGE                   "The given file is too big."
+#define INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE          "Invalid color palette."
+#define INVALID_QUIRK_EXCEPTION_MESSAGE                  "Invalid quirk."
 #define FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE "Failed to initialize graphics."
-#define INVALID_FONT_EXCEPTION_MESSAGE "Invalid font."
-#define INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE "Clock speed cannot be less than 1."
-#define STACK_UNDERFLOW_EXCEPTION_MESSAGE "Stack underflow occurred during execution."
+#define INVALID_FONT_EXCEPTION_MESSAGE                   "Invalid font."
+#define INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE            "Clock speed cannot be less than 1."
+#define STACK_UNDERFLOW_EXCEPTION_MESSAGE                "Stack underflow occurred during execution."
 
 typedef struct {
     exception_code_t code;
-    const char* message;
+    const char*      message;
 } exception_t;
-
 
 exception_t exceptions[] = {
     { INVALID_INSTRUCTION_EXCEPTION, INVALID_INSTRUCTION_EXCEPTION_MESSAGE },
@@ -68,7 +67,7 @@ void handle_exception(int code) {
 
     fprintf(stderr, "%s\n", c8_exception);
 
-    #ifndef TEST
+#ifndef TEST
     exit(code);
-    #endif
+#endif
 }

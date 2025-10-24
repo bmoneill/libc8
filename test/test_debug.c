@@ -1,29 +1,27 @@
 
 #include "unity.h"
 
+#include "c8/defs.h"
 #include "c8/private/debug.c"
 #include "c8/private/exception.h"
 #include "c8/private/util.h"
-#include "c8/defs.h"
 
 #include <stdint.h>
-#include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 #define BUFLEN 64
 
-char buf[BUFLEN];
+char  buf[BUFLEN];
 cmd_t cmd;
-c8_t c8;
+c8_t  c8;
 
-void setUp(void) {
+void  setUp(void) {
     memset(buf, 0, BUFLEN);
     memset(&cmd, 0, sizeof(cmd_t));
     memset(&c8, 0, sizeof(c8_t));
     c8.pc = 0x200;
 }
-void tearDown(void) { }
+void tearDown(void) {}
 
 void test_get_command_WhereCommandIsBreak(void) {
     const char* s = "break";
@@ -72,7 +70,7 @@ void test_get_command_WhereCommandIsSet(void) {
 }
 
 void test_get_command_WhereCommandIsSet_WhereArgIsAddr(void) {
-    int addr = 0x20;
+    int addr  = 0x20;
     int value = 0x12;
     sprintf(buf, "set $%03x %d", addr, value);
 
@@ -169,7 +167,7 @@ void test_get_command_WhereCommandIsInvalid(void) {
 }
 
 void test_run_command_WhereCommandIsAddBreakpoint_WithNoArgument(void) {
-    cmd.id = CMD_ADD_BREAKPOINT;
+    cmd.id       = CMD_ADD_BREAKPOINT;
     cmd.arg.type = ARG_NONE;
 
     TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
@@ -177,9 +175,9 @@ void test_run_command_WhereCommandIsAddBreakpoint_WithNoArgument(void) {
 }
 
 void test_run_command_WhereCommandIsAddBreakpoint_WithArgument(void) {
-    int addr = 0x246;
-    cmd.id = CMD_ADD_BREAKPOINT;
-    cmd.arg.type = ARG_ADDR;
+    int addr        = 0x246;
+    cmd.id          = CMD_ADD_BREAKPOINT;
+    cmd.arg.type    = ARG_ADDR;
     cmd.arg.value.i = addr;
 
     TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
@@ -188,19 +186,19 @@ void test_run_command_WhereCommandIsAddBreakpoint_WithArgument(void) {
 
 void test_run_command_WhereCommandIsRMBreakpoint_WithNoArgument(void) {
     c8.breakpoints[c8.pc] = 1;
-    cmd.id = CMD_RM_BREAKPOINT;
-    cmd.arg.type = ARG_NONE;
+    cmd.id                = CMD_RM_BREAKPOINT;
+    cmd.arg.type          = ARG_NONE;
 
     TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
     TEST_ASSERT_EQUAL_INT(0, c8.breakpoints[c8.pc]);
 }
 
 void test_run_command_WhereCommandIsRMBreakpoint_WithArgument(void) {
-    int addr = 0x123;
+    int addr             = 0x123;
     c8.breakpoints[addr] = 1;
-    cmd.id = CMD_RM_BREAKPOINT;
-    cmd.arg.type = ARG_ADDR;
-    cmd.arg.value.i = addr;
+    cmd.id               = CMD_RM_BREAKPOINT;
+    cmd.arg.type         = ARG_ADDR;
+    cmd.arg.value.i      = addr;
 
     TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
     TEST_ASSERT_EQUAL_INT(0, c8.breakpoints[addr]);
@@ -225,7 +223,7 @@ void test_run_command_WhereCommandIsQuit(void) {
 }
 
 void test_run_command_WhereCommandIsSet_WhereArgIsPC(void) {
-    cmd.id = CMD_SET;
+    cmd.id       = CMD_SET;
     cmd.arg.type = ARG_PC;
     cmd.setValue = 0x300;
 
@@ -234,12 +232,12 @@ void test_run_command_WhereCommandIsSet_WhereArgIsPC(void) {
 }
 
 void test_run_command_WhereCommandIsSet_WhereArgIsADDR(void) {
-    int addr = 0x10;
-    int value = 0x23;
-    cmd.id = CMD_SET;
-    cmd.arg.type = ARG_ADDR;
+    int addr        = 0x10;
+    int value       = 0x23;
+    cmd.id          = CMD_SET;
+    cmd.arg.type    = ARG_ADDR;
     cmd.arg.value.i = addr;
-    cmd.setValue = value;
+    cmd.setValue    = value;
 
     TEST_ASSERT_EQUAL_INT(0, run_command(&c8, &cmd));
     TEST_ASSERT_EQUAL_INT(value, c8.mem[addr]);
