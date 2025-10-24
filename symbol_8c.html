@@ -97,11 +97,11 @@ $(document).ready(function(){initNavTree('symbol_8c.html',''); initResizable(); 
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="symbol_8h_source.html">symbol.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="encode_8h_source.html">../encode.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="defs_8h_source.html">../defs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="encode_8h_source.html">../encode.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="exception_8h_source.html">exception.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="util_8h_source.html">util.h</a>&quot;</code><br />
-<code>#include &lt;ctype.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -635,20 +635,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    <span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line">     <span class="stringliteral">&quot;DT&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;ST&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;I&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;[I]&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;K&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;F&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;B&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;.DB&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;.DW&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;.DS&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;HF&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;R&quot;</span> ,</div>
-<div class="line">    NULL,</div>
+<div class="line">    <span class="stringliteral">&quot;&quot;</span>,  <span class="stringliteral">&quot;DT&quot;</span> ,  <span class="stringliteral">&quot;ST&quot;</span> ,  <span class="stringliteral">&quot;I&quot;</span> ,  <span class="stringliteral">&quot;[I]&quot;</span> ,  <span class="stringliteral">&quot;K&quot;</span> ,  <span class="stringliteral">&quot;F&quot;</span> ,  <span class="stringliteral">&quot;B&quot;</span> ,  <span class="stringliteral">&quot;.DB&quot;</span> ,  <span class="stringliteral">&quot;.DW&quot;</span> ,  <span class="stringliteral">&quot;.DS&quot;</span> ,  <span class="stringliteral">&quot;HF&quot;</span> ,  <span class="stringliteral">&quot;R&quot;</span> , NULL,</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Reserved identifier strings. Has to match <code>Symbol</code>. </p>
 
@@ -666,33 +653,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">     <span class="stringliteral">&quot;CLS&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;RET&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;JP&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;CALL&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SE&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SNE&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;LD&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;ADD&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;OR&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;AND&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SUB&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SHR&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SUBN&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SHL&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;RND&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;DRW&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SKP&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SKNP&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;XOR&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SCD&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SCR&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;SCL&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;EXIT&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;LOW&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;HIGH&quot;</span> ,</div>
-<div class="line">     <span class="stringliteral">&quot;JP V0,&quot;</span> ,</div>
-<div class="line">    NULL,</div>
+<div class="line">     <span class="stringliteral">&quot;CLS&quot;</span> ,  <span class="stringliteral">&quot;RET&quot;</span> ,  <span class="stringliteral">&quot;JP&quot;</span> ,   <span class="stringliteral">&quot;CALL&quot;</span> ,  <span class="stringliteral">&quot;SE&quot;</span> ,    <span class="stringliteral">&quot;SNE&quot;</span> ,  <span class="stringliteral">&quot;LD&quot;</span> ,    <span class="stringliteral">&quot;ADD&quot;</span> ,    <span class="stringliteral">&quot;OR&quot;</span> ,</div>
+<div class="line">     <span class="stringliteral">&quot;AND&quot;</span> ,  <span class="stringliteral">&quot;SUB&quot;</span> ,  <span class="stringliteral">&quot;SHR&quot;</span> ,  <span class="stringliteral">&quot;SUBN&quot;</span> ,  <span class="stringliteral">&quot;SHL&quot;</span> ,   <span class="stringliteral">&quot;RND&quot;</span> ,  <span class="stringliteral">&quot;DRW&quot;</span> ,   <span class="stringliteral">&quot;SKP&quot;</span> ,    <span class="stringliteral">&quot;SKNP&quot;</span> ,</div>
+<div class="line">     <span class="stringliteral">&quot;XOR&quot;</span> ,  <span class="stringliteral">&quot;SCD&quot;</span> ,  <span class="stringliteral">&quot;SCR&quot;</span> ,  <span class="stringliteral">&quot;SCL&quot;</span> ,   <span class="stringliteral">&quot;EXIT&quot;</span> ,  <span class="stringliteral">&quot;LOW&quot;</span> ,  <span class="stringliteral">&quot;HIGH&quot;</span> ,  <span class="stringliteral">&quot;JP V0,&quot;</span> , NULL,</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Instruction strings. Has to match <code>Instruction</code>. </p>
 

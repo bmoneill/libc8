@@ -97,13 +97,12 @@ $(document).ready(function(){initNavTree('instruction_8c.html',''); initResizabl
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="instruction_8h_source.html">c8/private/instruction.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="decode_8h_source.html">c8/decode.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="defs_8h_source.html">c8/defs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="font_8h_source.html">c8/font.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="exception_8h_source.html">c8/private/exception.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="decode_8h_source.html">../decode.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="defs_8h_source.html">../defs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="font_8h_source.html">../font.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="exception_8h_source.html">exception.h</a>&quot;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -207,8 +206,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#a974238d8fa061c50c721fdcd4f5726e1">C8_FLAG_QUIRK_BITWISE</a>) { \</div>
-<div class="line">        c-&gt;V[0xF] = 0; \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#a974238d8fa061c50c721fdcd4f5726e1">C8_FLAG_QUIRK_BITWISE</a>) {                                                        \</div>
+<div class="line">        c-&gt;V[0xF] = 0;                                                                             \</div>
 <div class="line">    }</div>
 <div class="ttc" id="achip8_8h_html_a974238d8fa061c50c721fdcd4f5726e1"><div class="ttname"><a href="chip8_8h.html#a974238d8fa061c50c721fdcd4f5726e1">C8_FLAG_QUIRK_BITWISE</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_BITWISE</div><div class="ttdef"><b>Definition:</b> chip8.h:24</div></div>
 </div><!-- fragment -->
@@ -229,8 +228,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#ae028401e02e00f6bd3df02fdc0a08087">C8_FLAG_QUIRK_DRAW</a>) { \</div>
-<div class="line">        if () \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#ae028401e02e00f6bd3df02fdc0a08087">C8_FLAG_QUIRK_DRAW</a>) {                                                           \</div>
+<div class="line">        if ()                                                                                      \</div>
 <div class="line">    }</div>
 <div class="ttc" id="achip8_8h_html_ae028401e02e00f6bd3df02fdc0a08087"><div class="ttname"><a href="chip8_8h.html#ae028401e02e00f6bd3df02fdc0a08087">C8_FLAG_QUIRK_DRAW</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_DRAW</div><div class="ttdef"><b>Definition:</b> chip8.h:25</div></div>
 </div><!-- fragment -->
@@ -251,8 +250,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#ae3343f6f990f3e72a0d063fcbd341a66">C8_FLAG_QUIRK_LOADSTORE</a>) { \</div>
-<div class="line">        c-&gt;I += x + 1; \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#ae3343f6f990f3e72a0d063fcbd341a66">C8_FLAG_QUIRK_LOADSTORE</a>) {                                                      \</div>
+<div class="line">        c-&gt;I += x + 1;                                                                             \</div>
 <div class="line">    }</div>
 <div class="ttc" id="achip8_8h_html_ae3343f6f990f3e72a0d063fcbd341a66"><div class="ttname"><a href="chip8_8h.html#ae3343f6f990f3e72a0d063fcbd341a66">C8_FLAG_QUIRK_LOADSTORE</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_LOADSTORE</div><div class="ttdef"><b>Definition:</b> chip8.h:26</div></div>
 </div><!-- fragment -->
@@ -273,8 +272,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#a92a870e6ca433a2ebb5164e5a62735c7">C8_FLAG_QUIRK_SHIFT</a>) { \</div>
-<div class="line">        y = x; \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#a92a870e6ca433a2ebb5164e5a62735c7">C8_FLAG_QUIRK_SHIFT</a>) {                                                          \</div>
+<div class="line">        y = x;                                                                                     \</div>
 <div class="line">    }</div>
 <div class="ttc" id="achip8_8h_html_a92a870e6ca433a2ebb5164e5a62735c7"><div class="ttname"><a href="chip8_8h.html#a92a870e6ca433a2ebb5164e5a62735c7">C8_FLAG_QUIRK_SHIFT</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_SHIFT</div><div class="ttdef"><b>Definition:</b> chip8.h:27</div></div>
 </div><!-- fragment -->
@@ -295,12 +294,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;mode == <a class="code hl_define" href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a>) { \</div>
-<div class="line">        C8_EXCEPTION(<a class="code hl_enumvalue" href="exception_8h.html#a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>, <span class="stringliteral">&quot;SCHIP instruction detected in CHIP-8 mode.\n&quot;</span>); \</div>
-<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>; \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;mode == <a class="code hl_define" href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a>) {                                                                \</div>
+<div class="line">        C8_EXCEPTION(<a class="code hl_enumvalue" href="exception_8h.html#a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>,                                                \</div>
+<div class="line">                     <span class="stringliteral">&quot;SCHIP instruction detected in CHIP-8 mode.\n&quot;</span>);                              \</div>
+<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>;                                                      \</div>
 <div class="line">    }</div>
 <div class="ttc" id="achip8_8h_html_ace5f100e8d06164b3cb3b0b04e5297f5"><div class="ttname"><a href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a></div><div class="ttdeci">#define C8_MODE_CHIP8</div><div class="ttdef"><b>Definition:</b> chip8.h:18</div></div>
-<div class="ttc" id="aexception_8h_html_a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5"><div class="ttname"><a href="exception_8h.html#a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a></div><div class="ttdeci">@ INVALID_INSTRUCTION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:21</div></div>
+<div class="ttc" id="aexception_8h_html_a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5"><div class="ttname"><a href="exception_8h.html#a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a></div><div class="ttdeci">@ INVALID_INSTRUCTION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:22</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -337,10 +337,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;mode != <a class="code hl_define" href="chip8_8h.html#acf75ba93ff6438063ec6a493e004429d">C8_MODE_XOCHIP</a>) { \</div>
-<div class="line">        <span class="keyword">const</span> <span class="keywordtype">char</span> *modeStr = (c-&gt;mode == <a class="code hl_define" href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a>) ? <span class="stringliteral">&quot;CHIP-8&quot;</span> : <span class="stringliteral">&quot;SCHIP&quot;</span>; \</div>
-<div class="line">        C8_EXCEPTION(<a class="code hl_enumvalue" href="exception_8h.html#a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>, <span class="stringliteral">&quot;XOCHIP instruction detected in %s mode.\n&quot;</span>, modeStr); \</div>
-<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>; \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;mode != <a class="code hl_define" href="chip8_8h.html#acf75ba93ff6438063ec6a493e004429d">C8_MODE_XOCHIP</a>) {                                                               \</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">char</span>* modeStr = (c-&gt;mode == <a class="code hl_define" href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a>) ? <span class="stringliteral">&quot;CHIP-8&quot;</span> : <span class="stringliteral">&quot;SCHIP&quot;</span>;                     \</div>
+<div class="line">        C8_EXCEPTION(<a class="code hl_enumvalue" href="exception_8h.html#a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>,                                                \</div>
+<div class="line">                     <span class="stringliteral">&quot;XOCHIP instruction detected in %s mode.\n&quot;</span>,                                  \</div>
+<div class="line">                     modeStr);                                                                     \</div>
+<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a402ebff4d96f276dd02c0159707849a3a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>;                                                      \</div>
 <div class="line">    }</div>
 <div class="ttc" id="achip8_8h_html_acf75ba93ff6438063ec6a493e004429d"><div class="ttname"><a href="chip8_8h.html#acf75ba93ff6438063ec6a493e004429d">C8_MODE_XOCHIP</a></div><div class="ttdeci">#define C8_MODE_XOCHIP</div><div class="ttdef"><b>Definition:</b> chip8.h:20</div></div>
 </div><!-- fragment -->

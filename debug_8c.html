@@ -100,8 +100,8 @@ $(document).ready(function(){initNavTree('debug_8c.html',''); initResizable(); }
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="debug_8h_source.html">debug.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="chip8_8h_source.html">../chip8.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="font_8h_source.html">..//font.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="decode_8h_source.html">..//decode.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="decode_8h_source.html">../decode.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="font_8h_source.html">../font.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="exception_8h_source.html">exception.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="util_8h_source.html">util.h</a>&quot;</code><br />
 <code>#include &lt;ctype.h&gt;</code><br />
@@ -345,18 +345,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    <span class="stringliteral">&quot;SP&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;DT&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;ST&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;PC&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;I&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;VK&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;stack&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;bg&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;fg&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;sfont&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;bfont&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;quirks&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;SP&quot;</span>, <span class="stringliteral">&quot;DT&quot;</span>, <span class="stringliteral">&quot;ST&quot;</span>, <span class="stringliteral">&quot;PC&quot;</span>, <span class="stringliteral">&quot;I&quot;</span>, <span class="stringliteral">&quot;VK&quot;</span>, <span class="stringliteral">&quot;stack&quot;</span>, <span class="stringliteral">&quot;bg&quot;</span>, <span class="stringliteral">&quot;fg&quot;</span>, <span class="stringliteral">&quot;sfont&quot;</span>, <span class="stringliteral">&quot;bfont&quot;</span>, <span class="stringliteral">&quot;quirks&quot;</span>,</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>These are string values of all possible argument, ordered to match the Argument enumerator. </p>
 
@@ -374,18 +363,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    <span class="stringliteral">&quot;break&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;rmbreak&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;continue&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;next&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;set&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;load&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;save&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;print&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;help&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;quit&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;loadflags&quot;</span>,</div>
-<div class="line">    <span class="stringliteral">&quot;saveflags&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;break&quot;</span>, <span class="stringliteral">&quot;rmbreak&quot;</span>, <span class="stringliteral">&quot;continue&quot;</span>, <span class="stringliteral">&quot;next&quot;</span>, <span class="stringliteral">&quot;set&quot;</span>,       <span class="stringliteral">&quot;load&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;save&quot;</span>,  <span class="stringliteral">&quot;print&quot;</span>,   <span class="stringliteral">&quot;help&quot;</span>,     <span class="stringliteral">&quot;quit&quot;</span>, <span class="stringliteral">&quot;loadflags&quot;</span>, <span class="stringliteral">&quot;saveflags&quot;</span>,</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>These are string values of all possible commands, ordered to match the Command enumerator. </p>
 
