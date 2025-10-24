@@ -20,5 +20,5 @@ var exception_8c =
     [ "UNKNOWN_EXCEPTION_MESSAGE", "exception_8c.html#a9599d0e7e81b26fa8fbbf9e700c9df5c", null ],
     [ "handle_exception", "exception_8c.html#ac37cd7017ba52954f487d180bb35e327", null ],
     [ "c8_exception", "exception_8c.html#a220454f62a07328378e890bf6f2488b0", null ],
-    [ "exceptions", "exception_8c.html#ad085a791176c79b7eee1d049ddf788dd", null ]
+    [ "exceptions", "exception_8c.html#a016fac4b2672b5d5e51f5e27e8298d1f", null ]
 ];
