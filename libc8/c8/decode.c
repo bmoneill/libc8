@@ -6,8 +6,8 @@
 
 #include "decode.h"
 
-#include "private/symbol.h"
 #include "defs.h"
+#include "private/symbol.h"
 
 #include <stdio.h>
 #include <stdlib.h>
