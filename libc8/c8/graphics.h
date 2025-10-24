@@ -27,6 +27,7 @@
 
 /**
   * @struct display_t
+  * @brief Represents a graphics display.
   *
   * @param p pixels (1D array)
   * @param mode display mode (`DISPLAY_STANDARD` or `DISPLAY_EXTENDED`)

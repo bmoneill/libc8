@@ -31,12 +31,19 @@
 #define INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE            "Clock speed cannot be less than 1."
 #define STACK_UNDERFLOW_EXCEPTION_MESSAGE                "Stack underflow occurred during execution."
 
+/**
+ * @struct exception_t
+ * @brief  Represents an exception.
+ *
+ * @param code    exception code
+ * @param message exception message
+ */
 typedef struct {
     exception_code_t code;
     const char*      message;
 } exception_t;
 
-exception_t exceptions[] = {
+const exception_t exceptions[] = {
     { INVALID_INSTRUCTION_EXCEPTION, INVALID_INSTRUCTION_EXCEPTION_MESSAGE },
     { TOO_MANY_LABELS_EXCEPTION, TOO_MANY_LABELS_EXCEPTION_MESSAGE },
     { STACK_OVERFLOW_EXCEPTION, STACK_OVERFLOW_EXCEPTION_MESSAGE },
