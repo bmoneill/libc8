@@ -27,8 +27,8 @@ function(Enable_Tests)
 endfunction()
 
 function(Build_Library)
-  add_subdirectory(libc8)
-  include_directories(libc8)
+  add_subdirectory(src)
+  include_directories(src)
 endfunction()
 
 function(Build_Tests)
