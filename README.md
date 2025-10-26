@@ -1,6 +1,8 @@
 # libc8
 
-[![Build Status](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml/badge.svg?branch=master)](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml).
+[![Build Status](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml/badge.svg?branch=main)](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml)
+[![Doxygen Status](https://github.com/bmoneill/libc8/actions/workflows/doxygen.yml/badge.svg?branch=main)](https://bmoneill.github.io/libc8)
+[![Clang-format status](https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml/badge.svg?branch=main)](https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml)
 
 This is a C library for interpreting, assembling, and disassembling CHIP-8 and
 SCHIP code, optionally utilizing the [SDL2](https://www.libsdl.org/) library
