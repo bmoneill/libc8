@@ -5,7 +5,7 @@ This is a disassembler for the CHIP-8 and SCHIP, utilizing libc8.
 ## Usage
 
 ```shell
-c8dis [-al] [-o outputfile] rom
+c8dis [-alV] [-o outputfile] rom
 ```
 
 * `-a` toggles printing of addresses.
