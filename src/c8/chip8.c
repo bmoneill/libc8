@@ -248,6 +248,11 @@ void c8_simulate(c8_t* c8) {
     }
 }
 
+const char* c8_version(void)
+{
+    return LIBC8_VERSION;
+}
+
 /**
  * @brief Load a ROM to `c8->mem` at path `addr`.
  *

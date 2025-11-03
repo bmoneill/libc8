@@ -82,6 +82,7 @@ c8_t* c8_init(const char*, int);
 int   c8_load_palette_s(c8_t*, char*);
 int   c8_load_palette_f(c8_t*, const char*);
 void  c8_load_quirks(c8_t*, const char*);
+const char* c8_version(void);
 void  c8_simulate(c8_t*);
 
 #endif

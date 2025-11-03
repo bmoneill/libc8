@@ -4,10 +4,7 @@ project("libc8" C)
 # Global Parameters
 
 set(PROJECT_NAME "libc8")
-
 set(LIBRARY_NAME "c8")
-set(LIBRARY_VERSION_MAJOR 0)
-set(LIBRARY_VERSION_STRING 0.0)
 
 include(GNUInstallDirs)
 
@@ -61,13 +58,6 @@ add_library (
 if(SDL2)
     target_link_libraries(${LIBRARY_NAME} PRIVATE SDL2)
 endif()
-
-set_target_properties(
-	${BINARY_NAME} PROPERTIES
-	VERSION		${LIBRARY_VERSION_STRING}
-	SOVERSION	${LIBRARY_VERSION_MAJOR}
-	PUBLIC_HEADER  ${LIBRARY_PUBLIC_HEADERS}
-)
 
 # Compiler definitions
 ADD_DEFINITIONS("-g")

@@ -7,6 +7,17 @@ include(CTest)
 # defaults
 set(SDL2 OFF)
 
+# Store git commit hash in GIT_COMMIT_HASH
+execute_process(
+    COMMAND git rev-parse --short HEAD
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE GIT_COMMIT_HASH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+# Version
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DLIBC8_VERSION=\'\"${GIT_COMMIT_HASH}\"\'")
+
 # C standard
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_FILE_OFFSET_BITS=64")
 
