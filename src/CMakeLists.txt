@@ -35,6 +35,7 @@ set(LIBRARY_PRIVATE_SRC
 
 set(LIBRARY_PUBLIC_HEADERS
 	"${LIBRARY_BASE_PATH}/chip8.h"
+	"${LIBRARY_BASE_PATH}/common.h"
 	"${LIBRARY_BASE_PATH}/decode.h"
 	"${LIBRARY_BASE_PATH}/encode.h"
 	"${LIBRARY_BASE_PATH}/font.h"
