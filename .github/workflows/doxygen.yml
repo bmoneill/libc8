@@ -1,4 +1,4 @@
-name: Doxygen GitHub Pages
+name: Doxygen
 
 on:
   push:
