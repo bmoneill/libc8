@@ -7,7 +7,7 @@
 
 #include "exception.h"
 
-#include "../defs.h"
+#include "../common.h"
 
 #include <stdio.h>
 #include <stdlib.h>

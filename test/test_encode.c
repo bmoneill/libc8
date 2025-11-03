@@ -2,7 +2,7 @@
 
 #include "c8/encode.c"
 
-#include "c8/defs.h"
+#include "c8/common.h"
 #include "c8/private/util.h"
 
 #include <stdint.h>

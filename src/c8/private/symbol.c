@@ -7,7 +7,7 @@
 
 #include "symbol.h"
 
-#include "../defs.h"
+#include "../common.h"
 #include "../encode.h"
 #include "exception.h"
 #include "util.h"

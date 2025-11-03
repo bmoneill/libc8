@@ -1,5 +1,5 @@
 #include "c8/decode.c"
-#include "c8/defs.h"
+#include "c8/common.h"
 #include "c8/private/exception.h"
 #include "unity.h"
 

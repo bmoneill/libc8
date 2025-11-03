@@ -6,7 +6,7 @@
 
 #include "encode.h"
 
-#include "defs.h"
+#include "common.h"
 #include "private/exception.h"
 #include "private/symbol.h"
 #include "private/util.h"

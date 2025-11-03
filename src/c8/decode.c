@@ -6,7 +6,7 @@
 
 #include "decode.h"
 
-#include "defs.h"
+#include "common.h"
 #include "private/symbol.h"
 
 #include <stdio.h>

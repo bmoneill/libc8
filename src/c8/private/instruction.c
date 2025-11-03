@@ -7,8 +7,8 @@
  */
 #include "c8/private/instruction.h"
 
+#include "../common.h"
 #include "../decode.h"
-#include "../defs.h"
 #include "../font.h"
 #include "exception.h"
 

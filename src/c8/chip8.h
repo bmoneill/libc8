@@ -7,7 +7,7 @@
 #ifndef LIBC8_CHIP8_H
 #define LIBC8_CHIP8_H
 
-#include "defs.h"
+#include "common.h"
 #include "graphics.h"
 
 #include <stdint.h>

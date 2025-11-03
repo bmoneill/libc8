@@ -1,11 +1,11 @@
 /**
- * @file c8/defs.h
+ * @file c8/common.h
  *
  * Base CHIP-8 definitions/macros
  */
 
-#ifndef LIBC8_DEFS_H
-#define LIBC8_DEFS_H
+#ifndef LIBC8_COMMON_H
+#define LIBC8_COMMON_H
 
 #define C8_X(i)   ((i & 0x0F00) >> 8)
 #define C8_Y(i)   ((i & 0x00F0) >> 4)
