@@ -68,11 +68,11 @@ char c8_exception[EXCEPTION_MESSAGE_SIZE];
 void handle_exception(int code) {
     for (size_t i = 0; i < sizeof(exceptions) / sizeof(exception_t); i++) {
         if (exceptions[i].code == code) {
-            fprintf(stderr, "%s\n", exceptions[i].message);
+            fprintf(stderr, "libc8: %s\n", exceptions[i].message);
         }
     }
 
-    fprintf(stderr, "%s\n", c8_exception);
+    fprintf(stderr, "libc8: %s\n", c8_exception);
 
 #ifndef TEST
     exit(code);
