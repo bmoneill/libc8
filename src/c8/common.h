@@ -11,7 +11,6 @@
 #define LIBC8_VERSION "unknown"
 #endif
 
-
 #define C8_X(i)   ((i & 0x0F00) >> 8)
 #define C8_Y(i)   ((i & 0x00F0) >> 4)
 #define C8_NNN(i) (i & 0x0FFF)

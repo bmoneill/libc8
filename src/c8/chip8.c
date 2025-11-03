@@ -248,10 +248,12 @@ void c8_simulate(c8_t* c8) {
     }
 }
 
-const char* c8_version(void)
-{
-    return LIBC8_VERSION;
-}
+/**
+ * @brief Get the version of libc8.
+ *
+ * @return const char* version string
+ */
+const char* c8_version(void) { return LIBC8_VERSION; }
 
 /**
  * @brief Load a ROM to `c8->mem` at path `addr`.
