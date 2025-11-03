@@ -22,7 +22,6 @@
 #define DEBUG(c) (c->flags & C8_FLAG_DEBUG)
 
 static void draw(c8_t*, uint16_t);
-static int  load_rom(c8_t*, const char*);
 
 /**
  * @brief Deinitialize graphics and free c8
@@ -62,7 +61,9 @@ c8_t* c8_init(const char* path, int flags) {
     c8->display.mode = C8_DISPLAYMODE_HIGH;
     c8->mode         = C8_MODE_CHIP8;
 
-    load_rom(c8, path);
+    if (path != NULL) {
+        c8_load_rom(c8, path);
+    }
     c8_set_fonts(c8, 0, 0);
     c8_init_graphics();
     return c8;
@@ -162,6 +163,40 @@ void c8_load_quirks(c8_t* c8, const char* s) {
 }
 
 /**
+ * @brief Load a ROM to `c8->mem` at path `addr`.
+ *
+ * @param c8 `c8_t` to store the ROM's contents
+ * @param addr path to the ROM
+ *
+ * @return 1 if success.
+ */
+int c8_load_rom(c8_t* c8, const char* addr) {
+    FILE* f;
+    int   size;
+
+    f = fopen(addr, "r");
+    if (!f) {
+        C8_EXCEPTION(LOAD_FILE_FAILURE_EXCEPTION, "Could not open ROM file: %s", addr);
+        return LOAD_FILE_FAILURE_EXCEPTION;
+    }
+
+    /* Get file size */
+    fseek(f, 0, SEEK_END);
+    size = ftell(f);
+    if (ftell(f) > (0x1000 - 0x200)) {
+        /* File is too big, failure */
+        C8_EXCEPTION(FILE_TOO_BIG_EXCEPTION, "ROM file too big: %s", addr);
+    }
+    rewind(f);
+
+    /* Read the file into memory */
+    fread(c8->mem + C8_PROG_START, size, 1, f);
+    fclose(f);
+
+    return 1;
+}
+
+/**
  * @brief Main interpreter simulation loop. Exits when `c8->running` is 0.
  *
  * @param c8 the `c8_t` to simulate
@@ -254,37 +289,3 @@ void c8_simulate(c8_t* c8) {
  * @return const char* version string
  */
 const char* c8_version(void) { return LIBC8_VERSION; }
-
-/**
- * @brief Load a ROM to `c8->mem` at path `addr`.
- *
- * @param c8 `c8_t` to store the ROM's contents
- * @param addr path to the ROM
- *
- * @return 1 if success.
- */
-static int load_rom(c8_t* c8, const char* addr) {
-    FILE* f;
-    int   size;
-
-    f = fopen(addr, "r");
-    if (!f) {
-        C8_EXCEPTION(LOAD_FILE_FAILURE_EXCEPTION, "Could not open ROM file: %s", addr);
-        return LOAD_FILE_FAILURE_EXCEPTION;
-    }
-
-    /* Get file size */
-    fseek(f, 0, SEEK_END);
-    size = ftell(f);
-    if (ftell(f) > (0x1000 - 0x200)) {
-        /* File is too big, failure */
-        C8_EXCEPTION(FILE_TOO_BIG_EXCEPTION, "ROM file too big: %s", addr);
-    }
-    rewind(f);
-
-    /* Read the file into memory */
-    fread(c8->mem + C8_PROG_START, size, 1, f);
-    fclose(f);
-
-    return 1;
-}

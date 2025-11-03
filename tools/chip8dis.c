@@ -4,10 +4,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#ifndef VERSION
-#define VERSION "dev"
-#endif
-
 int main(int argc, char* argv[]) {
     int   args = 0;
     int   opt;
@@ -28,10 +24,10 @@ int main(int argc, char* argv[]) {
             outp = optarg;
             break;
         case 'V':
-            printf("%s %s\n", argv[0], VERSION);
+            printf("%s %s\n", argv[0], c8_version());
             exit(EXIT_SUCCESS);
         default:
-            fprintf(stderr, "Usage: %s [-al] [-o outputfile] file\n", argv[0]);
+            fprintf(stderr, "Usage: %s [-alV] [-o outputfile] file\n", argv[0]);
             exit(1);
         }
     }

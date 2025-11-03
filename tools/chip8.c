@@ -7,10 +7,6 @@
 #include <time.h>
 #include <unistd.h>
 
-#ifndef VERSION
-#define VERSION "dev"
-#endif
-
 static void usage(const char* argv0);
 
 int         main(int argc, char* argv[]) {
@@ -18,7 +14,7 @@ int         main(int argc, char* argv[]) {
         usage(argv[0]);
     }
 
-    c8_t* c8 = c8_init(argv[argc - 1], 0);
+    c8_t* c8 = c8_init(NULL, 0);
 
     if (!c8) {
         usage(argv[0]);
@@ -52,7 +48,7 @@ int         main(int argc, char* argv[]) {
             c8_load_quirks(c8, optarg);
             break;
         case 'V':
-            printf("%s %s\n", argv[0], VERSION);
+            printf("%s %s\n", argv[0], c8_version());
             return 0;
         default:
             usage(argv[0]);
@@ -63,6 +59,7 @@ int         main(int argc, char* argv[]) {
         c8_set_fonts_s(c8, fontstr);
     }
 
+    load_rom(c8, argv[optind]);
     c8_simulate(c8);
     c8_deinit(c8);
 
