@@ -12,15 +12,19 @@
 #include <stdio.h>
 #include <string.h>
 
-#define SMALLFONT_OCTO      0
-#define SMALLFONT_VIP       1
-#define SMALLFONT_DREAM6800 2
-#define SMALLFONT_ETI660    3
-#define SMALLFONT_FISH      4
+enum {
+    SMALLFONT_OCTO = 0,
+    SMALLFONT_VIP = 1,
+    SMALLFONT_DREAM6800 = 2,
+    SMALLFONT_ETI660 = 3,
+    SMALLFONT_FISH = 4,
+};
 
-#define BIGFONT_OCTO  0
-#define BIGFONT_SCHIP 1
-#define BIGFONT_FISH  2
+enum {
+    BIGFONT_OCTO  = 0,
+    BIGFONT_SCHIP = 1,
+    BIGFONT_FISH  = 2,
+};
 
 #define OCTO_S      "octo"
 #define VIP_S       "vip"
