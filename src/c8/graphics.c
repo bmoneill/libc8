@@ -47,7 +47,7 @@ __attribute__((weak)) uint8_t c8_init_graphics(void) {
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
  */
-__attribute__((weak)) void c8_render(c8_display_t* display, int* colors) {
+__attribute__((weak)) void c8_render(C8_Display* display, int* colors) {
     fprintf(stderr, "c8_render() not implemented.");
 }
 
@@ -66,13 +66,13 @@ __attribute__((weak)) int c8_tick(int* key) {
 /**
  * @brief Get the value of (x,y) from `display`
  *
- * @param display `display_t` to get pixel from
+ * @param display `C8_Display` to get pixel from
  * @param x the x value
  * @param y the y value
  *
  * @return pointer to value of (x,y) in `display`
  */
-uint8_t* c8_get_pixel(c8_display_t* display, int x, int y) {
+uint8_t* c8_get_pixel(C8_Display* display, int x, int y) {
     if (display->mode == C8_DISPLAYMODE_HIGH) {
         x += display->x;
         y += display->y;

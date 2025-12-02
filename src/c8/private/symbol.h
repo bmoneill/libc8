@@ -58,7 +58,7 @@
 #define S_R  "R"
 
 /**
- * @enum Instruction
+ * @enum InstructionIdentifier
  * @brief Represents instruction types
  *
  * This enumeration defines all possible CHIP-8 instructions.
@@ -93,10 +93,10 @@ typedef enum {
     I_LOW,
     I_HIGH,
     I_JP_V0,
-} Instruction;
+} InstructionIdentifier;
 
 /**
- * @enum Symbol
+ * @enum SymbolIdentifier
  * @brief Represents symbol types
  *
  * This enumeration defines all symbol types found during the first assembler
@@ -127,10 +127,10 @@ typedef enum {
     SYM_V,
     SYM_INSTRUCTION,
     SYM_LABEL_DEFINITION,
-} Symbol;
+} SymbolIdentifier;
 
 /**
- * @struct instruction_format_t
+ * @struct InstructionFormat
  * @brief Represents a valid instruction format
  *
  * instruction_t's are checked against instruction_format_t's to verify
@@ -143,15 +143,15 @@ typedef enum {
  * @param pmask parameter masks (where to OR parameters to)
  */
 typedef struct {
-    Instruction cmd;
-    uint16_t    base;
-    int         pcount;
-    Symbol      ptype[3];
-    uint16_t    pmask[3];
-} instruction_format_t;
+    InstructionIdentifier cmd;
+    uint16_t              base;
+    int                   pcount;
+    SymbolIdentifier      ptype[3];
+    uint16_t              pmask[3];
+} InstructionFormat;
 
 /**
- * @struct instruction_t
+ * @struct Instruction
  * @brief Represents an instruction
  *
  * During the second pass, this structure is used to verify the instruction's
@@ -166,15 +166,15 @@ typedef struct {
  */
 typedef struct {
     int                   line;
-    Instruction           cmd;
+    InstructionIdentifier cmd;
     int                   pcount;
-    Symbol                ptype[3];
+    SymbolIdentifier      ptype[3];
     int                   p[3];
-    instruction_format_t* format;
-} instruction_t;
+    InstructionFormat*    format;
+} Instruction;
 
 /**
- * @struct label_t
+ * @struct Label
  * @brief Represents a label
  *
  * Represents a label with an identifier and byte value
@@ -185,10 +185,10 @@ typedef struct {
 typedef struct {
     char identifier[LABEL_IDENTIFIER_SIZE];
     int  byte;
-} label_t;
+} Label;
 
 /**
- * @struct label_list_t
+ * @struct LabelList
  * @brief Represents a list of labels
  *
  * @param l pointer to first label
@@ -196,13 +196,13 @@ typedef struct {
  * @param ceil maximum length of the list
  */
 typedef struct {
-    label_t* l;
-    int      len;
-    int      ceil;
-} label_list_t;
+    Label* l;
+    int    len;
+    int    ceil;
+} LabelList;
 
 /**
- * @struct symbol_t
+ * @struct Symbol
  * @brief Represents a symbol with a type, value, and line number
  *
  * @param type symbol type
@@ -210,13 +210,13 @@ typedef struct {
  * @param ln line number
  */
 typedef struct {
-    Symbol   type;
-    uint16_t value;
-    int      ln;
-} symbol_t;
+    SymbolIdentifier type;
+    uint16_t         value;
+    int              ln;
+} Symbol;
 
 /**
- * @struct symbol_list_t
+ * @struct SymbolList
  * @brief Represents a symbol with a type, value, and line number
  *
  * @param s pointer to first symbol
@@ -224,29 +224,29 @@ typedef struct {
  * @param ceil amount of symbols that can fit in allocated memory
  */
 typedef struct {
-    symbol_t* s;
-    int       len;
-    int       ceil;
-} symbol_list_t;
+    Symbol* s;
+    int     len;
+    int     ceil;
+} SymbolList;
 
-extern const char*          c8_instructionStrings[];
-extern const char*          c8_identifierStrings[];
-extern instruction_format_t formats[];
+extern const char*       c8_instructionStrings[];
+extern const char*       c8_identifierStrings[];
+extern InstructionFormat formats[];
 
-int                         build_instruction(instruction_t*, symbol_list_t*, int);
-int                         is_comment(const char*);
-int                         is_db(const char*);
-int                         is_ds(const char*);
-int                         is_dw(const char*);
-int                         is_instruction(const char*);
-int                         is_label_definition(const char*);
-int                         is_label(const char*, const label_list_t*);
-int                         is_register(const char*);
-int                         is_reserved_identifier(const char*);
-symbol_t*                   next_symbol(symbol_list_t*);
-int                         populate_labels(label_list_t*);
-int                         resolve_labels(symbol_list_t*, label_list_t*);
-int                         shift(uint16_t);
-int                         substitute_labels(symbol_list_t*, label_list_t*);
+int                      build_instruction(Instruction*, SymbolList*, int);
+int                      is_comment(const char*);
+int                      is_db(const char*);
+int                      is_ds(const char*);
+int                      is_dw(const char*);
+int                      is_instruction(const char*);
+int                      is_label_definition(const char*);
+int                      is_label(const char*, const LabelList*);
+int                      is_register(const char*);
+int                      is_reserved_identifier(const char*);
+Symbol*                  next_symbol(SymbolList*);
+int                      populate_labels(LabelList*);
+int                      resolve_labels(SymbolList*, LabelList*);
+int                      shift(uint16_t);
+int                      substitute_labels(SymbolList*, LabelList*);
 
 #endif

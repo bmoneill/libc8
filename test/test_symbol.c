@@ -14,17 +14,17 @@
 #define MAX_LINE_COUNT 10
 #define MAX_LINE_LEN   50
 
-instruction_t ins;
-symbol_list_t symbols;
-label_list_t  labels;
-const char*   empty = "\0";
-int           fc    = 0;
-char*         line0;
+Instruction ins;
+SymbolList  symbols;
+LabelList   labels;
+const char* empty = "\0";
+int         fc    = 0;
+char*       line0;
 
-void          setUp(void) {
-    symbols.s    = calloc(SYMBOL_CEILING, sizeof(symbol_t));
+void        setUp(void) {
+    symbols.s    = calloc(SYMBOL_CEILING, sizeof(Symbol));
     symbols.ceil = SYMBOL_CEILING;
-    labels.l     = calloc(LABEL_CEILING, sizeof(label_t));
+    labels.l     = calloc(LABEL_CEILING, sizeof(Label));
     labels.ceil  = LABEL_CEILING;
 
     for (fc = 0; formats[fc].cmd != I_NULL; fc++)
@@ -41,14 +41,14 @@ void          setUp(void) {
         c8_lines_unformatted[i] = line0 + (i * MAX_LINE_LEN);
     }
 
-    memset(&ins, 0, sizeof(instruction_t));
+    memset(&ins, 0, sizeof(Instruction));
     memset(line0, 0, MAX_LINE_LEN * MAX_LINE_COUNT);
 
-    memset(labels.l, 0, LABEL_CEILING * sizeof(label_t));
+    memset(labels.l, 0, LABEL_CEILING * sizeof(Label));
     labels.len  = 0;
     labels.ceil = LABEL_CEILING;
 
-    memset(symbols.s, 0, SYMBOL_CEILING * sizeof(symbol_t));
+    memset(symbols.s, 0, SYMBOL_CEILING * sizeof(Symbol));
     symbols.len  = 0;
     symbols.ceil = SYMBOL_CEILING;
 }
@@ -241,10 +241,10 @@ void test_next_symbol_WhereSymbolListIsNotEmptyOrFull(void) {
 void test_next_symbol_WhereSymbolListIsFull(void) {
     memset(symbols.s, SYM_INSTRUCTION, SYMBOL_CEILING);
 
-    symbols.len      = SYMBOL_CEILING;
-    symbols.ceil     = SYMBOL_CEILING;
+    symbols.len    = SYMBOL_CEILING;
+    symbols.ceil   = SYMBOL_CEILING;
 
-    symbol_t* symbol = next_symbol(&symbols);
+    Symbol* symbol = next_symbol(&symbols);
 
     TEST_ASSERT_EQUAL_INT(SYMBOL_CEILING + 1, symbols.len);
     TEST_ASSERT_EQUAL_INT(SYMBOL_CEILING * 2, symbols.ceil);
@@ -431,7 +431,6 @@ void test_substitute_labels_WhereSymbolListIsEmpty(void) {
 }
 
 void test_substitute_labels_WhereSymbolListContainsNoLabels_WhereLabelListIsEmpty(void) {
-
     symbols.len       = 4;
     symbols.s[0].type = SYM_INSTRUCTION;
     symbols.s[1].type = SYM_INSTRUCTION;

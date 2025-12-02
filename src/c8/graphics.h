@@ -26,7 +26,7 @@
 #define C8_DISPLAYMODE_HIGH 1
 
 /**
-  * @struct display_t
+  * @struct C8_Display
   * @brief Represents a graphics display.
   *
   * @param p pixels (1D array)
@@ -38,14 +38,14 @@ typedef struct {
     uint8_t p[C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT];
     uint8_t mode;
     uint8_t x, y;
-} c8_display_t;
+} C8_Display;
 
-uint8_t*       c8_get_pixel(c8_display_t*, int, int);
+uint8_t*       c8_get_pixel(C8_Display*, int, int);
 
 extern void    c8_beep(void);
 extern void    c8_deinit_graphics(void);
 extern uint8_t c8_init_graphics(void);
-extern void    c8_render(c8_display_t*, int*);
+extern void    c8_render(C8_Display*, int*);
 extern int     c8_tick(int*);
 
 #endif

@@ -17,16 +17,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int         initialize_labels(label_list_t*);
-static int         initialize_symbols(symbol_list_t*);
+static int         initialize_labels(LabelList*);
+static int         initialize_symbols(SymbolList*);
 static int         line_count(const char*);
-static int         parse_line(char*, int, symbol_list_t*, const label_list_t*);
-static int         parse_word(char*, const char*, int, symbol_t*, const label_list_t*);
+static int         parse_line(char*, int, SymbolList*, const LabelList*);
+static int         parse_word(char*, const char*, int, Symbol*, const LabelList*);
 static inline void put16(uint8_t*, uint16_t, int);
 static int         tokenize(char**, char*, const char*, int);
 static int         to_upper(char*);
 static char*       remove_comma(char*);
-static int         write(uint8_t*, symbol_list_t*);
+static int         write(uint8_t*, SymbolList*);
 
 char**             c8_lines;
 char**             c8_lines_unformatted;
@@ -51,8 +51,8 @@ int c8_encode(const char* s, uint8_t* out, int args) {
     int   count          = 0;
     int   validLineCount = 0;
     c8_line_count        = line_count(s);
-    label_list_t  labels;
-    symbol_list_t symbols;
+    LabelList  labels;
+    SymbolList symbols;
 
     initialize_labels(&labels);
     initialize_symbols(&symbols);
@@ -154,8 +154,8 @@ char* remove_comment(char* s) {
  *
  * @return 1 if success, exception code otherwise
  */
-static int initialize_labels(label_list_t* labels) {
-    labels->l = (label_t*) calloc(LABEL_CEILING, sizeof(label_t));
+static int initialize_labels(LabelList* labels) {
+    labels->l = (Label*) calloc(LABEL_CEILING, sizeof(Label));
     if (!labels->l) {
         C8_EXCEPTION(MEMORY_ALLOCATION_EXCEPTION, "At function %s", __func__);
         return MEMORY_ALLOCATION_EXCEPTION;
@@ -173,8 +173,8 @@ static int initialize_labels(label_list_t* labels) {
  *
  * @return 1 if success, exception code otherwise
  */
-static int initialize_symbols(symbol_list_t* symbols) {
-    symbols->s = (symbol_t*) calloc(SYMBOL_CEILING, sizeof(symbol_t));
+static int initialize_symbols(SymbolList* symbols) {
+    symbols->s = (Symbol*) calloc(SYMBOL_CEILING, sizeof(Symbol));
     if (!symbols->s) {
         C8_EXCEPTION(MEMORY_ALLOCATION_EXCEPTION, "At function %s", __func__);
         return MEMORY_ALLOCATION_EXCEPTION;
@@ -213,7 +213,7 @@ static int line_count(const char* s) {
  *
  * @return 1 if success, exception code otherwise
  */
-static int parse_line(char* s, int ln, symbol_list_t* symbols, const label_list_t* labels) {
+static int parse_line(char* s, int ln, SymbolList* symbols, const LabelList* labels) {
     s = trim(s);
     s = remove_comment(s);
     if (strlen(s) == 0) {
@@ -221,9 +221,9 @@ static int parse_line(char* s, int ln, symbol_list_t* symbols, const label_list_
         return 1;
     }
 
-    symbol_t* sym = next_symbol(symbols);
-    char*     words[C8_ENCODE_MAX_WORDS];
-    int       wc = tokenize(words, s, " ", C8_ENCODE_MAX_WORDS);
+    Symbol* sym = next_symbol(symbols);
+    char*   words[C8_ENCODE_MAX_WORDS];
+    int     wc = tokenize(words, s, " ", C8_ENCODE_MAX_WORDS);
 
     // Special case for strings
     if (wc > 1 && is_ds(words[0])) {
@@ -274,8 +274,7 @@ static int parse_line(char* s, int ln, symbol_list_t* symbols, const label_list_
  *
  * @return number of words to skip
  */
-static int
-parse_word(char* s, const char* next, int ln, symbol_t* sym, const label_list_t* labels) {
+static int parse_word(char* s, const char* next, int ln, Symbol* sym, const LabelList* labels) {
     int value;
     sym->ln = ln;
     s       = remove_comma(s);
@@ -307,7 +306,7 @@ parse_word(char* s, const char* next, int ln, symbol_t* sym, const label_list_t*
         sym->value = value;
         return 0;
     } else if ((value = is_reserved_identifier(s)) >= 0) {
-        sym->type = (Symbol) value;
+        sym->type = (SymbolIdentifier) value;
         return 0;
     } else if ((value = parse_int(s)) > -1) {
         if (value < 0x10) {
@@ -399,10 +398,10 @@ static int to_upper(char* s) {
  *
  * @return length of bytecode
  */
-static int write(uint8_t* output, symbol_list_t* symbols) {
-    int           ret;
-    instruction_t ins;
-    int           byte = 0;
+static int write(uint8_t* output, SymbolList* symbols) {
+    int         ret;
+    Instruction ins;
+    int         byte = 0;
 
     for (int i = 0; i < symbols->len; i++) {
         if (byte >= C8_MEMSIZE - C8_PROG_START) {

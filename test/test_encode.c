@@ -13,19 +13,19 @@
 #define BYTECODE_SIZE (C8_MEMSIZE - C8_PROG_START)
 #define BUF_SIZE      (BYTECODE_SIZE * C8_ENCODE_MAX_LINE_LENGTH)
 
-char          buf[BUF_SIZE];
-uint8_t*      bytecode;
-int           fmtCount;
-int           insCount;
+char       buf[BUF_SIZE];
+uint8_t*   bytecode;
+int        fmtCount;
+int        insCount;
 
-symbol_list_t symbols;
-label_list_t  labels;
+SymbolList symbols;
+LabelList  labels;
 
-void          setUp(void) {
+void       setUp(void) {
     bytecode     = calloc(BYTECODE_SIZE, 1);
-    symbols.s    = calloc(SYMBOL_CEILING, sizeof(symbol_t));
+    symbols.s    = calloc(SYMBOL_CEILING, sizeof(Symbol));
     symbols.ceil = SYMBOL_CEILING;
-    labels.l     = calloc(LABEL_CEILING, sizeof(label_t));
+    labels.l     = calloc(LABEL_CEILING, sizeof(Label));
     labels.ceil  = LABEL_CEILING;
 
     for (fmtCount = 0; formats[fmtCount].cmd != I_NULL; fmtCount++)
@@ -36,11 +36,11 @@ void          setUp(void) {
     memset(bytecode, 0, BYTECODE_SIZE);
     memset(buf, 0, BUF_SIZE);
 
-    memset(labels.l, 0, LABEL_CEILING * sizeof(label_t));
+    memset(labels.l, 0, LABEL_CEILING * sizeof(Label));
     labels.len  = 0;
     labels.ceil = LABEL_CEILING;
 
-    memset(symbols.s, 0, SYMBOL_CEILING * sizeof(symbol_t));
+    memset(symbols.s, 0, SYMBOL_CEILING * sizeof(Symbol));
     symbols.len  = 0;
     symbols.ceil = SYMBOL_CEILING;
 }

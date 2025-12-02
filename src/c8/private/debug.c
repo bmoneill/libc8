@@ -19,7 +19,7 @@
 #include <string.h>
 
 /**
-  * @enum Command
+  * @enum CommandIdentifier
   * @brief Represents command types
   *
   * This enumeration defines all possible debug mode commands.
@@ -38,10 +38,10 @@ typedef enum {
     CMD_QUIT,
     CMD_LOADFLAGS,
     CMD_SAVEFLAGS,
-} Command;
+} CommandIdentifier;
 
 /**
- * @enum Argument
+ * @enum ArgIdentifier
  * @brief Represents argument types
  *
  * This enumeration defines all possible debug mode arguments.
@@ -64,7 +64,7 @@ typedef enum {
     ARG_R,
     ARG_ADDR,
     ARG_FILE,
-} Argument;
+} ArgIdentifier;
 
 /**
  * @union ArgValue
@@ -83,7 +83,7 @@ typedef union {
 } ArgValue;
 
 /**
- * @struct arg_t
+ * @struct Arg
  * @brief Represents an argument for a command with a type and value.
  *
  * This structure is used to encapsulate an argument's type and its value.
@@ -94,12 +94,12 @@ typedef union {
  * @param value Argument value
  */
 typedef struct {
-    Argument type;
-    ArgValue value;
-} arg_t;
+    ArgIdentifier type;
+    ArgValue      value;
+} Arg;
 
 /**
- * @struct cmd_t
+ * @struct Command
  * @brief Represents a command with an ID, argument ID, and associated argument.
  *
  * This structure is used to encapsulate a command's identifier, its argument,
@@ -110,25 +110,25 @@ typedef struct {
  * @param setValue value to set `arg.value` to for set commands
  */
 typedef struct {
-    Command id;
-    arg_t   arg;
-    int     setValue;
-} cmd_t;
+    CommandIdentifier id;
+    Arg               arg;
+    int               setValue;
+} Command;
 
-static int  get_command(cmd_t*, char*);
-static int  load_file_arg(cmd_t*, char*);
+static int  get_command(Command*, char*);
+static int  load_file_arg(Command*, char*);
 static void load_flags(C8*, const char*);
 static void load_state(C8*, const char*);
-static int  parse_arg(cmd_t*, char*);
+static int  parse_arg(Command*, char*);
 static void print_help(void);
 static void print_r_registers(const C8*);
 static void print_stack(const C8*);
 static void print_v_registers(const C8*);
-static void print_value(C8*, const cmd_t*);
-static int  run_command(C8*, const cmd_t*);
+static void print_value(C8*, const Command*);
+static int  run_command(C8*, const Command*);
 static void save_flags(const C8*, const char*);
 static void save_state(const C8*, const char*);
-static int  set_value(C8*, const cmd_t*);
+static int  set_value(C8*, const Command*);
 
 /**
  * These are string values of all possible argument, ordered to match the
@@ -163,8 +163,8 @@ const char* cmds[] = {
  * @return `DEBUG_CONTINUE`, `DEBUG_STEP`, or `DEBUG_QUIT`
  */
 int debug_repl(C8* c8) {
-    char  buf[64];
-    cmd_t cmd;
+    char    buf[64];
+    Command cmd;
 
     printf("debug > ");
     while (scanf("%63[^\n]", buf) != EOF) {
@@ -212,7 +212,7 @@ int has_breakpoint(C8* c8, uint16_t pc) { return c8->breakpoints[pc]; }
  * @param s command string
  * @return 1 if successful, 0 if not
  */
-static int get_command(cmd_t* cmd, char* s) {
+static int get_command(Command* cmd, char* s) {
     int numCmds = (int) sizeof(cmds) / sizeof(cmds[0]);
 
     /* reset cmd */
@@ -228,7 +228,7 @@ static int get_command(cmd_t* cmd, char* s) {
 
         if (!strncmp(s, full, len)) {
             /* Full cmd */
-            cmd->id = (Command) i;
+            cmd->id = (CommandIdentifier) i;
             if (s[len] == '\0') {
                 /* No arg */
                 cmd->arg.type = ARG_NONE;
@@ -287,7 +287,7 @@ static void load_state(C8* c8, const char* path) {
  *
  * @return 1
  */
-static int load_file_arg(cmd_t* cmd, char* arg) {
+static int load_file_arg(Command* cmd, char* arg) {
     cmd->arg.type    = ARG_FILE;
     cmd->arg.value.s = trim(arg);
     return 1;
@@ -301,12 +301,12 @@ static int load_file_arg(cmd_t* cmd, char* arg) {
  *
  * @return 1 if success, 0 otherwise
  */
-static int parse_arg(cmd_t* cmd, char* s) {
-    arg_t* arg       = &cmd->arg;
-    char*  value     = NULL;
-    int    argsCount = sizeof(args) / sizeof(args[0]);
+static int parse_arg(Command* cmd, char* s) {
+    Arg*  arg       = &cmd->arg;
+    char* value     = NULL;
+    int   argsCount = sizeof(args) / sizeof(args[0]);
 
-    arg->type        = ARG_NONE;
+    arg->type       = ARG_NONE;
 
     if (cmd->id == CMD_SET) {
         /* Split attribute to set and value to set it to */
@@ -322,7 +322,7 @@ static int parse_arg(cmd_t* cmd, char* s) {
     for (int i = 0; i < argsCount; i++) {
         if (!strcmp(s, args[i])) {
             printf("%s", s);
-            arg->type = (Argument) i;
+            arg->type = (ArgIdentifier) i;
         }
     }
 
@@ -349,7 +349,7 @@ static int parse_arg(cmd_t* cmd, char* s) {
 
     for (int i = 0; i < argsCount; i++) {
         if (!strcmp(s, args[i])) {
-            arg->type = (Argument) i;
+            arg->type = (ArgIdentifier) i;
         }
     }
 
@@ -465,7 +465,7 @@ static void print_stack(const C8* c8) {
  * @param c8 the current CHIP-8 state
  * @param cmd the command structure to get the arg from
  */
-static void print_value(C8* c8, const cmd_t* cmd) {
+static void print_value(C8* c8, const Command* cmd) {
     uint16_t pc;
     uint16_t ins;
     int      addr;
@@ -558,7 +558,7 @@ static void print_value(C8* c8, const cmd_t* cmd) {
  * @param cmd the command structure containing the command ID and arguments
  * @return `DEBUG_CONTINUE`, `DEBUG_STEP`, `DEBUG_QUIT`, or 0
  */
-static int run_command(C8* c8, const cmd_t* cmd) {
+static int run_command(C8* c8, const Command* cmd) {
     switch (cmd->id) {
     case CMD_ADD_BREAKPOINT:
         if (cmd->arg.type == ARG_NONE) {
@@ -652,7 +652,7 @@ static void save_state(const C8* c8, const char* path) {
  * @param c8 the current CHIP-8 state
  * @param cmd the command structure
  */
-static int set_value(C8* c8, const cmd_t* cmd) {
+static int set_value(C8* c8, const Command* cmd) {
     switch (cmd->arg.type) {
     case ARG_NONE:
         return 0;

@@ -54,27 +54,27 @@
   * @param mode interpreter mode (C8_MODE_CHIP8, C8_MODE_SCHIP, C8_MODE_XOCHIP)
   */
 typedef struct {
-    uint8_t      mem[C8_MEMSIZE];
-    uint8_t      R[8];
-    uint8_t      V[16];
-    uint8_t      sp;
-    uint8_t      dt;
-    uint8_t      st;
-    uint16_t     stack[C8_STACK_SIZE];
-    uint16_t     pc;
-    uint16_t     I;
-    int          key[18];
-    int          VK;
-    int          cs;
-    int          waitingForKey;
-    int          running;
-    c8_display_t display;
-    int          flags;
-    int          breakpoints[C8_MEMSIZE];
-    int          colors[2];
-    int          fonts[2];
-    int          draw;
-    int          mode;
+    uint8_t    mem[C8_MEMSIZE];
+    uint8_t    R[8];
+    uint8_t    V[16];
+    uint8_t    sp;
+    uint8_t    dt;
+    uint8_t    st;
+    uint16_t   stack[C8_STACK_SIZE];
+    uint16_t   pc;
+    uint16_t   I;
+    int        key[18];
+    int        VK;
+    int        cs;
+    int        waitingForKey;
+    int        running;
+    C8_Display display;
+    int        flags;
+    int        breakpoints[C8_MEMSIZE];
+    int        colors[2];
+    int        fonts[2];
+    int        draw;
+    int        mode;
 } C8;
 
 void        c8_deinit(C8*);

@@ -11,13 +11,13 @@
 
 #define BUFLEN 64
 
-char  buf[BUFLEN];
-cmd_t cmd;
-C8 c8;
+char    buf[BUFLEN];
+Command cmd;
+C8      c8;
 
-void  setUp(void) {
+void    setUp(void) {
     memset(buf, 0, BUFLEN);
-    memset(&cmd, 0, sizeof(cmd_t));
+    memset(&cmd, 0, sizeof(Command));
     memset(&c8, 0, sizeof(C8));
     c8.pc = 0x200;
 }

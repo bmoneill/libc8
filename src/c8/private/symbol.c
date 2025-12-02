@@ -34,7 +34,7 @@ const char* c8_instructionStrings[] = {
 /**
  * All valid instruction formats
  */
-instruction_format_t formats[] = {
+InstructionFormat formats[] = {
     { I_SCD, 0x00C0, 1, { SYM_INT4 }, { 0x000F } },
     { I_CLS, 0x00E0, 0, { SYM_NULL }, { 0 } },
     { I_RET, 0x00EE, 0, { SYM_NULL }, { 0 } },
@@ -92,10 +92,10 @@ instruction_format_t formats[] = {
     { I_NULL, 0, 0, { SYM_NULL }, { 0 } },
 };
 
-static int get_instruction_args(instruction_t* ins, symbol_list_t* symbols, int idx);
-static int parse_instruction(instruction_t*);
-static int reallocate_symbols(symbol_list_t* symbols);
-static int validate_instruction(instruction_t*);
+static int get_instruction_args(Instruction* ins, SymbolList* symbols, int idx);
+static int parse_instruction(Instruction*);
+static int reallocate_symbols(SymbolList* symbols);
+static int validate_instruction(Instruction*);
 
 /**
  * @brief Build an instruction from symbols beginning at idx
@@ -108,8 +108,8 @@ static int validate_instruction(instruction_t*);
  * @param idx symbols index of start of instruction
  * @return instruction bytecode
  */
-int build_instruction(instruction_t* ins, symbol_list_t* symbols, int idx) {
-    ins->cmd    = (Instruction) symbols->s[idx].value;
+int build_instruction(Instruction* ins, SymbolList* symbols, int idx) {
+    ins->cmd    = (InstructionIdentifier) symbols->s[idx].value;
     ins->line   = symbols->s[idx].ln;
     ins->pcount = 0;
 
@@ -193,7 +193,7 @@ int is_label_definition(const char* s) {
  * @param labels label list to check from
  * @return label index if true, -1 otherwise
  */
-int is_label(const char* s, const label_list_t* labels) {
+int is_label(const char* s, const LabelList* labels) {
     if (strlen(s) == 0) {
         return -1;
     }
@@ -254,7 +254,7 @@ int is_reserved_identifier(const char* s) {
  *
  * @return first empty symbol in symbol table
  */
-symbol_t* next_symbol(symbol_list_t* symbols) {
+Symbol* next_symbol(SymbolList* symbols) {
     if (!symbols || !symbols->s) {
         return NULL;
     }
@@ -288,7 +288,7 @@ symbol_t* next_symbol(symbol_list_t* symbols) {
  *
  * @return 1 if success, 0 if failure
  */
-int populate_labels(label_list_t* labels) {
+int populate_labels(LabelList* labels) {
     for (int i = 0; i < c8_line_count; i++) {
         if (strlen(c8_lines[i]) == 0) {
             continue;
@@ -363,7 +363,7 @@ int populate_labels(label_list_t* labels) {
  *
  * @return 1 if success, 0 if failure
  */
-int resolve_labels(symbol_list_t* symbols, label_list_t* labels) {
+int resolve_labels(SymbolList* symbols, LabelList* labels) {
     int byte     = C8_PROG_START;
     int labelIdx = 0;
     for (int i = 0; i < symbols->len; i++) {
@@ -402,7 +402,7 @@ int resolve_labels(symbol_list_t* symbols, label_list_t* labels) {
  * @param symbols symbols to search
  * @param labels labels to search
  */
-int substitute_labels(symbol_list_t* symbols, label_list_t* labels) {
+int substitute_labels(SymbolList* symbols, LabelList* labels) {
     for (int i = 0; i < symbols->len; i++) {
         if (symbols->s[i].type == SYM_LABEL) {
             if (symbols->s[i].value >= labels->len) {
@@ -436,7 +436,7 @@ int substitute_labels(symbol_list_t* symbols, label_list_t* labels) {
  *
  * @return 1 if success, exception code otherwise.
  */
-static int get_instruction_args(instruction_t* ins, symbol_list_t* symbols, int idx) {
+static int get_instruction_args(Instruction* ins, SymbolList* symbols, int idx) {
     int j   = 0;
     int max = 0;
     for (int i = idx; i < symbols->len; i++) {
@@ -493,7 +493,7 @@ static int get_instruction_args(instruction_t* ins, symbol_list_t* symbols, int 
  *
  * @return bytecode of instruction ins
  */
-static int parse_instruction(instruction_t* ins) {
+static int parse_instruction(Instruction* ins) {
     uint16_t result = ins->format->base;
     for (int j = 0; j < ins->pcount; j++) {
         if (ins->format->pmask[j]) {
@@ -514,10 +514,10 @@ static int parse_instruction(instruction_t* ins) {
  *
  * @return 1 if success, 0 if failure
  */
-static int validate_instruction(instruction_t* ins) {
+static int validate_instruction(Instruction* ins) {
     int match;
     for (int i = 0; formats[i].cmd != I_NULL; i++) {
-        instruction_format_t* f = &formats[i];
+        InstructionFormat* f = &formats[i];
         if (ins->pcount == f->pcount && ins->cmd == f->cmd) {
             match = 1;
             for (int j = 0; j < ins->pcount; j++) {
@@ -571,11 +571,11 @@ static int validate_instruction(instruction_t* ins) {
  *
  * @return 1 if success, exception code otherwise.
  */
-static int reallocate_symbols(symbol_list_t* symbols) {
-    int       newCeiling = symbols->ceil + SYMBOL_CEILING;
-    symbol_t* oldsym     = symbols->s;
-    symbols->s           = (symbol_t*) malloc(sizeof(symbol_t) * newCeiling);
-    memcpy(symbols->s, oldsym, symbols->ceil * sizeof(symbol_t));
+static int reallocate_symbols(SymbolList* symbols) {
+    int     newCeiling = symbols->ceil + SYMBOL_CEILING;
+    Symbol* oldsym     = symbols->s;
+    symbols->s         = (Symbol*) malloc(sizeof(Symbol) * newCeiling);
+    memcpy(symbols->s, oldsym, symbols->ceil * sizeof(Symbol));
     symbols->ceil = newCeiling;
     free(oldsym);
 
