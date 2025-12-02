@@ -57,64 +57,64 @@
 #define CARRIES(x, y) ((((int) x) + y) > UINT8_MAX)
 
 /* instruction groups */
-static int        base_instruction(c8_t*, uint16_t, uint8_t);
-static int        bitwise_instruction(c8_t*, uint16_t, uint8_t, uint8_t, uint8_t);
-static int        key_instruction(c8_t*, uint16_t, uint8_t, uint8_t);
-static int        misc_instruction(c8_t*, uint16_t, uint8_t, uint8_t);
+static int        base_instruction(C8*, uint16_t, uint8_t);
+static int        bitwise_instruction(C8*, uint16_t, uint8_t, uint8_t, uint8_t);
+static int        key_instruction(C8*, uint16_t, uint8_t, uint8_t);
+static int        misc_instruction(C8*, uint16_t, uint8_t, uint8_t);
 
-static inline int i_scd_b(c8_t*, uint8_t);
+static inline int i_scd_b(C8*, uint8_t);
 
 /* base (00kk) instructions */
-static inline int i_cls(c8_t*);
-static inline int i_ret(c8_t*);
-static inline int i_scr(c8_t*);
-static inline int i_scl(c8_t*);
-static inline int i_exit(c8_t*);
-static inline int i_low(c8_t*);
-static inline int i_high(c8_t*);
+static inline int i_cls(C8*);
+static inline int i_ret(C8*);
+static inline int i_scr(C8*);
+static inline int i_scl(C8*);
+static inline int i_exit(C8*);
+static inline int i_low(C8*);
+static inline int i_high(C8*);
 
-static inline int i_jp_nnn(c8_t*, uint16_t);
-static inline int i_call_nnn(c8_t*, uint16_t);
-static inline int i_se_vx_kk(c8_t*, uint8_t, uint8_t);
-static inline int i_sne_vx_kk(c8_t*, uint8_t, uint8_t);
-static inline int i_se_vx_vy(c8_t*, uint8_t, uint8_t);
-static inline int i_ld_vx_kk(c8_t*, uint8_t, uint8_t);
-static inline int i_add_vx_kk(c8_t*, uint8_t, uint8_t);
+static inline int i_jp_nnn(C8*, uint16_t);
+static inline int i_call_nnn(C8*, uint16_t);
+static inline int i_se_vx_kk(C8*, uint8_t, uint8_t);
+static inline int i_sne_vx_kk(C8*, uint8_t, uint8_t);
+static inline int i_se_vx_vy(C8*, uint8_t, uint8_t);
+static inline int i_ld_vx_kk(C8*, uint8_t, uint8_t);
+static inline int i_add_vx_kk(C8*, uint8_t, uint8_t);
 
 /* bitwise (8xyb) instructions */
-static inline int i_ld_vx_vy(c8_t*, uint8_t, uint8_t);
-static inline int i_or_vx_vy(c8_t*, uint8_t, uint8_t);
-static inline int i_and_vx_vy(c8_t*, uint8_t, uint8_t);
-static inline int i_xor_vx_vy(c8_t*, uint8_t, uint8_t);
-static inline int i_add_vx_vy(c8_t*, uint8_t, uint8_t);
-static inline int i_sub_vx_vy(c8_t*, uint8_t, uint8_t);
-static inline int i_shr_vx_vy(c8_t*, uint8_t, uint8_t);
-static inline int i_subn_vx_vy(c8_t*, uint8_t, uint8_t);
-static inline int i_shl_vx_vy(c8_t*, uint8_t, uint8_t);
+static inline int i_ld_vx_vy(C8*, uint8_t, uint8_t);
+static inline int i_or_vx_vy(C8*, uint8_t, uint8_t);
+static inline int i_and_vx_vy(C8*, uint8_t, uint8_t);
+static inline int i_xor_vx_vy(C8*, uint8_t, uint8_t);
+static inline int i_add_vx_vy(C8*, uint8_t, uint8_t);
+static inline int i_sub_vx_vy(C8*, uint8_t, uint8_t);
+static inline int i_shr_vx_vy(C8*, uint8_t, uint8_t);
+static inline int i_subn_vx_vy(C8*, uint8_t, uint8_t);
+static inline int i_shl_vx_vy(C8*, uint8_t, uint8_t);
 
-static inline int i_sne_vx_vy(c8_t*, uint8_t, uint8_t);
-static inline int i_ld_i_nnn(c8_t*, uint16_t);
-static inline int i_jp_v0_nnn(c8_t*, uint16_t);
-static inline int i_rnd_vx_kk(c8_t*, uint8_t, uint8_t);
-static inline int i_drw_vx_vy_b(c8_t*, uint8_t, uint8_t, uint8_t);
+static inline int i_sne_vx_vy(C8*, uint8_t, uint8_t);
+static inline int i_ld_i_nnn(C8*, uint16_t);
+static inline int i_jp_v0_nnn(C8*, uint16_t);
+static inline int i_rnd_vx_kk(C8*, uint8_t, uint8_t);
+static inline int i_drw_vx_vy_b(C8*, uint8_t, uint8_t, uint8_t);
 
 /* key (Ex00) instructions */
-static inline int i_skp_vx(c8_t*, uint8_t);
-static inline int i_sknp_vx(c8_t*, uint8_t);
+static inline int i_skp_vx(C8*, uint8_t);
+static inline int i_sknp_vx(C8*, uint8_t);
 
 /* misc (Fxkk) instructions */
-static inline int i_ld_vx_dt(c8_t*, uint8_t);
-static inline int i_ld_vx_k(c8_t*, uint8_t);
-static inline int i_ld_dt_vx(c8_t*, uint8_t);
-static inline int i_ld_st_vx(c8_t*, uint8_t);
-static inline int i_add_i_vx(c8_t*, uint8_t);
-static inline int i_ld_f_vx(c8_t*, uint8_t);
-static inline int i_ld_hf_vx(c8_t*, uint8_t);
-static inline int i_ld_b_vx(c8_t*, uint8_t);
-static inline int i_ld_ip_vx(c8_t*, uint8_t);
-static inline int i_ld_vx_ip(c8_t*, uint8_t);
-static inline int i_ld_r_vx(c8_t*, uint8_t);
-static inline int i_ld_vx_r(c8_t*, uint8_t);
+static inline int i_ld_vx_dt(C8*, uint8_t);
+static inline int i_ld_vx_k(C8*, uint8_t);
+static inline int i_ld_dt_vx(C8*, uint8_t);
+static inline int i_ld_st_vx(C8*, uint8_t);
+static inline int i_add_i_vx(C8*, uint8_t);
+static inline int i_ld_f_vx(C8*, uint8_t);
+static inline int i_ld_hf_vx(C8*, uint8_t);
+static inline int i_ld_b_vx(C8*, uint8_t);
+static inline int i_ld_ip_vx(C8*, uint8_t);
+static inline int i_ld_vx_ip(C8*, uint8_t);
+static inline int i_ld_r_vx(C8*, uint8_t);
+static inline int i_ld_vx_r(C8*, uint8_t);
 
 /**
  * @brief Execute the instruction at `c8->pc`
@@ -124,11 +124,11 @@ static inline int i_ld_vx_r(c8_t*, uint8_t);
  *
  * If verbose flag is set, this will print the instruction to `stdout` as well.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @return amount to increase the program counter, or an exception code if an
  * error occurs.
  */
-int parse_instruction(c8_t* c8) {
+int parse_instruction(C8* c8) {
     uint16_t in = (((uint16_t) c8->mem[c8->pc]) << 8) | c8->mem[c8->pc + 1];
     C8_EXPAND(in);
 
@@ -175,7 +175,7 @@ int parse_instruction(c8_t* c8) {
     }
 }
 
-static int base_instruction(c8_t* c8, uint16_t in, uint8_t kk) {
+static int base_instruction(C8* c8, uint16_t in, uint8_t kk) {
     switch (kk) {
     case 0xE0:
         return i_cls(c8);
@@ -197,7 +197,7 @@ static int base_instruction(c8_t* c8, uint16_t in, uint8_t kk) {
     }
 }
 
-static int bitwise_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t y, uint8_t b) {
+static int bitwise_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t y, uint8_t b) {
     switch (b) {
     case 0x0:
         return i_ld_vx_vy(c8, x, y);
@@ -223,7 +223,7 @@ static int bitwise_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t y, uint
     }
 }
 
-static int key_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t kk) {
+static int key_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
     switch (kk) {
     case 0x9E:
         return i_skp_vx(c8, x);
@@ -235,7 +235,7 @@ static int key_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t kk) {
     }
 }
 
-static int misc_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t kk) {
+static int misc_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
     switch (kk) {
     case 0x07:
         return i_ld_vx_dt(c8, x);
@@ -275,13 +275,13 @@ static int misc_instruction(c8_t* c8, uint16_t in, uint8_t x, uint8_t kk) {
  * @note This is a SCHIP instruction. `c8` must be in SCHIP or XO-CHIP mode to
  * execute this instruction.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param b the number of pixels to scroll down
  *
  * @return 2, the number of bytes to increase the program counter by,
  * or INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int i_scd_b(c8_t* c8, uint8_t b) {
+static inline int i_scd_b(C8* c8, uint8_t b) {
     SCHIP_EXCLUSIVE(c8);
     c8->display.y += b;
     if (c8->display.y > C8_HIGH_DISPLAY_HEIGHT) {
@@ -297,10 +297,10 @@ static inline int i_scd_b(c8_t* c8, uint8_t b) {
  *
  * This instruction clears the display and sets the draw flag.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_cls(c8_t* c8) {
+static inline int i_cls(C8* c8) {
     memset(&c8->display.p, 0, C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT);
     c8->draw = 1;
     return 2;
@@ -313,12 +313,12 @@ static inline int i_cls(c8_t* c8) {
  * Usually, the PC should be at a `CALL` instruction after this, so the program
  * counter must be increased by 2.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  *
  * @return 2, the number of bytes to increase the program counter by,
  * or STACK_UNDERFLOW_EXCEPTION if the stack is empty.
  */
-static inline int i_ret(c8_t* c8) {
+static inline int i_ret(C8* c8) {
     if (c8->sp == 0) {
         C8_EXCEPTION(STACK_UNDERFLOW_EXCEPTION, "Stack underflow at %03x", c8->pc);
         return STACK_UNDERFLOW_EXCEPTION;
@@ -337,12 +337,12 @@ static inline int i_ret(c8_t* c8) {
  * @note This is a SCHIP instruction. `c8` must be in SCHIP or XO-CHIP mode to
  * execute this instruction.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  *
  * @return 2, the number of bytes to increase the program counter by, or
  * INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int i_scr(c8_t* c8) {
+static inline int i_scr(C8* c8) {
     SCHIP_EXCLUSIVE(c8);
     c8->display.x += 4;
     if (c8->display.x > C8_HIGH_DISPLAY_WIDTH) {
@@ -360,12 +360,12 @@ static inline int i_scr(c8_t* c8) {
  * @note This is a SCHIP instruction. `c8` must be in SCHIP or XO-CHIP mode to
  * execute this instruction.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  *
  * @return 2, the number of bytes to increase the program counter by, or
  * INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int i_scl(c8_t* c8) {
+static inline int i_scl(C8* c8) {
     SCHIP_EXCLUSIVE(c8);
     if (c8->display.x < 4) {
         c8->display.x += C8_HIGH_DISPLAY_WIDTH;
@@ -382,11 +382,11 @@ static inline int i_scl(c8_t* c8) {
  * @note This is a SCHIP instruction. `c8` must be in SCHIP or XO-CHIP mode to
  * execute this instruction.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  *
  * @return 0, or INVALID_INSTRUCTION_EXCEPTION if `c8` is in SCHIP mode.
  */
-static inline int i_exit(c8_t* c8) {
+static inline int i_exit(C8* c8) {
     SCHIP_EXCLUSIVE(c8);
     c8->running = 0;
     return 0;
@@ -400,12 +400,12 @@ static inline int i_exit(c8_t* c8) {
  * @note This is a SCHIP instruction. `c8` must be in SCHIP or XO-CHIP mode to
  * execute this instruction.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  *
  * @return 2, the number of bytes to increase the program counter by, or
  * INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int i_low(c8_t* c8) {
+static inline int i_low(C8* c8) {
     SCHIP_EXCLUSIVE(c8);
     c8->display.mode = C8_DISPLAYMODE_LOW;
     return 2;
@@ -419,12 +419,12 @@ static inline int i_low(c8_t* c8) {
  * @note This is a SCHIP instruction. `c8` must be in SCHIP or XO-CHIP mode to
  * execute this instruction.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  *
  * @return 2, the number of bytes to increase the program counter by, or
  * INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int i_high(c8_t* c8) {
+static inline int i_high(C8* c8) {
     SCHIP_EXCLUSIVE(c8);
     c8->display.mode = C8_DISPLAYMODE_HIGH;
     return 2;
@@ -435,12 +435,12 @@ static inline int i_high(c8_t* c8) {
  *
  * This instruction sets the program counter to `nnn`.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param nnn the address to jump to
  *
  * @return 0, the number of bytes to increase the program counter by.
  */
-static inline int i_jp_nnn(c8_t* c8, uint16_t nnn) {
+static inline int i_jp_nnn(C8* c8, uint16_t nnn) {
     c8->pc = nnn;
     return 0;
 }
@@ -451,12 +451,12 @@ static inline int i_jp_nnn(c8_t* c8, uint16_t nnn) {
  * This instruction pushes the current program counter onto the stack and
  * sets the program counter to `nnn`.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param nnn the address to call
  *
  * @return 0, the number of bytes to increase the program counter by.
  */
-static inline int i_call_nnn(c8_t* c8, uint16_t nnn) {
+static inline int i_call_nnn(C8* c8, uint16_t nnn) {
     if (c8->sp >= 15) {
         C8_EXCEPTION(STACK_OVERFLOW_EXCEPTION, "Stack overflow at %03x", c8->pc);
         return STACK_OVERFLOW_EXCEPTION;
@@ -473,13 +473,13 @@ static inline int i_call_nnn(c8_t* c8, uint16_t nnn) {
  * This instruction checks if the value in register Vx is equal to kk.
  * If they are equal, it increases the program counter by 2.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param kk the byte value to compare against
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_se_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
+static inline int i_se_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
     if (c8->V[x] == kk) {
         c8->pc += 2;
     }
@@ -492,13 +492,13 @@ static inline int i_se_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
  * This instruction checks if the value in register Vx is not equal to kk.
  * If they are not equal, it increases the program counter by 2.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param kk the byte value to compare against
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_sne_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
+static inline int i_sne_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
     if (c8->V[x] != kk) {
         c8->pc += 2;
     }
@@ -511,13 +511,13 @@ static inline int i_sne_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
  * This instruction checks if the value in register Vx is equal to the value in
  * register Vy. If they are not equal, it increases the program counter by 2.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_se_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_se_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     if (c8->V[x] == c8->V[y]) {
         c8->pc += 2;
     }
@@ -529,13 +529,13 @@ static inline int i_se_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  *
  * This instruction loads the value `kk` into register Vx.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param kk the byte value to load into Vx
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_ld_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
+static inline int i_ld_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
     c8->V[x] = kk;
     return 2;
 }
@@ -546,13 +546,13 @@ static inline int i_ld_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
  * This instruction adds the value `kk` to the value in register Vx.
  * If the result exceeds 255, it sets the carry flag in VF.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param kk the byte value to add to Vx
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_add_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
+static inline int i_add_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
     c8->V[0xF] = CARRIES(c8->V[x], kk);
     c8->V[x] += kk;
     return 2;
@@ -563,13 +563,13 @@ static inline int i_add_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
  *
  * This instruction loads the value in register Vy into register Vx.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_ld_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_ld_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] = c8->V[y];
     return 2;
 }
@@ -583,13 +583,13 @@ static inline int i_ld_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  * @note This instruction is affected by the QUIRK_BITWISE flag. If the flag is
  * set in `c8.quirks`, VF is set to 0.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_or_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_or_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] |= c8->V[y];
     QUIRK_BITWISE(c8);
     return 2;
@@ -604,13 +604,13 @@ static inline int i_or_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  * @note This instruction is affected by the QUIRK_BITWISE flag. If the flag is
  * set in `c8.quirks`, VF is set to 0.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_and_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_and_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] &= c8->V[y];
     QUIRK_BITWISE(c8);
     return 2;
@@ -625,13 +625,13 @@ static inline int i_and_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  * @note This instruction is affected by the QUIRK_BITWISE flag. If the flag is
  * set in `c8.quirks`, VF is set to 0.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_xor_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_xor_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] = c8->V[x] ^ c8->V[y];
     QUIRK_BITWISE(c8);
     return 2;
@@ -643,13 +643,13 @@ static inline int i_xor_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  * This instruction adds the value in register Vy to the value in register Vx.
  * If the result exceeds 255, it sets VF to 1.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_add_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_add_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[0xF] = CARRIES(c8->V[x], c8->V[y]);
     c8->V[x] += c8->V[y];
     return 2;
@@ -661,13 +661,13 @@ static inline int i_add_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  * This instruction subtracts the value in register Vy from the value in register Vx.
  * If the result is not negative, it sets VF to 1.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_sub_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_sub_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[0xF] = !BORROWS(c8->V[x], c8->V[y]);
     c8->V[x] -= c8->V[y];
     return 2;
@@ -684,13 +684,13 @@ static inline int i_sub_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  * set in `c8.quirks`, the value of y is set to x, effectively making it a right
  * shift of Vx.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_shr_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_shr_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
     c8->V[x]   = c8->V[y] >> 1;
     c8->V[0xF] = c8->V[x] & 0x1;
@@ -703,13 +703,13 @@ static inline int i_shr_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  * This instruction subtracts the value in register Vx from the value in register Vy.
  * If the result is not negative, it sets VF to 1.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_subn_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_subn_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[0xF] = !BORROWS(c8->V[y], c8->V[x]);
     c8->V[x]   = c8->V[y] - c8->V[x];
     return 2;
@@ -726,13 +726,13 @@ static inline int i_subn_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  * set in `c8.quirks`, the value of y is set to x, effectively making it a left
  * shift of Vx.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_shl_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_shl_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
     c8->V[x]   = c8->V[y] << 1;
     c8->V[0xF] = (c8->V[x] >> 7) & 1;
@@ -745,13 +745,13 @@ static inline int i_shl_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  * This instruction checks if the value in register Vx is not equal to the value in register Vy.
  * If they are not equal, it increases the program counter by 2.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_sne_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
+static inline int i_sne_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     if (c8->V[x] != c8->V[y]) {
         c8->pc += 2;
     }
@@ -763,12 +763,12 @@ static inline int i_sne_vx_vy(c8_t* c8, uint8_t x, uint8_t y) {
  *
  * This instruction sets the index register I to the value nnn.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param nnn the address to set I to
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_ld_i_nnn(c8_t* c8, uint16_t nnn) {
+static inline int i_ld_i_nnn(C8* c8, uint16_t nnn) {
     c8->I = nnn;
     return 2;
 }
@@ -781,12 +781,12 @@ static inline int i_ld_i_nnn(c8_t* c8, uint16_t nnn) {
  * @note If the QUIRK_JUMP flag is set in `c8->flags`, it uses the value in
  * register V[8th bit of nnn] instead of V0.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param nnn the address to jump to
  *
  * @return 0, the number of bytes to increase the program counter by.
  */
-static inline int i_jp_v0_nnn(c8_t* c8, uint16_t nnn) {
+static inline int i_jp_v0_nnn(C8* c8, uint16_t nnn) {
     if (c8->flags & C8_FLAG_QUIRK_JUMP) {
         c8->pc = nnn + c8->V[(nnn >> 8) & 0xF];
     } else {
@@ -801,13 +801,13 @@ static inline int i_jp_v0_nnn(c8_t* c8, uint16_t nnn) {
  * This instruction generates a random number and performs a bitwise AND operation
  * with `kk`, storing the result in register Vx.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param kk the byte value to AND with the random number
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_rnd_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
+static inline int i_rnd_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
     c8->V[x] = rand() & kk;
     return 2;
 }
@@ -821,14 +821,14 @@ static inline int i_rnd_vx_kk(c8_t* c8, uint8_t x, uint8_t kk) {
  * pixels are turned off that were previously on, the VF register is set to 1.
  * Then the draw flag is set to 1.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
  * @param b the number of bytes in the sprite (1-16)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_drw_vx_vy_b(c8_t* c8, uint8_t x, uint8_t y, uint8_t b) {
+static inline int i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b) {
     c8->V[0xF] = 0;
     int dw     = C8_LOW_DISPLAY_WIDTH;
     int dh     = C8_LOW_DISPLAY_HEIGHT;
@@ -879,12 +879,12 @@ static inline int i_drw_vx_vy_b(c8_t* c8, uint8_t x, uint8_t y, uint8_t b) {
  * This instruction checks if the key corresponding to the value in register Vx
  * is pressed. If it is pressed, it increases the program counter by 2.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_skp_vx(c8_t* c8, uint8_t x) {
+static inline int i_skp_vx(C8* c8, uint8_t x) {
     if (c8->key[c8->V[x]]) {
         c8->pc += 2;
     }
@@ -897,12 +897,12 @@ static inline int i_skp_vx(c8_t* c8, uint8_t x) {
  * This instruction checks if the key corresponding to the value in register Vx
  * is not pressed. If it is not pressed, it increases the program counter by 2.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_sknp_vx(c8_t* c8, uint8_t x) {
+static inline int i_sknp_vx(C8* c8, uint8_t x) {
     if (!c8->key[c8->V[x]]) {
         c8->pc += 2;
     }
@@ -914,12 +914,12 @@ static inline int i_sknp_vx(c8_t* c8, uint8_t x) {
  *
  * This instruction loads the value of the delay timer into register Vx.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_ld_vx_dt(c8_t* c8, uint8_t x) {
+static inline int i_ld_vx_dt(C8* c8, uint8_t x) {
     c8->V[x] = c8->dt;
     return 2;
 }
@@ -931,12 +931,12 @@ static inline int i_ld_vx_dt(c8_t* c8, uint8_t x) {
  * key in register Vx. If no key is pressed, it sets the `waitingForKey` flag
  * to 1.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  *
  * @return 2 if a key is pressed, 0 if no key is pressed and waitingForKey is set.
  */
-static inline int i_ld_vx_k(c8_t* c8, uint8_t x) {
+static inline int i_ld_vx_k(C8* c8, uint8_t x) {
     // Check if a key is already pressed
     for (int i = 0; i < 16; i++) {
         if (c8->key[i]) {
@@ -956,12 +956,12 @@ static inline int i_ld_vx_k(c8_t* c8, uint8_t x) {
  *
  * This instruction sets the delay timer to the value in register Vx.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_ld_dt_vx(c8_t* c8, uint8_t x) {
+static inline int i_ld_dt_vx(C8* c8, uint8_t x) {
     c8->dt = c8->V[x];
     return 2;
 }
@@ -971,11 +971,11 @@ static inline int i_ld_dt_vx(c8_t* c8, uint8_t x) {
  *
  * This instruction sets the sound timer to the value in register Vx.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_ld_st_vx(c8_t* c8, uint8_t x) {
+static inline int i_ld_st_vx(C8* c8, uint8_t x) {
     c8->st = c8->V[x];
     return 2;
 }
@@ -985,12 +985,12 @@ static inline int i_ld_st_vx(c8_t* c8, uint8_t x) {
  *
  * This instruction adds the value in register Vx to the index register I.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_add_i_vx(c8_t* c8, uint8_t x) {
+static inline int i_add_i_vx(C8* c8, uint8_t x) {
     c8->I += c8->V[x];
     return 2;
 }
@@ -1004,11 +1004,11 @@ static inline int i_add_i_vx(c8_t* c8, uint8_t x) {
  * The font characters are stored in the range `C8_FONT_START` to
  * `C8_FONT_START` + 80.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_ld_f_vx(c8_t* c8, uint8_t x) {
+static inline int i_ld_f_vx(C8* c8, uint8_t x) {
     c8->I = C8_FONT_START + (c8->V[x] * 5);
     return 2;
 }
@@ -1024,12 +1024,12 @@ static inline int i_ld_f_vx(c8_t* c8, uint8_t x) {
  *
  * @note This instruction is only available in SCHIP and XO-CHIP modes.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @return 2, the number of bytes to increase the program counter by, or
  * `INVALID_INSTRUCTION_EXCEPTION` if `c8` is in CHIP-8 mode.
  */
-static inline int i_ld_hf_vx(c8_t* c8, uint8_t x) {
+static inline int i_ld_hf_vx(C8* c8, uint8_t x) {
     SCHIP_EXCLUSIVE(c8);
 
     c8->I = C8_HIGH_FONT_START + (c8->V[x] * 10);
@@ -1043,12 +1043,12 @@ static inline int i_ld_hf_vx(c8_t* c8, uint8_t x) {
  * in register Vx at the address in index register I. The hundreds digit is stored
  * at I, the tens digit at I + 1, and the ones digit at I + 2.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_ld_b_vx(c8_t* c8, uint8_t x) {
+static inline int i_ld_b_vx(C8* c8, uint8_t x) {
     c8->mem[c8->I]     = (c8->V[x] / 100) % 10; // hundreds
     c8->mem[c8->I + 1] = (c8->V[x] / 10) % 10; // tens
     c8->mem[c8->I + 2] = c8->V[x] % 10; // ones
@@ -1061,12 +1061,12 @@ static inline int i_ld_b_vx(c8_t* c8, uint8_t x) {
  * This instruction stores the values of registers V0 to Vx at the address in
  * index register I. The values are stored in memory starting from address I.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_ld_ip_vx(c8_t* c8, uint8_t x) {
+static inline int i_ld_ip_vx(C8* c8, uint8_t x) {
     for (int i = 0; i < x; i++) {
         c8->mem[c8->I + i] = c8->V[i];
     }
@@ -1080,12 +1080,12 @@ static inline int i_ld_ip_vx(c8_t* c8, uint8_t x) {
  * This instruction loads the values from memory starting at address I into
  * registers V0 to Vx. The values are loaded in order from I to I + (x - 1).
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the number of registers to load (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int i_ld_vx_ip(c8_t* c8, uint8_t x) {
+static inline int i_ld_vx_ip(C8* c8, uint8_t x) {
     for (int i = 0; i < x; i++) {
         c8->V[i] = c8->mem[c8->I + i];
     }
@@ -1102,13 +1102,13 @@ static inline int i_ld_vx_ip(c8_t* c8, uint8_t x) {
  *
  * @note This instruction is only available in SCHIP and XO-CHIP modes.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the number of registers to copy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by,
  * or INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int i_ld_r_vx(c8_t* c8, uint8_t x) {
+static inline int i_ld_r_vx(C8* c8, uint8_t x) {
     SCHIP_EXCLUSIVE(c8);
     for (int i = 0; i < x; i++) {
         c8->R[i] = c8->V[i];
@@ -1125,13 +1125,13 @@ static inline int i_ld_r_vx(c8_t* c8, uint8_t x) {
  *
  * @note This instruction is only available in SCHIP and XO-CHIP modes.
  *
- * @param c8 the `c8_t` to execute the instruction from
+ * @param c8 the `C8` to execute the instruction from
  * @param x the number of registers to copy (0-15)
  *
  * @return 2, the number of bytes to increase the program counter by,
  * or INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int i_ld_vx_r(c8_t* c8, uint8_t x) {
+static inline int i_ld_vx_r(C8* c8, uint8_t x) {
     SCHIP_EXCLUSIVE(c8);
 
     for (int i = 0; i < x; i++) {

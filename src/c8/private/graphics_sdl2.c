@@ -70,7 +70,7 @@ uint8_t c8_init_graphics(void) {
  * @param display `display_t` to render
  * @param colors colors to render
  */
-void c8_render(c8_display_t* display, int* colors) {
+void c8_render(C8_Display* display, int* colors) {
     SDL_Rect pix = {
         .x = 0,
         .y = 0,

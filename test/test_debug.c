@@ -13,12 +13,12 @@
 
 char  buf[BUFLEN];
 cmd_t cmd;
-c8_t  c8;
+C8 c8;
 
 void  setUp(void) {
     memset(buf, 0, BUFLEN);
     memset(&cmd, 0, sizeof(cmd_t));
-    memset(&c8, 0, sizeof(c8_t));
+    memset(&c8, 0, sizeof(C8));
     c8.pc = 0x200;
 }
 void tearDown(void) {}

@@ -165,11 +165,11 @@ const uint8_t bigFonts[3][160]
 /**
  * @brief Loads small and/or big fonts in `c8`
  *
- * @param c8 `c8_t` to set fonts
+ * @param c8 `C8` to set fonts
  * @param small small font identifier (-1 to not set)
  * @param big big font identifier (-1 to not set)
  */
-void c8_set_fonts(c8_t* c8, int small, int big) {
+void c8_set_fonts(C8* c8, int small, int big) {
     if (small > -1 && small < 5) {
         c8->fonts[0] = small;
         memcpy(&c8->mem[C8_FONT_START], smallFonts[small], 80);
@@ -184,12 +184,12 @@ void c8_set_fonts(c8_t* c8, int small, int big) {
 /**
  * @brief Set fonts from string
  *
- * @param c8 `c8_t` to set fonts
+ * @param c8 `C8` to set fonts
  * @param s string to get fonts from (comma-separated `fontNames` names)
  *
  * @return 1 if success, 0 otherwise
  */
-int c8_set_fonts_s(c8_t* c8, char* s) {
+int c8_set_fonts_s(C8* c8, char* s) {
     int         len   = strlen(s);
     int         small = -1;
     int         big   = -1;
@@ -221,12 +221,12 @@ int c8_set_fonts_s(c8_t* c8, char* s) {
 /**
  * @brief Set small font from `s` (`fontNames` name)
  *
- * @param c8 `c8_t` to set font from
+ * @param c8 `C8` to set font from
  * @param s string to get font from
  *
  * @return 1 if success, 0 otherwise
  */
-int c8_set_small_font(c8_t* c8, const char* s) {
+int c8_set_small_font(C8* c8, const char* s) {
     int f = -1;
 
     for (int i = 0; i < 5; i++) {
@@ -241,12 +241,12 @@ int c8_set_small_font(c8_t* c8, const char* s) {
 /**
  * @brief Set big font from `s` (`fontNames` name)
  *
- * @param c8 `c8_t` to set font from
+ * @param c8 `C8` to set font from
  * @param s string to get font from
  *
  * @return 1 if success, 0 otherwise
  */
-int c8_set_big_font(c8_t* c8, const char* s) {
+int c8_set_big_font(C8* c8, const char* s) {
     int f = -1;
     for (int i = 0; i < 3; i++) {
         if (!strcmp(s, c8_fontNames[1][i])) {
@@ -261,8 +261,8 @@ int c8_set_big_font(c8_t* c8, const char* s) {
 /**
  * @brief Print fonts (for debug)
  *
- * @param c8 `c8_t` to get fonts from
+ * @param c8 `C8` to get fonts from
  */
-void print_fonts(c8_t* c8) {
+void print_fonts(C8* c8) {
     printf("SFONT: %s\tBFONT: %s\n", c8_fontNames[0][c8->fonts[0]], c8_fontNames[1][c8->fonts[1]]);
 }

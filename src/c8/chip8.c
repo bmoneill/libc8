@@ -1,7 +1,7 @@
 /**
- * @file c8/chip8.c
+ * @file c8/C8.c
  *
- * Stuff for simulating and modifying `c8_t`s.
+ * Stuff for simulating and modifying `C8`s.
  */
 
 #include "chip8.h"
@@ -21,34 +21,34 @@
 
 #define DEBUG(c) (c->flags & C8_FLAG_DEBUG)
 
-static void draw(c8_t*, uint16_t);
+static void draw(C8*, uint16_t);
 
 /**
  * @brief Deinitialize graphics and free c8
  *
- * @param c8 `c8_t` to deinitialize
+ * @param c8 `C8` to deinitialize
  */
-void c8_deinit(c8_t* c8) {
+void c8_deinit(C8* c8) {
     c8_deinit_graphics();
     free(c8);
 }
 
 /**
- * @brief Initialize and return a `c8_t` with the given flags
+ * @brief Initialize and return a `C8` with the given flags
  *
- * This function allocates memory for a new `c8_t` with all values set to 0
+ * This function allocates memory for a new `C8` with all values set to 0
  * or their default values, adds the font to memory, inititializes the graphics
- * system, and returns a pointer to the `c8_t`.
+ * system, and returns a pointer to the `C8`.
  *
  * @param path path to ROM file
  * @param flags flags
  *
- * @return pointer to initialized `c8_t`.
+ * @return pointer to initialized `C8`.
  */
-c8_t* c8_init(const char* path, int flags) {
-    int   res;
+C8* c8_init(const char* path, int flags) {
+    int res;
 
-    c8_t* c8 = (c8_t*) calloc(1, sizeof(c8_t));
+    C8* c8 = (C8*) calloc(1, sizeof(C8));
 
     if (!c8) {
         C8_EXCEPTION(MEMORY_ALLOCATION_EXCEPTION, "At %s", __func__);
@@ -77,7 +77,7 @@ c8_t* c8_init(const char* path, int flags) {
  *
  * @return 1 if success
  */
-int c8_load_palette_s(c8_t* c8, char* s) {
+int c8_load_palette_s(C8* c8, char* s) {
     char* c[2];
     int   len = strlen(s);
 
@@ -110,7 +110,7 @@ int c8_load_palette_s(c8_t* c8, char* s) {
  *
  * @return 1 if success
  */
-int c8_load_palette_f(c8_t* c8, const char* path) {
+int c8_load_palette_f(C8* c8, const char* path) {
     char buf[64];
     buf[0]  = '$';
     FILE* f = fopen(path, "r");
@@ -138,7 +138,7 @@ int c8_load_palette_f(c8_t* c8, const char* path) {
  * @param c8 where to store flags
  * @param s string to get quirks from
  */
-void c8_load_quirks(c8_t* c8, const char* s) {
+void c8_load_quirks(C8* c8, const char* s) {
     for (size_t i = 0; i < strlen(s); i++) {
         switch (s[i]) {
         case 'b':
@@ -165,12 +165,12 @@ void c8_load_quirks(c8_t* c8, const char* s) {
 /**
  * @brief Load a ROM to `c8->mem` at path `addr`.
  *
- * @param c8 `c8_t` to store the ROM's contents
+ * @param c8 `C8` to store the ROM's contents
  * @param addr path to the ROM
  *
  * @return 1 if success.
  */
-int c8_load_rom(c8_t* c8, const char* addr) {
+int c8_load_rom(C8* c8, const char* addr) {
     FILE* f;
     int   size;
 
@@ -199,9 +199,9 @@ int c8_load_rom(c8_t* c8, const char* addr) {
 /**
  * @brief Main interpreter simulation loop. Exits when `c8->running` is 0.
  *
- * @param c8 the `c8_t` to simulate
+ * @param c8 the `C8` to simulate
  */
-void c8_simulate(c8_t* c8) {
+void c8_simulate(C8* c8) {
     int debugRet;
     int ret;
     int step = 1;

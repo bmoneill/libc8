@@ -117,18 +117,18 @@ typedef struct {
 
 static int  get_command(cmd_t*, char*);
 static int  load_file_arg(cmd_t*, char*);
-static void load_flags(c8_t*, const char*);
-static void load_state(c8_t*, const char*);
+static void load_flags(C8*, const char*);
+static void load_state(C8*, const char*);
 static int  parse_arg(cmd_t*, char*);
 static void print_help(void);
-static void print_r_registers(const c8_t*);
-static void print_stack(const c8_t*);
-static void print_v_registers(const c8_t*);
-static void print_value(c8_t*, const cmd_t*);
-static int  run_command(c8_t*, const cmd_t*);
-static void save_flags(const c8_t*, const char*);
-static void save_state(const c8_t*, const char*);
-static int  set_value(c8_t*, const cmd_t*);
+static void print_r_registers(const C8*);
+static void print_stack(const C8*);
+static void print_v_registers(const C8*);
+static void print_value(C8*, const cmd_t*);
+static int  run_command(C8*, const cmd_t*);
+static void save_flags(const C8*, const char*);
+static void save_state(const C8*, const char*);
+static int  set_value(C8*, const cmd_t*);
 
 /**
  * These are string values of all possible argument, ordered to match the
@@ -162,7 +162,7 @@ const char* cmds[] = {
  * @param c8 the current CHIP-8 state
  * @return `DEBUG_CONTINUE`, `DEBUG_STEP`, or `DEBUG_QUIT`
  */
-int debug_repl(c8_t* c8) {
+int debug_repl(C8* c8) {
     char  buf[64];
     cmd_t cmd;
 
@@ -191,15 +191,15 @@ int debug_repl(c8_t* c8) {
  * @brief Check if breakpoint exists at address pc
  *
  * This function checks if there is a breakpoint set at the
- * specified program counter (pc) address in the `c8_t` structure.
+ * specified program counter (pc) address in the `C8` structure.
  * It returns 1 if a breakpoint exists at that address,
  * and 0 if no breakpoint is set.
  *
- * @param c8 `c8_t` to check breakpoints of
+ * @param c8 `C8` to check breakpoints of
  * @param pc address to check for breakpoint at
  * @return 1 if yes, 0 if no
  */
-int has_breakpoint(c8_t* c8, uint16_t pc) { return c8->breakpoints[pc]; }
+int has_breakpoint(C8* c8, uint16_t pc) { return c8->breakpoints[pc]; }
 
 /**
  * @brief Parse command from string `s` and store in `cmd`.
@@ -249,7 +249,7 @@ static int get_command(cmd_t* cmd, char* s) {
  * @param c8 struct to load to
  * @param path path to load from
  */
-static void load_flags(c8_t* c8, const char* path) {
+static void load_flags(C8* c8, const char* path) {
     FILE* f = fopen(path, "rb");
     if (!f) {
         printf("Invalid file\n");
@@ -261,18 +261,18 @@ static void load_flags(c8_t* c8, const char* path) {
 }
 
 /**
- * @brief Load `c8_t` from file.
+ * @brief Load `C8` from file.
  *
  * @param c8 struct to load to
  * @param path path to load from
  */
-static void load_state(c8_t* c8, const char* path) {
+static void load_state(C8* c8, const char* path) {
     FILE* f = fopen(path, "rb");
     if (!f) {
         printf("Invalid file\n");
         return;
     }
-    fread(c8, sizeof(c8_t), 1, f);
+    fread(c8, sizeof(C8), 1, f);
     fclose(f);
 
     c8->draw = 1;
@@ -428,7 +428,7 @@ static void print_quirks(int flags) {
  *
  * @param c8 the current CHIP-8 state
  */
-static void print_r_registers(const c8_t* c8) {
+static void print_r_registers(const C8* c8) {
     for (int i = 0; i < 4; i++) {
         printf("R%01x: %02x\t\t", i, c8->R[i]);
         printf("R%01x: %02x\n", i + 4, c8->R[i + 4]);
@@ -440,7 +440,7 @@ static void print_r_registers(const c8_t* c8) {
  *
  * @param c8 the current CHIP-8 state
  */
-static void print_v_registers(const c8_t* c8) {
+static void print_v_registers(const C8* c8) {
     for (int i = 0; i < 8; i++) {
         printf("V%01x: %02x\t\t", i, c8->V[i]);
         printf("V%01x: %02x\n", i + 8, c8->V[i + 8]);
@@ -452,7 +452,7 @@ static void print_v_registers(const c8_t* c8) {
  *
  * @param c8 the current CHIP-8 state
  */
-static void print_stack(const c8_t* c8) {
+static void print_stack(const C8* c8) {
     for (int i = 0; i < 8; i++) {
         printf("x%01x: $%03x\t\t", i, c8->stack[i]);
         printf("x%01x: $%03x\n", i + 8, c8->stack[i + 8]);
@@ -465,7 +465,7 @@ static void print_stack(const c8_t* c8) {
  * @param c8 the current CHIP-8 state
  * @param cmd the command structure to get the arg from
  */
-static void print_value(c8_t* c8, const cmd_t* cmd) {
+static void print_value(C8* c8, const cmd_t* cmd) {
     uint16_t pc;
     uint16_t ins;
     int      addr;
@@ -558,7 +558,7 @@ static void print_value(c8_t* c8, const cmd_t* cmd) {
  * @param cmd the command structure containing the command ID and arguments
  * @return `DEBUG_CONTINUE`, `DEBUG_STEP`, `DEBUG_QUIT`, or 0
  */
-static int run_command(c8_t* c8, const cmd_t* cmd) {
+static int run_command(C8* c8, const cmd_t* cmd) {
     switch (cmd->id) {
     case CMD_ADD_BREAKPOINT:
         if (cmd->arg.type == ARG_NONE) {
@@ -612,10 +612,10 @@ static int run_command(c8_t* c8, const cmd_t* cmd) {
 /**
  * @brief Save flag registers to file.
  *
- * @param c8 `c8_t` to grab flag registers from
+ * @param c8 `C8` to grab flag registers from
  * @param path path to save to
  */
-static void save_flags(const c8_t* c8, const char* path) {
+static void save_flags(const C8* c8, const char* path) {
     FILE* f = fopen(path, "wb");
     if (!f) {
         printf("Invalid file\n");
@@ -627,19 +627,19 @@ static void save_flags(const c8_t* c8, const char* path) {
 }
 
 /**
- * @brief Save `c8_t` to file.
+ * @brief Save `C8` to file.
  *
- * @param c8 `c8_t` to save
+ * @param c8 `C8` to save
  * @param path path to save to
  */
-static void save_state(const c8_t* c8, const char* path) {
+static void save_state(const C8* c8, const char* path) {
     FILE* f = fopen(path, "wb");
     if (!f) {
         printf("Invalid file\n");
         return;
     }
 
-    fwrite(c8, sizeof(c8_t), 1, f);
+    fwrite(c8, sizeof(C8), 1, f);
     fclose(f);
 }
 
@@ -652,7 +652,7 @@ static void save_state(const c8_t* c8, const char* path) {
  * @param c8 the current CHIP-8 state
  * @param cmd the command structure
  */
-static int set_value(c8_t* c8, const cmd_t* cmd) {
+static int set_value(C8* c8, const cmd_t* cmd) {
     switch (cmd->arg.type) {
     case ARG_NONE:
         return 0;

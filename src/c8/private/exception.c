@@ -39,11 +39,11 @@
  * @param message exception message
  */
 typedef struct {
-    exception_code_t code;
+    C8_ExceptionCode code;
     const char*      message;
-} exception_t;
+} C8_Exception;
 
-const exception_t exceptions[] = {
+const C8_Exception exceptions[] = {
     { INVALID_INSTRUCTION_EXCEPTION, INVALID_INSTRUCTION_EXCEPTION_MESSAGE },
     { TOO_MANY_LABELS_EXCEPTION, TOO_MANY_LABELS_EXCEPTION_MESSAGE },
     { STACK_OVERFLOW_EXCEPTION, STACK_OVERFLOW_EXCEPTION_MESSAGE },
@@ -65,8 +65,8 @@ const exception_t exceptions[] = {
 
 char c8_exception[EXCEPTION_MESSAGE_SIZE];
 
-void handle_exception(int code) {
-    for (size_t i = 0; i < sizeof(exceptions) / sizeof(exception_t); i++) {
+void handle_exception(C8_ExceptionCode code) {
+    for (size_t i = 0; i < sizeof(exceptions) / sizeof(C8_Exception); i++) {
         if (exceptions[i].code == code) {
             fprintf(stderr, "libc8: %s\n", exceptions[i].message);
         }

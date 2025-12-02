@@ -36,13 +36,13 @@ typedef enum {
     INVALID_FONT_EXCEPTION                   = -17,
     INVALID_CLOCK_SPEED_EXCEPTION            = -18,
     STACK_UNDERFLOW_EXCEPTION                = -19
-} exception_code_t;
+} C8_ExceptionCode;
 
 /**
   * Message to print when calling `handle_exception` with a non-zero code
   */
 extern char c8_exception[EXCEPTION_MESSAGE_SIZE];
 
-void        handle_exception(int);
+void        handle_exception(C8_ExceptionCode);
 
 #endif

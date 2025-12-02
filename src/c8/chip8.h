@@ -1,7 +1,7 @@
 /**
  * @file c8/chip8.h
  *
- * Stuff for simulating and modifying `c8_t`s.
+ * Stuff for simulating and modifying `CHIP8`s.
  */
 
 #ifndef LIBC8_CHIP8_H
@@ -28,7 +28,7 @@
 #define C8_FLAG_QUIRK_JUMP      0x40
 
 /**
-  * @struct c8_t
+  * @struct C8
   * @brief Represents current state of the CHIP-8 interpreter
   *
   * @param mem CHIP-8 memory
@@ -75,15 +75,15 @@ typedef struct {
     int          fonts[2];
     int          draw;
     int          mode;
-} c8_t;
+} C8;
 
-void        c8_deinit(c8_t*);
-c8_t*       c8_init(const char*, int);
-int         c8_load_palette_s(c8_t*, char*);
-int         c8_load_palette_f(c8_t*, const char*);
-void        c8_load_quirks(c8_t*, const char*);
-int         c8_load_rom(c8_t*, const char*);
+void        c8_deinit(C8*);
+C8*         c8_init(const char*, int);
+int         c8_load_palette_s(C8*, char*);
+int         c8_load_palette_f(C8*, const char*);
+void        c8_load_quirks(C8*, const char*);
+int         c8_load_rom(C8*, const char*);
 const char* c8_version(void);
-void        c8_simulate(c8_t*);
+void        c8_simulate(C8*);
 
 #endif

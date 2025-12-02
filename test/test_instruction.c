@@ -28,7 +28,7 @@
 #define ANNN(a, nnn)                       INSERT_INSTRUCTION(pc, BUILD_INSTRUCTION_ANNN(a, nnn))
 #define AXYB(a, x, y, b)                   INSERT_INSTRUCTION(pc, BUILD_INSTRUCTION_AXYB(a, x, y, b))
 
-c8_t           c8;
+C8             c8;
 uint8_t        x   = 0;
 uint8_t        y   = 0;
 uint8_t        kk  = 0;
@@ -41,7 +41,7 @@ const uint16_t pc  = 0x200;
 void           setUp(void) {
     srand(time(NULL));
     /* clear c8_t */
-    memset(&c8, 0, sizeof(c8_t));
+    memset(&c8, 0, sizeof(C8));
     c8.pc = 0x200;
     c8.I  = 0x300;
 
