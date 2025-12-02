@@ -10,9 +10,11 @@
 
 #include "../chip8.h"
 
-#define DEBUG_QUIT     1
-#define DEBUG_CONTINUE 2
-#define DEBUG_STEP     3
+enum {
+    DEBUG_QUIT,
+    DEBUG_CONTINUE,
+    DEBUG_STEP,
+};
 
 #define DEBUG_HELP_STRING                                                                          \
     "Available commands:\n\
