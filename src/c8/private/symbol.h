@@ -229,10 +229,6 @@ typedef struct {
     int     ceil;
 } SymbolList;
 
-extern const char*       c8_instructionStrings[];
-extern const char*       c8_identifierStrings[];
-extern InstructionFormat formats[];
-
 int                      build_instruction(Instruction*, SymbolList*, int);
 int                      is_comment(const char*);
 int                      is_db(const char*);
@@ -248,5 +244,9 @@ int                      populate_labels(LabelList*);
 int                      resolve_labels(SymbolList*, LabelList*);
 int                      shift(uint16_t);
 int                      substitute_labels(SymbolList*, LabelList*);
+
+extern const char*       c8_instructionStrings[];
+extern const char*       c8_identifierStrings[];
+extern InstructionFormat formats[];
 
 #endif
