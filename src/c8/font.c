@@ -13,11 +13,11 @@
 #include <string.h>
 
 enum {
-    SMALLFONT_OCTO = 0,
-    SMALLFONT_VIP = 1,
+    SMALLFONT_OCTO      = 0,
+    SMALLFONT_VIP       = 1,
     SMALLFONT_DREAM6800 = 2,
-    SMALLFONT_ETI660 = 3,
-    SMALLFONT_FISH = 4,
+    SMALLFONT_ETI660    = 3,
+    SMALLFONT_FISH      = 4,
 };
 
 enum {
