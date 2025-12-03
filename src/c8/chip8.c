@@ -1,5 +1,5 @@
 /**
- * @file c8/C8.c
+ * @file c8/chip8.c
  *
  * Stuff for simulating and modifying `C8`s.
  */

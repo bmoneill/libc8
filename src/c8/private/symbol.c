@@ -282,8 +282,6 @@ Symbol* next_symbol(SymbolList* symbols) {
  *
  * If too many labels are defined, it throws a `TOO_MANY_LABELS_EXCEPTION`.
  *
- * @param lines lines to search
- * @param lineCount number of lines to search
  * @param labels label list to populate
  *
  * @return 1 if success, 0 if failure
