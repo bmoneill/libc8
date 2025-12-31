@@ -1,3 +1,4 @@
+#include "c8/chip8.h"
 #include "c8/decode.h"
 
 #include <stdint.h>

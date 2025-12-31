@@ -14,7 +14,7 @@ int         main(int argc, char* argv[]) {
         usage(argv[0]);
     }
 
-    c8_t* c8 = c8_init(NULL, 0);
+    C8* c8 = c8_init(NULL, 0);
 
     if (!c8) {
         usage(argv[0]);
@@ -59,7 +59,7 @@ int         main(int argc, char* argv[]) {
         c8_set_fonts_s(c8, fontstr);
     }
 
-    load_rom(c8, argv[optind]);
+    c8_load_rom(c8, argv[optind]);
     c8_simulate(c8);
     c8_deinit(c8);
 
