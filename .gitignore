@@ -25,6 +25,7 @@ Testing
 /install_manifest.txt
 
 # etc
+docs/html
 .zed/
 /.clangd
 /compile_commands.json
