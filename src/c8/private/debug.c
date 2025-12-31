@@ -10,7 +10,6 @@
 #include "../chip8.h"
 #include "../decode.h"
 #include "../font.h"
-#include "exception.h"
 #include "util.h"
 
 #include <ctype.h>
