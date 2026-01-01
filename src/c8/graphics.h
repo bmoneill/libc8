@@ -30,9 +30,9 @@
   * @brief Represents a graphics display.
   *
   * @param p pixels (1D array)
-  * @param mode display mode (`DISPLAY_STANDARD` or `DISPLAY_EXTENDED`)
-  * @param x x offset (for `DISPLAY_EXTENDED`)
-  * @param y y offset (for `DISPLAY_EXTENDED`)
+  * @param mode display mode (`C8_DISPLAYMODE_LOW` or `C8_DISPLAYMODE_HIGH`)
+  * @param x x offset (for `C8_DISPLAYMODE_LOW`)
+  * @param y y offset (for `C8_DISPLAYMODE_HIGH`)
   */
 typedef struct {
     uint8_t p[C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT];

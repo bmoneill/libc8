@@ -64,6 +64,11 @@ const C8_Exception c8_exceptions[] = {
 
 char c8_exception[C8_EXCEPTION_MESSAGE_SIZE];
 
+/**
+ * @brief Handles an exception by printing the corresponding error message to stderr.
+ *
+ * @param code The exception code.
+ */
 void c8_handle_exception(C8_ExceptionCode code) {
     for (size_t i = 0; i < sizeof(c8_exceptions) / sizeof(C8_Exception); i++) {
         if (c8_exceptions[i].code == code) {

@@ -24,14 +24,14 @@ char        result[RESULT_SIZE];
 /**
  * @brief Convert bytecode from `input` to assembly and writes it to `output`.
  *
- * `ARG_PRINT_ADDRESSES` should be AND'd to args to print addresses before each
+ * `C8_DECODE_PRINT_ADDRESSES` should be AND'd to args to print addresses before each
  * assembly instruction.
  *
- * `ARG_DEFINE_LABELS` should be AND'd to args to define labels.
+ * `C8_DECODE_DEFINE_LABELS` should be AND'd to args to define labels.
  *
  * @param input the CHIP-8 ROM file to disassemble
  * @param output the file to write the assembly to
- * @param args 0 with `ARG_PRINT_ADDRESSES` and/or `ARG_DEFINE_LABELS`
+ * @param args 0 with `C8_DECODE_PRINT_ADDRESSES` and/or `C8_DECODE_DEFINE_LABELS`
  * optionally OR'd
  */
 void c8_decode(FILE* input, FILE* output, int args) {

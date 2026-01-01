@@ -197,6 +197,16 @@ static int c8_base_instruction(C8* c8, uint16_t in, uint8_t kk) {
     }
 }
 
+/**
+ * @brief Handles a bitwise instruction by calling the appropriate function.
+ *
+ * @param c8 The current CHIP-8 state.
+ * @param in The instruction word.
+ * @param x The x register.
+ * @param y The y register.
+ * @param b The bitwise operation code.
+ * @return The result of the bitwise operation.
+ */
 static int c8_bitwise_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t y, uint8_t b) {
     switch (b) {
     case 0x0:
@@ -223,6 +233,15 @@ static int c8_bitwise_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t y, uin
     }
 }
 
+/**
+ * Handles a key instruction by calling the appropriate function.
+ *
+ * @param c8 The current CHIP-8 state.
+ * @param in The instruction word.
+ * @param x The x register.
+ * @param kk The key code.
+ * @return The result of the key instruction.
+ */
 static int c8_key_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
     switch (kk) {
     case 0x9E:
@@ -235,6 +254,15 @@ static int c8_key_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
     }
 }
 
+/**
+ * Handles a miscellaneous instruction by calling the appropriate function.
+ *
+ * @param c8 The current CHIP-8 state.
+ * @param in The instruction word.
+ * @param x The x register.
+ * @param kk The key code.
+ * @return The result of the miscellaneous instruction.
+ */
 static int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
     switch (kk) {
     case 0x07:

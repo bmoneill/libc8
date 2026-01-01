@@ -279,9 +279,9 @@ C8_Symbol* c8_next_symbol(C8_SymbolList* symbols) {
  * It checks each line for a label definition (ending with a colon) and adds it
  * to the label list.
  *
- * If a duplicate label definition is found, it throws a `DUPLICATE_LABEL_EXCEPTION`.
+ * If a duplicate label definition is found, it throws a `C8_DUPLICATE_LABEL_EXCEPTION`.
  *
- * If too many labels are defined, it throws a `TOO_MANY_LABELC8_SEXCEPTION`.
+ * If too many labels are defined, it throws a `C8_TOO_MANY_LABELS_EXCEPTION`.
  *
  * @param labels label list to populate
  *
@@ -300,7 +300,6 @@ int c8_populate_labels(C8_LabelList* labels) {
         }
 
         if (c8_is_label_definition(c8_lines[i])) {
-            printf("GOT HERE\n");
             for (int j = 0; j < labels->len; j++) {
                 if (!strncmp(labels->l[j].identifier,
                              c8_lines[i],
@@ -390,7 +389,7 @@ int c8_resolve_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
  *
  * This function replaces all symbols of type `C8_SYM_LABEL` in the symbol list
  * with their corresponding byte value from the label list. It checks if the
- * label exists and throws an `INVALID_SYMBOL_EXCEPTION` if it does not.
+ * label exists and throws an `C8_INVALID_SYMBOL_EXCEPTION` if it does not.
  *
  * This function assumes that the label list has been populated and that their
  * byte values have been set correctly.
@@ -423,8 +422,8 @@ int c8_substitute_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
  * starting at the given index. It checks the type of each symbol and assigns
  * the value to the instruction's parameter array.
  *
- * If an integer argument is too large for the expected type, it throws an
- * `INVALID_INSTRUCTION_EXCEPTION`.
+ * If an integer argument is too large for the expected type, it throws a
+ * `C8_INVALID_INSTRUCTION_EXCEPTION`.
  *
  * @param ins instruction to populate
  * @param symbols symbol list
@@ -483,10 +482,7 @@ static int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, int
  * It uses the instruction format to determine how to encode the parameters
  * and combines them with the base value of the instruction format.
  *
- * If ins is `NULL`, it will throw a `NULL_ARGUMENT_EXCEPTION`.
- *
  * @param ins instruction to get bytecode of
- *
  * @return bytecode of instruction ins
  */
 static int parse_instruction(C8_Instruction* ins) {
@@ -503,7 +499,7 @@ static int parse_instruction(C8_Instruction* ins) {
  * @brief Validate the given instruction against legal instruction formats
  *
  * If successful, `ins->format` will be populated with the matching format.
- * If the instruction is invalid, an `INVALID_INSTRUCTION_EXCEPTION` will be
+ * If the instruction is invalid, an `C8_INVALID_INSTRUCTION_EXCEPTION` will be
  * thrown.
  *
  * @param ins instruction to validate
@@ -585,7 +581,7 @@ static int reallocate_symbols(C8_SymbolList* symbols) {
  * This is a workaround for the fact that the instruction formats are not
  * defined in a way that allows for easy bit manipulation.
  *
- * @param fmt `instruction_format_t` pformat to check
+ * @param fmt `C8_InstructionFormat` pformat to check
  *
  * @return number of bits to shift
  */

@@ -105,7 +105,7 @@ typedef struct {
  * and a value to set the argument to specifically for `set` commands.
  *
  * @param id command identifier
- * @param arg `arg_t` argument
+ * @param arg `Arg` argument
  * @param setValue value to set `arg.value` to for set commands
  */
 typedef struct {
@@ -131,7 +131,7 @@ static int  c8_set_value(C8*, const C8_Command*);
 
 /**
  * These are string values of all possible argument, ordered to match the
- * Argument enumerator.
+ * C8_Argument enumerator.
  */
 const char* c8_args[] = {
     "SP", "DT", "ST", "PC", "I", "VK", "stack", "bg", "fg", "sfont", "bfont", "quirks",
@@ -139,7 +139,7 @@ const char* c8_args[] = {
 
 /**
  * These are string values of all possible commands, ordered to match the
- * Command enumerator.
+ * C8_Command enumerator.
  */
 const char* c8_cmds[] = {
     "break", "rmbreak", "continue", "next", "set",       "load",
@@ -555,7 +555,7 @@ static void c8_print_value(C8* c8, const C8_Command* cmd) {
  *
  * @param c8 the current CHIP-8 state
  * @param cmd the command structure containing the command ID and arguments
- * @return `DEBUG_CONTINUE`, `DEBUG_STEP`, `DEBUG_QUIT`, or 0
+ * @return `C8_DEBUG_CONTINUE`, `C8_DEBUG_STEP`, `C8_DEBUG_QUIT`, or 0
  */
 static int c8_run_command(C8* c8, const C8_Command* cmd) {
     switch (cmd->id) {
