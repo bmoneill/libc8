@@ -16,8 +16,9 @@ An example [assembler](docs/chip8as.md), [disassembler](docs/chip8dis.md), and
 ### Linux
 
 ```shell
-cmake .
+cmake -S .
 cmake --build .
+sudo cmake --install . # install
 ```
 
 This will build libc8 as well as the example tools.
