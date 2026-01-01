@@ -37,11 +37,6 @@ code, you must implement these functions with your preferred graphics library:
 
 **Note**: the `all` and `tools` targets require `SDL2` to be `ON`.
 
-## Documentation
-
-[Full documentation for libc8](https://bmoneill.github.io/libc8) is
-available on the GitHub pages site.
-
 ## Testing
 
 Testing is done using
@@ -65,6 +60,11 @@ to undefined behavior.
 The libc8 CHIP-8 interpreter running [Outlaw by John Earnest](https://johnearnest.github.io/chip8Archive/play.html?p=outlaw):
 
 ![libc8 running outlaw](https://oneill.sh/img/libc8-outlaw.gif)
+
+## Documentation
+
+[Library documentation for libc8](https://bmoneill.github.io/libc8) is
+available on the GitHub pages site.
 
 ## Further Reading
 
