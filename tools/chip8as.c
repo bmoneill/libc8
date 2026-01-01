@@ -21,7 +21,7 @@ int          main(int argc, char* argv[]) {
             outpath = optarg;
             break;
         case 'v':
-            args |= ARG_VERBOSE;
+            args |= C8_ARG_VERBOSE;
             break;
         case 'V':
             printf("%s %s\n", argv[0], c8_version());

@@ -11,12 +11,12 @@
 #include "../chip8.h"
 
 enum {
-    DEBUG_QUIT,
-    DEBUG_CONTINUE,
-    DEBUG_STEP,
+    C8_DEBUG_QUIT,
+    C8_DEBUG_CONTINUE,
+    C8_DEBUG_STEP,
 };
 
-#define DEBUG_HELP_STRING                                                                          \
+#define C8_DEBUG_HELP_STRING                                                                       \
     "Available commands:\n\
 break [ADDRESS]: Add breakpoint to PC or ADDRESS, if given\n\
 rmbreak [ADDRESS]: Remove breakpoint at PC or ADDRESS, if given\n\
@@ -43,7 +43,7 @@ $[address]: Value at given address\n\
 If no argument is given to print, it will print all of the above attributes\n\
 except for address values.\n"
 
-int debug_repl(C8*);
-int has_breakpoint(C8*, uint16_t);
+int c8_debug_repl(C8*);
+int c8_has_breakpoint(C8*, uint16_t);
 
 #endif

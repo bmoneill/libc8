@@ -8,13 +8,8 @@
 #ifndef C8_UTIL_H
 #define C8_UTIL_H
 
-#define VERBOSE_PRINT(a, ...)                                                                      \
-    if (a & ARG_VERBOSE) {                                                                         \
-        printf(__VA_ARGS__);                                                                       \
-    }
-
-int   hex_to_int(char);
-int   parse_int(const char*);
-char* trim(char*);
+int   c8_hex_to_int(char);
+int   c8_parse_int(const char*);
+char* c8_trim(char*);
 
 #endif

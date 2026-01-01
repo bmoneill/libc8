@@ -11,6 +11,6 @@
 
 #include "../chip8.h"
 
-int parse_instruction(C8* c8);
+int c8_parse_instruction(C8* c8);
 
 #endif

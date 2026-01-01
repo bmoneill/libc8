@@ -21,12 +21,12 @@ static SDL_Renderer* renderer;
 /**
  * Map of all keys to track.
  *
- * * `keyMap[x][0]` is `SDL_Keycode`
- * * `keyMap[x][1]` is CHIP-8 keycode
- * * `keyMap[16]` enables debug mode / step,
- * * `keyMap[17]` disables debug mode
+ * * `c8_keyMap[x][0]` is `SDL_Keycode`
+ * * `c8_keyMap[x][1]` is CHIP-8 keycode
+ * * `c8_keyMap[16]` enables debug mode / step,
+ * * `c8_keyMap[17]` disables debug mode
  */
-static int keyMap[18][2] = {
+static int c8_keyMap[18][2] = {
     { SDLK_1, 1 },   { SDLK_2, 2 },   { SDLK_3, 3 },   { SDLK_4, 0xC }, { SDLK_q, 4 },
     { SDLK_w, 5 },   { SDLK_e, 6 },   { SDLK_r, 0xD }, { SDLK_a, 7 },   { SDLK_s, 8 },
     { SDLK_d, 9 },   { SDLK_f, 0xE }, { SDLK_z, 0xA }, { SDLK_x, 0 },   { SDLK_c, 0xB },
@@ -34,7 +34,7 @@ static int keyMap[18][2] = {
     { SDLK_m, 17 }, // Leave debug mode
 };
 
-static int get_key(SDL_Keycode k);
+static int c8_get_key(SDL_Keycode k);
 
 /**
  * @brief Deinitialize the graphics library.
@@ -144,12 +144,12 @@ int c8_tick(int* key) {
         case SDL_QUIT:
             return -2;
         case SDL_KEYDOWN:
-            if ((ret = get_key(e.key.keysym.sym)) != -1) {
+            if ((ret = c8_get_key(e.key.keysym.sym)) != -1) {
                 key[ret] = 1;
             }
             break;
         case SDL_KEYUP:
-            if ((ret = get_key(e.key.keysym.sym)) != -1) {
+            if ((ret = c8_get_key(e.key.keysym.sym)) != -1) {
                 key[ret] = 0;
             }
             break;
@@ -166,10 +166,10 @@ int c8_tick(int* key) {
  *
  * @return the CHIP-8 keycode
  */
-static int get_key(SDL_Keycode k) {
+static int c8_get_key(SDL_Keycode k) {
     for (int i = 0; i < 18; i++) {
-        if (keyMap[i][0] == k) {
-            return keyMap[i][1];
+        if (c8_keyMap[i][0] == k) {
+            return c8_keyMap[i][1];
         }
     }
     return -1;

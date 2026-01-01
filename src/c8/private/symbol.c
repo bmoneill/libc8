@@ -19,83 +19,84 @@
   * Reserved identifier strings. Has to match `Symbol`.
   */
 const char* c8_identifierStrings[] = {
-    "", S_DT, S_ST, S_I, S_IP, S_K, S_F, S_B, S_DB, S_DW, S_DS, S_HF, S_R, NULL,
+    "",     C8_S_DT, C8_S_ST, C8_S_I,  C8_S_IP, C8_S_K, C8_S_F,
+    C8_S_B, C8_S_DB, C8_S_DW, C8_S_DS, C8_S_HF, C8_S_R, NULL,
 };
 
 /**
  * Instruction strings. Has to match `Instruction`.
  */
 const char* c8_instructionStrings[] = {
-    S_CLS, S_RET, S_JP,  S_CALL, S_SE,   S_SNE, S_LD,   S_ADD,   S_OR,
-    S_AND, S_SUB, S_SHR, S_SUBN, S_SHL,  S_RND, S_DRW,  S_SKP,   S_SKNP,
-    S_XOR, S_SCD, S_SCR, S_SCL,  S_EXIT, S_LOW, S_HIGH, S_JP_V0, NULL,
+    C8_S_CLS, C8_S_RET, C8_S_JP,  C8_S_CALL, C8_S_SE,   C8_S_SNE, C8_S_LD,   C8_S_ADD,   C8_S_OR,
+    C8_S_AND, C8_S_SUB, C8_S_SHR, C8_S_SUBN, C8_S_SHL,  C8_S_RND, C8_S_DRW,  C8_S_SKP,   C8_S_SKNP,
+    C8_S_XOR, C8_S_SCD, C8_S_SCR, C8_S_SCL,  C8_S_EXIT, C8_S_LOW, C8_S_HIGH, C8_S_JP_V0, NULL,
 };
 
 /**
  * All valid instruction formats
  */
-InstructionFormat formats[] = {
-    { I_SCD, 0x00C0, 1, { SYM_INT4 }, { 0x000F } },
-    { I_CLS, 0x00E0, 0, { SYM_NULL }, { 0 } },
-    { I_RET, 0x00EE, 0, { SYM_NULL }, { 0 } },
-    { I_SCR, 0x00FB, 0, { SYM_NULL }, { 0 } },
-    { I_SCL, 0x00FC, 0, { SYM_NULL }, { 0 } },
-    { I_EXIT, 0x00FD, 0, { SYM_NULL }, { 0 } },
-    { I_LOW, 0x00FE, 0, { SYM_NULL }, { 0 } },
-    { I_HIGH, 0x00FF, 0, { SYM_NULL }, { 0 } },
-    { I_JP, 0x1000, 1, { SYM_INT12 }, { 0x0FFF } },
-    { I_CALL, 0x2000, 1, { SYM_INT12 }, { 0x0FFF } },
-    { I_SE, 0x3000, 2, { SYM_V, SYM_INT8 }, { 0x0F00, 0x00FF } },
-    { I_SNE, 0x4000, 2, { SYM_V, SYM_INT8 }, { 0x0F00, 0x00FF } },
-    { I_SE, 0x5000, 2, { SYM_V, SYM_V }, { 0x0F00, 0x00F0 } },
-    { I_LD, 0x6000, 2, { SYM_V, SYM_INT8 }, { 0x0F00, 0x00FF } },
-    { I_ADD, 0x7000, 2, { SYM_V, SYM_INT8 }, { 0x0F00, 0x00FF } },
-    { I_LD, 0x8000, 2, { SYM_V, SYM_V }, { 0x0F00, 0x00F0 } },
-    { I_OR, 0x8001, 2, { SYM_V, SYM_V }, { 0x0F00, 0x00F0 } },
-    { I_AND, 0x8002, 2, { SYM_V, SYM_V }, { 0x0F00, 0x00F0 } },
-    { I_XOR, 0x8003, 2, { SYM_V, SYM_V }, { 0x0F00, 0x00F0 } },
-    { I_ADD, 0x8004, 2, { SYM_V, SYM_V }, { 0x0F00, 0x00F0 } },
-    { I_SUB, 0x8005, 2, { SYM_V, SYM_V }, { 0x0F00, 0x00F0 } },
-    { I_SHR,
+C8_InstructionFormat c8_formats[] = {
+    { C8_I_SCD, 0x00C0, 1, { C8_SYM_INT4 }, { 0x000F } },
+    { C8_I_CLS, 0x00E0, 0, { C8_SYM_NULL }, { 0 } },
+    { C8_I_RET, 0x00EE, 0, { C8_SYM_NULL }, { 0 } },
+    { C8_I_SCR, 0x00FB, 0, { C8_SYM_NULL }, { 0 } },
+    { C8_I_SCL, 0x00FC, 0, { C8_SYM_NULL }, { 0 } },
+    { C8_I_EXIT, 0x00FD, 0, { C8_SYM_NULL }, { 0 } },
+    { C8_I_LOW, 0x00FE, 0, { C8_SYM_NULL }, { 0 } },
+    { C8_I_HIGH, 0x00FF, 0, { C8_SYM_NULL }, { 0 } },
+    { C8_I_JP, 0x1000, 1, { C8_SYM_INT12 }, { 0x0FFF } },
+    { C8_I_CALL, 0x2000, 1, { C8_SYM_INT12 }, { 0x0FFF } },
+    { C8_I_SE, 0x3000, 2, { C8_SYM_V, C8_SYM_INT8 }, { 0x0F00, 0x00FF } },
+    { C8_I_SNE, 0x4000, 2, { C8_SYM_V, C8_SYM_INT8 }, { 0x0F00, 0x00FF } },
+    { C8_I_SE, 0x5000, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
+    { C8_I_LD, 0x6000, 2, { C8_SYM_V, C8_SYM_INT8 }, { 0x0F00, 0x00FF } },
+    { C8_I_ADD, 0x7000, 2, { C8_SYM_V, C8_SYM_INT8 }, { 0x0F00, 0x00FF } },
+    { C8_I_LD, 0x8000, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
+    { C8_I_OR, 0x8001, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
+    { C8_I_AND, 0x8002, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
+    { C8_I_XOR, 0x8003, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
+    { C8_I_ADD, 0x8004, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
+    { C8_I_SUB, 0x8005, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
+    { C8_I_SHR,
       0x8006,
       2,
-      { SYM_V, SYM_V },
+      { C8_SYM_V, C8_SYM_V },
       { 0x0F00, 0x00F0 } }, // must be before below variant for decoding
-    { I_SHR, 0x8006, 1, { SYM_V }, { 0x0F00 } },
-    { I_SUBN, 0x8007, 2, { SYM_V, SYM_V }, { 0x0F00, 0x00F0 } },
-    { I_SHL,
+    { C8_I_SHR, 0x8006, 1, { C8_SYM_V }, { 0x0F00 } },
+    { C8_I_SUBN, 0x8007, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
+    { C8_I_SHL,
       0x800E,
       2,
-      { SYM_V, SYM_V },
+      { C8_SYM_V, C8_SYM_V },
       { 0x0F00, 0x00F0 } }, // must be before below variant for decoding
-    { I_SHL, 0x800E, 1, { SYM_V }, { 0x0F00 } },
-    { I_SNE, 0x9000, 2, { SYM_V, SYM_V }, { 0x0F00, 0x00F0 } },
-    { I_LD, 0xA000, 2, { SYM_I, SYM_INT12 }, { 0x0000, 0x0FFF } },
-    { I_JP_V0, 0xB000, 1, { SYM_INT12 }, { 0x0FFF } }, // For decoding
-    { I_JP, 0xB000, 1, { SYM_V, SYM_INT12 }, { 0x0000, 0x0FFF } }, // For encoding
-    { I_RND, 0xC000, 2, { SYM_V, SYM_INT8 }, { 0x0F00, 0x00FF } },
-    { I_DRW, 0xD000, 3, { SYM_V, SYM_V, SYM_INT4 }, { 0x0F00, 0x00F0, 0x000F } },
-    { I_SKP, 0xE09E, 1, { SYM_V }, { 0x0F00 } },
-    { I_SKNP, 0xE0A1, 1, { SYM_V }, { 0x0F00 } },
-    { I_LD, 0xF007, 2, { SYM_V, SYM_DT }, { 0x0F00, 0x0000 } },
-    { I_LD, 0xF00A, 2, { SYM_V, SYM_K }, { 0x0F00, 0x0000 } },
-    { I_LD, 0xF015, 2, { SYM_DT, SYM_V }, { 0x0000, 0x0F00 } },
-    { I_LD, 0xF018, 2, { SYM_ST, SYM_V }, { 0x0000, 0x0F00 } },
-    { I_ADD, 0xF01E, 2, { SYM_I, SYM_V }, { 0x0000, 0x0F00 } },
-    { I_LD, 0xF029, 2, { SYM_F, SYM_V }, { 0x0000, 0x0F00 } },
-    { I_LD, 0xF030, 2, { SYM_HF, SYM_V }, { 0x0000, 0x0F00 } },
-    { I_LD, 0xF033, 2, { SYM_B, SYM_V }, { 0x0000, 0x0F00 } },
-    { I_LD, 0xF055, 2, { SYM_IP, SYM_V }, { 0x0000, 0x0F00 } },
-    { I_LD, 0xF065, 2, { SYM_V, SYM_IP }, { 0x0F00, 0x0000 } },
-    { I_LD, 0xF075, 2, { SYM_R, SYM_V }, { 0x0000, 0x0F00 } },
-    { I_LD, 0xF085, 2, { SYM_V, SYM_R }, { 0x0F00, 0x0000 } },
-    { I_NULL, 0, 0, { SYM_NULL }, { 0 } },
+    { C8_I_SHL, 0x800E, 1, { C8_SYM_V }, { 0x0F00 } },
+    { C8_I_SNE, 0x9000, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
+    { C8_I_LD, 0xA000, 2, { C8_SYM_I, C8_SYM_INT12 }, { 0x0000, 0x0FFF } },
+    { C8_I_JP_V0, 0xB000, 1, { C8_SYM_INT12 }, { 0x0FFF } }, // For decoding
+    { C8_I_JP, 0xB000, 1, { C8_SYM_V, C8_SYM_INT12 }, { 0x0000, 0x0FFF } }, // For encoding
+    { C8_I_RND, 0xC000, 2, { C8_SYM_V, C8_SYM_INT8 }, { 0x0F00, 0x00FF } },
+    { C8_I_DRW, 0xD000, 3, { C8_SYM_V, C8_SYM_V, C8_SYM_INT4 }, { 0x0F00, 0x00F0, 0x000F } },
+    { C8_I_SKP, 0xE09E, 1, { C8_SYM_V }, { 0x0F00 } },
+    { C8_I_SKNP, 0xE0A1, 1, { C8_SYM_V }, { 0x0F00 } },
+    { C8_I_LD, 0xF007, 2, { C8_SYM_V, C8_SYM_DT }, { 0x0F00, 0x0000 } },
+    { C8_I_LD, 0xF00A, 2, { C8_SYM_V, C8_SYM_K }, { 0x0F00, 0x0000 } },
+    { C8_I_LD, 0xF015, 2, { C8_SYM_DT, C8_SYM_V }, { 0x0000, 0x0F00 } },
+    { C8_I_LD, 0xF018, 2, { C8_SYM_ST, C8_SYM_V }, { 0x0000, 0x0F00 } },
+    { C8_I_ADD, 0xF01E, 2, { C8_SYM_I, C8_SYM_V }, { 0x0000, 0x0F00 } },
+    { C8_I_LD, 0xF029, 2, { C8_SYM_F, C8_SYM_V }, { 0x0000, 0x0F00 } },
+    { C8_I_LD, 0xF030, 2, { C8_SYM_HF, C8_SYM_V }, { 0x0000, 0x0F00 } },
+    { C8_I_LD, 0xF033, 2, { C8_SYM_B, C8_SYM_V }, { 0x0000, 0x0F00 } },
+    { C8_I_LD, 0xF055, 2, { C8_SYM_IP, C8_SYM_V }, { 0x0000, 0x0F00 } },
+    { C8_I_LD, 0xF065, 2, { C8_SYM_V, C8_SYM_IP }, { 0x0F00, 0x0000 } },
+    { C8_I_LD, 0xF075, 2, { C8_SYM_R, C8_SYM_V }, { 0x0000, 0x0F00 } },
+    { C8_I_LD, 0xF085, 2, { C8_SYM_V, C8_SYM_R }, { 0x0F00, 0x0000 } },
+    { C8_I_NULL, 0, 0, { C8_SYM_NULL }, { 0 } },
 };
 
-static int get_instruction_args(Instruction* ins, SymbolList* symbols, int idx);
-static int parse_instruction(Instruction*);
-static int reallocate_symbols(SymbolList* symbols);
-static int validate_instruction(Instruction*);
+static int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, int idx);
+static int parse_instruction(C8_Instruction*);
+static int reallocate_symbols(C8_SymbolList* symbols);
+static int validate_instruction(C8_Instruction*);
 
 /**
  * @brief Build an instruction from symbols beginning at idx
@@ -108,8 +109,8 @@ static int validate_instruction(Instruction*);
  * @param idx symbols index of start of instruction
  * @return instruction bytecode
  */
-int build_instruction(Instruction* ins, SymbolList* symbols, int idx) {
-    ins->cmd    = (InstructionIdentifier) symbols->s[idx].value;
+int c8_build_instruction(C8_Instruction* ins, C8_SymbolList* symbols, int idx) {
+    ins->cmd    = (C8_InstructionIdentifier) symbols->s[idx].value;
     ins->line   = symbols->s[idx].ln;
     ins->pcount = 0;
 
@@ -124,28 +125,28 @@ int build_instruction(Instruction* ins, SymbolList* symbols, int idx) {
  * @param s the string to check
  * @return 1 if true, 0 if false
  */
-int is_comment(const char* s) { return s[0] == ';'; }
+int c8_is_comment(const char* s) { return s[0] == ';'; }
 
 /**
  * @brief Check if given string is a DB identifier
  *
  * @return 1 if true, 0 if false
  */
-int is_db(const char* s) { return !strcmp(s, S_DB); }
+int c8_is_db(const char* s) { return !strcmp(s, C8_S_DB); }
 
 /**
  * @brief Check if given string is a DS identifier
  *
  * @return 1 if true, 0 if false
  */
-int is_ds(const char* s) { return !strcmp(s, S_DS); }
+int c8_is_ds(const char* s) { return !strcmp(s, C8_S_DS); }
 
 /**
  * @brief Check if given string is a DW identifier
  *
  * @return 1 if true, 0 if false
  */
-int is_dw(const char* s) { return !strcmp(s, S_DW); }
+int c8_is_dw(const char* s) { return !strcmp(s, C8_S_DW); }
 
 /**
  * @brief Check if the given string is an instruction
@@ -153,7 +154,7 @@ int is_dw(const char* s) { return !strcmp(s, S_DW); }
  * @param s the string to check
  * @return instruction enumerator if true, -1 if false
  */
-int is_instruction(const char* s) {
+int c8_is_instruction(const char* s) {
     for (int i = 0; c8_instructionStrings[i]; i++) {
         if (!strcmp(s, c8_instructionStrings[i])) {
             return i;
@@ -169,7 +170,7 @@ int is_instruction(const char* s) {
  * @param s the string to check
  * @return 1 if true, 0 if false
  */
-int is_label_definition(const char* s) {
+int c8_is_label_definition(const char* s) {
     int len = strlen(s);
     if (len < 2) {
         return 0;
@@ -193,7 +194,7 @@ int is_label_definition(const char* s) {
  * @param labels label list to check from
  * @return label index if true, -1 otherwise
  */
-int is_label(const char* s, const LabelList* labels) {
+int c8_is_label(const char* s, const C8_LabelList* labels) {
     if (strlen(s) == 0) {
         return -1;
     }
@@ -218,7 +219,7 @@ int is_label(const char* s, const LabelList* labels) {
  * @param s string to check
  * @return V register number if true, -1 otherwise
  */
-int is_register(const char* s) { return (*s == 'V' || *s == 'v') ? parse_int(s) : -1; }
+int c8_is_register(const char* s) { return (*s == 'V' || *s == 'v') ? c8_parse_int(s) : -1; }
 
 /**
  * @brief Check if given string is a reserved identifier
@@ -230,7 +231,7 @@ int is_register(const char* s) { return (*s == 'V' || *s == 'v') ? parse_int(s) 
  * @param s string to check
  * @return type of identifier if true, -1 otherwise
  */
-int is_reserved_identifier(const char* s) {
+int c8_is_reserved_identifier(const char* s) {
     for (int i = 1; c8_identifierStrings[i]; i++) {
         if (!strcmp(s, c8_identifierStrings[i])) {
             return i;
@@ -254,7 +255,7 @@ int is_reserved_identifier(const char* s) {
  *
  * @return first empty symbol in symbol table
  */
-Symbol* next_symbol(SymbolList* symbols) {
+C8_Symbol* c8_next_symbol(C8_SymbolList* symbols) {
     if (!symbols || !symbols->s) {
         return NULL;
     }
@@ -280,40 +281,40 @@ Symbol* next_symbol(SymbolList* symbols) {
  *
  * If a duplicate label definition is found, it throws a `DUPLICATE_LABEL_EXCEPTION`.
  *
- * If too many labels are defined, it throws a `TOO_MANY_LABELS_EXCEPTION`.
+ * If too many labels are defined, it throws a `TOO_MANY_LABELC8_SEXCEPTION`.
  *
  * @param labels label list to populate
  *
- * @return 1 if success, 0 if failure
+ * @return 1 if success, 0 or error code otherwise
  */
-int populate_labels(LabelList* labels) {
-    for (int i = 0; i < c8_line_count; i++) {
+int c8_populate_labels(C8_LabelList* labels) {
+    for (int i = 0; i < c8_lineCount; i++) {
         if (strlen(c8_lines[i]) == 0) {
             continue;
         }
 
-        c8_lines[i] = remove_comment(c8_lines[i]);
-        trim(c8_lines[i]);
-        if (strlen(remove_comment(c8_lines[i])) == 0) {
+        c8_lines[i] = c8_remove_comment(c8_lines[i]);
+        c8_trim(c8_lines[i]);
+        if (strlen(c8_remove_comment(c8_lines[i])) == 0) {
             continue;
         }
 
-        if (is_label_definition(c8_lines[i])) {
+        if (c8_is_label_definition(c8_lines[i])) {
             printf("GOT HERE\n");
             for (int j = 0; j < labels->len; j++) {
                 if (!strncmp(labels->l[j].identifier,
                              c8_lines[i],
                              strlen(labels->l[j].identifier))) {
-                    C8_EXCEPTION(DUPLICATE_LABEL_EXCEPTION,
+                    C8_EXCEPTION(C8_DUPLICATE_LABEL_EXCEPTION,
                                  "Duplicate label definition.\nLine %d: %s",
                                  i + 1,
-                                 c8_lines_unformatted[i + 1]);
-                    return DUPLICATE_LABEL_EXCEPTION;
+                                 c8_linesUnformatted[i + 1]);
+                    return C8_DUPLICATE_LABEL_EXCEPTION;
                 }
             }
 
             snprintf(labels->l[labels->len].identifier,
-                     LABEL_IDENTIFIER_SIZE - 1,
+                     C8_LABEL_IDENTIFIER_SIZE - 1,
                      "%s",
                      c8_lines[i]);
 
@@ -324,11 +325,11 @@ int populate_labels(LabelList* labels) {
             labels->len++;
         }
         if (labels->len == labels->ceil) {
-            C8_EXCEPTION(TOO_MANY_LABELS_EXCEPTION,
+            C8_EXCEPTION(C8_TOO_MANY_LABELS_EXCEPTION,
                          "Too many labels defined in source code.\nLine %d: %s",
                          i + 1,
                          c8_lines[i]);
-            return TOO_MANY_LABELS_EXCEPTION;
+            return C8_TOO_MANY_LABELS_EXCEPTION;
         }
     }
 
@@ -353,15 +354,12 @@ int populate_labels(LabelList* labels) {
  * This function will return 1 if all labels were resolved successfully,
  * or 0 if there was a failure (e.g., if the label list is not fully populated).
  *
- * This function will throw a NULL_ARGUMENT_EXCEPTION if either
- * `symbols` or `labels` is NULL.
- *
  * @param symbols list of symbols
  * @param labels list of labels
  *
  * @return 1 if success, 0 if failure
  */
-int resolve_labels(SymbolList* symbols, LabelList* labels) {
+int c8_resolve_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
     int byte     = C8_PROG_START;
     int labelIdx = 0;
     for (int i = 0; i < symbols->len; i++) {
@@ -370,14 +368,14 @@ int resolve_labels(SymbolList* symbols, LabelList* labels) {
         }
 
         switch (symbols->s[i].type) {
-        case SYM_LABEL_DEFINITION:
+        case C8_SYM_LABEL_DEFINITION:
             labels->l[labelIdx++].byte = byte;
             break;
-        case SYM_DB:
+        case C8_SYM_DB:
             byte++;
             break;
-        case SYM_INSTRUCTION:
-        case SYM_DW:
+        case C8_SYM_INSTRUCTION:
+        case C8_SYM_DW:
             byte += 2;
         default:
             break;
@@ -390,7 +388,7 @@ int resolve_labels(SymbolList* symbols, LabelList* labels) {
 /**
  * @brief Substitute label symbols with their corresponding int value
  *
- * This function replaces all symbols of type `SYM_LABEL` in the symbol list
+ * This function replaces all symbols of type `C8_SYM_LABEL` in the symbol list
  * with their corresponding byte value from the label list. It checks if the
  * label exists and throws an `INVALID_SYMBOL_EXCEPTION` if it does not.
  *
@@ -400,17 +398,17 @@ int resolve_labels(SymbolList* symbols, LabelList* labels) {
  * @param symbols symbols to search
  * @param labels labels to search
  */
-int substitute_labels(SymbolList* symbols, LabelList* labels) {
+int c8_substitute_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
     for (int i = 0; i < symbols->len; i++) {
-        if (symbols->s[i].type == SYM_LABEL) {
+        if (symbols->s[i].type == C8_SYM_LABEL) {
             if (symbols->s[i].value >= labels->len) {
-                C8_EXCEPTION(INVALID_SYMBOL_EXCEPTION,
+                C8_EXCEPTION(C8_INVALID_SYMBOL_EXCEPTION,
                              "Label does not exist.\nLine %d: %s",
                              symbols->s[i].ln,
-                             c8_lines_unformatted[symbols->s[i].ln]);
-                return INVALID_SYMBOL_EXCEPTION;
+                             c8_linesUnformatted[symbols->s[i].ln]);
+                return C8_INVALID_SYMBOL_EXCEPTION;
             }
-            symbols->s[i].type  = SYM_INT12;
+            symbols->s[i].type  = C8_SYM_INT12;
             symbols->s[i].value = labels->l[symbols->s[i].value].byte;
         }
     }
@@ -434,38 +432,38 @@ int substitute_labels(SymbolList* symbols, LabelList* labels) {
  *
  * @return 1 if success, exception code otherwise.
  */
-static int get_instruction_args(Instruction* ins, SymbolList* symbols, int idx) {
+static int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, int idx) {
     int j   = 0;
     int max = 0;
     for (int i = idx; i < symbols->len; i++) {
         switch (symbols->s[i].type) {
-        case SYM_V:
-        case SYM_INT12:
+        case C8_SYM_V:
+        case C8_SYM_INT12:
             max = 0xFFF;
             // fall through
-        case SYM_INT8:
+        case C8_SYM_INT8:
             max = max == 0 ? 0xFF : max;
             // fall through
-        case SYM_INT4:
+        case C8_SYM_INT4:
             max = max == 0 ? 0xF : max;
             if (symbols->s[i].value > max) {
-                C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION,
+                C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION,
                              "Line %d: Integer argument too big: %d",
                              symbols->s[i].ln,
                              symbols->s[i].value);
-                return INVALID_INSTRUCTION_EXCEPTION;
+                return C8_INVALID_INSTRUCTION_EXCEPTION;
             }
             ins->p[j] = symbols->s[i].value;
             // fall through
-        case SYM_B:
-        case SYM_DT:
-        case SYM_F:
-        case SYM_I:
-        case SYM_IP:
-        case SYM_K:
-        case SYM_ST:
-        case SYM_HF:
-        case SYM_R:
+        case C8_SYM_B:
+        case C8_SYM_DT:
+        case C8_SYM_F:
+        case C8_SYM_I:
+        case C8_SYM_IP:
+        case C8_SYM_K:
+        case C8_SYM_ST:
+        case C8_SYM_HF:
+        case C8_SYM_R:
             ins->ptype[j] = symbols->s[i].type;
             ins->pcount++;
             break;
@@ -491,11 +489,11 @@ static int get_instruction_args(Instruction* ins, SymbolList* symbols, int idx) 
  *
  * @return bytecode of instruction ins
  */
-static int parse_instruction(Instruction* ins) {
+static int parse_instruction(C8_Instruction* ins) {
     uint16_t result = ins->format->base;
     for (int j = 0; j < ins->pcount; j++) {
         if (ins->format->pmask[j]) {
-            result |= ins->p[j] << shift(ins->format->pmask[j]);
+            result |= ins->p[j] << c8_shift(ins->format->pmask[j]);
         }
     }
     return result;
@@ -512,24 +510,24 @@ static int parse_instruction(Instruction* ins) {
  *
  * @return 1 if success, 0 if failure
  */
-static int validate_instruction(Instruction* ins) {
+static int validate_instruction(C8_Instruction* ins) {
     int match;
-    for (int i = 0; formats[i].cmd != I_NULL; i++) {
-        InstructionFormat* f = &formats[i];
+    for (int i = 0; c8_formats[i].cmd != C8_I_NULL; i++) {
+        C8_InstructionFormat* f = &c8_formats[i];
         if (ins->pcount == f->pcount && ins->cmd == f->cmd) {
             match = 1;
             for (int j = 0; j < ins->pcount; j++) {
                 switch (ins->ptype[j]) {
-                case SYM_INT:
-                case SYM_INT4:
-                case SYM_INT8:
-                case SYM_INT12:
-                    if (f->ptype[j] == SYM_INT12 && ins->p[j] < 0x1000) {
-                        ins->ptype[j] = SYM_INT12;
-                    } else if (f->ptype[j] == SYM_INT8 && ins->p[j] < 0x100) {
-                        ins->ptype[j] = SYM_INT8;
-                    } else if (f->ptype[j] == SYM_INT4 && ins->p[j] < 0x10) {
-                        ins->ptype[j] = SYM_INT4;
+                case C8_SYM_INT:
+                case C8_SYM_INT4:
+                case C8_SYM_INT8:
+                case C8_SYM_INT12:
+                    if (f->ptype[j] == C8_SYM_INT12 && ins->p[j] < 0x1000) {
+                        ins->ptype[j] = C8_SYM_INT12;
+                    } else if (f->ptype[j] == C8_SYM_INT8 && ins->p[j] < 0x100) {
+                        ins->ptype[j] = C8_SYM_INT8;
+                    } else if (f->ptype[j] == C8_SYM_INT4 && ins->p[j] < 0x10) {
+                        ins->ptype[j] = C8_SYM_INT4;
                     }
                 default:
                     break;
@@ -548,11 +546,11 @@ static int validate_instruction(Instruction* ins) {
         }
     }
 
-    C8_EXCEPTION(INVALID_INSTRUCTION_EXCEPTION,
+    C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION,
                  "Line %d: %s",
                  ins->line,
-                 c8_lines_unformatted[ins->line - 1]);
-    return INVALID_INSTRUCTION_EXCEPTION;
+                 c8_linesUnformatted[ins->line - 1]);
+    return C8_INVALID_INSTRUCTION_EXCEPTION;
 }
 
 /**
@@ -563,17 +561,15 @@ static int validate_instruction(Instruction* ins) {
  * the existing symbols to the new memory location. This is necessary when
  * the symbol list is full and more symbols need to be added.
  *
- * If symbols is `NULL`, it will return an `NULL_ARGUMENT_EXCEPTION`.
- *
  * @param symbols symbol list
  *
  * @return 1 if success, exception code otherwise.
  */
-static int reallocate_symbols(SymbolList* symbols) {
-    int     newCeiling = symbols->ceil + SYMBOL_CEILING;
-    Symbol* oldsym     = symbols->s;
-    symbols->s         = (Symbol*) malloc(sizeof(Symbol) * newCeiling);
-    memcpy(symbols->s, oldsym, symbols->ceil * sizeof(Symbol));
+static int reallocate_symbols(C8_SymbolList* symbols) {
+    int        newCeiling = symbols->ceil + C8_SYMBOL_CEILING;
+    C8_Symbol* oldsym     = symbols->s;
+    symbols->s            = (C8_Symbol*) malloc(sizeof(C8_Symbol) * newCeiling);
+    memcpy(symbols->s, oldsym, symbols->ceil * sizeof(C8_Symbol));
     symbols->ceil = newCeiling;
     free(oldsym);
 
@@ -593,7 +589,7 @@ static int reallocate_symbols(SymbolList* symbols) {
  *
  * @return number of bits to shift
  */
-int shift(uint16_t fmt) {
+int c8_shift(uint16_t fmt) {
     static const int table[6][2] = {
         { 0xF000, 12 }, // a
         { 0x000F, 0 }, // b

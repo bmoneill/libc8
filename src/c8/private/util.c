@@ -19,7 +19,7 @@
  *
  * @return -1 if failed, otherwise 0-15
  */
-int hex_to_int(char c) {
+int c8_hex_to_int(char c) {
     if (c >= '0' && c <= '9') {
         return c - '0';
     }
@@ -42,7 +42,7 @@ int hex_to_int(char c) {
  *
  * @return -1 if failed, otherwise whatever the value is
  */
-int parse_int(const char* s) {
+int c8_parse_int(const char* s) {
     int len = strlen(s);
     if (len == 0) {
         return -1;
@@ -77,7 +77,7 @@ int parse_int(const char* s) {
  * @param s string to trim
  * @return pointer to first non-whitespace character after `s`.
  */
-char* trim(char* s) {
+char* c8_trim(char* s) {
     if (s == NULL) {
         return NULL;
     }

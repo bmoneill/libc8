@@ -19,86 +19,86 @@ void setUp(void) {
 
 void tearDown(void) {}
 
-void test_hex_to_int_WhereStringIsLowercase(void) {
+void test_c8_hex_to_int_WhereStringIsLowercase(void) {
     int  n = (rand() % 6) + 10;
     char c = (n + 0x61) - 10;
-    TEST_ASSERT_EQUAL_INT(n, hex_to_int(c));
+    TEST_ASSERT_EQUAL_INT(n, c8_hex_to_int(c));
 }
 
-void test_hex_to_int_WhereStringIsUppercase(void) {
+void test_c8_hex_to_int_WhereStringIsUppercase(void) {
     int  n = (rand() % 6) + 10;
     char c = (n + 0x41) - 10;
-    TEST_ASSERT_EQUAL_INT(n, hex_to_int(c));
+    TEST_ASSERT_EQUAL_INT(n, c8_hex_to_int(c));
 }
 
-void test_hex_to_int_WhereStringIsDecimal(void) {
+void test_c8_hex_to_int_WhereStringIsDecimal(void) {
     int  n = rand() % 10;
     char c = n + 0x30;
-    TEST_ASSERT_EQUAL_INT(n, hex_to_int(c));
+    TEST_ASSERT_EQUAL_INT(n, c8_hex_to_int(c));
 }
 
-void test_parse_int_WhereStringIsDecimal(void) {
+void test_c8_parse_int_WhereStringIsDecimal(void) {
     int n = rand();
     sprintf(buf, "%d", n);
-    TEST_ASSERT_EQUAL_INT(n, parse_int(buf));
+    TEST_ASSERT_EQUAL_INT(n, c8_parse_int(buf));
 }
 
-void test_parse_int_WhereStringIsHexWithDollarPrefix(void) {
+void test_c8_parse_int_WhereStringIsHexWithDollarPrefix(void) {
     int n = rand();
     sprintf(buf, "$%x", n);
-    TEST_ASSERT_EQUAL_INT(n, parse_int(buf));
+    TEST_ASSERT_EQUAL_INT(n, c8_parse_int(buf));
 }
 
-void test_parse_int_WhereStringIsHexWithXPrefix(void) {
+void test_c8_parse_int_WhereStringIsHexWithXPrefix(void) {
     int n = rand();
     sprintf(buf, "x%x", n);
-    TEST_ASSERT_EQUAL_INT(n, parse_int(buf));
+    TEST_ASSERT_EQUAL_INT(n, c8_parse_int(buf));
 }
 
-void test_parse_int_WhereStringIsHexWithVPrefix(void) {
+void test_c8_parse_int_WhereStringIsHexWithVPrefix(void) {
     int n = rand();
     sprintf(buf, "V%x", n);
-    TEST_ASSERT_EQUAL_INT(n, parse_int(buf));
+    TEST_ASSERT_EQUAL_INT(n, c8_parse_int(buf));
 }
 
-void test_parse_int_WhereStringIsEmpty(void) { TEST_ASSERT_EQUAL_INT(-1, parse_int(buf)); }
+void test_c8_parse_int_WhereStringIsEmpty(void) { TEST_ASSERT_EQUAL_INT(-1, c8_parse_int(buf)); }
 
-void test_parse_int_WhereIntIsZero(void) {
+void test_c8_parse_int_WhereIntIsZero(void) {
     int n = 0;
     sprintf(buf, "%d", n);
-    TEST_ASSERT_EQUAL_INT(n, parse_int(buf));
+    TEST_ASSERT_EQUAL_INT(n, c8_parse_int(buf));
 }
 
-void test_parse_int_WhereStringDoesNotContainInt(void) {
+void test_c8_parse_int_WhereStringDoesNotContainInt(void) {
     sprintf(buf, "A string without an integer");
-    TEST_ASSERT_EQUAL_INT(-1, parse_int(buf));
+    TEST_ASSERT_EQUAL_INT(-1, c8_parse_int(buf));
 }
 
-void test_trim_WhereStringIsOnlyWhitespace(void) {
+void test_c8_trim_WhereStringIsOnlyWhitespace(void) {
     sprintf(buf, "      \t\t");
-    TEST_ASSERT_EQUAL_INT(0, strlen(trim(buf)));
+    TEST_ASSERT_EQUAL_INT(0, strlen(c8_trim(buf)));
 }
 
-void test_trim_WhereStringHasLeadingWhitespace(void) {
+void test_c8_trim_WhereStringHasLeadingWhitespace(void) {
     const char* content = "Hello there";
     sprintf(buf, "        \t\t  %s", content);
-    TEST_ASSERT_EQUAL_STRING(content, trim(buf));
+    TEST_ASSERT_EQUAL_STRING(content, c8_trim(buf));
 }
 
-void test_trim_WhereStringHasTrailingWhitespace(void) {
+void test_c8_trim_WhereStringHasTrailingWhitespace(void) {
     const char* content = "Hello there";
     sprintf(buf, "%s        \t\t\t", content);
-    TEST_ASSERT_EQUAL_STRING(content, trim(buf));
+    TEST_ASSERT_EQUAL_STRING(content, c8_trim(buf));
 }
 
-void test_trim_leading_WhereStringHasLeadingAndTrailingWhitespace(void) {
+void test_c8_trim_leading_WhereStringHasLeadingAndTrailingWhitespace(void) {
     const char* content = "Hello there";
     sprintf(buf, "         \t\t       %s   \t\t\t", content);
-    TEST_ASSERT_EQUAL_STRING(content, trim(buf));
+    TEST_ASSERT_EQUAL_STRING(content, c8_trim(buf));
 }
 
-void test_trim_WhereStringHasNoWhitespace(void) {
+void test_c8_trim_WhereStringHasNoWhitespace(void) {
     const char* content = "Hello there";
     sprintf(buf, "%s", content);
-    TEST_ASSERT_EQUAL_STRING(content, trim(buf));
+    TEST_ASSERT_EQUAL_STRING(content, c8_trim(buf));
 }

@@ -53,7 +53,7 @@ const char* c8_fontNames[2][5] = {
  *
  * From Octo (https://github.com/JohnEarnest/Octo).
  */
-const uint8_t smallFonts[5][80]
+const uint8_t c8_smallFonts[5][80]
     = { {
             /* SMALLFONT_OCTO */
             0xF0, 0x90, 0x90, 0x90, 0xF0, // 0
@@ -115,7 +115,7 @@ const uint8_t smallFonts[5][80]
  *
  * From Octo (https://github.com/JohnEarnest/Octo).
  */
-const uint8_t bigFonts[3][160]
+const uint8_t c8_bigFonts[3][160]
     = { {
             /* BIGFONT_OCTO */
             0xFF, 0xFF, 0xC3, 0xC3, 0xC3, 0xC3, 0xC3, 0xC3, 0xFF, 0xFF, // 0
@@ -176,12 +176,12 @@ const uint8_t bigFonts[3][160]
 void c8_set_fonts(C8* c8, int small, int big) {
     if (small > -1 && small < 5) {
         c8->fonts[0] = small;
-        memcpy(&c8->mem[C8_FONT_START], smallFonts[small], 80);
+        memcpy(&c8->mem[C8_FONT_START], c8_smallFonts[small], 80);
     }
 
     if (big > -1 && big < 3) {
         c8->fonts[1] = big;
-        memcpy(&c8->mem[C8_HIGH_FONT_START], bigFonts[big], 160);
+        memcpy(&c8->mem[C8_HIGH_FONT_START], c8_bigFonts[big], 160);
     }
 }
 
@@ -267,6 +267,6 @@ int c8_set_big_font(C8* c8, const char* s) {
  *
  * @param c8 `C8` to get fonts from
  */
-void print_fonts(C8* c8) {
+void c8_print_fonts(C8* c8) {
     printf("SFONT: %s\tBFONT: %s\n", c8_fontNames[0][c8->fonts[0]], c8_fontNames[1][c8->fonts[1]]);
 }

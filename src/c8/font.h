@@ -14,7 +14,7 @@
 
 extern const char* c8_fontNames[2][5];
 
-void               print_fonts(C8*);
+void               c8_print_fonts(C8*);
 void               c8_set_fonts(C8*, int, int);
 int                c8_set_fonts_s(C8*, char*);
 int                c8_set_small_font(C8*, const char*);

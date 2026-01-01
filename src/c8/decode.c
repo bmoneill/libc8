@@ -98,57 +98,57 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
         snprintf(result, RESULT_SIZE, "SCD 0x%01X", b);
         return result;
     }
-    for (int i = 0; formats[i].cmd != I_NULL; i++) {
-        if ((C8_A(formats[i].base) & a) == C8_A(in)) {
+    for (int i = 0; c8_formats[i].cmd != C8_I_NULL; i++) {
+        if ((C8_A(c8_formats[i].base) & a) == C8_A(in)) {
             int match = 1;
             if (a == 0x0 || a == 0xE || a == 0xF) {
                 // 0x0, 0xE, and 0xF instructions have kk as a mask, so we need to check
-                match = kk == C8_KK(formats[i].base);
+                match = kk == C8_KK(c8_formats[i].base);
             } else if (a == 0x8) {
                 // 0x8 instructions have b as a mask, so we need to check
-                match = b == C8_B(formats[i].base);
+                match = b == C8_B(c8_formats[i].base);
             }
 
             if (match) {
-                snprintf(result, RESULT_SIZE, "%s", c8_instructionStrings[formats[i].cmd]);
+                snprintf(result, RESULT_SIZE, "%s", c8_instructionStrings[c8_formats[i].cmd]);
 
                 int idx = strlen(result);
-                for (int j = 0; j < formats[i].pcount; j++) {
+                for (int j = 0; j < c8_formats[i].pcount; j++) {
                     if (j > 0) {
                         snprintf(result + idx, RESULT_SIZE - idx, ",");
                         idx++;
                     }
-                    switch (formats[i].ptype[j]) {
-                    case SYM_INT12:
+                    switch (c8_formats[i].ptype[j]) {
+                    case C8_SYM_INT12:
                         if (label_map[nnn]) {
                             snprintf(result + idx, RESULT_SIZE - idx, " label%d", label_map[nnn]);
                         } else {
                             snprintf(result + idx, RESULT_SIZE - idx, " $%03X", nnn);
                         }
                         break;
-                    case SYM_INT8:
+                    case C8_SYM_INT8:
                         snprintf(result + idx,
                                  RESULT_SIZE - idx,
                                  " 0x%02X",
-                                 (in & formats[i].pmask[j]) >> shift(formats[i].pmask[j]));
+                                 (in & c8_formats[i].pmask[j]) >> c8_shift(c8_formats[i].pmask[j]));
                         break;
-                    case SYM_INT4:
+                    case C8_SYM_INT4:
                         snprintf(result + idx,
                                  RESULT_SIZE - idx,
                                  " 0x%01X",
-                                 (in & formats[i].pmask[j]) >> shift(formats[i].pmask[j]));
+                                 (in & c8_formats[i].pmask[j]) >> c8_shift(c8_formats[i].pmask[j]));
                         break;
-                    case SYM_V:
+                    case C8_SYM_V:
                         snprintf(result + idx,
                                  RESULT_SIZE - idx,
                                  " V%01X",
-                                 (in & formats[i].pmask[j]) >> shift(formats[i].pmask[j]));
+                                 (in & c8_formats[i].pmask[j]) >> c8_shift(c8_formats[i].pmask[j]));
                         break;
                     default:
                         snprintf(result + idx,
                                  RESULT_SIZE - idx,
                                  " %s",
-                                 c8_identifierStrings[formats[i].ptype[j]]);
+                                 c8_identifierStrings[c8_formats[i].ptype[j]]);
                         break;
                     }
                     idx = strlen(result);

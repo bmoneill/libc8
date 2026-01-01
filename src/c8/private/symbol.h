@@ -10,55 +10,55 @@
 
 #include <stdint.h>
 
-#define INSTRUCTION_COUNT     64
-#define LABEL_CEILING         64
-#define LABEL_IDENTIFIER_SIZE 20
-#define SYMBOL_CEILING        64
+#define C8_INSTRUCTION_COUNT     64
+#define C8_LABEL_CEILING         64
+#define C8_LABEL_IDENTIFIER_SIZE 20
+#define C8_SYMBOL_CEILING        64
 
 /* Instruction strings */
-#define S_CLS   "CLS"
-#define S_RET   "RET"
-#define S_JP    "JP"
-#define S_CALL  "CALL"
-#define S_SE    "SE"
-#define S_SNE   "SNE"
-#define S_LD    "LD"
-#define S_ADD   "ADD"
-#define S_OR    "OR"
-#define S_AND   "AND"
-#define S_SUB   "SUB"
-#define S_SHR   "SHR"
-#define S_SUBN  "SUBN"
-#define S_SHL   "SHL"
-#define S_RND   "RND"
-#define S_DRW   "DRW"
-#define S_SKP   "SKP"
-#define S_SKNP  "SKNP"
-#define S_XOR   "XOR"
-#define S_SCD   "SCD"
-#define S_SCR   "SCR"
-#define S_SCL   "SCL"
-#define S_EXIT  "EXIT"
-#define S_LOW   "LOW"
-#define S_HIGH  "HIGH"
-#define S_JP_V0 "JP V0,"
+#define C8_S_CLS   "CLS"
+#define C8_S_RET   "RET"
+#define C8_S_JP    "JP"
+#define C8_S_CALL  "CALL"
+#define C8_S_SE    "SE"
+#define C8_S_SNE   "SNE"
+#define C8_S_LD    "LD"
+#define C8_S_ADD   "ADD"
+#define C8_S_OR    "OR"
+#define C8_S_AND   "AND"
+#define C8_S_SUB   "SUB"
+#define C8_S_SHR   "SHR"
+#define C8_S_SUBN  "SUBN"
+#define C8_S_SHL   "SHL"
+#define C8_S_RND   "RND"
+#define C8_S_DRW   "DRW"
+#define C8_S_SKP   "SKP"
+#define C8_S_SKNP  "SKNP"
+#define C8_S_XOR   "XOR"
+#define C8_S_SCD   "SCD"
+#define C8_S_SCR   "SCR"
+#define C8_S_SCL   "SCL"
+#define C8_S_EXIT  "EXIT"
+#define C8_S_LOW   "LOW"
+#define C8_S_HIGH  "HIGH"
+#define C8_S_JP_V0 "JP V0,"
 
 /* Reserved identifier strings */
-#define S_K  "K"
-#define S_F  "F"
-#define S_B  "B"
-#define S_DT "DT"
-#define S_ST "ST"
-#define S_I  "I"
-#define S_IP "[I]"
-#define S_DB ".DB"
-#define S_DW ".DW"
-#define S_DS ".DS"
-#define S_HF "HF"
-#define S_R  "R"
+#define C8_S_K  "K"
+#define C8_S_F  "F"
+#define C8_S_B  "B"
+#define C8_S_DT "DT"
+#define C8_S_ST "ST"
+#define C8_S_I  "I"
+#define C8_S_IP "[I]"
+#define C8_S_DB ".DB"
+#define C8_S_DW ".DW"
+#define C8_S_DS ".DS"
+#define C8_S_HF "HF"
+#define C8_S_R  "R"
 
 /**
- * @enum InstructionIdentifier
+ * @enum C8_InstructionIdentifier
  * @brief Represents instruction types
  *
  * This enumeration defines all possible CHIP-8 instructions.
@@ -66,37 +66,37 @@
  * NOTE: values to be kept in same order as `instructionStrings`
  */
 typedef enum {
-    I_NULL = -1,
-    I_CLS,
-    I_RET,
-    I_JP,
-    I_CALL,
-    I_SE,
-    I_SNE,
-    I_LD,
-    I_ADD,
-    I_OR,
-    I_AND,
-    I_SUB,
-    I_SHR,
-    I_SUBN,
-    I_SHL,
-    I_RND,
-    I_DRW,
-    I_SKP,
-    I_SKNP,
-    I_XOR,
-    I_SCD,
-    I_SCR,
-    I_SCL,
-    I_EXIT,
-    I_LOW,
-    I_HIGH,
-    I_JP_V0,
-} InstructionIdentifier;
+    C8_I_NULL = -1,
+    C8_I_CLS,
+    C8_I_RET,
+    C8_I_JP,
+    C8_I_CALL,
+    C8_I_SE,
+    C8_I_SNE,
+    C8_I_LD,
+    C8_I_ADD,
+    C8_I_OR,
+    C8_I_AND,
+    C8_I_SUB,
+    C8_I_SHR,
+    C8_I_SUBN,
+    C8_I_SHL,
+    C8_I_RND,
+    C8_I_DRW,
+    C8_I_SKP,
+    C8_I_SKNP,
+    C8_I_XOR,
+    C8_I_SCD,
+    C8_I_SCR,
+    C8_I_SCL,
+    C8_I_EXIT,
+    C8_I_LOW,
+    C8_I_HIGH,
+    C8_I_JP_V0,
+} C8_InstructionIdentifier;
 
 /**
- * @enum SymbolIdentifier
+ * @enum C8_SymbolIdentifier
  * @brief Represents symbol types
  *
  * This enumeration defines all symbol types found during the first assembler
@@ -105,29 +105,29 @@ typedef enum {
  * NOTE: values before label need to be kept in same order as `identifierStrings`
  */
 typedef enum {
-    SYM_NULL,
-    SYM_DT,
-    SYM_ST,
-    SYM_I,
-    SYM_IP,
-    SYM_K,
-    SYM_F,
-    SYM_B,
-    SYM_DB,
-    SYM_DW,
-    SYM_DS,
-    SYM_HF,
-    SYM_R,
-    SYM_LABEL,
-    SYM_INT,
-    SYM_INT4,
-    SYM_INT8,
-    SYM_INT12,
-    SYM_STRING,
-    SYM_V,
-    SYM_INSTRUCTION,
-    SYM_LABEL_DEFINITION,
-} SymbolIdentifier;
+    C8_SYM_NULL,
+    C8_SYM_DT,
+    C8_SYM_ST,
+    C8_SYM_I,
+    C8_SYM_IP,
+    C8_SYM_K,
+    C8_SYM_F,
+    C8_SYM_B,
+    C8_SYM_DB,
+    C8_SYM_DW,
+    C8_SYM_DS,
+    C8_SYM_HF,
+    C8_SYM_R,
+    C8_SYM_LABEL,
+    C8_SYM_INT,
+    C8_SYM_INT4,
+    C8_SYM_INT8,
+    C8_SYM_INT12,
+    C8_SYM_STRING,
+    C8_SYM_V,
+    C8_SYM_INSTRUCTION,
+    C8_SYM_LABEL_DEFINITION,
+} C8_SymbolIdentifier;
 
 /**
  * @struct InstructionFormat
@@ -143,15 +143,15 @@ typedef enum {
  * @param pmask parameter masks (where to OR parameters to)
  */
 typedef struct {
-    InstructionIdentifier cmd;
-    uint16_t              base;
-    int                   pcount;
-    SymbolIdentifier      ptype[3];
-    uint16_t              pmask[3];
-} InstructionFormat;
+    C8_InstructionIdentifier cmd;
+    uint16_t                 base;
+    int                      pcount;
+    C8_SymbolIdentifier      ptype[3];
+    uint16_t                 pmask[3];
+} C8_InstructionFormat;
 
 /**
- * @struct Instruction
+ * @struct C8_Instruction
  * @brief Represents an instruction
  *
  * During the second pass, this structure is used to verify the instruction's
@@ -162,19 +162,19 @@ typedef struct {
  * @param pcount parameter count
  * @param ptype parameter types
  * @param p parameter values
- * @param format corresponding `instruction_format_t` (if valid)
+ * @param format corresponding `C8_InstructionFormat` (if valid)
  */
 typedef struct {
-    int                   line;
-    InstructionIdentifier cmd;
-    int                   pcount;
-    SymbolIdentifier      ptype[3];
-    int                   p[3];
-    InstructionFormat*    format;
-} Instruction;
+    int                      line;
+    C8_InstructionIdentifier cmd;
+    int                      pcount;
+    C8_SymbolIdentifier      ptype[3];
+    int                      p[3];
+    C8_InstructionFormat*    format;
+} C8_Instruction;
 
 /**
- * @struct Label
+ * @struct C8_Label
  * @brief Represents a label
  *
  * Represents a label with an identifier and byte value
@@ -183,12 +183,12 @@ typedef struct {
  * @param byte location of the label
  */
 typedef struct {
-    char identifier[LABEL_IDENTIFIER_SIZE];
+    char identifier[C8_LABEL_IDENTIFIER_SIZE];
     int  byte;
-} Label;
+} C8_Label;
 
 /**
- * @struct LabelList
+ * @struct C8_LabelList
  * @brief Represents a list of labels
  *
  * @param l pointer to first label
@@ -196,13 +196,13 @@ typedef struct {
  * @param ceil maximum length of the list
  */
 typedef struct {
-    Label* l;
-    int    len;
-    int    ceil;
-} LabelList;
+    C8_Label* l;
+    int       len;
+    int       ceil;
+} C8_LabelList;
 
 /**
- * @struct Symbol
+ * @struct C8_Symbol
  * @brief Represents a symbol with a type, value, and line number
  *
  * @param type symbol type
@@ -210,13 +210,13 @@ typedef struct {
  * @param ln line number
  */
 typedef struct {
-    SymbolIdentifier type;
-    uint16_t         value;
-    int              ln;
-} Symbol;
+    C8_SymbolIdentifier type;
+    uint16_t            value;
+    int                 ln;
+} C8_Symbol;
 
 /**
- * @struct SymbolList
+ * @struct C8_SymbolList
  * @brief Represents a symbol with a type, value, and line number
  *
  * @param s pointer to first symbol
@@ -224,29 +224,29 @@ typedef struct {
  * @param ceil amount of symbols that can fit in allocated memory
  */
 typedef struct {
-    Symbol* s;
-    int     len;
-    int     ceil;
-} SymbolList;
+    C8_Symbol* s;
+    int        len;
+    int        ceil;
+} C8_SymbolList;
 
-int                      build_instruction(Instruction*, SymbolList*, int);
-int                      is_comment(const char*);
-int                      is_db(const char*);
-int                      is_ds(const char*);
-int                      is_dw(const char*);
-int                      is_instruction(const char*);
-int                      is_label_definition(const char*);
-int                      is_label(const char*, const LabelList*);
-int                      is_register(const char*);
-int                      is_reserved_identifier(const char*);
-Symbol*                  next_symbol(SymbolList*);
-int                      populate_labels(LabelList*);
-int                      resolve_labels(SymbolList*, LabelList*);
-int                      shift(uint16_t);
-int                      substitute_labels(SymbolList*, LabelList*);
+int                         c8_build_instruction(C8_Instruction*, C8_SymbolList*, int);
+int                         c8_is_comment(const char*);
+int                         c8_is_db(const char*);
+int                         c8_is_ds(const char*);
+int                         c8_is_dw(const char*);
+int                         c8_is_instruction(const char*);
+int                         c8_is_label_definition(const char*);
+int                         c8_is_label(const char*, const C8_LabelList*);
+int                         c8_is_register(const char*);
+int                         c8_is_reserved_identifier(const char*);
+C8_Symbol*                  c8_next_symbol(C8_SymbolList*);
+int                         c8_populate_labels(C8_LabelList*);
+int                         c8_resolve_labels(C8_SymbolList*, C8_LabelList*);
+int                         c8_shift(uint16_t);
+int                         c8_substitute_labels(C8_SymbolList*, C8_LabelList*);
 
-extern const char*       c8_instructionStrings[];
-extern const char*       c8_identifierStrings[];
-extern InstructionFormat formats[];
+extern const char*          c8_instructionStrings[];
+extern const char*          c8_identifierStrings[];
+extern C8_InstructionFormat c8_formats[];
 
 #endif
