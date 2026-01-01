@@ -1,0 +1,27 @@
+.TH CHIP8DIS 1 "January 2026" "libc8" "User Commands"
+.SH SYNOPSIS
+.B c8dis
+[-alV] [-o outputfile] rom
+.SH DESCRIPTION
+This is a disassembler for the CHIP-8 and SCHIP, utilizing libc8\. An input
+file must be specified. By default, \fBc8dis\fP will write to \fBstdout\fP\.
+.SH Usage
+.B -a
+Toggle printing of addresses\.
+.TP
+.B -l
+Toggle printing of auto-generated labels\.
+.TP
+.B -o
+Write the output to \fBoutputfile\fP\.
+.TP
+\fB-V\fP prints the version number\.
+.SH AUTHOR
+Written by Ben O'Neill <ben@oneill.sh>.
+.SH BUGS
+If any bugs are found, email the author.
+.SH COPYRIGHT
+Copyright \(co 2019-2026 Ben O'Neill <ben@oneill.sh>. License: MIT.
+.SH SEE ALSO
+.BR chip8 (1),
+.BR chip8as (1)

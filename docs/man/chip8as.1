@@ -1,0 +1,44 @@
+.TH CHIP8AS 1 "January 2026" "libc8" "User Commands"
+.SH SYNOPSIS
+.B chip8as
+[-vV] [-o outputfile] file
+.SH DESCRIPTION
+This is an assembler for the CHIP-8 and SCHIP. It must be called with a
+specified output file (default is \fBa.c8\fP)\. If an input file is not
+specified, it will read from standard input\.
+.SH USAGE
+.TP
+.B -o
+Set an output file (default is \fBa.c8\fP)\.
+.TP
+.B -v
+Print diagnostic messages and the resulting hex-encoded bytecode to standard output\.
+.TP
+.B -V
+Print the version number\.
+.SH NOTES
+.TP
+It may be useful to run the disassembler, \fBchip8dis\fP, and take a look at the output in order to get a general idea of this assembler's syntax requirements\.
+.TP
+Hex integers must be formatted with \fB0x\fP, \fBx\fP, or \fB$\fP prefixes\.
+.TP
+Binary integers must be formatted with a \fB0b\fP prefix\.
+.TP
+Data bytes may be defined using the \fB.DB\fP symbol\.
+.TP
+16-bit data words may be defined using the \fB.DW\fP symbol\.
+.TP
+Strings may be defined using the \fB.DS\fP symbol\.
+.TP
+Commas are optional for instruction parameters\.
+.TP
+This assembler is not case sensitive\.
+.SH AUTHOR
+Written by Ben O'Neill <ben@oneill.sh>.
+.SH BUGS
+If any bugs are found, email the author.
+.SH COPYRIGHT
+Copyright \(co 2019-2026 Ben O'Neill <ben@oneill.sh>. License: MIT.
+.SH SEE ALSO
+.BR chip8 (1),
+.BR chip8dis (1)
