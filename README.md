@@ -50,8 +50,8 @@ Testing is done using
 
 ```shell
 git submodule update
-cmake -DTARGET_GROUP=test -DSDL2=OFF
-make && ctest --verbose
+cmake -B . -DTARGET_GROUP=test -DSDL2=OFF
+cmake --build . && ctest --verbose
 ```
 
 **Note**: When built with tests enabled (`-DTARGET_GROUP=test`),

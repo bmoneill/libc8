@@ -23,7 +23,7 @@ void       setUp(void) {
 }
 void tearDown(void) {}
 
-void test_get_command_WhereCommandIsBreak(void) {
+void test_c8_get_command_WhereCommandIsBreak(void) {
     const char* s = "break";
     strcpy(buf, s);
 
@@ -32,7 +32,7 @@ void test_get_command_WhereCommandIsBreak(void) {
     TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
 }
 
-void test_get_command_WhereCommandIsRMBreak(void) {
+void test_c8_get_command_WhereCommandIsRMBreak(void) {
     const char* s = "rmbreak";
     strcpy(buf, s);
 
@@ -41,7 +41,7 @@ void test_get_command_WhereCommandIsRMBreak(void) {
     TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
 }
 
-void test_get_command_WhereCommandIsContinue(void) {
+void test_c8_get_command_WhereCommandIsContinue(void) {
     const char* s = "continue";
     strcpy(buf, s);
 
@@ -50,7 +50,7 @@ void test_get_command_WhereCommandIsContinue(void) {
     TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
 }
 
-void test_get_command_WhereCommandIsNext(void) {
+void test_c8_get_command_WhereCommandIsNext(void) {
     const char* s = "next";
     strcpy(buf, s);
 
@@ -59,7 +59,7 @@ void test_get_command_WhereCommandIsNext(void) {
     TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
 }
 
-void test_get_command_WhereCommandIsSet(void) {
+void test_c8_get_command_WhereCommandIsSet(void) {
     const char* s = "set PC 0x200";
     strcpy(buf, s);
 
@@ -69,7 +69,7 @@ void test_get_command_WhereCommandIsSet(void) {
     TEST_ASSERT_EQUAL_INT(0x200, cmd.setValue);
 }
 
-void test_get_command_WhereCommandIsSet_WhereArgIsAddr(void) {
+void test_c8_get_command_WhereCommandIsSet_WhereArgIsAddr(void) {
     int addr  = 0x20;
     int value = 0x12;
     sprintf(buf, "set $%03x %d", addr, value);
@@ -81,7 +81,7 @@ void test_get_command_WhereCommandIsSet_WhereArgIsAddr(void) {
     TEST_ASSERT_EQUAL_INT(value, cmd.setValue);
 }
 
-void test_get_command_WhereCommandIsLoad(void) {
+void test_c8_get_command_WhereCommandIsLoad(void) {
     const char* s = "load /path/to/file";
     strcpy(buf, s);
 
@@ -91,7 +91,7 @@ void test_get_command_WhereCommandIsLoad(void) {
     TEST_ASSERT_EQUAL_STRING("/path/to/file", cmd.arg.value.s);
 }
 
-void test_get_command_WhereCommandIsSave(void) {
+void test_c8_get_command_WhereCommandIsSave(void) {
     const char* s = "save /path/to/file";
     strcpy(buf, s);
 
@@ -101,7 +101,7 @@ void test_get_command_WhereCommandIsSave(void) {
     TEST_ASSERT_EQUAL_STRING("/path/to/file", cmd.arg.value.s);
 }
 
-void test_get_command_WhereCommandIsLoadFlags(void) {
+void test_c8_get_command_WhereCommandIsLoadFlags(void) {
     const char* s = "loadflags /path/to/flags";
     strcpy(buf, s);
 
@@ -111,7 +111,7 @@ void test_get_command_WhereCommandIsLoadFlags(void) {
     TEST_ASSERT_EQUAL_STRING("/path/to/flags", cmd.arg.value.s);
 }
 
-void test_get_command_WhereCommandIsSaveFlags(void) {
+void test_c8_get_command_WhereCommandIsSaveFlags(void) {
     const char* s = "saveflags /path/to/flags";
     strcpy(buf, s);
 
@@ -121,7 +121,7 @@ void test_get_command_WhereCommandIsSaveFlags(void) {
     TEST_ASSERT_EQUAL_STRING("/path/to/flags", cmd.arg.value.s);
 }
 
-void test_get_command_WhereCommandIsPrint_WithArgument(void) {
+void test_c8_get_command_WhereCommandIsPrint_WithArgument(void) {
     const char* s = "print PC";
     strcpy(buf, s);
 
@@ -130,7 +130,7 @@ void test_get_command_WhereCommandIsPrint_WithArgument(void) {
     TEST_ASSERT_EQUAL_INT(C8_ARG_PC, cmd.arg.type);
 }
 
-void test_get_command_WhereCommandIsPrint_WithNoArguments(void) {
+void test_c8_get_command_WhereCommandIsPrint_WithNoArguments(void) {
     const char* s = "print";
     strcpy(buf, s);
 
@@ -139,7 +139,7 @@ void test_get_command_WhereCommandIsPrint_WithNoArguments(void) {
     TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
 }
 
-void test_get_command_WhereCommandIsHelp(void) {
+void test_c8_get_command_WhereCommandIsHelp(void) {
     const char* s = "help";
     strcpy(buf, s);
 
@@ -148,7 +148,7 @@ void test_get_command_WhereCommandIsHelp(void) {
     TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
 }
 
-void test_get_command_WhereCommandIsQuit(void) {
+void test_c8_get_command_WhereCommandIsQuit(void) {
     const char* s = "quit";
     strcpy(buf, s);
 
@@ -157,7 +157,7 @@ void test_get_command_WhereCommandIsQuit(void) {
     TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
 }
 
-void test_get_command_WhereCommandIsInvalid(void) {
+void test_c8_get_command_WhereCommandIsInvalid(void) {
     const char* s = "invalid";
     strcpy(buf, s);
 
