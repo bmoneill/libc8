@@ -5,8 +5,8 @@
  * Stuff for handling exceptions.
  */
 
-#ifndef LIBC8_EXCEPTION_H
-#define LIBC8_EXCEPTION_H
+#ifndef C8_EXCEPTION_H
+#define C8_EXCEPTION_H
 
 #include <stdio.h>
 

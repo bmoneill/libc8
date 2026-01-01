@@ -5,8 +5,8 @@
  * Stuff related to debug mode.
  */
 
-#ifndef LIBC8_DEBUG_H
-#define LIBC8_DEBUG_H
+#ifndef C8_DEBUG_H
+#define C8_DEBUG_H
 
 #include "../chip8.h"
 

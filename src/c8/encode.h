@@ -4,8 +4,8 @@
  * Base assembler code
  */
 
-#ifndef LIBC8_PARSE_H
-#define LIBC8_PARSE_H
+#ifndef C8_PARSE_H
+#define C8_PARSE_H
 
 #include <stdint.h>
 

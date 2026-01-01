@@ -288,4 +288,4 @@ void c8_simulate(C8* c8) {
  *
  * @return const char* version string
  */
-const char* c8_version(void) { return LIBC8_VERSION; }
+const char* c8_version(void) { return C8_VERSION; }

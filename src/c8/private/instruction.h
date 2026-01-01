@@ -6,8 +6,8 @@
  * execution functions for the CHIP-8 interpreter.
  */
 
-#ifndef LIBC8_INSTRUCTION_H
-#define LIBC8_INSTRUCTION_H
+#ifndef C8_INSTRUCTION_H
+#define C8_INSTRUCTION_H
 
 #include "../chip8.h"
 

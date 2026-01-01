@@ -4,8 +4,8 @@
  * Stuff for simulating and modifying `CHIP8`s.
  */
 
-#ifndef LIBC8_CHIP8_H
-#define LIBC8_CHIP8_H
+#ifndef C8_CHIP8_H
+#define C8_CHIP8_H
 
 #include "common.h"
 #include "graphics.h"

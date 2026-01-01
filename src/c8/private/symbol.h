@@ -5,8 +5,8 @@
  * Stuff for parsing symbols and instructions for encoding CHIP-8 "assembly".
  */
 
-#ifndef CHIP8_SYMBOL_H
-#define CHIP8_SYMBOL_H
+#ifndef C8_SYMBOL_H
+#define C8_SYMBOL_H
 
 #include <stdint.h>
 

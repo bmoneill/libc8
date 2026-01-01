@@ -4,8 +4,8 @@
  * Stuff for disassembling bytecode.
  */
 
-#ifndef LIBC8_DECODE_H
-#define LIBC8_DECODE_H
+#ifndef C8_DECODE_H
+#define C8_DECODE_H
 
 #include <stdint.h>
 #include <stdio.h>

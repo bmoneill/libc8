@@ -4,11 +4,11 @@
  * Base CHIP-8 definitions/macros
  */
 
-#ifndef LIBC8_COMMON_H
-#define LIBC8_COMMON_H
+#ifndef C8_COMMON_H
+#define C8_COMMON_H
 
-#ifndef LIBC8_VERSION
-#define LIBC8_VERSION "unknown"
+#ifndef C8_VERSION
+#define C8_VERSION "unknown"
 #endif
 
 #define C8_X(i)   ((i & 0x0F00) >> 8)

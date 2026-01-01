@@ -4,8 +4,8 @@
  * Stuff related to loading fonts.
  */
 
-#ifndef LIBC8_FONT_H
-#define LIBC8_FONT_H
+#ifndef C8_FONT_H
+#define C8_FONT_H
 
 #include "chip8.h"
 
