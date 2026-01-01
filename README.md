@@ -50,7 +50,7 @@ Testing is done using
 
 ```shell
 git submodule update
-cmake -B . -DTARGET_GROUP=test -DSDL2=OFF
+cmake -S . -DTARGET_GROUP=test -DSDL2=OFF
 cmake --build . && ctest --verbose
 ```
 
