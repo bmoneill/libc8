@@ -1,4 +1,3 @@
-
 project("libc8" C)
 
 # Global Parameters
@@ -11,40 +10,40 @@ include(GNUInstallDirs)
 set(LIBRARY_BASE_PATH ".")
 
 INCLUDE_DIRECTORIES (
-	"${LIBRARY_BASE_PATH}"
+ "${LIBRARY_BASE_PATH}"
 )
 
 set(LIBRARY_PUBLIC_SRC
-	"${LIBRARY_BASE_PATH}/c8/chip8.c"
-	"${LIBRARY_BASE_PATH}/c8/decode.c"
-	"${LIBRARY_BASE_PATH}/c8/encode.c"
-	"${LIBRARY_BASE_PATH}/c8/font.c"
-	"${LIBRARY_BASE_PATH}/c8/graphics.c"
+ "${LIBRARY_BASE_PATH}/c8/chip8.c"
+ "${LIBRARY_BASE_PATH}/c8/decode.c"
+ "${LIBRARY_BASE_PATH}/c8/encode.c"
+ "${LIBRARY_BASE_PATH}/c8/font.c"
+ "${LIBRARY_BASE_PATH}/c8/graphics.c"
 )
 
 set(LIBRARY_PRIVATE_SRC
-	"${LIBRARY_BASE_PATH}/c8/private/debug.c"
-	"${LIBRARY_BASE_PATH}/c8/private/exception.c"
-	"${LIBRARY_BASE_PATH}/c8/private/instruction.c"
-	"${LIBRARY_BASE_PATH}/c8/private/symbol.c"
-	"${LIBRARY_BASE_PATH}/c8/private/util.c"
+ "${LIBRARY_BASE_PATH}/c8/private/debug.c"
+ "${LIBRARY_BASE_PATH}/c8/private/exception.c"
+ "${LIBRARY_BASE_PATH}/c8/private/instruction.c"
+ "${LIBRARY_BASE_PATH}/c8/private/symbol.c"
+ "${LIBRARY_BASE_PATH}/c8/private/util.c"
 )
 
 set(LIBRARY_PUBLIC_HEADERS
-	"${LIBRARY_BASE_PATH}/chip8.h"
-	"${LIBRARY_BASE_PATH}/common.h"
-	"${LIBRARY_BASE_PATH}/decode.h"
-	"${LIBRARY_BASE_PATH}/encode.h"
-	"${LIBRARY_BASE_PATH}/font.h"
-	"${LIBRARY_BASE_PATH}/graphics.h"
+ "${LIBRARY_BASE_PATH}/chip8.h"
+ "${LIBRARY_BASE_PATH}/common.h"
+ "${LIBRARY_BASE_PATH}/decode.h"
+ "${LIBRARY_BASE_PATH}/encode.h"
+ "${LIBRARY_BASE_PATH}/font.h"
+ "${LIBRARY_BASE_PATH}/graphics.h"
 )
 
 set(LIBRARY_PRIVATE_HEADERS
-	"${LIBRARY_BASE_PATH}/c8/private/debug.h"
-	"${LIBRARY_BASE_PATH}/c8/private/exception.h"
-	"${LIBRARY_BASE_PATH}/c8/private/instruction.h"
-	"${LIBRARY_BASE_PATH}/c8/private/symbol.h"
-	"${LIBRARY_BASE_PATH}/c8/private/util.h"
+ "${LIBRARY_BASE_PATH}/c8/private/debug.h"
+ "${LIBRARY_BASE_PATH}/c8/private/exception.h"
+ "${LIBRARY_BASE_PATH}/c8/private/instruction.h"
+ "${LIBRARY_BASE_PATH}/c8/private/symbol.h"
+ "${LIBRARY_BASE_PATH}/c8/private/util.h"
 )
 
 if(SDL2)
@@ -52,7 +51,7 @@ if(SDL2)
 endif()
 
 add_library (
-	${LIBRARY_NAME} SHARED ${LIBRARY_PUBLIC_SRC} ${LIBRARY_PRIVATE_SRC}
+ ${LIBRARY_NAME} SHARED ${LIBRARY_PUBLIC_SRC} ${LIBRARY_PRIVATE_SRC}
 )
 
 if(SDL2)
@@ -62,12 +61,12 @@ endif()
 # Compiler definitions
 ADD_DEFINITIONS("-g")
 if(TEST)
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTEST")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTEST")
 endif()
 
 # Library installation directives
 INSTALL (
-	TARGETS ${LIBRARY_NAME}
-	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+ TARGETS ${LIBRARY_NAME}
+ LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+ PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
