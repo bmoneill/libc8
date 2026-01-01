@@ -1,16 +1,10 @@
 build/
-Testing/
-
-# c8as output
-a.c8
-
-# debug
 vgcore*
 gmon.out
 
-# etc
+a.c8
 docs/html
-.zed/
-/.clangd
-/compile_commands.json
-/.cache
+
+# Editor stuff
+.zed
+.clangd
