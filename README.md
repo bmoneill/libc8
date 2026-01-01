@@ -16,9 +16,9 @@ An example [assembler](docs/chip8as.md), [disassembler](docs/chip8dis.md), and
 ### Linux
 
 ```shell
-cmake -S .
-cmake --build .
-sudo cmake --install . # install
+cmake -S . -B build
+cmake --build build
+sudo cmake --install build
 ```
 
 This will build libc8 as well as the example tools.
@@ -50,8 +50,10 @@ Testing is done using
 
 ```shell
 git submodule update
-cmake -S . -DTARGET_GROUP=test -DSDL2=OFF
-cmake --build . && ctest --verbose
+cmake -S . -B build -DTARGET_GROUP=test -DSDL2=OFF
+cmake --build build 
+cd build
+ctest --verbose
 ```
 
 **Note**: When built with tests enabled (`-DTARGET_GROUP=test`),

@@ -1,28 +1,12 @@
+build/
+Testing/
+
 # c8as output
 a.c8
-
-# targets
-*.so
-*.a
-*.o
-tools/chip8
-tools/chip8as
-tools/chip8dis
 
 # debug
 vgcore*
 gmon.out
-
-# cmake
-CMakeFiles
-CMakeCache.txt
-*.cmake
-*.tcl
-Makefile
-*_tests
-*_runner.c
-Testing
-/install_manifest.txt
 
 # etc
 docs/html
