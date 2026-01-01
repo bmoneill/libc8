@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('instruction_8c.html',''); initResizabl
   <div class="headertitle"><div class="title">instruction.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="instruction_8h_source.html">c8/private/instruction.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="instruction_8h_source.html">instruction.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="common_8h_source.html">../common.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="decode_8h_source.html">../decode.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="font_8h_source.html">../font.h</a>&quot;</code><br />
@@ -127,9 +127,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a22022ac3c60e180c0b616983453c8c96"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="instruction_8c.html#a22022ac3c60e180c0b616983453c8c96">parse_instruction</a> (<a class="el" href="structC8.html">C8</a> *c8)</td></tr>
-<tr class="memdesc:a22022ac3c60e180c0b616983453c8c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the instruction at <code>c8-&gt;pc</code>  <br /></td></tr>
-<tr class="separator:a22022ac3c60e180c0b616983453c8c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae80c4c97bf5dcad02f450ac800e9a019"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="instruction_8c.html#ae80c4c97bf5dcad02f450ac800e9a019">c8_parse_instruction</a> (<a class="el" href="structC8.html">C8</a> *c8)</td></tr>
+<tr class="memdesc:ae80c4c97bf5dcad02f450ac800e9a019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the instruction at <code>c8-&gt;pc</code>  <br /></td></tr>
+<tr class="separator:ae80c4c97bf5dcad02f450ac800e9a019"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section note"><dt>Note</dt><dd>NOT EXPORTED</dd></dl>
@@ -295,12 +295,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;mode == <a class="code hl_define" href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a>) {                                                                \</div>
-<div class="line">        C8_EXCEPTION(<a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>,                                                \</div>
+<div class="line">        C8_EXCEPTION(<a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a>,                                             \</div>
 <div class="line">                     <span class="stringliteral">&quot;SCHIP instruction detected in CHIP-8 mode.\n&quot;</span>);                              \</div>
-<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>;                                                      \</div>
+<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a>;                                                   \</div>
 <div class="line">    }</div>
 <div class="ttc" id="achip8_8h_html_ace5f100e8d06164b3cb3b0b04e5297f5"><div class="ttname"><a href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a></div><div class="ttdeci">#define C8_MODE_CHIP8</div><div class="ttdef"><b>Definition:</b> chip8.h:18</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a89fe9d8586d84549f73c7696c7fc01d5"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a></div><div class="ttdeci">@ INVALID_INSTRUCTION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:22</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_INSTRUCTION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:22</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -339,24 +339,24 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;mode != <a class="code hl_define" href="chip8_8h.html#acf75ba93ff6438063ec6a493e004429d">C8_MODE_XOCHIP</a>) {                                                               \</div>
 <div class="line">        <span class="keyword">const</span> <span class="keywordtype">char</span>* modeStr = (c-&gt;mode == <a class="code hl_define" href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a>) ? <span class="stringliteral">&quot;CHIP-8&quot;</span> : <span class="stringliteral">&quot;SCHIP&quot;</span>;                     \</div>
-<div class="line">        C8_EXCEPTION(<a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>,                                                \</div>
+<div class="line">        C8_EXCEPTION(<a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a>,                                             \</div>
 <div class="line">                     <span class="stringliteral">&quot;XOCHIP instruction detected in %s mode.\n&quot;</span>,                                  \</div>
 <div class="line">                     modeStr);                                                                     \</div>
-<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>;                                                      \</div>
+<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a>;                                                   \</div>
 <div class="line">    }</div>
 <div class="ttc" id="achip8_8h_html_acf75ba93ff6438063ec6a493e004429d"><div class="ttname"><a href="chip8_8h.html#acf75ba93ff6438063ec6a493e004429d">C8_MODE_XOCHIP</a></div><div class="ttdeci">#define C8_MODE_XOCHIP</div><div class="ttdef"><b>Definition:</b> chip8.h:20</div></div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a22022ac3c60e180c0b616983453c8c96" name="a22022ac3c60e180c0b616983453c8c96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22022ac3c60e180c0b616983453c8c96">&#9670;&#160;</a></span>parse_instruction()</h2>
+<a id="ae80c4c97bf5dcad02f450ac800e9a019" name="ae80c4c97bf5dcad02f450ac800e9a019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae80c4c97bf5dcad02f450ac800e9a019">&#9670;&#160;</a></span>c8_parse_instruction()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int parse_instruction </td>
+          <td class="memname">int c8_parse_instruction </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structC8.html">C8</a> *&#160;</td>
           <td class="paramname"><em>c8</em></td><td>)</td>

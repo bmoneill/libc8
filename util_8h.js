@@ -1,7 +1,6 @@
 var util_8h =
 [
-    [ "VERBOSE_PRINT", "util_8h.html#a16e027ed946c00a879920dabaf8e8058", null ],
-    [ "hex_to_int", "util_8h.html#a3272235cd80b8d6bc6e3c6d80d8b5747", null ],
-    [ "parse_int", "util_8h.html#a35f6c017d221697fb5b3e5d4909b1d3f", null ],
-    [ "trim", "util_8h.html#a2e633f1259693fed05713244055d6e78", null ]
+    [ "c8_hex_to_int", "util_8h.html#afed85962255262f3da3eaa60e66ec744", null ],
+    [ "c8_parse_int", "util_8h.html#a8a99f1d973a44924cef21098aeebe12a", null ],
+    [ "c8_trim", "util_8h.html#aee8e97490e24c4a1cf77f5a9073f44f4", null ]
 ];

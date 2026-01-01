@@ -1,6 +1,6 @@
 var debug_8h =
 [
-    [ "DEBUG_HELP_STRING", "debug_8h.html#aeb0830f3cad169c66aa52cf423abbfac", null ],
-    [ "debug_repl", "debug_8h.html#a43553dff6168e49820cfe633e7494a83", null ],
-    [ "has_breakpoint", "debug_8h.html#a5520e15b7ed65d5c9743c0fbb364e2fa", null ]
+    [ "C8_DEBUG_HELP_STRING", "debug_8h.html#abf516ab66b6e3e913e5bd640e5742276", null ],
+    [ "c8_debug_repl", "debug_8h.html#abd28e6a0b1d4ba8eda21ee9af595f1f4", null ],
+    [ "c8_has_breakpoint", "debug_8h.html#a3b0ffcf00f0287c892a8a921021f0a82", null ]
 ];

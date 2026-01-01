@@ -103,38 +103,38 @@ $(document).ready(function(){initNavTree('debug_8h.html',''); initResizable(); }
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aeb0830f3cad169c66aa52cf423abbfac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#aeb0830f3cad169c66aa52cf423abbfac">DEBUG_HELP_STRING</a>&#160;&#160;&#160;    &quot;Available commands:\n\break [ADDRESS]: Add breakpoint to PC or ADDRESS, if given\n\rmbreak [ADDRESS]: Remove breakpoint at PC or ADDRESS, if given\n\continue: Exit debug mode until next breakpoint or completion\n\help: Print this help string\n\load PATH: Load program state from PATH\n\next: Step to the next instruction\n\print [ATTRIBUTE]: Print current value of ATTRIBUTE\n\save PATH: Save program state to the given file\n\set ATTRIBUTE VALUE: Set the given attribute to the given value\n\quit: Terminate the program\n\\n\Available attributes to print:\n\PC: Program counter\n\SP: Stack pointer\n\DT: Delay timer\n\ST: Sound timer\n\I:  I address\n\K:  Register to store next keypress\n\V[x]:  All register values or value of Vx, if given\n\stack: All stack values\n\$[address]: Value at given address\n\\n\If no argument is given to print, it will print all of the above attributes\n\except for address values.\n&quot;</td></tr>
-<tr class="separator:aeb0830f3cad169c66aa52cf423abbfac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf516ab66b6e3e913e5bd640e5742276"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#abf516ab66b6e3e913e5bd640e5742276">C8_DEBUG_HELP_STRING</a>&#160;&#160;&#160;    &quot;Available commands:\n\break [ADDRESS]: Add breakpoint to PC or ADDRESS, if given\n\rmbreak [ADDRESS]: Remove breakpoint at PC or ADDRESS, if given\n\continue: Exit debug mode until next breakpoint or completion\n\help: Print this help string\n\load PATH: Load program state from PATH\n\next: Step to the next instruction\n\print [ATTRIBUTE]: Print current value of ATTRIBUTE\n\save PATH: Save program state to the given file\n\set ATTRIBUTE VALUE: Set the given attribute to the given value\n\quit: Terminate the program\n\\n\Available attributes to print:\n\PC: Program counter\n\SP: Stack pointer\n\DT: Delay timer\n\ST: Sound timer\n\I:  I address\n\K:  Register to store next keypress\n\V[x]:  All register values or value of Vx, if given\n\stack: All stack values\n\$[address]: Value at given address\n\\n\If no argument is given to print, it will print all of the above attributes\n\except for address values.\n&quot;</td></tr>
+<tr class="separator:abf516ab66b6e3e913e5bd640e5742276"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a99fb83031ce9923c84392b4e92f956b5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5aab196e1dffc49b12d7aa2c6c5a57ada1">DEBUG_QUIT</a>
-, <a class="el" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5ace9c40996f50e7d82401573dd6645102">DEBUG_CONTINUE</a>
-, <a class="el" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5a053743b1beb53cb9d4beee59532d2ea9">DEBUG_STEP</a>
+<tr class="memitem:a99fb83031ce9923c84392b4e92f956b5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5ad94cd2a88e788b64dfa68c8fb4e9f6c9">C8_DEBUG_QUIT</a>
+, <a class="el" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5addb58edf2ca2f8a283cebb8e3dbff5f8">C8_DEBUG_CONTINUE</a>
+, <a class="el" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5a998836305f98c9257d743b8383dc82b4">C8_DEBUG_STEP</a>
  }</td></tr>
 <tr class="separator:a99fb83031ce9923c84392b4e92f956b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a43553dff6168e49820cfe633e7494a83"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a43553dff6168e49820cfe633e7494a83">debug_repl</a> (<a class="el" href="structC8.html">C8</a> *)</td></tr>
-<tr class="memdesc:a43553dff6168e49820cfe633e7494a83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug command line loop.  <br /></td></tr>
-<tr class="separator:a43553dff6168e49820cfe633e7494a83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5520e15b7ed65d5c9743c0fbb364e2fa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a5520e15b7ed65d5c9743c0fbb364e2fa">has_breakpoint</a> (<a class="el" href="structC8.html">C8</a> *, uint16_t)</td></tr>
-<tr class="memdesc:a5520e15b7ed65d5c9743c0fbb364e2fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if breakpoint exists at address pc.  <br /></td></tr>
-<tr class="separator:a5520e15b7ed65d5c9743c0fbb364e2fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd28e6a0b1d4ba8eda21ee9af595f1f4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#abd28e6a0b1d4ba8eda21ee9af595f1f4">c8_debug_repl</a> (<a class="el" href="structC8.html">C8</a> *)</td></tr>
+<tr class="memdesc:abd28e6a0b1d4ba8eda21ee9af595f1f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug command line loop.  <br /></td></tr>
+<tr class="separator:abd28e6a0b1d4ba8eda21ee9af595f1f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b0ffcf00f0287c892a8a921021f0a82"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#a3b0ffcf00f0287c892a8a921021f0a82">c8_has_breakpoint</a> (<a class="el" href="structC8.html">C8</a> *, uint16_t)</td></tr>
+<tr class="memdesc:a3b0ffcf00f0287c892a8a921021f0a82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if breakpoint exists at address pc.  <br /></td></tr>
+<tr class="separator:a3b0ffcf00f0287c892a8a921021f0a82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section note"><dt>Note</dt><dd>NOT EXPORTED</dd></dl>
 <p>Stuff related to debug mode. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="aeb0830f3cad169c66aa52cf423abbfac" name="aeb0830f3cad169c66aa52cf423abbfac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb0830f3cad169c66aa52cf423abbfac">&#9670;&#160;</a></span>DEBUG_HELP_STRING</h2>
+<a id="abf516ab66b6e3e913e5bd640e5742276" name="abf516ab66b6e3e913e5bd640e5742276"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf516ab66b6e3e913e5bd640e5742276">&#9670;&#160;</a></span>C8_DEBUG_HELP_STRING</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define DEBUG_HELP_STRING&#160;&#160;&#160;    &quot;Available commands:\n\break [ADDRESS]: Add breakpoint to PC or ADDRESS, if given\n\rmbreak [ADDRESS]: Remove breakpoint at PC or ADDRESS, if given\n\continue: Exit debug mode until next breakpoint or completion\n\help: Print this help string\n\load PATH: Load program state from PATH\n\next: Step to the next instruction\n\print [ATTRIBUTE]: Print current value of ATTRIBUTE\n\save PATH: Save program state to the given file\n\set ATTRIBUTE VALUE: Set the given attribute to the given value\n\quit: Terminate the program\n\\n\Available attributes to print:\n\PC: Program counter\n\SP: Stack pointer\n\DT: Delay timer\n\ST: Sound timer\n\I:  I address\n\K:  Register to store next keypress\n\V[x]:  All register values or value of Vx, if given\n\stack: All stack values\n\$[address]: Value at given address\n\\n\If no argument is given to print, it will print all of the above attributes\n\except for address values.\n&quot;</td>
+          <td class="memname">#define C8_DEBUG_HELP_STRING&#160;&#160;&#160;    &quot;Available commands:\n\break [ADDRESS]: Add breakpoint to PC or ADDRESS, if given\n\rmbreak [ADDRESS]: Remove breakpoint at PC or ADDRESS, if given\n\continue: Exit debug mode until next breakpoint or completion\n\help: Print this help string\n\load PATH: Load program state from PATH\n\next: Step to the next instruction\n\print [ATTRIBUTE]: Print current value of ATTRIBUTE\n\save PATH: Save program state to the given file\n\set ATTRIBUTE VALUE: Set the given attribute to the given value\n\quit: Terminate the program\n\\n\Available attributes to print:\n\PC: Program counter\n\SP: Stack pointer\n\DT: Delay timer\n\ST: Sound timer\n\I:  I address\n\K:  Register to store next keypress\n\V[x]:  All register values or value of Vx, if given\n\stack: All stack values\n\$[address]: Value at given address\n\\n\If no argument is given to print, it will print all of the above attributes\n\except for address values.\n&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -154,22 +154,22 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a99fb83031ce9923c84392b4e92f956b5aab196e1dffc49b12d7aa2c6c5a57ada1" name="a99fb83031ce9923c84392b4e92f956b5aab196e1dffc49b12d7aa2c6c5a57ada1"></a>DEBUG_QUIT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a99fb83031ce9923c84392b4e92f956b5ace9c40996f50e7d82401573dd6645102" name="a99fb83031ce9923c84392b4e92f956b5ace9c40996f50e7d82401573dd6645102"></a>DEBUG_CONTINUE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a99fb83031ce9923c84392b4e92f956b5a053743b1beb53cb9d4beee59532d2ea9" name="a99fb83031ce9923c84392b4e92f956b5a053743b1beb53cb9d4beee59532d2ea9"></a>DEBUG_STEP&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a99fb83031ce9923c84392b4e92f956b5ad94cd2a88e788b64dfa68c8fb4e9f6c9" name="a99fb83031ce9923c84392b4e92f956b5ad94cd2a88e788b64dfa68c8fb4e9f6c9"></a>C8_DEBUG_QUIT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a99fb83031ce9923c84392b4e92f956b5addb58edf2ca2f8a283cebb8e3dbff5f8" name="a99fb83031ce9923c84392b4e92f956b5addb58edf2ca2f8a283cebb8e3dbff5f8"></a>C8_DEBUG_CONTINUE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a99fb83031ce9923c84392b4e92f956b5a998836305f98c9257d743b8383dc82b4" name="a99fb83031ce9923c84392b4e92f956b5a998836305f98c9257d743b8383dc82b4"></a>C8_DEBUG_STEP&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a43553dff6168e49820cfe633e7494a83" name="a43553dff6168e49820cfe633e7494a83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43553dff6168e49820cfe633e7494a83">&#9670;&#160;</a></span>debug_repl()</h2>
+<a id="abd28e6a0b1d4ba8eda21ee9af595f1f4" name="abd28e6a0b1d4ba8eda21ee9af595f1f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd28e6a0b1d4ba8eda21ee9af595f1f4">&#9670;&#160;</a></span>c8_debug_repl()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int debug_repl </td>
+          <td class="memname">int c8_debug_repl </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structC8.html">C8</a> *&#160;</td>
           <td class="paramname"><em>c8</em></td><td>)</td>
@@ -181,9 +181,9 @@ Functions</h2></td></tr>
 <p>Debug command line loop. </p>
 <p>This function parses user commands from stdin and prints the result until one of the following conditions is met:</p>
 <ul>
-<li>continue command is evaluated (return <code>DEBUG_CONTINUE</code>)</li>
-<li>quit command is evaluated (return <code>DEBUG_QUIT</code>)</li>
-<li>next command is evaluated (return <code>DEBUG_STEP</code>)</li>
+<li>continue command is evaluated (return <code>C8_DEBUG_CONTINUE</code>)</li>
+<li>quit command is evaluated (return <code>C8_DEBUG_QUIT</code>)</li>
+<li>next command is evaluated (return <code>C8_DEBUG_STEP</code>)</li>
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -191,18 +191,18 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>DEBUG_CONTINUE</code>, <code>DEBUG_STEP</code>, or <code>DEBUG_QUIT</code> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>C8_DEBUG_CONTINUE</code>, <code>C8_DEBUG_STEP</code>, or <code>C8_DEBUG_QUIT</code> </dd></dl>
 
 </div>
 </div>
-<a id="a5520e15b7ed65d5c9743c0fbb364e2fa" name="a5520e15b7ed65d5c9743c0fbb364e2fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5520e15b7ed65d5c9743c0fbb364e2fa">&#9670;&#160;</a></span>has_breakpoint()</h2>
+<a id="a3b0ffcf00f0287c892a8a921021f0a82" name="a3b0ffcf00f0287c892a8a921021f0a82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b0ffcf00f0287c892a8a921021f0a82">&#9670;&#160;</a></span>c8_has_breakpoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int has_breakpoint </td>
+          <td class="memname">int c8_has_breakpoint </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structC8.html">C8</a> *&#160;</td>
           <td class="paramname"><em>c8</em>, </td>

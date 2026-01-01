@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['next_5fsymbol_0',['next_symbol',['../symbol_8c.html#a4727026355fbdc6bf47426471bc1176d',1,'next_symbol(SymbolList *symbols):&#160;symbol.c'],['../symbol_8h.html#a9e07ab144800538332b1aa94e53b81d4',1,'next_symbol(SymbolList *):&#160;symbol.c']]]
+  ['p_0',['p',['../structC8__Display.html#a7b9b2e0f3539aa84729fe17c869c2669',1,'C8_Display::p()'],['../structC8__Instruction.html#a7f7dd4c072eb554e8c14ce29d2ca7e6d',1,'C8_Instruction::p()']]],
+  ['pc_1',['pc',['../structC8.html#af21633fb74a6aa87c93baf3caaa58864',1,'C8']]],
+  ['pcount_2',['pcount',['../structC8__InstructionFormat.html#a747fe457bac32c34b78b69f9bfefd6f3',1,'C8_InstructionFormat::pcount()'],['../structC8__Instruction.html#a747fe457bac32c34b78b69f9bfefd6f3',1,'C8_Instruction::pcount()']]],
+  ['pmask_3',['pmask',['../structC8__InstructionFormat.html#ab47bcc908fcad9122ec7d5aa4f9630d5',1,'C8_InstructionFormat']]],
+  ['print_5faddresses_4',['PRINT_ADDRESSES',['../decode_8c.html#a9931e6ab27d34613d577c78d02cc4ae1',1,'decode.c']]],
+  ['ptype_5',['ptype',['../structC8__InstructionFormat.html#a68911e16317263355bae9e1341d53689',1,'C8_InstructionFormat::ptype()'],['../structC8__Instruction.html#a68911e16317263355bae9e1341d53689',1,'C8_Instruction::ptype()']]]
 ];

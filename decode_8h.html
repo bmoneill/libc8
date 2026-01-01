@@ -184,13 +184,13 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Convert bytecode from <code>input</code> to assembly and writes it to <code>output</code>. </p>
-<p><code>ARG_PRINT_ADDRESSES</code> should be AND'd to args to print addresses before each assembly instruction.</p>
-<p><code>ARG_DEFINE_LABELS</code> should be AND'd to args to define labels.</p>
+<p><code>C8_DECODE_PRINT_ADDRESSES</code> should be AND'd to args to print addresses before each assembly instruction.</p>
+<p><code>C8_DECODE_DEFINE_LABELS</code> should be AND'd to args to define labels.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">input</td><td>the CHIP-8 ROM file to disassemble </td></tr>
     <tr><td class="paramname">output</td><td>the file to write the assembly to </td></tr>
-    <tr><td class="paramname">args</td><td>0 with <code>ARG_PRINT_ADDRESSES</code> and/or <code>ARG_DEFINE_LABELS</code> optionally OR'd </td></tr>
+    <tr><td class="paramname">args</td><td>0 with <code>C8_DECODE_PRINT_ADDRESSES</code> and/or <code>C8_DECODE_DEFINE_LABELS</code> optionally OR'd </td></tr>
   </table>
   </dd>
 </dl>

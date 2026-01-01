@@ -106,16 +106,16 @@ $(document).ready(function(){initNavTree('decode_8c.html',''); initResizable(); 
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:abf88a709ca68bf6b5d7399fe513cf50b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#abf88a709ca68bf6b5d7399fe513cf50b">DEFINE_LABELS</a>&#160;&#160;&#160;(<a class="el" href="debug_8c.html#aa987ed85a62ae9981838cf3bddd4c7fe">args</a> &amp; <a class="el" href="decode_8h.html#a70cee0483970767fdabbf1e20aef389e">C8_DECODE_DEFINE_LABELS</a>)</td></tr>
+<tr class="memitem:abf88a709ca68bf6b5d7399fe513cf50b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#abf88a709ca68bf6b5d7399fe513cf50b">DEFINE_LABELS</a>&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#a70cee0483970767fdabbf1e20aef389e">C8_DECODE_DEFINE_LABELS</a>)</td></tr>
 <tr class="separator:abf88a709ca68bf6b5d7399fe513cf50b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9931e6ab27d34613d577c78d02cc4ae1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a9931e6ab27d34613d577c78d02cc4ae1">PRINT_ADDRESSES</a>&#160;&#160;&#160;(<a class="el" href="debug_8c.html#aa987ed85a62ae9981838cf3bddd4c7fe">args</a> &amp; <a class="el" href="decode_8h.html#aa656d70570e455f29c44e52d9462a33e">C8_DECODE_PRINT_ADDRESSES</a>)</td></tr>
+<tr class="memitem:a9931e6ab27d34613d577c78d02cc4ae1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a9931e6ab27d34613d577c78d02cc4ae1">PRINT_ADDRESSES</a>&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#aa656d70570e455f29c44e52d9462a33e">C8_DECODE_PRINT_ADDRESSES</a>)</td></tr>
 <tr class="separator:a9931e6ab27d34613d577c78d02cc4ae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c5e3db06e3b3ee37636d8348dc2c505"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a7c5e3db06e3b3ee37636d8348dc2c505">RESULT_SIZE</a>&#160;&#160;&#160;32</td></tr>
 <tr class="separator:a7c5e3db06e3b3ee37636d8348dc2c505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1a9370d74377ee6f6d2cb3a3bae0664b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a1a9370d74377ee6f6d2cb3a3bae0664b">c8_decode</a> (FILE *input, FILE *output, int <a class="el" href="debug_8c.html#aa987ed85a62ae9981838cf3bddd4c7fe">args</a>)</td></tr>
+<tr class="memitem:a1a9370d74377ee6f6d2cb3a3bae0664b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a1a9370d74377ee6f6d2cb3a3bae0664b">c8_decode</a> (FILE *input, FILE *output, int args)</td></tr>
 <tr class="memdesc:a1a9370d74377ee6f6d2cb3a3bae0664b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert bytecode from <code>input</code> to assembly and writes it to <code>output</code>.  <br /></td></tr>
 <tr class="separator:a1a9370d74377ee6f6d2cb3a3bae0664b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2169032c4c6eeca3d68a5e90d332d68e"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a2169032c4c6eeca3d68a5e90d332d68e">c8_decode_instruction</a> (uint16_t in, uint8_t *label_map)</td></tr>
@@ -140,7 +140,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define DEFINE_LABELS&#160;&#160;&#160;(<a class="el" href="debug_8c.html#aa987ed85a62ae9981838cf3bddd4c7fe">args</a> &amp; <a class="el" href="decode_8h.html#a70cee0483970767fdabbf1e20aef389e">C8_DECODE_DEFINE_LABELS</a>)</td>
+          <td class="memname">#define DEFINE_LABELS&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#a70cee0483970767fdabbf1e20aef389e">C8_DECODE_DEFINE_LABELS</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -154,7 +154,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PRINT_ADDRESSES&#160;&#160;&#160;(<a class="el" href="debug_8c.html#aa987ed85a62ae9981838cf3bddd4c7fe">args</a> &amp; <a class="el" href="decode_8h.html#aa656d70570e455f29c44e52d9462a33e">C8_DECODE_PRINT_ADDRESSES</a>)</td>
+          <td class="memname">#define PRINT_ADDRESSES&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#aa656d70570e455f29c44e52d9462a33e">C8_DECODE_PRINT_ADDRESSES</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -209,13 +209,13 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Convert bytecode from <code>input</code> to assembly and writes it to <code>output</code>. </p>
-<p><code>ARG_PRINT_ADDRESSES</code> should be AND'd to args to print addresses before each assembly instruction.</p>
-<p><code>ARG_DEFINE_LABELS</code> should be AND'd to args to define labels.</p>
+<p><code>C8_DECODE_PRINT_ADDRESSES</code> should be AND'd to args to print addresses before each assembly instruction.</p>
+<p><code>C8_DECODE_DEFINE_LABELS</code> should be AND'd to args to define labels.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">input</td><td>the CHIP-8 ROM file to disassemble </td></tr>
     <tr><td class="paramname">output</td><td>the file to write the assembly to </td></tr>
-    <tr><td class="paramname">args</td><td>0 with <code>ARG_PRINT_ADDRESSES</code> and/or <code>ARG_DEFINE_LABELS</code> optionally OR'd </td></tr>
+    <tr><td class="paramname">args</td><td>0 with <code>C8_DECODE_PRINT_ADDRESSES</code> and/or <code>C8_DECODE_DEFINE_LABELS</code> optionally OR'd </td></tr>
   </table>
   </dd>
 </dl>

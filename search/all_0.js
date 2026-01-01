@@ -1,26 +1,4 @@
 var searchData=
 [
-  ['arg_0',['Arg',['../structArg.html',1,'']]],
-  ['arg_1',['arg',['../structCommand.html#a5a085ba63715fbce00e61d356160ac87',1,'Command']]],
-  ['arg_5faddr_2',['ARG_ADDR',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa6ced5b2df24725f07531b971d3e461f7',1,'debug.c']]],
-  ['arg_5fbfont_3',['ARG_BFONT',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa8a85c3d4b5a72c7b5b94248c9e72e56e',1,'debug.c']]],
-  ['arg_5fbg_4',['ARG_BG',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa276720a25b5ee4622c809ff5e50906f8',1,'debug.c']]],
-  ['arg_5fdt_5',['ARG_DT',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aac668a91feaaa9086586e42516a1e52e1',1,'debug.c']]],
-  ['arg_5ffg_6',['ARG_FG',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aaf113b897a6b411d683b8766b10e91ab1',1,'debug.c']]],
-  ['arg_5ffile_7',['ARG_FILE',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aadeecbe9f9e9f73427520b8cedfc4a730',1,'debug.c']]],
-  ['arg_5fi_8',['ARG_I',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aac733a1c629b8c50593c44cd510731dd7',1,'debug.c']]],
-  ['arg_5fnone_9',['ARG_NONE',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa987f8fc7b774aef0a635c58ae03258c9',1,'debug.c']]],
-  ['arg_5fpc_10',['ARG_PC',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aaf3402b4b482d7e3c5c2eb12a8bb11ce1',1,'debug.c']]],
-  ['arg_5fquirks_11',['ARG_QUIRKS',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa4530f14e6ffcf6f31327d68c63bbe28e',1,'debug.c']]],
-  ['arg_5fr_12',['ARG_R',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa47c9cca4b50c8fc6c58559ef6fb713bc',1,'debug.c']]],
-  ['arg_5fsfont_13',['ARG_SFONT',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aab4e2f45933fe600878322bd7b7c6f874',1,'debug.c']]],
-  ['arg_5fsp_14',['ARG_SP',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa738b1aacb6ff0fc3dc2ac5813bea7f75',1,'debug.c']]],
-  ['arg_5fst_15',['ARG_ST',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa7784179b2bdfec4dd09b6d7f1e9927e9',1,'debug.c']]],
-  ['arg_5fstack_16',['ARG_STACK',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa93a55fca7e43f8df9680655425322b0d',1,'debug.c']]],
-  ['arg_5fv_17',['ARG_V',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa7b607ba407896adf66b898e42e5455e7',1,'debug.c']]],
-  ['arg_5fverbose_18',['ARG_VERBOSE',['../encode_8h.html#a95088696c8690393aef7f90cd1954c78',1,'encode.h']]],
-  ['arg_5fvk_19',['ARG_VK',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61aa1804fd0453ee36274821e89a3e0e7cb9',1,'debug.c']]],
-  ['argidentifier_20',['ArgIdentifier',['../debug_8c.html#a64470f7bda819058e5a79c89d6c2d61a',1,'debug.c']]],
-  ['args_21',['args',['../debug_8c.html#aa987ed85a62ae9981838cf3bddd4c7fe',1,'debug.c']]],
-  ['argvalue_22',['ArgValue',['../unionArgValue.html',1,'']]]
+  ['arg_0',['arg',['../structC8__Command.html#a591c7189799febe1d8ba14ec7545068d',1,'C8_Command']]]
 ];

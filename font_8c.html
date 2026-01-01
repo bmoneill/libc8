@@ -151,18 +151,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a95b80629df02c9c98a12d7a2c930f7ab"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#a95b80629df02c9c98a12d7a2c930f7ab">c8_set_big_font</a> (<a class="el" href="structC8.html">C8</a> *c8, const char *s)</td></tr>
 <tr class="memdesc:a95b80629df02c9c98a12d7a2c930f7ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set big font from <code>s</code> (<code>fontNames</code> name)  <br /></td></tr>
 <tr class="separator:a95b80629df02c9c98a12d7a2c930f7ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92115071ca63ee0598c1d8aa57a1e192"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#a92115071ca63ee0598c1d8aa57a1e192">print_fonts</a> (<a class="el" href="structC8.html">C8</a> *c8)</td></tr>
-<tr class="memdesc:a92115071ca63ee0598c1d8aa57a1e192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print fonts (for debug)  <br /></td></tr>
-<tr class="separator:a92115071ca63ee0598c1d8aa57a1e192"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa60ab998eb2c236840be2c86bfe2f036"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#aa60ab998eb2c236840be2c86bfe2f036">c8_print_fonts</a> (<a class="el" href="structC8.html">C8</a> *c8)</td></tr>
+<tr class="memdesc:aa60ab998eb2c236840be2c86bfe2f036"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print fonts (for debug)  <br /></td></tr>
+<tr class="separator:aa60ab998eb2c236840be2c86bfe2f036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ac677f9c5dce232b0682cafb3c0c29554"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#ac677f9c5dce232b0682cafb3c0c29554">c8_fontNames</a> [2][5]</td></tr>
 <tr class="separator:ac677f9c5dce232b0682cafb3c0c29554"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63606ab00695e5d4e4ba9c3b3275eb6e"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#a63606ab00695e5d4e4ba9c3b3275eb6e">smallFonts</a> [5][80]</td></tr>
-<tr class="separator:a63606ab00695e5d4e4ba9c3b3275eb6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3105a55c700a531ff5e053e71bb24d93"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#a3105a55c700a531ff5e053e71bb24d93">bigFonts</a> [3][160]</td></tr>
-<tr class="separator:a3105a55c700a531ff5e053e71bb24d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d870669d476fe5528cbc948635eaeec"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#a3d870669d476fe5528cbc948635eaeec">c8_smallFonts</a> [5][80]</td></tr>
+<tr class="separator:a3d870669d476fe5528cbc948635eaeec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa168321f6c88b725b6d0b2f03cd41d23"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#aa168321f6c88b725b6d0b2f03cd41d23">c8_bigFonts</a> [3][160]</td></tr>
+<tr class="separator:aa168321f6c88b725b6d0b2f03cd41d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stuff related to loading fonts. </p>
@@ -293,6 +293,32 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="aa60ab998eb2c236840be2c86bfe2f036" name="aa60ab998eb2c236840be2c86bfe2f036"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa60ab998eb2c236840be2c86bfe2f036">&#9670;&#160;</a></span>c8_print_fonts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void c8_print_fonts </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structC8.html">C8</a> *&#160;</td>
+          <td class="paramname"><em>c8</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print fonts (for debug) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c8</td><td><code><a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a></code> to get fonts from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a95b80629df02c9c98a12d7a2c930f7ab" name="a95b80629df02c9c98a12d7a2c930f7ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a95b80629df02c9c98a12d7a2c930f7ab">&#9670;&#160;</a></span>c8_set_big_font()</h2>
 
@@ -451,41 +477,15 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a92115071ca63ee0598c1d8aa57a1e192" name="a92115071ca63ee0598c1d8aa57a1e192"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92115071ca63ee0598c1d8aa57a1e192">&#9670;&#160;</a></span>print_fonts()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_fonts </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structC8.html">C8</a> *&#160;</td>
-          <td class="paramname"><em>c8</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Print fonts (for debug) </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">c8</td><td><code><a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a></code> to get fonts from </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a3105a55c700a531ff5e053e71bb24d93" name="a3105a55c700a531ff5e053e71bb24d93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3105a55c700a531ff5e053e71bb24d93">&#9670;&#160;</a></span>bigFonts</h2>
+<a id="aa168321f6c88b725b6d0b2f03cd41d23" name="aa168321f6c88b725b6d0b2f03cd41d23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa168321f6c88b725b6d0b2f03cd41d23">&#9670;&#160;</a></span>c8_bigFonts</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t bigFonts[3][160]</td>
+          <td class="memname">const uint8_t c8_bigFonts[3][160]</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -522,14 +522,14 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a63606ab00695e5d4e4ba9c3b3275eb6e" name="a63606ab00695e5d4e4ba9c3b3275eb6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63606ab00695e5d4e4ba9c3b3275eb6e">&#9670;&#160;</a></span>smallFonts</h2>
+<a id="a3d870669d476fe5528cbc948635eaeec" name="a3d870669d476fe5528cbc948635eaeec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d870669d476fe5528cbc948635eaeec">&#9670;&#160;</a></span>c8_smallFonts</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t smallFonts[5][80]</td>
+          <td class="memname">const uint8_t c8_smallFonts[5][80]</td>
         </tr>
       </table>
 </div><div class="memdoc">

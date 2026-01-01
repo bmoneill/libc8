@@ -99,7 +99,6 @@ $(document).ready(function(){initNavTree('exception_8c.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="exception_8h_source.html">exception.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="common_8h_source.html">../common.h</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
@@ -107,54 +106,56 @@ $(document).ready(function(){initNavTree('exception_8c.html',''); initResizable(
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Exception.html">C8_Exception</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an exception.  <a href="structC8__Exception.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ac35112fdcda6162f4c4d7dbbd0eacd9e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#ac35112fdcda6162f4c4d7dbbd0eacd9e">INVALID_INSTRUCTION_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;An invalid instruction exists in the input file.&quot;</td></tr>
-<tr class="separator:ac35112fdcda6162f4c4d7dbbd0eacd9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a949a0c9034584d8b0e289ede019d6ef5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a949a0c9034584d8b0e289ede019d6ef5">TOO_MANY_LABELS_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Too many labels are defined in the input file.&quot;</td></tr>
-<tr class="separator:a949a0c9034584d8b0e289ede019d6ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74b1d988cab3caa46e49a0ff2684d857"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a74b1d988cab3caa46e49a0ff2684d857">STACK_OVERFLOW_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;A stack overflow occurred during execution.&quot;</td></tr>
-<tr class="separator:a74b1d988cab3caa46e49a0ff2684d857"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad10eaf5bfd1e6ef44a9568551ed849ee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#ad10eaf5bfd1e6ef44a9568551ed849ee">INVALID_ARGUMENT_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;An invalid instruction argument was given.&quot;</td></tr>
-<tr class="separator:ad10eaf5bfd1e6ef44a9568551ed849ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a324da6f8ce367afdc1d3c32efcabd489"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a324da6f8ce367afdc1d3c32efcabd489">DUPLICATE_LABEL_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;A label was defined multiple times.&quot;</td></tr>
-<tr class="separator:a324da6f8ce367afdc1d3c32efcabd489"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e093e960ca74a084ea48394fca36fd1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a6e093e960ca74a084ea48394fca36fd1">INVALID_SYMBOL_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;An invalid symbol exists in the input file.&quot;</td></tr>
-<tr class="separator:a6e093e960ca74a084ea48394fca36fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6206eb59c6788af28c65c11932e61522"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a6206eb59c6788af28c65c11932e61522">MEMORY_ALLOCATION_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Failed to allocate memory.&quot;</td></tr>
-<tr class="separator:a6206eb59c6788af28c65c11932e61522"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9599d0e7e81b26fa8fbbf9e700c9df5c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a9599d0e7e81b26fa8fbbf9e700c9df5c">UNKNOWN_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;An unknown error has occurred.&quot;</td></tr>
-<tr class="separator:a9599d0e7e81b26fa8fbbf9e700c9df5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af62de7d8fb5f520eacfb91d2aaa06912"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#af62de7d8fb5f520eacfb91d2aaa06912">TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Too many symbols exist in the input file.&quot;</td></tr>
-<tr class="separator:af62de7d8fb5f520eacfb91d2aaa06912"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adeb9c7a505f592f531f436c458ae6042"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#adeb9c7a505f592f531f436c458ae6042">LOAD_FILE_FAILURE_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Failed to load file.&quot;</td></tr>
-<tr class="separator:adeb9c7a505f592f531f436c458ae6042"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97f7f4d011db8503ccb2b726d499fe69"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a97f7f4d011db8503ccb2b726d499fe69">FILE_TOO_BIG_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;The given file is too big.&quot;</td></tr>
-<tr class="separator:a97f7f4d011db8503ccb2b726d499fe69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14d4b092e0beb391db6ba51f5e7f746e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a14d4b092e0beb391db6ba51f5e7f746e">INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Invalid color palette.&quot;</td></tr>
-<tr class="separator:a14d4b092e0beb391db6ba51f5e7f746e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70f705bc964e7af2120d7e499adc73f6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a70f705bc964e7af2120d7e499adc73f6">INVALID_QUIRK_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Invalid quirk.&quot;</td></tr>
-<tr class="separator:a70f705bc964e7af2120d7e499adc73f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ae1a85b84b01c1f499de59e9a2de0b6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a5ae1a85b84b01c1f499de59e9a2de0b6">FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Failed to initialize graphics.&quot;</td></tr>
-<tr class="separator:a5ae1a85b84b01c1f499de59e9a2de0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb83ec1dd7e8419f7492b435a86c2e86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#acb83ec1dd7e8419f7492b435a86c2e86">INVALID_FONT_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Invalid font.&quot;</td></tr>
-<tr class="separator:acb83ec1dd7e8419f7492b435a86c2e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac400428156a04267b67f0052fb6ad8d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#ac400428156a04267b67f0052fb6ad8d1">INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Clock speed cannot be less than 1.&quot;</td></tr>
-<tr class="separator:ac400428156a04267b67f0052fb6ad8d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae78bb3d6d735c9c09c22af1b2041e15c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#ae78bb3d6d735c9c09c22af1b2041e15c">STACK_UNDERFLOW_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Stack underflow occurred during execution.&quot;</td></tr>
-<tr class="separator:ae78bb3d6d735c9c09c22af1b2041e15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a926bf99e610c65000fa88ce0142f7860"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a926bf99e610c65000fa88ce0142f7860">C8_INVALID_INSTRUCTION_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;An invalid instruction exists in the input file.&quot;</td></tr>
+<tr class="separator:a926bf99e610c65000fa88ce0142f7860"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29d77fb13943ba10612b6c3a754a9893"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a29d77fb13943ba10612b6c3a754a9893">C8_TOO_MANY_LABELS_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Too many labels are defined in the input file.&quot;</td></tr>
+<tr class="separator:a29d77fb13943ba10612b6c3a754a9893"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a403ffac146be66c1fe6ba938d22b026b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a403ffac146be66c1fe6ba938d22b026b">C8_STACK_OVERFLOW_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;A stack overflow occurred during execution.&quot;</td></tr>
+<tr class="separator:a403ffac146be66c1fe6ba938d22b026b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70302461c77c1b933be4a1cccdbe2d37"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a70302461c77c1b933be4a1cccdbe2d37">C8_INVALID_ARGUMENT_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;An invalid instruction argument was given.&quot;</td></tr>
+<tr class="separator:a70302461c77c1b933be4a1cccdbe2d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0730a52505e899a3422c91355882b6cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a0730a52505e899a3422c91355882b6cc">C8_DUPLICATE_LABEL_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;A label was defined multiple times.&quot;</td></tr>
+<tr class="separator:a0730a52505e899a3422c91355882b6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57588907fe171f31bd4724efd98bf099"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a57588907fe171f31bd4724efd98bf099">C8_INVALID_SYMBOL_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;An invalid symbol exists in the input file.&quot;</td></tr>
+<tr class="separator:a57588907fe171f31bd4724efd98bf099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64d6ccc3c8165d80fa110d9b9fd3305d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a64d6ccc3c8165d80fa110d9b9fd3305d">C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Failed to allocate memory.&quot;</td></tr>
+<tr class="separator:a64d6ccc3c8165d80fa110d9b9fd3305d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0520777407cdf942ed27f80c08e2d753"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a0520777407cdf942ed27f80c08e2d753">C8_UNKNOWN_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;An unknown error has occurred.&quot;</td></tr>
+<tr class="separator:a0520777407cdf942ed27f80c08e2d753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada90de898f3da58a68976c3bb42cefd7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#ada90de898f3da58a68976c3bb42cefd7">C8_TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Too many symbols exist in the input file.&quot;</td></tr>
+<tr class="separator:ada90de898f3da58a68976c3bb42cefd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e1550c06acaa7a359f448c168a42047"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a6e1550c06acaa7a359f448c168a42047">C8_LOAD_FILE_FAILURE_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Failed to load file.&quot;</td></tr>
+<tr class="separator:a6e1550c06acaa7a359f448c168a42047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada243640e464ef056a82be07917d684a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#ada243640e464ef056a82be07917d684a">C8_FILE_TOO_BIG_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;The given file is too big.&quot;</td></tr>
+<tr class="separator:ada243640e464ef056a82be07917d684a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b9e21ba5b4f196a6ab4c54a4fb05eca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a5b9e21ba5b4f196a6ab4c54a4fb05eca">C8_INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Invalid color palette.&quot;</td></tr>
+<tr class="separator:a5b9e21ba5b4f196a6ab4c54a4fb05eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44fadbaffd4abfc7f8f1b078d8fade65"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a44fadbaffd4abfc7f8f1b078d8fade65">C8_INVALID_QUIRK_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Invalid quirk.&quot;</td></tr>
+<tr class="separator:a44fadbaffd4abfc7f8f1b078d8fade65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a355033c16b5c05303b6c56205f38079b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a355033c16b5c05303b6c56205f38079b">C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Failed to initialize graphics.&quot;</td></tr>
+<tr class="separator:a355033c16b5c05303b6c56205f38079b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acce6a15178cebe54e17dfbd2caec5d6f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#acce6a15178cebe54e17dfbd2caec5d6f">C8_INVALID_FONT_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Invalid font.&quot;</td></tr>
+<tr class="separator:acce6a15178cebe54e17dfbd2caec5d6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b509376252d0b80be75f917ad6f8c9d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a6b509376252d0b80be75f917ad6f8c9d">C8_INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Clock speed cannot be less than 1.&quot;</td></tr>
+<tr class="separator:a6b509376252d0b80be75f917ad6f8c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe9ff3e16df954c93e8e38ce43c692c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#abe9ff3e16df954c93e8e38ce43c692c3">C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Stack underflow occurred during execution.&quot;</td></tr>
+<tr class="separator:abe9ff3e16df954c93e8e38ce43c692c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a33e469d807f6b0d1f7df798b3dc3f2ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a33e469d807f6b0d1f7df798b3dc3f2ff">handle_exception</a> (<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480">C8_ExceptionCode</a> code)</td></tr>
-<tr class="separator:a33e469d807f6b0d1f7df798b3dc3f2ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0b1dd47826fe873e66fc467f5a46738"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#ac0b1dd47826fe873e66fc467f5a46738">c8_handle_exception</a> (<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480">C8_ExceptionCode</a> code)</td></tr>
+<tr class="memdesc:ac0b1dd47826fe873e66fc467f5a46738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles an exception by printing the corresponding error message to stderr.  <br /></td></tr>
+<tr class="separator:ac0b1dd47826fe873e66fc467f5a46738"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ade6f3048fe1347632670c42b555ad366"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structC8__Exception.html">C8_Exception</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#ade6f3048fe1347632670c42b555ad366">exceptions</a> []</td></tr>
-<tr class="separator:ade6f3048fe1347632670c42b555ad366"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01a182af7759f1fb977e2d3140fd80d8"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structC8__Exception.html">C8_Exception</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a01a182af7759f1fb977e2d3140fd80d8">c8_exceptions</a> []</td></tr>
+<tr class="separator:a01a182af7759f1fb977e2d3140fd80d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a220454f62a07328378e890bf6f2488b0"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a220454f62a07328378e890bf6f2488b0">c8_exception</a> [BUFSIZ]</td></tr>
 <tr class="separator:a220454f62a07328378e890bf6f2488b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -162,238 +163,238 @@ Variables</h2></td></tr>
 <div class="textblock"><dl class="section note"><dt>Note</dt><dd>NOT EXPORTED</dd></dl>
 <p>Stuff for handling exceptions. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a324da6f8ce367afdc1d3c32efcabd489" name="a324da6f8ce367afdc1d3c32efcabd489"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a324da6f8ce367afdc1d3c32efcabd489">&#9670;&#160;</a></span>DUPLICATE_LABEL_EXCEPTION_MESSAGE</h2>
+<a id="a0730a52505e899a3422c91355882b6cc" name="a0730a52505e899a3422c91355882b6cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0730a52505e899a3422c91355882b6cc">&#9670;&#160;</a></span>C8_DUPLICATE_LABEL_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define DUPLICATE_LABEL_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;A label was defined multiple times.&quot;</td>
+          <td class="memname">#define C8_DUPLICATE_LABEL_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;A label was defined multiple times.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a5ae1a85b84b01c1f499de59e9a2de0b6" name="a5ae1a85b84b01c1f499de59e9a2de0b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ae1a85b84b01c1f499de59e9a2de0b6">&#9670;&#160;</a></span>FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE</h2>
+<a id="a355033c16b5c05303b6c56205f38079b" name="a355033c16b5c05303b6c56205f38079b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a355033c16b5c05303b6c56205f38079b">&#9670;&#160;</a></span>C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Failed to initialize graphics.&quot;</td>
+          <td class="memname">#define C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Failed to initialize graphics.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a97f7f4d011db8503ccb2b726d499fe69" name="a97f7f4d011db8503ccb2b726d499fe69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97f7f4d011db8503ccb2b726d499fe69">&#9670;&#160;</a></span>FILE_TOO_BIG_EXCEPTION_MESSAGE</h2>
+<a id="ada243640e464ef056a82be07917d684a" name="ada243640e464ef056a82be07917d684a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada243640e464ef056a82be07917d684a">&#9670;&#160;</a></span>C8_FILE_TOO_BIG_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define FILE_TOO_BIG_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;The given file is too big.&quot;</td>
+          <td class="memname">#define C8_FILE_TOO_BIG_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;The given file is too big.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ad10eaf5bfd1e6ef44a9568551ed849ee" name="ad10eaf5bfd1e6ef44a9568551ed849ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad10eaf5bfd1e6ef44a9568551ed849ee">&#9670;&#160;</a></span>INVALID_ARGUMENT_EXCEPTION_MESSAGE</h2>
+<a id="a70302461c77c1b933be4a1cccdbe2d37" name="a70302461c77c1b933be4a1cccdbe2d37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70302461c77c1b933be4a1cccdbe2d37">&#9670;&#160;</a></span>C8_INVALID_ARGUMENT_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define INVALID_ARGUMENT_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;An invalid instruction argument was given.&quot;</td>
+          <td class="memname">#define C8_INVALID_ARGUMENT_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;An invalid instruction argument was given.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ac400428156a04267b67f0052fb6ad8d1" name="ac400428156a04267b67f0052fb6ad8d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac400428156a04267b67f0052fb6ad8d1">&#9670;&#160;</a></span>INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE</h2>
+<a id="a6b509376252d0b80be75f917ad6f8c9d" name="a6b509376252d0b80be75f917ad6f8c9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b509376252d0b80be75f917ad6f8c9d">&#9670;&#160;</a></span>C8_INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Clock speed cannot be less than 1.&quot;</td>
+          <td class="memname">#define C8_INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Clock speed cannot be less than 1.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a14d4b092e0beb391db6ba51f5e7f746e" name="a14d4b092e0beb391db6ba51f5e7f746e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14d4b092e0beb391db6ba51f5e7f746e">&#9670;&#160;</a></span>INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE</h2>
+<a id="a5b9e21ba5b4f196a6ab4c54a4fb05eca" name="a5b9e21ba5b4f196a6ab4c54a4fb05eca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b9e21ba5b4f196a6ab4c54a4fb05eca">&#9670;&#160;</a></span>C8_INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Invalid color palette.&quot;</td>
+          <td class="memname">#define C8_INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Invalid color palette.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="acb83ec1dd7e8419f7492b435a86c2e86" name="acb83ec1dd7e8419f7492b435a86c2e86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb83ec1dd7e8419f7492b435a86c2e86">&#9670;&#160;</a></span>INVALID_FONT_EXCEPTION_MESSAGE</h2>
+<a id="acce6a15178cebe54e17dfbd2caec5d6f" name="acce6a15178cebe54e17dfbd2caec5d6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acce6a15178cebe54e17dfbd2caec5d6f">&#9670;&#160;</a></span>C8_INVALID_FONT_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define INVALID_FONT_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Invalid font.&quot;</td>
+          <td class="memname">#define C8_INVALID_FONT_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Invalid font.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ac35112fdcda6162f4c4d7dbbd0eacd9e" name="ac35112fdcda6162f4c4d7dbbd0eacd9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac35112fdcda6162f4c4d7dbbd0eacd9e">&#9670;&#160;</a></span>INVALID_INSTRUCTION_EXCEPTION_MESSAGE</h2>
+<a id="a926bf99e610c65000fa88ce0142f7860" name="a926bf99e610c65000fa88ce0142f7860"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a926bf99e610c65000fa88ce0142f7860">&#9670;&#160;</a></span>C8_INVALID_INSTRUCTION_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define INVALID_INSTRUCTION_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;An invalid instruction exists in the input file.&quot;</td>
+          <td class="memname">#define C8_INVALID_INSTRUCTION_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;An invalid instruction exists in the input file.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a70f705bc964e7af2120d7e499adc73f6" name="a70f705bc964e7af2120d7e499adc73f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70f705bc964e7af2120d7e499adc73f6">&#9670;&#160;</a></span>INVALID_QUIRK_EXCEPTION_MESSAGE</h2>
+<a id="a44fadbaffd4abfc7f8f1b078d8fade65" name="a44fadbaffd4abfc7f8f1b078d8fade65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44fadbaffd4abfc7f8f1b078d8fade65">&#9670;&#160;</a></span>C8_INVALID_QUIRK_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define INVALID_QUIRK_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Invalid quirk.&quot;</td>
+          <td class="memname">#define C8_INVALID_QUIRK_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Invalid quirk.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a6e093e960ca74a084ea48394fca36fd1" name="a6e093e960ca74a084ea48394fca36fd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e093e960ca74a084ea48394fca36fd1">&#9670;&#160;</a></span>INVALID_SYMBOL_EXCEPTION_MESSAGE</h2>
+<a id="a57588907fe171f31bd4724efd98bf099" name="a57588907fe171f31bd4724efd98bf099"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57588907fe171f31bd4724efd98bf099">&#9670;&#160;</a></span>C8_INVALID_SYMBOL_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define INVALID_SYMBOL_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;An invalid symbol exists in the input file.&quot;</td>
+          <td class="memname">#define C8_INVALID_SYMBOL_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;An invalid symbol exists in the input file.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="adeb9c7a505f592f531f436c458ae6042" name="adeb9c7a505f592f531f436c458ae6042"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adeb9c7a505f592f531f436c458ae6042">&#9670;&#160;</a></span>LOAD_FILE_FAILURE_EXCEPTION_MESSAGE</h2>
+<a id="a6e1550c06acaa7a359f448c168a42047" name="a6e1550c06acaa7a359f448c168a42047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e1550c06acaa7a359f448c168a42047">&#9670;&#160;</a></span>C8_LOAD_FILE_FAILURE_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define LOAD_FILE_FAILURE_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Failed to load file.&quot;</td>
+          <td class="memname">#define C8_LOAD_FILE_FAILURE_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Failed to load file.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a6206eb59c6788af28c65c11932e61522" name="a6206eb59c6788af28c65c11932e61522"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6206eb59c6788af28c65c11932e61522">&#9670;&#160;</a></span>MEMORY_ALLOCATION_EXCEPTION_MESSAGE</h2>
+<a id="a64d6ccc3c8165d80fa110d9b9fd3305d" name="a64d6ccc3c8165d80fa110d9b9fd3305d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64d6ccc3c8165d80fa110d9b9fd3305d">&#9670;&#160;</a></span>C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MEMORY_ALLOCATION_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Failed to allocate memory.&quot;</td>
+          <td class="memname">#define C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Failed to allocate memory.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a74b1d988cab3caa46e49a0ff2684d857" name="a74b1d988cab3caa46e49a0ff2684d857"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74b1d988cab3caa46e49a0ff2684d857">&#9670;&#160;</a></span>STACK_OVERFLOW_EXCEPTION_MESSAGE</h2>
+<a id="a403ffac146be66c1fe6ba938d22b026b" name="a403ffac146be66c1fe6ba938d22b026b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a403ffac146be66c1fe6ba938d22b026b">&#9670;&#160;</a></span>C8_STACK_OVERFLOW_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define STACK_OVERFLOW_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;A stack overflow occurred during execution.&quot;</td>
+          <td class="memname">#define C8_STACK_OVERFLOW_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;A stack overflow occurred during execution.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ae78bb3d6d735c9c09c22af1b2041e15c" name="ae78bb3d6d735c9c09c22af1b2041e15c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae78bb3d6d735c9c09c22af1b2041e15c">&#9670;&#160;</a></span>STACK_UNDERFLOW_EXCEPTION_MESSAGE</h2>
+<a id="abe9ff3e16df954c93e8e38ce43c692c3" name="abe9ff3e16df954c93e8e38ce43c692c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe9ff3e16df954c93e8e38ce43c692c3">&#9670;&#160;</a></span>C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define STACK_UNDERFLOW_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Stack underflow occurred during execution.&quot;</td>
+          <td class="memname">#define C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Stack underflow occurred during execution.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a949a0c9034584d8b0e289ede019d6ef5" name="a949a0c9034584d8b0e289ede019d6ef5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a949a0c9034584d8b0e289ede019d6ef5">&#9670;&#160;</a></span>TOO_MANY_LABELS_EXCEPTION_MESSAGE</h2>
+<a id="a29d77fb13943ba10612b6c3a754a9893" name="a29d77fb13943ba10612b6c3a754a9893"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29d77fb13943ba10612b6c3a754a9893">&#9670;&#160;</a></span>C8_TOO_MANY_LABELS_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define TOO_MANY_LABELS_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Too many labels are defined in the input file.&quot;</td>
+          <td class="memname">#define C8_TOO_MANY_LABELS_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Too many labels are defined in the input file.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="af62de7d8fb5f520eacfb91d2aaa06912" name="af62de7d8fb5f520eacfb91d2aaa06912"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af62de7d8fb5f520eacfb91d2aaa06912">&#9670;&#160;</a></span>TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE</h2>
+<a id="ada90de898f3da58a68976c3bb42cefd7" name="ada90de898f3da58a68976c3bb42cefd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada90de898f3da58a68976c3bb42cefd7">&#9670;&#160;</a></span>C8_TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Too many symbols exist in the input file.&quot;</td>
+          <td class="memname">#define C8_TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Too many symbols exist in the input file.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a9599d0e7e81b26fa8fbbf9e700c9df5c" name="a9599d0e7e81b26fa8fbbf9e700c9df5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9599d0e7e81b26fa8fbbf9e700c9df5c">&#9670;&#160;</a></span>UNKNOWN_EXCEPTION_MESSAGE</h2>
+<a id="a0520777407cdf942ed27f80c08e2d753" name="a0520777407cdf942ed27f80c08e2d753"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0520777407cdf942ed27f80c08e2d753">&#9670;&#160;</a></span>C8_UNKNOWN_EXCEPTION_MESSAGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UNKNOWN_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;An unknown error has occurred.&quot;</td>
+          <td class="memname">#define C8_UNKNOWN_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;An unknown error has occurred.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -401,14 +402,14 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a33e469d807f6b0d1f7df798b3dc3f2ff" name="a33e469d807f6b0d1f7df798b3dc3f2ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33e469d807f6b0d1f7df798b3dc3f2ff">&#9670;&#160;</a></span>handle_exception()</h2>
+<a id="ac0b1dd47826fe873e66fc467f5a46738" name="ac0b1dd47826fe873e66fc467f5a46738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0b1dd47826fe873e66fc467f5a46738">&#9670;&#160;</a></span>c8_handle_exception()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void handle_exception </td>
+          <td class="memname">void c8_handle_exception </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480">C8_ExceptionCode</a>&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
@@ -416,6 +417,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Handles an exception by printing the corresponding error message to stderr. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td>The exception code. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -431,57 +440,58 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Message to print when calling <code>handle_exception</code> with a non-zero code </p>
+<p>Message to print when calling <code>c8_handle_exception</code> with a non-zero code </p>
 
 </div>
 </div>
-<a id="ade6f3048fe1347632670c42b555ad366" name="ade6f3048fe1347632670c42b555ad366"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade6f3048fe1347632670c42b555ad366">&#9670;&#160;</a></span>exceptions</h2>
+<a id="a01a182af7759f1fb977e2d3140fd80d8" name="a01a182af7759f1fb977e2d3140fd80d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01a182af7759f1fb977e2d3140fd80d8">&#9670;&#160;</a></span>c8_exceptions</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="structC8__Exception.html">C8_Exception</a> exceptions[]</td>
+          <td class="memname">const <a class="el" href="structC8__Exception.html">C8_Exception</a> c8_exceptions[]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a>,  <span class="stringliteral">&quot;An invalid instruction exists in the input file.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a796941d857979fde0a0345c4fc1b7103">TOO_MANY_LABELS_EXCEPTION</a>,  <span class="stringliteral">&quot;Too many labels are defined in the input file.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ad6fe2e2faa40a4c0dd0325997881aec0">STACK_OVERFLOW_EXCEPTION</a>,  <span class="stringliteral">&quot;A stack overflow occurred during execution.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480abea88c7480a592f9cfc48d5ff634a54a">INVALID_ARGUMENT_EXCEPTION</a>,  <span class="stringliteral">&quot;An invalid instruction argument was given.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480af25105f8195e1faa2143a21942e4ade1">DUPLICATE_LABEL_EXCEPTION</a>,  <span class="stringliteral">&quot;A label was defined multiple times.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a370b0451ded7089ffb4ce1b8b53faf10">INVALID_SYMBOL_EXCEPTION</a>,  <span class="stringliteral">&quot;An invalid symbol exists in the input file.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a1036439e8ed0580814539af9f3ad3c37">MEMORY_ALLOCATION_EXCEPTION</a>,  <span class="stringliteral">&quot;Failed to allocate memory.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a1918b005c3a338a2b213077aeb2ffa03">UNKNOWN_EXCEPTION</a>,  <span class="stringliteral">&quot;An unknown error has occurred.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a04d468fe83f3c93d1fb81b6f3532d13b">TOO_MANY_SYMBOLS_EXCEPTION</a>,  <span class="stringliteral">&quot;Too many symbols exist in the input file.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480af630833c17ebef4c030a95cfed6b218b">LOAD_FILE_FAILURE_EXCEPTION</a>,  <span class="stringliteral">&quot;Failed to load file.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a52a248732dadf1de7254d4f283bf2f88">FILE_TOO_BIG_EXCEPTION</a>,  <span class="stringliteral">&quot;The given file is too big.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480aecd95338fa080426f7431ad389e50c79">INVALID_COLOR_PALETTE_EXCEPTION</a>,  <span class="stringliteral">&quot;Invalid color palette.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a81acb4921da74ab211bb24a7364a8073">INVALID_QUIRK_EXCEPTION</a>,  <span class="stringliteral">&quot;Invalid quirk.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae2f1b32e97a36abd0238cf6cea302d4d">FAILED_GRAPHICS_INITIALIZATION_EXCEPTION</a>,  <span class="stringliteral">&quot;Failed to initialize graphics.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab3fa90ab9bfc5e55ae151b1f09d5b1a0">INVALID_FONT_EXCEPTION</a>,  <span class="stringliteral">&quot;Invalid font.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab5b33615c956f298585103c8fb59dceb">INVALID_CLOCK_SPEED_EXCEPTION</a>,  <span class="stringliteral">&quot;Clock speed cannot be less than 1.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480abcd4b9587b726a485b36533272f90ce3">STACK_UNDERFLOW_EXCEPTION</a>,  <span class="stringliteral">&quot;Stack underflow occurred during execution.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a>,  <span class="stringliteral">&quot;An invalid instruction exists in the input file.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5637fe6bf703e39df8b3b097d28ad276">C8_TOO_MANY_LABELS_EXCEPTION</a>,  <span class="stringliteral">&quot;Too many labels are defined in the input file.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627">C8_STACK_OVERFLOW_EXCEPTION</a>,  <span class="stringliteral">&quot;A stack overflow occurred during execution.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5062f4976d83e80bc391406c54a223f7">C8_INVALID_ARGUMENT_EXCEPTION</a>,  <span class="stringliteral">&quot;An invalid instruction argument was given.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ad59e88c91356fdbf9f753d3c8644cf83">C8_DUPLICATE_LABEL_EXCEPTION</a>,  <span class="stringliteral">&quot;A label was defined multiple times.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a409377cb39089af6be279ebfbea08051">C8_INVALID_SYMBOL_EXCEPTION</a>,  <span class="stringliteral">&quot;An invalid symbol exists in the input file.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a526c94418797d663a630f29b4fda9838">C8_MEMORY_ALLOCATION_EXCEPTION</a>,  <span class="stringliteral">&quot;Failed to allocate memory.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a142790ed1dc30cd295f39b9e641a2c85">C8_UNKNOWN_EXCEPTION</a>,  <span class="stringliteral">&quot;An unknown error has occurred.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab4eff6980b381cb483fa19853b3fc386">C8_TOO_MANY_SYMBOLS_EXCEPTION</a>,  <span class="stringliteral">&quot;Too many symbols exist in the input file.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5628e8f6e83af54b4c7fef49e1a80abf">C8_LOAD_FILE_FAILURE_EXCEPTION</a>,  <span class="stringliteral">&quot;Failed to load file.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae12c50afda02689ba17a4f46b6995c9b">C8_FILE_TOO_BIG_EXCEPTION</a>,  <span class="stringliteral">&quot;The given file is too big.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9e3f63e708ac14bf5921f70ed7bf54ac">C8_INVALID_COLOR_PALETTE_EXCEPTION</a>,  <span class="stringliteral">&quot;Invalid color palette.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae66de38a1743bd708966ef5393fa0a2c">C8_INVALID_QUIRK_EXCEPTION</a>,  <span class="stringliteral">&quot;Invalid quirk.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a929af25c310f19442ef4b27593b69d97">C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION</a>,</div>
+<div class="line">       <span class="stringliteral">&quot;Failed to initialize graphics.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7952be3cdc38b30f8c3a9fa0ae8a6e7c">C8_INVALID_FONT_EXCEPTION</a>,  <span class="stringliteral">&quot;Invalid font.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272">C8_INVALID_CLOCK_SPEED_EXCEPTION</a>,  <span class="stringliteral">&quot;Clock speed cannot be less than 1.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880">C8_STACK_UNDERFLOW_EXCEPTION</a>,  <span class="stringliteral">&quot;Stack underflow occurred during execution.&quot;</span>  },</div>
 <div class="line">}</div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a04d468fe83f3c93d1fb81b6f3532d13b"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a04d468fe83f3c93d1fb81b6f3532d13b">TOO_MANY_SYMBOLS_EXCEPTION</a></div><div class="ttdeci">@ TOO_MANY_SYMBOLS_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:30</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a1036439e8ed0580814539af9f3ad3c37"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a1036439e8ed0580814539af9f3ad3c37">MEMORY_ALLOCATION_EXCEPTION</a></div><div class="ttdeci">@ MEMORY_ALLOCATION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:28</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a1918b005c3a338a2b213077aeb2ffa03"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a1918b005c3a338a2b213077aeb2ffa03">UNKNOWN_EXCEPTION</a></div><div class="ttdeci">@ UNKNOWN_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:29</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a370b0451ded7089ffb4ce1b8b53faf10"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a370b0451ded7089ffb4ce1b8b53faf10">INVALID_SYMBOL_EXCEPTION</a></div><div class="ttdeci">@ INVALID_SYMBOL_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:27</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a52a248732dadf1de7254d4f283bf2f88"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a52a248732dadf1de7254d4f283bf2f88">FILE_TOO_BIG_EXCEPTION</a></div><div class="ttdeci">@ FILE_TOO_BIG_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:32</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a796941d857979fde0a0345c4fc1b7103"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a796941d857979fde0a0345c4fc1b7103">TOO_MANY_LABELS_EXCEPTION</a></div><div class="ttdeci">@ TOO_MANY_LABELS_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:23</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a81acb4921da74ab211bb24a7364a8073"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a81acb4921da74ab211bb24a7364a8073">INVALID_QUIRK_EXCEPTION</a></div><div class="ttdeci">@ INVALID_QUIRK_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:34</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a89fe9d8586d84549f73c7696c7fc01d5"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a89fe9d8586d84549f73c7696c7fc01d5">INVALID_INSTRUCTION_EXCEPTION</a></div><div class="ttdeci">@ INVALID_INSTRUCTION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:22</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ab3fa90ab9bfc5e55ae151b1f09d5b1a0"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab3fa90ab9bfc5e55ae151b1f09d5b1a0">INVALID_FONT_EXCEPTION</a></div><div class="ttdeci">@ INVALID_FONT_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:36</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ab5b33615c956f298585103c8fb59dceb"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab5b33615c956f298585103c8fb59dceb">INVALID_CLOCK_SPEED_EXCEPTION</a></div><div class="ttdeci">@ INVALID_CLOCK_SPEED_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:37</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480abcd4b9587b726a485b36533272f90ce3"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480abcd4b9587b726a485b36533272f90ce3">STACK_UNDERFLOW_EXCEPTION</a></div><div class="ttdeci">@ STACK_UNDERFLOW_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:38</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480abea88c7480a592f9cfc48d5ff634a54a"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480abea88c7480a592f9cfc48d5ff634a54a">INVALID_ARGUMENT_EXCEPTION</a></div><div class="ttdeci">@ INVALID_ARGUMENT_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:25</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ad6fe2e2faa40a4c0dd0325997881aec0"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ad6fe2e2faa40a4c0dd0325997881aec0">STACK_OVERFLOW_EXCEPTION</a></div><div class="ttdeci">@ STACK_OVERFLOW_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:24</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ae2f1b32e97a36abd0238cf6cea302d4d"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae2f1b32e97a36abd0238cf6cea302d4d">FAILED_GRAPHICS_INITIALIZATION_EXCEPTION</a></div><div class="ttdeci">@ FAILED_GRAPHICS_INITIALIZATION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:35</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480aecd95338fa080426f7431ad389e50c79"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480aecd95338fa080426f7431ad389e50c79">INVALID_COLOR_PALETTE_EXCEPTION</a></div><div class="ttdeci">@ INVALID_COLOR_PALETTE_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:33</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480af25105f8195e1faa2143a21942e4ade1"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480af25105f8195e1faa2143a21942e4ade1">DUPLICATE_LABEL_EXCEPTION</a></div><div class="ttdeci">@ DUPLICATE_LABEL_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:26</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480af630833c17ebef4c030a95cfed6b218b"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480af630833c17ebef4c030a95cfed6b218b">LOAD_FILE_FAILURE_EXCEPTION</a></div><div class="ttdeci">@ LOAD_FILE_FAILURE_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:31</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272">C8_INVALID_CLOCK_SPEED_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_CLOCK_SPEED_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:37</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a142790ed1dc30cd295f39b9e641a2c85"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a142790ed1dc30cd295f39b9e641a2c85">C8_UNKNOWN_EXCEPTION</a></div><div class="ttdeci">@ C8_UNKNOWN_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:29</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a409377cb39089af6be279ebfbea08051"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a409377cb39089af6be279ebfbea08051">C8_INVALID_SYMBOL_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_SYMBOL_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:27</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a5062f4976d83e80bc391406c54a223f7"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5062f4976d83e80bc391406c54a223f7">C8_INVALID_ARGUMENT_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_ARGUMENT_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:25</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a526c94418797d663a630f29b4fda9838"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a526c94418797d663a630f29b4fda9838">C8_MEMORY_ALLOCATION_EXCEPTION</a></div><div class="ttdeci">@ C8_MEMORY_ALLOCATION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:28</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a5628e8f6e83af54b4c7fef49e1a80abf"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5628e8f6e83af54b4c7fef49e1a80abf">C8_LOAD_FILE_FAILURE_EXCEPTION</a></div><div class="ttdeci">@ C8_LOAD_FILE_FAILURE_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:31</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a5637fe6bf703e39df8b3b097d28ad276"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5637fe6bf703e39df8b3b097d28ad276">C8_TOO_MANY_LABELS_EXCEPTION</a></div><div class="ttdeci">@ C8_TOO_MANY_LABELS_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:23</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a7952be3cdc38b30f8c3a9fa0ae8a6e7c"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7952be3cdc38b30f8c3a9fa0ae8a6e7c">C8_INVALID_FONT_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_FONT_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:36</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627">C8_STACK_OVERFLOW_EXCEPTION</a></div><div class="ttdeci">@ C8_STACK_OVERFLOW_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:24</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a929af25c310f19442ef4b27593b69d97"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a929af25c310f19442ef4b27593b69d97">C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION</a></div><div class="ttdeci">@ C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:35</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a9e3f63e708ac14bf5921f70ed7bf54ac"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9e3f63e708ac14bf5921f70ed7bf54ac">C8_INVALID_COLOR_PALETTE_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_COLOR_PALETTE_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:33</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ab4eff6980b381cb483fa19853b3fc386"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab4eff6980b381cb483fa19853b3fc386">C8_TOO_MANY_SYMBOLS_EXCEPTION</a></div><div class="ttdeci">@ C8_TOO_MANY_SYMBOLS_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:30</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880">C8_STACK_UNDERFLOW_EXCEPTION</a></div><div class="ttdeci">@ C8_STACK_UNDERFLOW_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:38</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ad59e88c91356fdbf9f753d3c8644cf83"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ad59e88c91356fdbf9f753d3c8644cf83">C8_DUPLICATE_LABEL_EXCEPTION</a></div><div class="ttdeci">@ C8_DUPLICATE_LABEL_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:26</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ae12c50afda02689ba17a4f46b6995c9b"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae12c50afda02689ba17a4f46b6995c9b">C8_FILE_TOO_BIG_EXCEPTION</a></div><div class="ttdeci">@ C8_FILE_TOO_BIG_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:32</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_INSTRUCTION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:22</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ae66de38a1743bd708966ef5393fa0a2c"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae66de38a1743bd708966ef5393fa0a2c">C8_INVALID_QUIRK_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_QUIRK_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:34</div></div>
 </div><!-- fragment -->
 </div>
 </div>
