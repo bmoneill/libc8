@@ -11,6 +11,12 @@
 
 #define BUFLEN 64
 
+#define TEST_COMMAND(s, cmdid, argtype)                                                            \
+    strcpy(buf, s);                                                                                \
+    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));                                           \
+    TEST_ASSERT_EQUAL_INT(cmdid, cmd.id);                                                          \
+    TEST_ASSERT_EQUAL_INT(argtype, cmd.arg.type);
+
 char       buf[BUFLEN];
 C8_Command cmd;
 C8         c8;
@@ -24,143 +30,74 @@ void       setUp(void) {
 void tearDown(void) {}
 
 void test_c8_get_command_WhereCommandIsBreak(void) {
-    const char* s = "break";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_ADD_BREAKPOINT, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
+    TEST_COMMAND("break", C8_CMD_ADD_BREAKPOINT, C8_ARG_NONE);
 }
 
 void test_c8_get_command_WhereCommandIsRMBreak(void) {
-    const char* s = "rmbreak";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_RM_BREAKPOINT, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
+    TEST_COMMAND("rmbreak", C8_CMD_RM_BREAKPOINT, C8_ARG_NONE);
 }
 
 void test_c8_get_command_WhereCommandIsContinue(void) {
-    const char* s = "continue";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_CONTINUE, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
+    TEST_COMMAND("continue", C8_CMD_CONTINUE, C8_ARG_NONE);
 }
 
 void test_c8_get_command_WhereCommandIsNext(void) {
-    const char* s = "next";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_NEXT, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
+    TEST_COMMAND("next", C8_CMD_NEXT, C8_ARG_NONE);
 }
 
 void test_c8_get_command_WhereCommandIsSet(void) {
-    const char* s = "set PC 0x200";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_SET, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_PC, cmd.arg.type);
+    TEST_COMMAND("set PC 0x200", C8_CMD_SET, C8_ARG_PC);
     TEST_ASSERT_EQUAL_INT(0x200, cmd.setValue);
 }
 
 void test_c8_get_command_WhereCommandIsSet_WhereArgIsAddr(void) {
     int addr  = 0x20;
     int value = 0x12;
-    sprintf(buf, "set $%03x %d", addr, value);
 
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_SET, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_ADDR, cmd.arg.type);
+    TEST_COMMAND("set $20 0x12", C8_CMD_SET, C8_ARG_ADDR);
     TEST_ASSERT_EQUAL_INT(addr, cmd.arg.value.i);
     TEST_ASSERT_EQUAL_INT(value, cmd.setValue);
 }
 
 void test_c8_get_command_WhereCommandIsLoad(void) {
-    const char* s = "load /path/to/file";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_LOAD, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_FILE, cmd.arg.type);
+    TEST_COMMAND("load /path/to/file", C8_CMD_LOAD, C8_ARG_FILE);
     TEST_ASSERT_EQUAL_STRING("/path/to/file", cmd.arg.value.s);
 }
 
 void test_c8_get_command_WhereCommandIsSave(void) {
-    const char* s = "save /path/to/file";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_SAVE, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_FILE, cmd.arg.type);
+    TEST_COMMAND("save /path/to/file", C8_CMD_SAVE, C8_ARG_FILE);
     TEST_ASSERT_EQUAL_STRING("/path/to/file", cmd.arg.value.s);
 }
 
 void test_c8_get_command_WhereCommandIsLoadFlags(void) {
-    const char* s = "loadflags /path/to/flags";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_LOADFLAGS, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_FILE, cmd.arg.type);
+    TEST_COMMAND("loadflags /path/to/flags", C8_CMD_LOADFLAGS, C8_ARG_FILE);
     TEST_ASSERT_EQUAL_STRING("/path/to/flags", cmd.arg.value.s);
 }
 
 void test_c8_get_command_WhereCommandIsSaveFlags(void) {
-    const char* s = "saveflags /path/to/flags";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_SAVEFLAGS, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_FILE, cmd.arg.type);
+    TEST_COMMAND("saveflags /path/to/flags", C8_CMD_SAVEFLAGS, C8_ARG_FILE);
     TEST_ASSERT_EQUAL_STRING("/path/to/flags", cmd.arg.value.s);
 }
 
 void test_c8_get_command_WhereCommandIsPrint_WithArgument(void) {
-    const char* s = "print PC";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_PRINT, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_PC, cmd.arg.type);
+    TEST_COMMAND("print PC", C8_CMD_PRINT, C8_ARG_PC);
 }
 
 void test_c8_get_command_WhereCommandIsPrint_WithNoArguments(void) {
-    const char* s = "print";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_PRINT, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
+    TEST_COMMAND("print", C8_CMD_PRINT, C8_ARG_NONE);
 }
 
 void test_c8_get_command_WhereCommandIsHelp(void) {
-    const char* s = "help";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_HELP, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
+    TEST_COMMAND("help", C8_CMD_HELP, C8_ARG_NONE);
 }
 
 void test_c8_get_command_WhereCommandIsQuit(void) {
-    const char* s = "quit";
-    strcpy(buf, s);
-
-    TEST_ASSERT_EQUAL_INT(1, c8_get_command(&cmd, buf));
-    TEST_ASSERT_EQUAL_INT(C8_CMD_QUIT, cmd.id);
-    TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
+    TEST_COMMAND("quit", C8_CMD_QUIT, C8_ARG_NONE);
 }
 
 void test_c8_get_command_WhereCommandIsInvalid(void) {
     const char* s = "invalid";
     strcpy(buf, s);
-
     TEST_ASSERT_EQUAL_INT(0, c8_get_command(&cmd, buf));
     TEST_ASSERT_EQUAL_INT(C8_CMD_NONE, cmd.id);
     TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);

@@ -1,4 +1,3 @@
-#include "c8/common.h"
 #include "c8/private/exception.c"
 #include "c8/private/util.c"
 #include "unity.h"
