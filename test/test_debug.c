@@ -1,10 +1,7 @@
 
 #include "unity.h"
 
-#include "c8/common.h"
 #include "c8/private/debug.c"
-#include "c8/private/exception.h"
-#include "c8/private/util.h"
 
 #include <stdint.h>
 #include <string.h>
