@@ -3,6 +3,7 @@ var common_8h =
     [ "C8_A", "common_8h.html#a2b7412265fcb5e14d71e3e73bbf90808", null ],
     [ "C8_B", "common_8h.html#abc473f47088628d7d5e744beb2e7b6c6", null ],
     [ "C8_EXPAND", "common_8h.html#a0c845c4d46fd2ee04977be885e156265", null ],
+    [ "C8_INLINE", "common_8h.html#a8bed8e40f510ca0765fcb6fca5a11e82", null ],
     [ "C8_KK", "common_8h.html#adbfd840282045dd988d09888d6f62b8d", null ],
     [ "C8_MEMSIZE", "common_8h.html#a9225090846dc1403ea45590bb45804b3", null ],
     [ "C8_NNN", "common_8h.html#af7b022502148c2b9883507a5be38e480", null ],
