@@ -8,7 +8,7 @@ var font_8c =
     [ "VIP_S", "font_8c.html#a71e77f0df1f95d5dd9afe6623a5cef94", null ],
     [ "c8_print_fonts", "font_8c.html#aa60ab998eb2c236840be2c86bfe2f036", null ],
     [ "c8_set_big_font", "font_8c.html#a95b80629df02c9c98a12d7a2c930f7ab", null ],
-    [ "c8_set_fonts", "font_8c.html#a25cb2632c7a87552edb6aff712d57340", null ],
+    [ "c8_set_fonts", "font_8c.html#ade9621bf169032b2e66df7b10970b652", null ],
     [ "c8_set_fonts_s", "font_8c.html#ae4135a656d1a96a064e3f4cc90483a2d", null ],
     [ "c8_set_small_font", "font_8c.html#aeae697735273c594e3c126fea1e9fd26", null ],
     [ "c8_bigFonts", "font_8c.html#aa168321f6c88b725b6d0b2f03cd41d23", null ],

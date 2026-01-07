@@ -104,32 +104,27 @@ $(document).ready(function(){initNavTree('structC8__Instruction.html',''); initR
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a41ebd28ef1d7c6ade45642cb6acc1039"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Instruction.html#a41ebd28ef1d7c6ade45642cb6acc1039">line</a></td></tr>
+<tr class="memdesc:a41ebd28ef1d7c6ade45642cb6acc1039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Line number.  <br /></td></tr>
 <tr class="separator:a41ebd28ef1d7c6ade45642cb6acc1039"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af58714ecdb75b0edc200a0ca0895b100"><td class="memItemLeft" align="right" valign="top"><a class="el" href="symbol_8h.html#a07a28f1ba52034ec968e5a1da7712b5b">C8_InstructionIdentifier</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Instruction.html#af58714ecdb75b0edc200a0ca0895b100">cmd</a></td></tr>
+<tr class="memdesc:af58714ecdb75b0edc200a0ca0895b100"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instruction command.  <br /></td></tr>
 <tr class="separator:af58714ecdb75b0edc200a0ca0895b100"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a747fe457bac32c34b78b69f9bfefd6f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Instruction.html#a747fe457bac32c34b78b69f9bfefd6f3">pcount</a></td></tr>
+<tr class="memdesc:a747fe457bac32c34b78b69f9bfefd6f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameter count.  <br /></td></tr>
 <tr class="separator:a747fe457bac32c34b78b69f9bfefd6f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68911e16317263355bae9e1341d53689"><td class="memItemLeft" align="right" valign="top"><a class="el" href="symbol_8h.html#a1ed5c36399f1b9c0ea9ff3c4a8cddaa0">C8_SymbolIdentifier</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Instruction.html#a68911e16317263355bae9e1341d53689">ptype</a> [3]</td></tr>
+<tr class="memdesc:a68911e16317263355bae9e1341d53689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameter types.  <br /></td></tr>
 <tr class="separator:a68911e16317263355bae9e1341d53689"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f7dd4c072eb554e8c14ce29d2ca7e6d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Instruction.html#a7f7dd4c072eb554e8c14ce29d2ca7e6d">p</a> [3]</td></tr>
+<tr class="memdesc:a7f7dd4c072eb554e8c14ce29d2ca7e6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameter values.  <br /></td></tr>
 <tr class="separator:a7f7dd4c072eb554e8c14ce29d2ca7e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea8b0e1c081d4be855f5055adbab4e8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structC8__InstructionFormat.html">C8_InstructionFormat</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Instruction.html#aea8b0e1c081d4be855f5055adbab4e8b">format</a></td></tr>
+<tr class="memdesc:aea8b0e1c081d4be855f5055adbab4e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Corresponding instruction format.  <br /></td></tr>
 <tr class="separator:aea8b0e1c081d4be855f5055adbab4e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents an instruction. </p>
-<p>During the second pass, this structure is used to verify the instruction's validity and generate the bytecode.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">line</td><td>line number </td></tr>
-    <tr><td class="paramname">cmd</td><td>instruction command </td></tr>
-    <tr><td class="paramname">pcount</td><td>parameter count </td></tr>
-    <tr><td class="paramname">ptype</td><td>parameter types </td></tr>
-    <tr><td class="paramname">p</td><td>parameter values </td></tr>
-    <tr><td class="paramname">format</td><td>corresponding <code><a class="el" href="structC8__InstructionFormat.html">C8_InstructionFormat</a></code> (if valid) </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>During the second pass, this structure is used to verify the instruction's validity and generate the bytecode. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="af58714ecdb75b0edc200a0ca0895b100" name="af58714ecdb75b0edc200a0ca0895b100"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af58714ecdb75b0edc200a0ca0895b100">&#9670;&#160;</a></span>cmd</h2>
@@ -142,6 +137,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instruction command. </p>
 
 </div>
 </div>
@@ -157,6 +154,8 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Corresponding instruction format. </p>
+
 </div>
 </div>
 <a id="a41ebd28ef1d7c6ade45642cb6acc1039" name="a41ebd28ef1d7c6ade45642cb6acc1039"></a>
@@ -170,6 +169,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Line number. </p>
 
 </div>
 </div>
@@ -185,6 +186,8 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Parameter values. </p>
+
 </div>
 </div>
 <a id="a747fe457bac32c34b78b69f9bfefd6f3" name="a747fe457bac32c34b78b69f9bfefd6f3"></a>
@@ -199,6 +202,8 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Parameter count. </p>
+
 </div>
 </div>
 <a id="a68911e16317263355bae9e1341d53689" name="a68911e16317263355bae9e1341d53689"></a>
@@ -212,6 +217,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Parameter types. </p>
 
 </div>
 </div>

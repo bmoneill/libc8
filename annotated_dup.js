@@ -11,6 +11,5 @@ var annotated_dup =
     [ "C8_Label", "structC8__Label.html", "structC8__Label" ],
     [ "C8_LabelList", "structC8__LabelList.html", "structC8__LabelList" ],
     [ "C8_Symbol", "structC8__Symbol.html", "structC8__Symbol" ],
-    [ "C8_SymbolList", "structC8__SymbolList.html", "structC8__SymbolList" ],
-    [ "InstructionFormat", "structInstructionFormat.html", null ]
+    [ "C8_SymbolList", "structC8__SymbolList.html", "structC8__SymbolList" ]
 ];

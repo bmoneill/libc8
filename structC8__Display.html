@@ -104,25 +104,20 @@ $(document).ready(function(){initNavTree('structC8__Display.html',''); initResiz
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a7b9b2e0f3539aa84729fe17c869c2669"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Display.html#a7b9b2e0f3539aa84729fe17c869c2669">p</a> [128 *64]</td></tr>
+<tr class="memdesc:a7b9b2e0f3539aa84729fe17c869c2669"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pixels (1D array)  <br /></td></tr>
 <tr class="separator:a7b9b2e0f3539aa84729fe17c869c2669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37e90f5e3bd99fac2021fb3a326607d4"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Display.html#a37e90f5e3bd99fac2021fb3a326607d4">mode</a></td></tr>
+<tr class="memdesc:a37e90f5e3bd99fac2021fb3a326607d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display mode (<code>C8_DISPLAYMODE_LOW</code> or <code>C8_DISPLAYMODE_HIGH</code>)  <br /></td></tr>
 <tr class="separator:a37e90f5e3bd99fac2021fb3a326607d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f561e77fa0f040b637f4e04f6cd8078"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Display.html#a0f561e77fa0f040b637f4e04f6cd8078">x</a></td></tr>
+<tr class="memdesc:a0f561e77fa0f040b637f4e04f6cd8078"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offset (for <code>C8_DISPLAYMODE_LOW</code>)  <br /></td></tr>
 <tr class="separator:a0f561e77fa0f040b637f4e04f6cd8078"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17f97f62d93bc8cfb4a2b5d273a2aa72"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8__Display.html#a17f97f62d93bc8cfb4a2b5d273a2aa72">y</a></td></tr>
+<tr class="memdesc:a17f97f62d93bc8cfb4a2b5d273a2aa72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offset (for <code>C8_DISPLAYMODE_HIGH</code>)  <br /></td></tr>
 <tr class="separator:a17f97f62d93bc8cfb4a2b5d273a2aa72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a graphics display. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td>pixels (1D array) </td></tr>
-    <tr><td class="paramname">mode</td><td>display mode (<code>C8_DISPLAYMODE_LOW</code> or <code>C8_DISPLAYMODE_HIGH</code>) </td></tr>
-    <tr><td class="paramname">x</td><td>x offset (for <code>C8_DISPLAYMODE_LOW</code>) </td></tr>
-    <tr><td class="paramname">y</td><td>y offset (for <code>C8_DISPLAYMODE_HIGH</code>) </td></tr>
-  </table>
-  </dd>
-</dl>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="a37e90f5e3bd99fac2021fb3a326607d4" name="a37e90f5e3bd99fac2021fb3a326607d4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a37e90f5e3bd99fac2021fb3a326607d4">&#9670;&#160;</a></span>mode</h2>
@@ -135,6 +130,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Display mode (<code>C8_DISPLAYMODE_LOW</code> or <code>C8_DISPLAYMODE_HIGH</code>) </p>
 
 </div>
 </div>
@@ -150,6 +147,8 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Pixels (1D array) </p>
+
 </div>
 </div>
 <a id="a0f561e77fa0f040b637f4e04f6cd8078" name="a0f561e77fa0f040b637f4e04f6cd8078"></a>
@@ -164,6 +163,8 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Offset (for <code>C8_DISPLAYMODE_LOW</code>) </p>
+
 </div>
 </div>
 <a id="a17f97f62d93bc8cfb4a2b5d273a2aa72" name="a17f97f62d93bc8cfb4a2b5d273a2aa72"></a>
@@ -177,6 +178,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Offset (for <code>C8_DISPLAYMODE_HIGH</code>) </p>
 
 </div>
 </div>

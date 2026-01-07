@@ -1,5 +1,15 @@
 var NAVTREEINDEX1 =
 {
+"graphics_8h.html#a93b44cde84096f87611becabba3a61ac":[11,0,1,0,11,4],
+"graphics_8h.html#aaa2f365dfe9bf72cf557b796c692bde7":[11,0,1,0,11,7],
+"graphics_8h.html#aab70d9202bcfc983806b5c35b4e76670":[11,0,1,0,11,9],
+"graphics_8h.html#ad5255936364b46efc6190f78de0bf52b":[11,0,1,0,11,10],
+"graphics_8h.html#adc869b2a189822edf5c89d1e9ce20a16":[11,0,1,0,11,6],
+"graphics_8h_source.html":[11,0,1,0,11],
+"graphics__sdl2_8c.html":[11,0,1,0,0,4],
+"graphics__sdl2_8c.html#a04f712dc6e338364ae5e43e0b6ae9762":[11,0,1,0,0,4,3],
+"graphics__sdl2_8c.html#a10c02b36be48214fec64cc6a9d4f20e4":[11,0,1,0,0,4,4],
+"graphics__sdl2_8c.html#a7e4bf757cd9e349b6d33d44a0d09ab33":[11,0,1,0,0,4,5],
 "graphics__sdl2_8c.html#aad1f5a1b583759496cd1f679aa647121":[11,0,1,0,0,4,2],
 "graphics__sdl2_8c.html#ab5fd95b5bc7f9c53e1bf7c8ab74bafa6":[11,0,1,0,0,4,0],
 "graphics__sdl2_8c.html#abf9de2ff816a5773ffa5bef76fb73202":[11,0,1,0,0,4,1],
@@ -105,7 +115,6 @@ var NAVTREEINDEX1 =
 "structC8__SymbolList.html#ac75272ac37fb194348287bc0d3eb22b7":[10,0,11,2],
 "structC8__SymbolList.html#ad6444f4012ee91774d9f670320011ad6":[10,0,11,0],
 "structC8__SymbolList.html#afed088663f8704004425cdae2120b9b3":[10,0,11,1],
-"structInstructionFormat.html":[10,0,12],
 "symbol_8c.html":[11,0,1,0,0,7],
 "symbol_8c.html#a10b86ac951bb5d27f443719231896261":[11,0,1,0,0,7,14],
 "symbol_8c.html#a234ca27111d1dc0642675cefec195602":[11,0,1,0,0,7,13],
@@ -240,14 +249,5 @@ var NAVTREEINDEX1 =
 "symbol_8h_source.html":[11,0,1,0,0,8],
 "unionC8__ArgValue.html":[10,0,2],
 "unionC8__ArgValue.html#ab51cd24d34f6509eafb5e059f4c7d10e":[10,0,2,1],
-"unionC8__ArgValue.html#acb559820d9ca11295b4500f179ef6392":[10,0,2,0],
-"util_8c.html":[11,0,1,0,0,9],
-"util_8c.html#a16ff0557197523227c41c191a09b2d2c":[11,0,1,0,0,9,1],
-"util_8c.html#a7df8c982f85efbf45b2ede99f43e128a":[11,0,1,0,0,9,0],
-"util_8c.html#a97b14f32d5fbfb89d6c14c7a38ed4afa":[11,0,1,0,0,9,2],
-"util_8h.html":[11,0,1,0,0,10],
-"util_8h.html#a8a99f1d973a44924cef21098aeebe12a":[11,0,1,0,0,10,1],
-"util_8h.html#aee8e97490e24c4a1cf77f5a9073f44f4":[11,0,1,0,0,10,2],
-"util_8h.html#afed85962255262f3da3eaa60e66ec744":[11,0,1,0,0,10,0],
-"util_8h_source.html":[11,0,1,0,0,10]
+"unionC8__ArgValue.html#acb559820d9ca11295b4500f179ef6392":[10,0,2,0]
 };

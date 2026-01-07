@@ -92,7 +92,6 @@ $(document).ready(function(){initNavTree('font_8c.html',''); initResizable(); })
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">font.c File Reference</div></div>
@@ -119,29 +118,11 @@ Macros</h2></td></tr>
 <tr class="memitem:a1e6dd636151039ea0039ccbab42e360a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#a1e6dd636151039ea0039ccbab42e360a">SCHIP_S</a>&#160;&#160;&#160;&quot;schip&quot;</td></tr>
 <tr class="separator:a1e6dd636151039ea0039ccbab42e360a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
-&#160;&#160;<a class="el" href="font_8c.html#a06fc87d81c62e9abb8790b6e5713c55baec067d085895d63f4ec9f40d8476a3de">SMALLFONT_OCTO</a> = 0
-, <a class="el" href="font_8c.html#a06fc87d81c62e9abb8790b6e5713c55bac36b7ed97d6232b00102a0d832bdded3">SMALLFONT_VIP</a> = 1
-, <a class="el" href="font_8c.html#a06fc87d81c62e9abb8790b6e5713c55bad5aee0062566b1d63f94634fc6c84ad2">SMALLFONT_DREAM6800</a> = 2
-, <a class="el" href="font_8c.html#a06fc87d81c62e9abb8790b6e5713c55ba5ac73f8a90d9f29f5b74c74515f56726">SMALLFONT_ETI660</a> = 3
-, <br />
-&#160;&#160;<a class="el" href="font_8c.html#a06fc87d81c62e9abb8790b6e5713c55ba76e3674b8d3b736349c4907aa93e94e5">SMALLFONT_FISH</a> = 4
-<br />
- }</td></tr>
-<tr class="separator:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf764cbdea00d65edcd07bb9953ad2b7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="font_8c.html#adf764cbdea00d65edcd07bb9953ad2b7a9e7ffe82ae03ac7d7855a7d817a8fb67">BIGFONT_OCTO</a> = 0
-, <a class="el" href="font_8c.html#adf764cbdea00d65edcd07bb9953ad2b7a840d8806c7d98a6c2b727d9f2a205ca9">BIGFONT_SCHIP</a> = 1
-, <a class="el" href="font_8c.html#adf764cbdea00d65edcd07bb9953ad2b7a62237050580d73e43bbc9e2de0b0aac5">BIGFONT_FISH</a> = 2
- }</td></tr>
-<tr class="separator:adf764cbdea00d65edcd07bb9953ad2b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a25cb2632c7a87552edb6aff712d57340"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#a25cb2632c7a87552edb6aff712d57340">c8_set_fonts</a> (<a class="el" href="structC8.html">C8</a> *c8, int small, int big)</td></tr>
-<tr class="memdesc:a25cb2632c7a87552edb6aff712d57340"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads small and/or big fonts in <code>c8</code>  <br /></td></tr>
-<tr class="separator:a25cb2632c7a87552edb6aff712d57340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9621bf169032b2e66df7b10970b652"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#ade9621bf169032b2e66df7b10970b652">c8_set_fonts</a> (<a class="el" href="structC8.html">C8</a> *c8, <a class="el" href="font_8h.html#ae32768e135ce8a889cc0bf9b9f874663">C8_SmallFont</a> small, <a class="el" href="font_8h.html#a83af929f737f95fe03ddb5df6d8d3e13">C8_BigFont</a> big)</td></tr>
+<tr class="memdesc:ade9621bf169032b2e66df7b10970b652"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads small and/or big fonts in <code>c8</code>  <br /></td></tr>
+<tr class="separator:ade9621bf169032b2e66df7b10970b652"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4135a656d1a96a064e3f4cc90483a2d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="font_8c.html#ae4135a656d1a96a064e3f4cc90483a2d">c8_set_fonts_s</a> (<a class="el" href="structC8.html">C8</a> *c8, char *s)</td></tr>
 <tr class="memdesc:ae4135a656d1a96a064e3f4cc90483a2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set fonts from string.  <br /></td></tr>
 <tr class="separator:ae4135a656d1a96a064e3f4cc90483a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -252,47 +233,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a06fc87d81c62e9abb8790b6e5713c55b" name="a06fc87d81c62e9abb8790b6e5713c55b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06fc87d81c62e9abb8790b6e5713c55b">&#9670;&#160;</a></span>anonymous enum</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">anonymous enum</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55baec067d085895d63f4ec9f40d8476a3de" name="a06fc87d81c62e9abb8790b6e5713c55baec067d085895d63f4ec9f40d8476a3de"></a>SMALLFONT_OCTO&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55bac36b7ed97d6232b00102a0d832bdded3" name="a06fc87d81c62e9abb8790b6e5713c55bac36b7ed97d6232b00102a0d832bdded3"></a>SMALLFONT_VIP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55bad5aee0062566b1d63f94634fc6c84ad2" name="a06fc87d81c62e9abb8790b6e5713c55bad5aee0062566b1d63f94634fc6c84ad2"></a>SMALLFONT_DREAM6800&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55ba5ac73f8a90d9f29f5b74c74515f56726" name="a06fc87d81c62e9abb8790b6e5713c55ba5ac73f8a90d9f29f5b74c74515f56726"></a>SMALLFONT_ETI660&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55ba76e3674b8d3b736349c4907aa93e94e5" name="a06fc87d81c62e9abb8790b6e5713c55ba76e3674b8d3b736349c4907aa93e94e5"></a>SMALLFONT_FISH&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
-<a id="adf764cbdea00d65edcd07bb9953ad2b7" name="adf764cbdea00d65edcd07bb9953ad2b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf764cbdea00d65edcd07bb9953ad2b7">&#9670;&#160;</a></span>anonymous enum</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">anonymous enum</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adf764cbdea00d65edcd07bb9953ad2b7a9e7ffe82ae03ac7d7855a7d817a8fb67" name="adf764cbdea00d65edcd07bb9953ad2b7a9e7ffe82ae03ac7d7855a7d817a8fb67"></a>BIGFONT_OCTO&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adf764cbdea00d65edcd07bb9953ad2b7a840d8806c7d98a6c2b727d9f2a205ca9" name="adf764cbdea00d65edcd07bb9953ad2b7a840d8806c7d98a6c2b727d9f2a205ca9"></a>BIGFONT_SCHIP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="adf764cbdea00d65edcd07bb9953ad2b7a62237050580d73e43bbc9e2de0b0aac5" name="adf764cbdea00d65edcd07bb9953ad2b7a62237050580d73e43bbc9e2de0b0aac5"></a>BIGFONT_FISH&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="aa60ab998eb2c236840be2c86bfe2f036" name="aa60ab998eb2c236840be2c86bfe2f036"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa60ab998eb2c236840be2c86bfe2f036">&#9670;&#160;</a></span>c8_print_fonts()</h2>
@@ -358,8 +298,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a25cb2632c7a87552edb6aff712d57340" name="a25cb2632c7a87552edb6aff712d57340"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25cb2632c7a87552edb6aff712d57340">&#9670;&#160;</a></span>c8_set_fonts()</h2>
+<a id="ade9621bf169032b2e66df7b10970b652" name="ade9621bf169032b2e66df7b10970b652"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade9621bf169032b2e66df7b10970b652">&#9670;&#160;</a></span>c8_set_fonts()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -373,13 +313,13 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype"><a class="el" href="font_8h.html#ae32768e135ce8a889cc0bf9b9f874663">C8_SmallFont</a>&#160;</td>
           <td class="paramname"><em>small</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype"><a class="el" href="font_8h.html#a83af929f737f95fe03ddb5df6d8d3e13">C8_BigFont</a>&#160;</td>
           <td class="paramname"><em>big</em>&#160;</td>
         </tr>
         <tr>
