@@ -61,6 +61,9 @@ endif()
 # Compiler definitions
 ADD_DEFINITIONS("-g")
 if(TEST)
+    if(CMAKE_COMPILER_IS_GNUCXX)
+        target_link_libraries(${PROJECT_TEST_NAME} gcov)
+    endif()
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTEST")
 endif()
 

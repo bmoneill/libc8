@@ -9,6 +9,7 @@ add_subdirectory(docs/man)
 # defaults
 set(SDL2 OFF)
 
+
 # Store git commit hash in GIT_COMMIT_HASH
 execute_process(
     COMMAND git rev-parse --short HEAD
@@ -37,6 +38,9 @@ endfunction()
 function(Enable_Tests)
     SDL2_Required()
     set(TEST ON CACHE INTERNAL "")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+    set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
+    include(CodeCoverage)
 endfunction()
 
 function(Build_Library)
