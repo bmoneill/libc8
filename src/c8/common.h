@@ -9,8 +9,10 @@
 
 #ifdef TEST
 #define C8_STATIC
+#define C8_INLINE
 #else
 #define C8_STATIC static
+#define C8_INLINE inline
 #endif
 
 #ifndef C8_VERSION
