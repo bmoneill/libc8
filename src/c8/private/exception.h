@@ -10,14 +10,23 @@
 
 #include <stdio.h>
 
+/**
+ * @brief Maximum size of exception message
+ */
 #define C8_EXCEPTION_MESSAGE_SIZE BUFSIZ
 
+/**
+ * @brief Exception handling macro
+ */
 #define C8_EXCEPTION(code, ...)                                                                    \
     {                                                                                              \
         snprintf(c8_exception, C8_EXCEPTION_MESSAGE_SIZE, __VA_ARGS__);                            \
         c8_handle_exception(code);                                                                 \
     }
 
+/**
+ * @brief Exception code enum
+ */
 typedef enum {
     C8_INVALID_INSTRUCTION_EXCEPTION            = -3,
     C8_TOO_MANY_LABELS_EXCEPTION                = -4,
@@ -39,8 +48,8 @@ typedef enum {
 } C8_ExceptionCode;
 
 /**
-  * Message to print when calling `c8_handle_exception` with a non-zero code
-  */
+ * @brief Message to print when calling `c8_handle_exception` with a non-zero code
+ */
 extern char c8_exception[C8_EXCEPTION_MESSAGE_SIZE];
 
 void        c8_handle_exception(C8_ExceptionCode);

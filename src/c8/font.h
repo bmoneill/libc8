@@ -9,9 +9,19 @@
 
 #include "chip8.h"
 
-#define C8_FONT_START      0x000
+/**
+ * @brief Font storage address in memory
+ */
+#define C8_FONT_START 0x000
+
+/**
+ * @brief HD font storage address in memory
+ */
 #define C8_HIGH_FONT_START (C8_FONT_START + (0x10 * 5))
 
+/**
+ * @brief Font names
+ */
 extern const char* c8_fontNames[2][5];
 
 void               c8_print_fonts(C8*);

@@ -12,20 +12,65 @@
 
 #include <stdint.h>
 
+/**
+ * @brief Maximum instructions to execute per second
+ */
 #define C8_CLOCK_SPEED 1000
-#define C8_STACK_SIZE  16
 
-#define C8_MODE_CHIP8  0
-#define C8_MODE_SCHIP  1
+/**
+ * @brief Maximum stack size
+ */
+#define C8_STACK_SIZE 16
+
+/**
+ * @brief CHIP-8 execution mode. SCHIP and XO-CHIP instructions will throw an error.
+ */
+#define C8_MODE_CHIP8 0
+
+/**
+ * @brief SCHIP execution mode.
+ */
+#define C8_MODE_SCHIP 1
+
+/**
+ * @brief XO-CHIP execution mode.
+ */
 #define C8_MODE_XOCHIP 2
 
-#define C8_FLAG_DEBUG           0x1
-#define C8_FLAG_VERBOSE         0x2
-#define C8_FLAG_QUIRK_BITWISE   0x4
-#define C8_FLAG_QUIRK_DRAW      0x8
+/**
+ * @brief Enable debug mode.
+ */
+#define C8_FLAG_DEBUG 0x1
+
+/**
+ * @brief Print all instructions as they are executed.
+ */
+#define C8_FLAG_VERBOSE 0x2
+
+/**
+ * @brief Enable the 'b' quirk (see main page/README).
+ */
+#define C8_FLAG_QUIRK_BITWISE 0x4
+
+/**
+ * @brief Enable the 'd' quirk (see main page/README).
+ */
+#define C8_FLAG_QUIRK_DRAW 0x8
+
+/**
+ * @brief Enable the 'l' quirk (see main page/README).
+ */
 #define C8_FLAG_QUIRK_LOADSTORE 0x10
-#define C8_FLAG_QUIRK_SHIFT     0x20
-#define C8_FLAG_QUIRK_JUMP      0x40
+
+/**
+ * @brief Enable the 's' quirk (see main page/README).
+ */
+#define C8_FLAG_QUIRK_SHIFT 0x20
+
+/**
+ * @brief Enable the 'j' quirk (see main page/README).
+ */
+#define C8_FLAG_QUIRK_JUMP 0x40
 
 /**
   * @struct C8

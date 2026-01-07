@@ -10,12 +10,18 @@
 
 #include "../chip8.h"
 
-enum {
+/**
+ * @brief Debug state enum
+ */
+typedef enum {
     C8_DEBUG_QUIT,
     C8_DEBUG_CONTINUE,
     C8_DEBUG_STEP,
-};
+} C8_DebugState;
 
+/**
+ * @brief Debug help string
+ */
 #define C8_DEBUG_HELP_STRING                                                                       \
     "Available commands:\n\
 break [ADDRESS]: Add breakpoint to PC or ADDRESS, if given\n\

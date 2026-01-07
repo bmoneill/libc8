@@ -10,7 +10,14 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#define C8_DECODE_DEFINE_LABELS   0x1
+/**
+ * @brief Auto-generate label names
+ */
+#define C8_DECODE_DEFINE_LABELS 0x1
+
+/**
+ * @brief Print addresses for each instruction
+ */
 #define C8_DECODE_PRINT_ADDRESSES 0x2
 
 void     c8_decode(FILE*, FILE*, int);

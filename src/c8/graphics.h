@@ -12,17 +12,54 @@
 
 #include <stdint.h>
 
-#define C8_LOW_DISPLAY_WIDTH   64
-#define C8_LOW_DISPLAY_HEIGHT  32
-#define C8_HIGH_DISPLAY_WIDTH  128
+/**
+ * @brief Width of the low-resolution display.
+ */
+#define C8_LOW_DISPLAY_WIDTH 64
+
+/**
+ * @brief Height of the low-resolution display.
+ */
+#define C8_LOW_DISPLAY_HEIGHT 32
+
+/**
+ * @brief Width of the high-resolution display.
+ */
+#define C8_HIGH_DISPLAY_WIDTH 128
+
+/**
+ * @brief Height of the high-resolution display.
+ */
 #define C8_HIGH_DISPLAY_HEIGHT 64
 
-#define C8_DEFAULT_WINDOW_WIDTH  800
-#define C8_DEFAULT_WINDOW_HEIGHT 400
-#define C8_WINDOW_SCALE_X        (C8_DEFAULT_WINDOW_WIDTH / C8_LOW_DISPLAY_WIDTH)
-#define C8_WINDOW_SCALE_Y        (C8_DEFAULT_WINDOW_HEIGHT / C8_LOW_DISPLAY_HEIGHT)
+/**
+ * @brief Default window width.
+ */
+#define C8_DEFAULT_WINDOW_WIDTH 800
 
-#define C8_DISPLAYMODE_LOW  0
+/**
+ * @brief Default window height.
+ */
+#define C8_DEFAULT_WINDOW_HEIGHT 400
+
+/**
+ * @brief Window scale factor in x direction.
+ */
+#define C8_WINDOW_SCALE_X (C8_DEFAULT_WINDOW_WIDTH / C8_LOW_DISPLAY_WIDTH)
+
+/**
+ * @brief Window scale factor in y direction.
+ */
+#define C8_WINDOW_SCALE_Y (C8_DEFAULT_WINDOW_HEIGHT / C8_LOW_DISPLAY_HEIGHT)
+
+/**
+ * @brief Low resolution display mode.
+ */
+#define C8_DISPLAYMODE_LOW 0
+
+/**
+ * @brief High resolution display mode.
+ */
 #define C8_DISPLAYMODE_HIGH 1
 
 /**

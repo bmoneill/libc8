@@ -10,12 +10,27 @@
 
 #include <stdint.h>
 
-#define C8_INSTRUCTION_COUNT     64
-#define C8_LABEL_CEILING         64
-#define C8_LABEL_IDENTIFIER_SIZE 20
-#define C8_SYMBOL_CEILING        64
+/**
+ * @brief Initial instruction list ceiling
+ */
+#define C8_INSTRUCTION_COUNT 64
 
-/* Instruction strings */
+/**
+ * @brief Initial label list ceiling
+ */
+#define C8_LABEL_CEILING 64
+
+/**
+ * @brief Maximum size of label identifier
+ */
+#define C8_LABEL_IDENTIFIER_SIZE 20
+
+/**
+ * @brief Initial symbol list ceiling
+ */
+#define C8_SYMBOL_CEILING 64
+
+/* --- Instruction strings --- */
 #define C8_S_CLS   "CLS"
 #define C8_S_RET   "RET"
 #define C8_S_JP    "JP"
@@ -43,7 +58,7 @@
 #define C8_S_HIGH  "HIGH"
 #define C8_S_JP_V0 "JP V0,"
 
-/* Reserved identifier strings */
+/* --- Reserved identifier strings --- */
 #define C8_S_K  "K"
 #define C8_S_F  "F"
 #define C8_S_B  "B"
