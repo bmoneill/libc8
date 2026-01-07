@@ -105,8 +105,10 @@ $(document).ready(function(){initNavTree('exception_8h.html',''); initResizable(
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:abed01c912860e11b613187b5a801fd26"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8h.html#abed01c912860e11b613187b5a801fd26">C8_EXCEPTION_MESSAGE_SIZE</a>&#160;&#160;&#160;BUFSIZ</td></tr>
+<tr class="memdesc:abed01c912860e11b613187b5a801fd26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum size of exception message.  <br /></td></tr>
 <tr class="separator:abed01c912860e11b613187b5a801fd26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3049a797967abc96f1861c63dbef01f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8h.html#a3049a797967abc96f1861c63dbef01f3">C8_EXCEPTION</a>(code, ...)</td></tr>
+<tr class="memdesc:a3049a797967abc96f1861c63dbef01f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception handling macro.  <br /></td></tr>
 <tr class="separator:a3049a797967abc96f1861c63dbef01f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
@@ -135,6 +137,7 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880">C8_STACK_UNDERFLOW_EXCEPTION</a> = -19
 <br />
  }</td></tr>
+<tr class="memdesc:a7c3781ed13680e20a5bf0907e4223480"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exception code enum.  <a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480">More...</a><br /></td></tr>
 <tr class="separator:a7c3781ed13680e20a5bf0907e4223480"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -146,6 +149,7 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a220454f62a07328378e890bf6f2488b0"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8h.html#a220454f62a07328378e890bf6f2488b0">c8_exception</a> [BUFSIZ]</td></tr>
+<tr class="memdesc:a220454f62a07328378e890bf6f2488b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message to print when calling <code>c8_handle_exception</code> with a non-zero code.  <br /></td></tr>
 <tr class="separator:a220454f62a07328378e890bf6f2488b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -181,9 +185,11 @@ Variables</h2></td></tr>
 <div class="line">        snprintf(<a class="code hl_variable" href="exception_8h.html#a220454f62a07328378e890bf6f2488b0">c8_exception</a>, <a class="code hl_define" href="exception_8h.html#abed01c912860e11b613187b5a801fd26">C8_EXCEPTION_MESSAGE_SIZE</a>, __VA_ARGS__);                            \</div>
 <div class="line">        c8_handle_exception(code);                                                                 \</div>
 <div class="line">    }</div>
-<div class="ttc" id="aexception_8h_html_a220454f62a07328378e890bf6f2488b0"><div class="ttname"><a href="exception_8h.html#a220454f62a07328378e890bf6f2488b0">c8_exception</a></div><div class="ttdeci">char c8_exception[BUFSIZ]</div><div class="ttdef"><b>Definition:</b> exception.c:65</div></div>
-<div class="ttc" id="aexception_8h_html_abed01c912860e11b613187b5a801fd26"><div class="ttname"><a href="exception_8h.html#abed01c912860e11b613187b5a801fd26">C8_EXCEPTION_MESSAGE_SIZE</a></div><div class="ttdeci">#define C8_EXCEPTION_MESSAGE_SIZE</div><div class="ttdef"><b>Definition:</b> exception.h:13</div></div>
+<div class="ttc" id="aexception_8h_html_a220454f62a07328378e890bf6f2488b0"><div class="ttname"><a href="exception_8h.html#a220454f62a07328378e890bf6f2488b0">c8_exception</a></div><div class="ttdeci">char c8_exception[BUFSIZ]</div><div class="ttdoc">Message to print when calling c8_handle_exception with a non-zero code.</div><div class="ttdef"><b>Definition:</b> exception.c:65</div></div>
+<div class="ttc" id="aexception_8h_html_abed01c912860e11b613187b5a801fd26"><div class="ttname"><a href="exception_8h.html#abed01c912860e11b613187b5a801fd26">C8_EXCEPTION_MESSAGE_SIZE</a></div><div class="ttdeci">#define C8_EXCEPTION_MESSAGE_SIZE</div><div class="ttdoc">Maximum size of exception message.</div><div class="ttdef"><b>Definition:</b> exception.h:16</div></div>
 </div><!-- fragment -->
+<p>Exception handling macro. </p>
+
 </div>
 </div>
 <a id="abed01c912860e11b613187b5a801fd26" name="abed01c912860e11b613187b5a801fd26"></a>
@@ -197,6 +203,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Maximum size of exception message. </p>
 
 </div>
 </div>
@@ -212,6 +220,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Exception code enum. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53" name="a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53"></a>C8_INVALID_INSTRUCTION_EXCEPTION&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a7c3781ed13680e20a5bf0907e4223480a5637fe6bf703e39df8b3b097d28ad276" name="a7c3781ed13680e20a5bf0907e4223480a5637fe6bf703e39df8b3b097d28ad276"></a>C8_TOO_MANY_LABELS_EXCEPTION&#160;</td><td class="fielddoc"></td></tr>
@@ -281,7 +291,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Message to print when calling <code>c8_handle_exception</code> with a non-zero code </p>
+
+<p>Message to print when calling <code>c8_handle_exception</code> with a non-zero code. </p>
 
 </div>
 </div>

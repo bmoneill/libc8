@@ -209,7 +209,7 @@ Functions</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#a974238d8fa061c50c721fdcd4f5726e1">C8_FLAG_QUIRK_BITWISE</a>) {                                                        \</div>
 <div class="line">        c-&gt;V[0xF] = 0;                                                                             \</div>
 <div class="line">    }</div>
-<div class="ttc" id="achip8_8h_html_a974238d8fa061c50c721fdcd4f5726e1"><div class="ttname"><a href="chip8_8h.html#a974238d8fa061c50c721fdcd4f5726e1">C8_FLAG_QUIRK_BITWISE</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_BITWISE</div><div class="ttdef"><b>Definition:</b> chip8.h:24</div></div>
+<div class="ttc" id="achip8_8h_html_a974238d8fa061c50c721fdcd4f5726e1"><div class="ttname"><a href="chip8_8h.html#a974238d8fa061c50c721fdcd4f5726e1">C8_FLAG_QUIRK_BITWISE</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_BITWISE</div><div class="ttdoc">Enable the 'b' quirk (see main page/README).</div><div class="ttdef"><b>Definition:</b> chip8.h:53</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -231,7 +231,7 @@ Functions</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#ae028401e02e00f6bd3df02fdc0a08087">C8_FLAG_QUIRK_DRAW</a>) {                                                           \</div>
 <div class="line">        if ()                                                                                      \</div>
 <div class="line">    }</div>
-<div class="ttc" id="achip8_8h_html_ae028401e02e00f6bd3df02fdc0a08087"><div class="ttname"><a href="chip8_8h.html#ae028401e02e00f6bd3df02fdc0a08087">C8_FLAG_QUIRK_DRAW</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_DRAW</div><div class="ttdef"><b>Definition:</b> chip8.h:25</div></div>
+<div class="ttc" id="achip8_8h_html_ae028401e02e00f6bd3df02fdc0a08087"><div class="ttname"><a href="chip8_8h.html#ae028401e02e00f6bd3df02fdc0a08087">C8_FLAG_QUIRK_DRAW</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_DRAW</div><div class="ttdoc">Enable the 'd' quirk (see main page/README).</div><div class="ttdef"><b>Definition:</b> chip8.h:58</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -253,7 +253,7 @@ Functions</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#ae3343f6f990f3e72a0d063fcbd341a66">C8_FLAG_QUIRK_LOADSTORE</a>) {                                                      \</div>
 <div class="line">        c-&gt;I += x + 1;                                                                             \</div>
 <div class="line">    }</div>
-<div class="ttc" id="achip8_8h_html_ae3343f6f990f3e72a0d063fcbd341a66"><div class="ttname"><a href="chip8_8h.html#ae3343f6f990f3e72a0d063fcbd341a66">C8_FLAG_QUIRK_LOADSTORE</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_LOADSTORE</div><div class="ttdef"><b>Definition:</b> chip8.h:26</div></div>
+<div class="ttc" id="achip8_8h_html_ae3343f6f990f3e72a0d063fcbd341a66"><div class="ttname"><a href="chip8_8h.html#ae3343f6f990f3e72a0d063fcbd341a66">C8_FLAG_QUIRK_LOADSTORE</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_LOADSTORE</div><div class="ttdoc">Enable the 'l' quirk (see main page/README).</div><div class="ttdef"><b>Definition:</b> chip8.h:63</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -275,7 +275,7 @@ Functions</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;flags &amp; <a class="code hl_define" href="chip8_8h.html#a92a870e6ca433a2ebb5164e5a62735c7">C8_FLAG_QUIRK_SHIFT</a>) {                                                          \</div>
 <div class="line">        y = x;                                                                                     \</div>
 <div class="line">    }</div>
-<div class="ttc" id="achip8_8h_html_a92a870e6ca433a2ebb5164e5a62735c7"><div class="ttname"><a href="chip8_8h.html#a92a870e6ca433a2ebb5164e5a62735c7">C8_FLAG_QUIRK_SHIFT</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_SHIFT</div><div class="ttdef"><b>Definition:</b> chip8.h:27</div></div>
+<div class="ttc" id="achip8_8h_html_a92a870e6ca433a2ebb5164e5a62735c7"><div class="ttname"><a href="chip8_8h.html#a92a870e6ca433a2ebb5164e5a62735c7">C8_FLAG_QUIRK_SHIFT</a></div><div class="ttdeci">#define C8_FLAG_QUIRK_SHIFT</div><div class="ttdoc">Enable the 's' quirk (see main page/README).</div><div class="ttdef"><b>Definition:</b> chip8.h:68</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -299,8 +299,8 @@ Functions</h2></td></tr>
 <div class="line">                     <span class="stringliteral">&quot;SCHIP instruction detected in CHIP-8 mode.\n&quot;</span>);                              \</div>
 <div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a>;                                                   \</div>
 <div class="line">    }</div>
-<div class="ttc" id="achip8_8h_html_ace5f100e8d06164b3cb3b0b04e5297f5"><div class="ttname"><a href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a></div><div class="ttdeci">#define C8_MODE_CHIP8</div><div class="ttdef"><b>Definition:</b> chip8.h:18</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_INSTRUCTION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:22</div></div>
+<div class="ttc" id="achip8_8h_html_ace5f100e8d06164b3cb3b0b04e5297f5"><div class="ttname"><a href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a></div><div class="ttdeci">#define C8_MODE_CHIP8</div><div class="ttdoc">CHIP-8 execution mode. SCHIP and XO-CHIP instructions will throw an error.</div><div class="ttdef"><b>Definition:</b> chip8.h:28</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_INSTRUCTION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:31</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -344,7 +344,7 @@ Functions</h2></td></tr>
 <div class="line">                     modeStr);                                                                     \</div>
 <div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">C8_INVALID_INSTRUCTION_EXCEPTION</a>;                                                   \</div>
 <div class="line">    }</div>
-<div class="ttc" id="achip8_8h_html_acf75ba93ff6438063ec6a493e004429d"><div class="ttname"><a href="chip8_8h.html#acf75ba93ff6438063ec6a493e004429d">C8_MODE_XOCHIP</a></div><div class="ttdeci">#define C8_MODE_XOCHIP</div><div class="ttdef"><b>Definition:</b> chip8.h:20</div></div>
+<div class="ttc" id="achip8_8h_html_acf75ba93ff6438063ec6a493e004429d"><div class="ttname"><a href="chip8_8h.html#acf75ba93ff6438063ec6a493e004429d">C8_MODE_XOCHIP</a></div><div class="ttdeci">#define C8_MODE_XOCHIP</div><div class="ttdoc">XO-CHIP execution mode.</div><div class="ttdef"><b>Definition:</b> chip8.h:38</div></div>
 </div><!-- fragment -->
 </div>
 </div>

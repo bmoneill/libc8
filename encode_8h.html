@@ -104,12 +104,16 @@ $(document).ready(function(){initNavTree('encode_8h.html',''); initResizable(); 
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:aa46b963447ea2136e5e4f1ef3f44451f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8h.html#aa46b963447ea2136e5e4f1ef3f44451f">C8_ARG_VERBOSE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:aa46b963447ea2136e5e4f1ef3f44451f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print verbose output.  <br /></td></tr>
 <tr class="separator:aa46b963447ea2136e5e4f1ef3f44451f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a629720d47ee3ec426685eb44f234a681"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8h.html#a629720d47ee3ec426685eb44f234a681">C8_ENCODE_MAX_LINE_LENGTH</a>&#160;&#160;&#160;100</td></tr>
+<tr class="memdesc:a629720d47ee3ec426685eb44f234a681"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum line length.  <br /></td></tr>
 <tr class="separator:a629720d47ee3ec426685eb44f234a681"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5114adf4c471dfa0fe6ae7d2aa0f5fd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8h.html#ae5114adf4c471dfa0fe6ae7d2aa0f5fd">C8_ENCODE_MAX_WORDS</a>&#160;&#160;&#160;100</td></tr>
+<tr class="memdesc:ae5114adf4c471dfa0fe6ae7d2aa0f5fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of words per line.  <br /></td></tr>
 <tr class="separator:ae5114adf4c471dfa0fe6ae7d2aa0f5fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa5480924e97b4150b91ad05e00192c2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8h.html#aaa5480924e97b4150b91ad05e00192c2">C8_ENCODE_MAX_LINES</a>&#160;&#160;&#160;500</td></tr>
+<tr class="memdesc:aaa5480924e97b4150b91ad05e00192c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of lines.  <br /></td></tr>
 <tr class="separator:aaa5480924e97b4150b91ad05e00192c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -124,10 +128,13 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a179391db175aa866ebcd9ddbc9c3d212"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8h.html#a179391db175aa866ebcd9ddbc9c3d212">c8_lines</a></td></tr>
+<tr class="memdesc:a179391db175aa866ebcd9ddbc9c3d212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source code (will be manipulated when encoding)  <br /></td></tr>
 <tr class="separator:a179391db175aa866ebcd9ddbc9c3d212"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee4570db439df7f596832d56af34219b"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8h.html#aee4570db439df7f596832d56af34219b">c8_linesUnformatted</a></td></tr>
+<tr class="memdesc:aee4570db439df7f596832d56af34219b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source code (will not be manipulated when encoding)  <br /></td></tr>
 <tr class="separator:aee4570db439df7f596832d56af34219b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af59c773541b0e4272a68600dd0dea514"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8h.html#af59c773541b0e4272a68600dd0dea514">c8_lineCount</a></td></tr>
+<tr class="memdesc:af59c773541b0e4272a68600dd0dea514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source code line count.  <br /></td></tr>
 <tr class="separator:af59c773541b0e4272a68600dd0dea514"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -145,6 +152,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Print verbose output. </p>
+
 </div>
 </div>
 <a id="a629720d47ee3ec426685eb44f234a681" name="a629720d47ee3ec426685eb44f234a681"></a>
@@ -158,6 +167,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Maximum line length. </p>
 
 </div>
 </div>
@@ -173,6 +184,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Maximum number of lines. </p>
+
 </div>
 </div>
 <a id="ae5114adf4c471dfa0fe6ae7d2aa0f5fd" name="ae5114adf4c471dfa0fe6ae7d2aa0f5fd"></a>
@@ -186,6 +199,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Maximum number of words per line. </p>
 
 </div>
 </div>
@@ -285,6 +300,8 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Source code line count. </p>
+
 </div>
 </div>
 <a id="a179391db175aa866ebcd9ddbc9c3d212" name="a179391db175aa866ebcd9ddbc9c3d212"></a>
@@ -307,6 +324,8 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Source code (will be manipulated when encoding) </p>
+
 </div>
 </div>
 <a id="aee4570db439df7f596832d56af34219b" name="aee4570db439df7f596832d56af34219b"></a>
@@ -328,6 +347,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Source code (will not be manipulated when encoding) </p>
 
 </div>
 </div>

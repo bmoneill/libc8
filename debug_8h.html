@@ -104,15 +104,17 @@ $(document).ready(function(){initNavTree('debug_8h.html',''); initResizable(); }
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:abf516ab66b6e3e913e5bd640e5742276"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#abf516ab66b6e3e913e5bd640e5742276">C8_DEBUG_HELP_STRING</a>&#160;&#160;&#160;    &quot;Available commands:\n\break [ADDRESS]: Add breakpoint to PC or ADDRESS, if given\n\rmbreak [ADDRESS]: Remove breakpoint at PC or ADDRESS, if given\n\continue: Exit debug mode until next breakpoint or completion\n\help: Print this help string\n\load PATH: Load program state from PATH\n\next: Step to the next instruction\n\print [ATTRIBUTE]: Print current value of ATTRIBUTE\n\save PATH: Save program state to the given file\n\set ATTRIBUTE VALUE: Set the given attribute to the given value\n\quit: Terminate the program\n\\n\Available attributes to print:\n\PC: Program counter\n\SP: Stack pointer\n\DT: Delay timer\n\ST: Sound timer\n\I:  I address\n\K:  Register to store next keypress\n\V[x]:  All register values or value of Vx, if given\n\stack: All stack values\n\$[address]: Value at given address\n\\n\If no argument is given to print, it will print all of the above attributes\n\except for address values.\n&quot;</td></tr>
+<tr class="memdesc:abf516ab66b6e3e913e5bd640e5742276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug help string.  <br /></td></tr>
 <tr class="separator:abf516ab66b6e3e913e5bd640e5742276"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a99fb83031ce9923c84392b4e92f956b5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5ad94cd2a88e788b64dfa68c8fb4e9f6c9">C8_DEBUG_QUIT</a>
-, <a class="el" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5addb58edf2ca2f8a283cebb8e3dbff5f8">C8_DEBUG_CONTINUE</a>
-, <a class="el" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5a998836305f98c9257d743b8383dc82b4">C8_DEBUG_STEP</a>
+<tr class="memitem:ae6e8d9ce1c24d1140b3b35bc8881dc5c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5c">C8_DebugState</a> { <a class="el" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5cad94cd2a88e788b64dfa68c8fb4e9f6c9">C8_DEBUG_QUIT</a>
+, <a class="el" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5caddb58edf2ca2f8a283cebb8e3dbff5f8">C8_DEBUG_CONTINUE</a>
+, <a class="el" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5ca998836305f98c9257d743b8383dc82b4">C8_DEBUG_STEP</a>
  }</td></tr>
-<tr class="separator:a99fb83031ce9923c84392b4e92f956b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ae6e8d9ce1c24d1140b3b35bc8881dc5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug state enum.  <a href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5c">More...</a><br /></td></tr>
+<tr class="separator:ae6e8d9ce1c24d1140b3b35bc8881dc5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -139,24 +141,28 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Debug help string. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a99fb83031ce9923c84392b4e92f956b5" name="a99fb83031ce9923c84392b4e92f956b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99fb83031ce9923c84392b4e92f956b5">&#9670;&#160;</a></span>anonymous enum</h2>
+<a id="ae6e8d9ce1c24d1140b3b35bc8881dc5c" name="ae6e8d9ce1c24d1140b3b35bc8881dc5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6e8d9ce1c24d1140b3b35bc8881dc5c">&#9670;&#160;</a></span>C8_DebugState</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">anonymous enum</td>
+          <td class="memname">enum <a class="el" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5c">C8_DebugState</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Debug state enum. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a99fb83031ce9923c84392b4e92f956b5ad94cd2a88e788b64dfa68c8fb4e9f6c9" name="a99fb83031ce9923c84392b4e92f956b5ad94cd2a88e788b64dfa68c8fb4e9f6c9"></a>C8_DEBUG_QUIT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a99fb83031ce9923c84392b4e92f956b5addb58edf2ca2f8a283cebb8e3dbff5f8" name="a99fb83031ce9923c84392b4e92f956b5addb58edf2ca2f8a283cebb8e3dbff5f8"></a>C8_DEBUG_CONTINUE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a99fb83031ce9923c84392b4e92f956b5a998836305f98c9257d743b8383dc82b4" name="a99fb83031ce9923c84392b4e92f956b5a998836305f98c9257d743b8383dc82b4"></a>C8_DEBUG_STEP&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae6e8d9ce1c24d1140b3b35bc8881dc5cad94cd2a88e788b64dfa68c8fb4e9f6c9" name="ae6e8d9ce1c24d1140b3b35bc8881dc5cad94cd2a88e788b64dfa68c8fb4e9f6c9"></a>C8_DEBUG_QUIT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae6e8d9ce1c24d1140b3b35bc8881dc5caddb58edf2ca2f8a283cebb8e3dbff5f8" name="ae6e8d9ce1c24d1140b3b35bc8881dc5caddb58edf2ca2f8a283cebb8e3dbff5f8"></a>C8_DEBUG_CONTINUE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae6e8d9ce1c24d1140b3b35bc8881dc5ca998836305f98c9257d743b8383dc82b4" name="ae6e8d9ce1c24d1140b3b35bc8881dc5ca998836305f98c9257d743b8383dc82b4"></a>C8_DEBUG_STEP&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>

@@ -99,49 +99,50 @@ $(document).ready(function(){initNavTree('debug_8h_source.html',''); initResizab
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;../chip8.h&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">enum</span> {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5ad94cd2a88e788b64dfa68c8fb4e9f6c9">   14</a></span>    <a class="code hl_enumvalue" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5ad94cd2a88e788b64dfa68c8fb4e9f6c9">C8_DEBUG_QUIT</a>,</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5addb58edf2ca2f8a283cebb8e3dbff5f8">   15</a></span>    <a class="code hl_enumvalue" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5addb58edf2ca2f8a283cebb8e3dbff5f8">C8_DEBUG_CONTINUE</a>,</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5a998836305f98c9257d743b8383dc82b4">   16</a></span>    <a class="code hl_enumvalue" href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5a998836305f98c9257d743b8383dc82b4">C8_DEBUG_STEP</a>,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>};</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="debug_8h.html#abf516ab66b6e3e913e5bd640e5742276">   19</a></span><span class="preprocessor">#define C8_DEBUG_HELP_STRING                                                                       \</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">    &quot;Available commands:\n\</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">break [ADDRESS]: Add breakpoint to PC or ADDRESS, if given\n\</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">rmbreak [ADDRESS]: Remove breakpoint at PC or ADDRESS, if given\n\</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">continue: Exit debug mode until next breakpoint or completion\n\</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">help: Print this help string\n\</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">load PATH: Load program state from PATH\n\</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">next: Step to the next instruction\n\</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">print [ATTRIBUTE]: Print current value of ATTRIBUTE\n\</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">save PATH: Save program state to the given file\n\</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">set ATTRIBUTE VALUE: Set the given attribute to the given value\n\</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">quit: Terminate the program\n\</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">\n\</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">Available attributes to print:\n\</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">PC: Program counter\n\</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">SP: Stack pointer\n\</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">DT: Delay timer\n\</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">ST: Sound timer\n\</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">I:  I address\n\</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">K:  Register to store next keypress\n\</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">V[x]:  All register values or value of Vx, if given\n\</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">stack: All stack values\n\</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">$[address]: Value at given address\n\</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">\n\</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">If no argument is given to print, it will print all of the above attributes\n\</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">except for address values.\n&quot;</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keywordtype">int</span> <a class="code hl_function" href="debug_8h.html#abd28e6a0b1d4ba8eda21ee9af595f1f4">c8_debug_repl</a>(<a class="code hl_struct" href="structC8.html">C8</a>*);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keywordtype">int</span> <a class="code hl_function" href="debug_8h.html#a3b0ffcf00f0287c892a8a921021f0a82">c8_has_breakpoint</a>(<a class="code hl_struct" href="structC8.html">C8</a>*, uint16_t);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5c">   16</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5cad94cd2a88e788b64dfa68c8fb4e9f6c9">   17</a></span>    <a class="code hl_enumvalue" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5cad94cd2a88e788b64dfa68c8fb4e9f6c9">C8_DEBUG_QUIT</a>,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5caddb58edf2ca2f8a283cebb8e3dbff5f8">   18</a></span>    <a class="code hl_enumvalue" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5caddb58edf2ca2f8a283cebb8e3dbff5f8">C8_DEBUG_CONTINUE</a>,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5ca998836305f98c9257d743b8383dc82b4">   19</a></span>    <a class="code hl_enumvalue" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5ca998836305f98c9257d743b8383dc82b4">C8_DEBUG_STEP</a>,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>} <a class="code hl_enumeration" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5c">C8_DebugState</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="debug_8h.html#abf516ab66b6e3e913e5bd640e5742276">   25</a></span><span class="preprocessor">#define C8_DEBUG_HELP_STRING                                                                       \</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">    &quot;Available commands:\n\</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">break [ADDRESS]: Add breakpoint to PC or ADDRESS, if given\n\</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">rmbreak [ADDRESS]: Remove breakpoint at PC or ADDRESS, if given\n\</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">continue: Exit debug mode until next breakpoint or completion\n\</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">help: Print this help string\n\</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">load PATH: Load program state from PATH\n\</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">next: Step to the next instruction\n\</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">print [ATTRIBUTE]: Print current value of ATTRIBUTE\n\</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">save PATH: Save program state to the given file\n\</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">set ATTRIBUTE VALUE: Set the given attribute to the given value\n\</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">quit: Terminate the program\n\</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">\n\</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">Available attributes to print:\n\</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">PC: Program counter\n\</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">SP: Stack pointer\n\</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">DT: Delay timer\n\</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">ST: Sound timer\n\</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">I:  I address\n\</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">K:  Register to store next keypress\n\</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">V[x]:  All register values or value of Vx, if given\n\</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">stack: All stack values\n\</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">$[address]: Value at given address\n\</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">\n\</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">If no argument is given to print, it will print all of the above attributes\n\</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">except for address values.\n&quot;</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keywordtype">int</span> <a class="code hl_function" href="debug_8h.html#abd28e6a0b1d4ba8eda21ee9af595f1f4">c8_debug_repl</a>(<a class="code hl_struct" href="structC8.html">C8</a>*);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keywordtype">int</span> <a class="code hl_function" href="debug_8h.html#a3b0ffcf00f0287c892a8a921021f0a82">c8_has_breakpoint</a>(<a class="code hl_struct" href="structC8.html">C8</a>*, uint16_t);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="adebug_8h_html_a3b0ffcf00f0287c892a8a921021f0a82"><div class="ttname"><a href="debug_8h.html#a3b0ffcf00f0287c892a8a921021f0a82">c8_has_breakpoint</a></div><div class="ttdeci">int c8_has_breakpoint(C8 *, uint16_t)</div><div class="ttdoc">Check if breakpoint exists at address pc.</div><div class="ttdef"><b>Definition:</b> debug.c:201</div></div>
-<div class="ttc" id="adebug_8h_html_a99fb83031ce9923c84392b4e92f956b5a998836305f98c9257d743b8383dc82b4"><div class="ttname"><a href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5a998836305f98c9257d743b8383dc82b4">C8_DEBUG_STEP</a></div><div class="ttdeci">@ C8_DEBUG_STEP</div><div class="ttdef"><b>Definition:</b> debug.h:16</div></div>
-<div class="ttc" id="adebug_8h_html_a99fb83031ce9923c84392b4e92f956b5ad94cd2a88e788b64dfa68c8fb4e9f6c9"><div class="ttname"><a href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5ad94cd2a88e788b64dfa68c8fb4e9f6c9">C8_DEBUG_QUIT</a></div><div class="ttdeci">@ C8_DEBUG_QUIT</div><div class="ttdef"><b>Definition:</b> debug.h:14</div></div>
-<div class="ttc" id="adebug_8h_html_a99fb83031ce9923c84392b4e92f956b5addb58edf2ca2f8a283cebb8e3dbff5f8"><div class="ttname"><a href="debug_8h.html#a99fb83031ce9923c84392b4e92f956b5addb58edf2ca2f8a283cebb8e3dbff5f8">C8_DEBUG_CONTINUE</a></div><div class="ttdeci">@ C8_DEBUG_CONTINUE</div><div class="ttdef"><b>Definition:</b> debug.h:15</div></div>
 <div class="ttc" id="adebug_8h_html_abd28e6a0b1d4ba8eda21ee9af595f1f4"><div class="ttname"><a href="debug_8h.html#abd28e6a0b1d4ba8eda21ee9af595f1f4">c8_debug_repl</a></div><div class="ttdeci">int c8_debug_repl(C8 *)</div><div class="ttdoc">Debug command line loop.</div><div class="ttdef"><b>Definition:</b> debug.c:164</div></div>
-<div class="ttc" id="astructC8_html"><div class="ttname"><a href="structC8.html">C8</a></div><div class="ttdoc">Represents current state of the CHIP-8 interpreter.</div><div class="ttdef"><b>Definition:</b> chip8.h:56</div></div>
+<div class="ttc" id="adebug_8h_html_ae6e8d9ce1c24d1140b3b35bc8881dc5c"><div class="ttname"><a href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5c">C8_DebugState</a></div><div class="ttdeci">C8_DebugState</div><div class="ttdoc">Debug state enum.</div><div class="ttdef"><b>Definition:</b> debug.h:16</div></div>
+<div class="ttc" id="adebug_8h_html_ae6e8d9ce1c24d1140b3b35bc8881dc5ca998836305f98c9257d743b8383dc82b4"><div class="ttname"><a href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5ca998836305f98c9257d743b8383dc82b4">C8_DEBUG_STEP</a></div><div class="ttdeci">@ C8_DEBUG_STEP</div><div class="ttdef"><b>Definition:</b> debug.h:19</div></div>
+<div class="ttc" id="adebug_8h_html_ae6e8d9ce1c24d1140b3b35bc8881dc5cad94cd2a88e788b64dfa68c8fb4e9f6c9"><div class="ttname"><a href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5cad94cd2a88e788b64dfa68c8fb4e9f6c9">C8_DEBUG_QUIT</a></div><div class="ttdeci">@ C8_DEBUG_QUIT</div><div class="ttdef"><b>Definition:</b> debug.h:17</div></div>
+<div class="ttc" id="adebug_8h_html_ae6e8d9ce1c24d1140b3b35bc8881dc5caddb58edf2ca2f8a283cebb8e3dbff5f8"><div class="ttname"><a href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5caddb58edf2ca2f8a283cebb8e3dbff5f8">C8_DEBUG_CONTINUE</a></div><div class="ttdeci">@ C8_DEBUG_CONTINUE</div><div class="ttdef"><b>Definition:</b> debug.h:18</div></div>
+<div class="ttc" id="astructC8_html"><div class="ttname"><a href="structC8.html">C8</a></div><div class="ttdoc">Represents current state of the CHIP-8 interpreter.</div><div class="ttdef"><b>Definition:</b> chip8.h:101</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
