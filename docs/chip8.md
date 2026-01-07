@@ -13,8 +13,10 @@ c8 [-dvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file
 * `-d` enables debug mode. This can be used to add breakpoints, display the
   current memory, and step through instructions individually.
 * `-f` loads the specified comma-separated fonts. Big font is optional.
-* `-p` loads a color palette from a file containing two newline-separated 24-bit hex codes.
-* `-P` sets the color palette from a string containing two comma-separated 24-bit hex codes.
+* `-p` loads a color palette from a file containing two newline-separated 24-bit
+  hex codes.
+* `-P` sets the color palette from a string containing two comma-separated 24-bit
+  hex codes.
 * `-q` sets the quirks to enable from string with non-separated quirk identifiers
 * `-v` enables verbose mode. This will print each instruction that is executed.
 * `-V` prints the version number.

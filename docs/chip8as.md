@@ -9,7 +9,8 @@ c8as [-vV] [-o outputfile] src
 ```
 
 * `-o` sets an output file (default is `a.c8`).
-* `-v` prints diagnostic messages and the resulting hex-encoded bytecode to standard output.
+* `-v` prints diagnostic messages and the resulting hex-encoded bytecode to
+  standard output.
 * `-V` prints the version number.
 
 ## Example Code
