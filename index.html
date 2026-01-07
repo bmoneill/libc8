@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>libc8: Main Page</title>
+<title>libc8: libc8</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,10 +89,63 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">libc8 Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">libc8 </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml/badge.svg?branch=main" alt="CI Status" style="pointer-events: none;" class="inline"/></a> <a href="https://bmoneill.github.io/libc8"><img src="https://github.com/bmoneill/libc8/actions/workflows/doxygen.yml/badge.svg?branch=main" alt="Doxygen Status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml/badge.svg?branch=main" alt="Clang-format status" style="pointer-events: none;" class="inline"/></a></p>
+<p>This is a C library for interpreting, assembling, and disassembling CHIP-8 and SCHIP code, optionally utilizing the <a href="https://www.libsdl.org/">SDL2</a> library for graphics.</p>
+<p>An example <a class="el" href="md_docs_chip8as.html">assembler</a>, <a class="el" href="md_docs_chip8dis.html">disassembler</a>, and <a class="el" href="md_docs_chip8.html">interpreter</a> is located in <code>tools/</code>.</p>
+<h1><a class="anchor" id="autotoc_md12"></a>
+Building</h1>
+<h2><a class="anchor" id="autotoc_md13"></a>
+Linux</h2>
+<div class="fragment"><div class="line">cmake -S . -B build</div>
+<div class="line">cmake --build build</div>
+<div class="line">sudo cmake --install build</div>
+</div><!-- fragment --><p>This will build libc8 as well as the example tools.</p>
+<h2><a class="anchor" id="autotoc_md14"></a>
+SDL2</h2>
+<p>SDL2 support is enabled by default. To disable it to use another graphics library, run <code>cmake</code> with <code>-DSDL2=OFF</code>. If <code>simulate()</code> is ever called in your code, you must implement these functions with your preferred graphics library:</p>
+<ul>
+<li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5"><code>void c8_beep(void)</code></a></li>
+<li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5"><code>void c8_deinit_graphics(void)</code></a></li>
+<li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4"><code>int c8_init_graphics(void)</code></a></li>
+<li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a57897d69496a19a080b3af70ce26c010"><code>void c8_render(c8_display_t *, int *)</code></a></li>
+<li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a020c1df5341d906fb19266b94235f884"><code>int c8_tick(int *, int)</code></a></li>
+</ul>
+<p><b>Note</b>: the <code>all</code> and <code>tools</code> targets require <code>SDL2</code> to be <code>ON</code>.</p>
+<h1><a class="anchor" id="autotoc_md15"></a>
+Testing</h1>
+<p>Testing is done using <a href="https://cmake.org/cmake/help/latest/manual/ctest.1.html">ctest</a> and <a href="https://github.com/ThrowTheSwitch/Unity">Unity</a>.</p>
+<div class="fragment"><div class="line">git submodule update</div>
+<div class="line">cmake -S . -B build -DTARGET_GROUP=test -DSDL2=OFF</div>
+<div class="line">cmake --build build </div>
+<div class="line">cd build</div>
+<div class="line">ctest --verbose</div>
+</div><!-- fragment --><p><b>Note</b>: When built with tests enabled (<code>-DTARGET_GROUP=test</code>), <code>libc8</code> will not halt execution after encountering an error, potentially leading to undefined behavior.</p>
+<h1><a class="anchor" id="autotoc_md16"></a>
+Showcase</h1>
+<p>The libc8 CHIP-8 interpreter running <a href="https://johnearnest.github.io/chip8Archive/play.html?p=outlaw">Outlaw by John Earnest</a>:</p>
+<p><img src="https://oneill.sh/img/libc8-outlaw.gif" alt="libc8 running outlaw" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md17"></a>
+Documentation</h1>
+<p><a href="https://bmoneill.github.io/libc8">Library documentation for libc8</a> is available on the GitHub pages site.</p>
+<h1><a class="anchor" id="autotoc_md18"></a>
+Further Reading</h1>
+<ul>
+<li><a href="http://devernay.free.fr/hacks/chip8/C8TECH10.HTM">Cowgod's Chip-8 Technical Reference</a></li>
+<li><a href="http://devernay.free.fr/hacks/chip8/schip.txt">S-CHIP 1.1 Reference</a></li>
+<li><a href="https://github.com/JohnEarnest/Octo">Octo</a></li>
+<li><a href="https://chip-8.github.io/extensions/">CHIP-8 Extensions and Compatibility</a></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md19"></a>
+Bugs</h1>
+<p>If you find a bug, submit an issue, PR, or email me with a description and/or patch.</p>
+<h1><a class="anchor" id="autotoc_md20"></a>
+License</h1>
+<p>Copyright (c) 2019-2026 Ben O'Neill <a href="#" onclick="location.href='mai'+'lto:'+'ben'+'@o'+'nei'+'ll'+'.sh'; return false;">ben@o<span class="obfuscator">.nosp@m.</span>neil<span class="obfuscator">.nosp@m.</span>l.sh</a>. This work is released under the terms of the MIT License. See [LICENSE](LICENSE) for the license terms. </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
