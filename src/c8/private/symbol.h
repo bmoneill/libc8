@@ -117,7 +117,7 @@ typedef enum {
  * This enumeration defines all symbol types found during the first assembler
  * pass.
  *
- * NOTE: values before label need to be kept in same order as `identifierStrings`
+ * NOTE: Values before label need to be kept in same order as `identifierStrings`
  */
 typedef enum {
     C8_SYM_NULL,
@@ -145,24 +145,18 @@ typedef enum {
 } C8_SymbolIdentifier;
 
 /**
- * @struct InstructionFormat
+ * @struct C8_InstructionFormat
  * @brief Represents a valid instruction format
  *
- * instruction_t's are checked against instruction_format_t's to verify
+ * C8_Instructions are checked against `C8_InstructionFormat`s to verify
  * that they will produce valid instructions.
- *
- * @param cmd instruction command
- * @param base base hex value of command (without parameters)
- * @param pcount parameter count
- * @param ptype parameter types
- * @param pmask parameter masks (where to OR parameters to)
  */
 typedef struct {
-    C8_InstructionIdentifier cmd;
-    uint16_t                 base;
-    int                      pcount;
-    C8_SymbolIdentifier      ptype[3];
-    uint16_t                 pmask[3];
+    C8_InstructionIdentifier cmd; //!< Instruction command
+    uint16_t                 base; //!< Base hex value of command (without parameters)
+    int                      pcount; //!< Parameter count
+    C8_SymbolIdentifier      ptype[3]; //!< Parameter types
+    uint16_t                 pmask[3]; //!< Parameter masks (where to OR parameters to)
 } C8_InstructionFormat;
 
 /**
@@ -171,77 +165,55 @@ typedef struct {
  *
  * During the second pass, this structure is used to verify the instruction's
  * validity and generate the bytecode.
- *
- * @param line line number
- * @param cmd instruction command
- * @param pcount parameter count
- * @param ptype parameter types
- * @param p parameter values
- * @param format corresponding `C8_InstructionFormat` (if valid)
  */
 typedef struct {
-    int                      line;
-    C8_InstructionIdentifier cmd;
-    int                      pcount;
-    C8_SymbolIdentifier      ptype[3];
-    int                      p[3];
-    C8_InstructionFormat*    format;
+    int                      line; //!< Line number
+    C8_InstructionIdentifier cmd; //!< Instruction command
+    int                      pcount; //!< Parameter count
+    C8_SymbolIdentifier      ptype[3]; //!< Parameter types
+    int                      p[3]; //!< Parameter values
+    C8_InstructionFormat*    format; //!< Corresponding instruction format
 } C8_Instruction;
 
 /**
  * @struct C8_Label
  * @brief Represents a label
  *
- * Represents a label with an identifier and byte value
- *
- * @param identifier string identifier
- * @param byte location of the label
+ * Represents a label with an identifier and byte value.
  */
 typedef struct {
-    char identifier[C8_LABEL_IDENTIFIER_SIZE];
-    int  byte;
+    char identifier[C8_LABEL_IDENTIFIER_SIZE]; //!< String identifier
+    int  byte; //!< Byte location
 } C8_Label;
 
 /**
  * @struct C8_LabelList
  * @brief Represents a list of labels
- *
- * @param l pointer to first label
- * @param len length of the list
- * @param ceil maximum length of the list
  */
 typedef struct {
-    C8_Label* l;
-    int       len;
-    int       ceil;
+    C8_Label* l; //!< Pointer to first label
+    int       len; //!< Length of the list
+    int       ceil; //!< Maximum length of the list
 } C8_LabelList;
 
 /**
  * @struct C8_Symbol
  * @brief Represents a symbol with a type, value, and line number
- *
- * @param type symbol type
- * @param value symbol value
- * @param ln line number
  */
 typedef struct {
-    C8_SymbolIdentifier type;
-    uint16_t            value;
-    int                 ln;
+    C8_SymbolIdentifier type; //!< Symbol type
+    uint16_t            value; //!< Symbol value
+    int                 ln; //!< Line number
 } C8_Symbol;
 
 /**
  * @struct C8_SymbolList
  * @brief Represents a symbol with a type, value, and line number
- *
- * @param s pointer to first symbol
- * @param len number of symbols in list
- * @param ceil amount of symbols that can fit in allocated memory
  */
 typedef struct {
-    C8_Symbol* s;
-    int        len;
-    int        ceil;
+    C8_Symbol* s; //!< Pointer to first symbol
+    int        len; //!< Number of symbols in list
+    int        ceil; //!< Amount of symbols that can fit in allocated memory
 } C8_SymbolList;
 
 int                         c8_build_instruction(C8_Instruction*, C8_SymbolList*, int);

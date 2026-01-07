@@ -99,27 +99,27 @@
   * @param mode interpreter mode (C8_MODE_CHIP8, C8_MODE_SCHIP, C8_MODE_XOCHIP)
   */
 typedef struct {
-    uint8_t    mem[C8_MEMSIZE];
-    uint8_t    R[8];
-    uint8_t    V[16];
-    uint8_t    sp;
-    uint8_t    dt;
-    uint8_t    st;
-    uint16_t   stack[C8_STACK_SIZE];
-    uint16_t   pc;
-    uint16_t   I;
-    int        key[18];
-    int        VK;
-    int        cs;
-    int        waitingForKey;
-    int        running;
-    C8_Display display;
-    int        flags;
-    int        breakpoints[C8_MEMSIZE];
-    int        colors[2];
-    int        fonts[2];
-    int        draw;
-    int        mode;
+    uint8_t    mem[C8_MEMSIZE]; //!< CHIP-8 memory
+    uint8_t    R[8]; //!< Flag registers
+    uint8_t    V[16]; //!< General purpose registers
+    uint8_t    sp; //!< Stack pointer
+    uint8_t    dt; //!< Delay timer
+    uint8_t    st; //!< Sound timer
+    uint16_t   stack[C8_STACK_SIZE]; //!< Stack
+    uint16_t   pc; //!< Program counter
+    uint16_t   I; //!< Address register
+    int        key[18]; //!< Key press states
+    int        VK; //!< Register to store next keypress
+    int        cs; //!< Instructions to execute per second
+    int        waitingForKey; //!< Waiting for keypress?
+    int        running; //!< Interpreter running state
+    C8_Display display; //!< Graphics display
+    int        flags; //!< CLI flags
+    int        breakpoints[C8_MEMSIZE]; //!< Debug breakpoint map
+    int        colors[2]; //!< 24 bit hex colors, background=[0] foreground=[1]
+    int        fonts[2]; //!< Font IDs (see font.c)
+    int        draw; //!< Need to draw? (1 or 0)
+    int        mode; //!< Interpreter mode (C8_MODE_CHIP8, C8_MODE_SCHIP, C8_MODE_XOCHIP)
 } C8;
 
 void        c8_deinit(C8*);

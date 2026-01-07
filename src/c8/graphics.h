@@ -66,15 +66,12 @@
   * @struct C8_Display
   * @brief Represents a graphics display.
   *
-  * @param p pixels (1D array)
-  * @param mode display mode (`C8_DISPLAYMODE_LOW` or `C8_DISPLAYMODE_HIGH`)
-  * @param x x offset (for `C8_DISPLAYMODE_LOW`)
-  * @param y y offset (for `C8_DISPLAYMODE_HIGH`)
   */
 typedef struct {
-    uint8_t p[C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT];
-    uint8_t mode;
-    uint8_t x, y;
+    uint8_t p[C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT]; //!< Pixels (1D array)
+    uint8_t mode; //!< Display mode (`C8_DISPLAYMODE_LOW` or `C8_DISPLAYMODE_HIGH`)
+    uint8_t x; //!< Offset (for `C8_DISPLAYMODE_LOW`)
+    uint8_t y; //!< Offset (for `C8_DISPLAYMODE_HIGH`)
 } C8_Display;
 
 uint8_t*       c8_get_pixel(C8_Display*, int, int);
