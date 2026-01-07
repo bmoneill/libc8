@@ -97,35 +97,41 @@ $(document).ready(function(){initNavTree('common_8h_source.html',''); initResiza
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef C8_COMMON_H</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define C8_COMMON_H</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef C8_VERSION</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="common_8h.html#a996814d82ebbdf27188efe64e294f5fc">   14</a></span><span class="preprocessor">#define C8_VERSION &quot;unknown&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="common_8h.html#a1f2ffa6772e0f5daa5d0e31825613f60">   20</a></span><span class="preprocessor">#define C8_X(i) ((i &amp; 0x0F00) &gt;&gt; 8)</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="common_8h.html#a4ebbcd3cf4554356d63bb23e26d12066">   25</a></span><span class="preprocessor">#define C8_Y(i) ((i &amp; 0x00F0) &gt;&gt; 4)</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="common_8h.html#af7b022502148c2b9883507a5be38e480">   30</a></span><span class="preprocessor">#define C8_NNN(i) (i &amp; 0x0FFF)</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="common_8h.html#a2b7412265fcb5e14d71e3e73bbf90808">   35</a></span><span class="preprocessor">#define C8_A(i) ((i &amp; 0xF000) &gt;&gt; 12)</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="common_8h.html#abc473f47088628d7d5e744beb2e7b6c6">   40</a></span><span class="preprocessor">#define C8_B(i) (i &amp; 0x000F)</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="common_8h.html#adbfd840282045dd988d09888d6f62b8d">   45</a></span><span class="preprocessor">#define C8_KK(i) (i &amp; 0x00FF)</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="common_8h.html#a0c845c4d46fd2ee04977be885e156265">   50</a></span><span class="preprocessor">#define C8_EXPAND(i)                                                                               \</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">    uint8_t  x   = C8_X(i);                                                                        \</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">    uint8_t  y   = C8_Y(i);                                                                        \</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">    uint16_t nnn = C8_NNN(i);                                                                      \</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">    uint8_t  a   = C8_A(i);                                                                        \</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">    uint8_t  b   = C8_B(i);                                                                        \</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">    uint8_t  kk  = C8_KK(i);</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="common_8h.html#ad31055032e613d8a21356ece8394773d">   61</a></span><span class="preprocessor">#define C8_PROG_START 0x200</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="common_8h.html#a9225090846dc1403ea45590bb45804b3">   66</a></span><span class="preprocessor">#define C8_MEMSIZE 0x1000</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifdef TEST</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define C8_STATIC</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="common_8h.html#a92e85352c662d1c6b4a0e1260ae42ff8">   13</a></span><span class="preprocessor">#define C8_STATIC static</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#ifndef C8_VERSION</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="common_8h.html#a996814d82ebbdf27188efe64e294f5fc">   20</a></span><span class="preprocessor">#define C8_VERSION &quot;unknown&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="common_8h.html#a1f2ffa6772e0f5daa5d0e31825613f60">   26</a></span><span class="preprocessor">#define C8_X(i) ((i &amp; 0x0F00) &gt;&gt; 8)</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="common_8h.html#a4ebbcd3cf4554356d63bb23e26d12066">   31</a></span><span class="preprocessor">#define C8_Y(i) ((i &amp; 0x00F0) &gt;&gt; 4)</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="common_8h.html#af7b022502148c2b9883507a5be38e480">   36</a></span><span class="preprocessor">#define C8_NNN(i) (i &amp; 0x0FFF)</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="common_8h.html#a2b7412265fcb5e14d71e3e73bbf90808">   41</a></span><span class="preprocessor">#define C8_A(i) ((i &amp; 0xF000) &gt;&gt; 12)</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="common_8h.html#abc473f47088628d7d5e744beb2e7b6c6">   46</a></span><span class="preprocessor">#define C8_B(i) (i &amp; 0x000F)</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="common_8h.html#adbfd840282045dd988d09888d6f62b8d">   51</a></span><span class="preprocessor">#define C8_KK(i) (i &amp; 0x00FF)</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="common_8h.html#a0c845c4d46fd2ee04977be885e156265">   56</a></span><span class="preprocessor">#define C8_EXPAND(i)                                                                               \</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">    uint8_t  x   = C8_X(i);                                                                        \</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">    uint8_t  y   = C8_Y(i);                                                                        \</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">    uint16_t nnn = C8_NNN(i);                                                                      \</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">    uint8_t  a   = C8_A(i);                                                                        \</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">    uint8_t  b   = C8_B(i);                                                                        \</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">    uint8_t  kk  = C8_KK(i);</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="common_8h.html#ad31055032e613d8a21356ece8394773d">   67</a></span><span class="preprocessor">#define C8_PROG_START 0x200</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="common_8h.html#a9225090846dc1403ea45590bb45804b3">   72</a></span><span class="preprocessor">#define C8_MEMSIZE 0x1000</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
