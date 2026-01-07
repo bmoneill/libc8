@@ -1,7 +1,6 @@
-#include "c8/decode.c"
-
 #include "c8/common.h"
-#include "c8/private/exception.h"
+#include "c8/decode.h"
+
 #include "unity.h"
 
 #include <stdint.h>
@@ -24,17 +23,19 @@
 #define SHOULD_PARSE(expected, ins)                                                                \
     TEST_ASSERT_EQUAL_STRING(expected, c8_decode_instruction(ins, label_map));
 
-uint8_t   label_map[C8_MEMSIZE];
-char      buf[64];
+uint8_t     label_map[C8_MEMSIZE];
+char        buf[64];
 
-int       x     = 0;
-int       y     = 0;
-int       kk    = 0;
-int       b     = 0;
-int       nnn   = 0;
-const int label = 1;
+int         x     = 0;
+int         y     = 0;
+int         kk    = 0;
+int         b     = 0;
+int         nnn   = 0;
+const int   label = 1;
 
-void      setUp(void) {
+extern void find_labels(FILE*, uint8_t*);
+
+void        setUp(void) {
     srand(time(NULL));
     memset(label_map, 0, 4096);
     x   = rand() % 0xF;

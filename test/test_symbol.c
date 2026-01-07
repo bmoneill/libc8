@@ -2,7 +2,7 @@
 
 #include "c8/encode.h"
 #include "c8/private/exception.h"
-#include "c8/private/symbol.c"
+#include "c8/private/symbol.h"
 
 #include <stdint.h>
 #include <stdlib.h>

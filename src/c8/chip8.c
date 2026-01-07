@@ -21,8 +21,6 @@
 
 #define DEBUG(c) (c->flags & C8_FLAG_DEBUG)
 
-static void draw(C8*, uint16_t);
-
 /**
  * @brief Deinitialize graphics and free c8
  *

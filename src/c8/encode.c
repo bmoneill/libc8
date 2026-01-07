@@ -22,20 +22,20 @@
         printf(__VA_ARGS__);                                                                       \
     }
 
-static int         c8_initialize_labels(C8_LabelList*);
-static int         c8_initialize_symbols(C8_SymbolList*);
-static int         c8_line_count(const char*);
-static int         c8_parse_line(char*, int, C8_SymbolList*, const C8_LabelList*);
-static int         c8_parse_word(char*, const char*, int, C8_Symbol*, const C8_LabelList*);
-static inline void c8_put16(uint8_t*, uint16_t, int);
-static int         c8_tokenize(char**, char*, const char*, int);
-static int         c8_to_upper(char*);
-static char*       c8_remove_comma(char*);
-static int         c8_write(uint8_t*, C8_SymbolList*);
+C8_STATIC int   c8_initialize_labels(C8_LabelList*);
+C8_STATIC int   c8_initialize_symbols(C8_SymbolList*);
+C8_STATIC int   c8_line_count(const char*);
+C8_STATIC int   c8_parse_line(char*, int, C8_SymbolList*, const C8_LabelList*);
+C8_STATIC int   c8_parse_word(char*, const char*, int, C8_Symbol*, const C8_LabelList*);
+C8_STATIC void  c8_put16(uint8_t*, uint16_t, int);
+C8_STATIC int   c8_tokenize(char**, char*, const char*, int);
+C8_STATIC int   c8_to_upper(char*);
+C8_STATIC char* c8_remove_comma(char*);
+C8_STATIC int   c8_write(uint8_t*, C8_SymbolList*);
 
-char**             c8_lines;
-char**             c8_linesUnformatted;
-int                c8_lineCount;
+char**          c8_lines;
+char**          c8_linesUnformatted;
+int             c8_lineCount;
 
 /**
  * @brief Parse the given string
@@ -159,7 +159,7 @@ char* c8_remove_comment(char* s) {
  *
  * @return 1 if success, exception code otherwise
  */
-static int c8_initialize_labels(C8_LabelList* labels) {
+C8_STATIC int c8_initialize_labels(C8_LabelList* labels) {
     labels->l = (C8_Label*) calloc(C8_LABEL_CEILING, sizeof(C8_Label));
     if (!labels->l) {
         C8_EXCEPTION(C8_MEMORY_ALLOCATION_EXCEPTION, "At function %s", __func__);
@@ -178,7 +178,7 @@ static int c8_initialize_labels(C8_LabelList* labels) {
  *
  * @return 1 if success, exception code otherwise
  */
-static int c8_initialize_symbols(C8_SymbolList* symbols) {
+C8_STATIC int c8_initialize_symbols(C8_SymbolList* symbols) {
     symbols->s = (C8_Symbol*) calloc(C8_SYMBOL_CEILING, sizeof(C8_Symbol));
     if (!symbols->s) {
         C8_EXCEPTION(C8_MEMORY_ALLOCATION_EXCEPTION, "At function %s", __func__);
@@ -197,7 +197,7 @@ static int c8_initialize_symbols(C8_SymbolList* symbols) {
  *
  * @return line count
  */
-static int c8_line_count(const char* s) {
+C8_STATIC int c8_line_count(const char* s) {
     int ln = 1;
     while (*s) {
         if (*s == '\n') {
@@ -218,7 +218,7 @@ static int c8_line_count(const char* s) {
  *
  * @return 1 if success, exception code otherwise
  */
-static int c8_parse_line(char* s, int ln, C8_SymbolList* symbols, const C8_LabelList* labels) {
+C8_STATIC int c8_parse_line(char* s, int ln, C8_SymbolList* symbols, const C8_LabelList* labels) {
     s = c8_trim(s);
     s = c8_remove_comment(s);
     if (strlen(s) == 0) {
@@ -279,7 +279,7 @@ static int c8_parse_line(char* s, int ln, C8_SymbolList* symbols, const C8_Label
  *
  * @return number of words to skip
  */
-static int
+C8_STATIC int
 c8_parse_word(char* s, const char* next, int ln, C8_Symbol* sym, const C8_LabelList* labels) {
     int value;
     sym->ln = ln;
@@ -342,7 +342,7 @@ c8_parse_word(char* s, const char* next, int ln, C8_Symbol* sym, const C8_LabelL
  * @param output where to write
  * @param n index to write to
  */
-static inline void c8_put16(uint8_t* output, uint16_t n, int idx) {
+C8_STATIC void c8_put16(uint8_t* output, uint16_t n, int idx) {
     output[idx]     = (n >> 8) & 0xFF;
     output[idx + 1] = n & 0xFF;
 }
@@ -357,7 +357,7 @@ static inline void c8_put16(uint8_t* output, uint16_t n, int idx) {
  *
  * @return number of tokens
  */
-static int c8_tokenize(char** tok, char* s, const char* delim, int maxTokens) {
+C8_STATIC int c8_tokenize(char** tok, char* s, const char* delim, int maxTokens) {
     int   tokenCount = 0;
     char* token      = strtok(s, delim);
     while (token && tokenCount < maxTokens) {
@@ -374,7 +374,7 @@ static int c8_tokenize(char** tok, char* s, const char* delim, int maxTokens) {
  * @param s string to remove comma from
  * @return string without comma
  */
-static char* c8_remove_comma(char* s) {
+C8_STATIC char* c8_remove_comma(char* s) {
     c8_trim(s);
     if (s[strlen(s) - 1] == ',') {
         s[strlen(s) - 1] = '\0';
@@ -388,7 +388,7 @@ static char* c8_remove_comma(char* s) {
  *
  * @param s string to convert
  */
-static int c8_to_upper(char* s) {
+C8_STATIC int c8_to_upper(char* s) {
     while (*s) {
         *s = toupper(*s);
         s++;
@@ -404,7 +404,7 @@ static int c8_to_upper(char* s) {
  *
  * @return length of bytecode
  */
-static int c8_write(uint8_t* output, C8_SymbolList* symbols) {
+C8_STATIC int c8_write(uint8_t* output, C8_SymbolList* symbols) {
     int            ret;
     C8_Instruction ins;
     int            byte = 0;

@@ -1,8 +1,9 @@
-#include "unity.h"
-
-#include "c8/encode.c"
-
 #include "c8/common.h"
+#include "c8/encode.h"
+#include "c8/private/exception.h"
+#include "c8/private/symbol.h"
+
+#include "unity.h"
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -19,6 +20,17 @@ int           insCount;
 
 C8_SymbolList symbols;
 C8_LabelList  labels;
+
+extern int    c8_initialize_labels(C8_LabelList*);
+extern int    c8_initialize_symbols(C8_SymbolList*);
+extern int    c8_line_count(const char*);
+extern int    c8_parse_line(char*, int, C8_SymbolList*, const C8_LabelList*);
+extern int    c8_parse_word(char*, const char*, int, C8_Symbol*, const C8_LabelList*);
+extern void   c8_put16(uint8_t*, uint16_t, int);
+extern int    c8_tokenize(char**, char*, const char*, int);
+extern int    c8_to_upper(char*);
+extern char*  c8_remove_comma(char*);
+extern int    c8_write(uint8_t*, C8_SymbolList*);
 
 void          setUp(void) {
     bytecode     = calloc(BYTECODE_SIZE, 1);

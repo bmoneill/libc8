@@ -7,6 +7,12 @@
 #ifndef C8_COMMON_H
 #define C8_COMMON_H
 
+#ifdef TEST
+#define C8_STATIC
+#else
+#define C8_STATIC static
+#endif
+
 #ifndef C8_VERSION
 /**
  * @brief Version of libc8.

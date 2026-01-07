@@ -93,10 +93,10 @@ C8_InstructionFormat c8_formats[] = {
     { C8_I_NULL, 0, 0, { C8_SYM_NULL }, { 0 } },
 };
 
-static int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, int idx);
-static int parse_instruction(C8_Instruction*);
-static int reallocate_symbols(C8_SymbolList* symbols);
-static int validate_instruction(C8_Instruction*);
+C8_STATIC int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, int idx);
+C8_STATIC int parse_instruction(C8_Instruction*);
+C8_STATIC int reallocate_symbols(C8_SymbolList* symbols);
+C8_STATIC int validate_instruction(C8_Instruction*);
 
 /**
  * @brief Build an instruction from symbols beginning at idx
@@ -431,7 +431,7 @@ int c8_substitute_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
  *
  * @return 1 if success, exception code otherwise.
  */
-static int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, int idx) {
+C8_STATIC int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, int idx) {
     int j   = 0;
     int max = 0;
     for (int i = idx; i < symbols->len; i++) {
@@ -485,7 +485,7 @@ static int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, int
  * @param ins instruction to get bytecode of
  * @return bytecode of instruction ins
  */
-static int parse_instruction(C8_Instruction* ins) {
+C8_STATIC int parse_instruction(C8_Instruction* ins) {
     uint16_t result = ins->format->base;
     for (int j = 0; j < ins->pcount; j++) {
         if (ins->format->pmask[j]) {
@@ -506,7 +506,7 @@ static int parse_instruction(C8_Instruction* ins) {
  *
  * @return 1 if success, 0 if failure
  */
-static int validate_instruction(C8_Instruction* ins) {
+C8_STATIC int validate_instruction(C8_Instruction* ins) {
     int match;
     for (int i = 0; c8_formats[i].cmd != C8_I_NULL; i++) {
         C8_InstructionFormat* f = &c8_formats[i];
@@ -561,7 +561,7 @@ static int validate_instruction(C8_Instruction* ins) {
  *
  * @return 1 if success, exception code otherwise.
  */
-static int reallocate_symbols(C8_SymbolList* symbols) {
+C8_STATIC int reallocate_symbols(C8_SymbolList* symbols) {
     int        newCeiling = symbols->ceil + C8_SYMBOL_CEILING;
     C8_Symbol* oldsym     = symbols->s;
     symbols->s            = (C8_Symbol*) malloc(sizeof(C8_Symbol) * newCeiling);
@@ -586,7 +586,7 @@ static int reallocate_symbols(C8_SymbolList* symbols) {
  * @return number of bits to shift
  */
 int c8_shift(uint16_t fmt) {
-    static const int table[6][2] = {
+    C8_STATIC const int table[6][2] = {
         { 0xF000, 12 }, // a
         { 0x000F, 0 }, // b
         { 0x00FF, 0 }, // kk

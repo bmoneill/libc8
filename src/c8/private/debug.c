@@ -17,117 +17,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-/**
-  * @enum C8_CommandIdentifier
-  * @brief Represents command types
-  *
-  * This enumeration defines all possible debug mode commands.
-  */
-typedef enum {
-    C8_CMD_NONE           = -1,
-    C8_CMD_ADD_BREAKPOINT = 0,
-    C8_CMD_RM_BREAKPOINT,
-    C8_CMD_CONTINUE,
-    C8_CMD_NEXT,
-    C8_CMD_SET,
-    C8_CMD_LOAD,
-    C8_CMD_SAVE,
-    C8_CMD_PRINT,
-    C8_CMD_HELP,
-    C8_CMD_QUIT,
-    C8_CMD_LOADFLAGS,
-    C8_CMD_SAVEFLAGS,
-} C8_CommandIdentifier;
-
-/**
- * @enum C8_ArgIdentifier
- * @brief Represents argument types
- *
- * This enumeration defines all possible debug mode arguments.
- */
-typedef enum {
-    C8_ARG_NONE = -1,
-    C8_ARG_SP   = 0,
-    C8_ARG_DT,
-    C8_ARG_ST,
-    C8_ARG_PC,
-    C8_ARG_I,
-    C8_ARG_VK,
-    C8_ARG_STACK,
-    C8_ARG_BG,
-    C8_ARG_FG,
-    C8_ARG_SFONT,
-    C8_ARG_BFONT,
-    C8_ARG_QUIRKS,
-    C8_ARG_V,
-    C8_ARG_R,
-    C8_ARG_ADDR,
-    C8_ARG_FILE,
-} C8_ArgIdentifier;
-
-/**
- * @union C8_ArgValue
- * @brief Stores an argument's value (string or int)
- *
- * This union is used to store the value of an argument, which can either be a
- * string (for file paths or names) or an integer (for register values, addresses,
- * etc.).
- *
- * @param s string value
- * @param i int value
- */
-typedef union {
-    char* s;
-    int   i;
-} C8_ArgValue;
-
-/**
- * @struct C8_Arg
- * @brief Represents an argument for a command with a type and value.
- *
- * This structure is used to encapsulate an argument's type and its value.
- * It can represent different types of arguments such as registers, memory addresses,
- * or file paths, depending on the command being executed.
- *
- * @param type Argument type
- * @param value Argument value
- */
-typedef struct {
-    C8_ArgIdentifier type;
-    C8_ArgValue      value;
-} C8_Arg;
-
-/**
- * @struct C8_Command
- * @brief Represents a command with an ID, argument ID, and associated argument.
- *
- * This structure is used to encapsulate a command's identifier, its argument,
- * and a value to set the argument to specifically for `set` commands.
- *
- * @param id command identifier
- * @param arg `Arg` argument
- * @param setValue value to set `arg.value` to for set commands
- */
-typedef struct {
-    C8_CommandIdentifier id;
-    C8_Arg               arg;
-    int                  setValue;
-} C8_Command;
-
-static int  c8_get_command(C8_Command*, char*);
-static int  c8_load_file_arg(C8_Command*, char*);
-static void c8_load_flags(C8*, const char*);
-static void c8_load_state(C8*, const char*);
-static int  c8_parse_arg(C8_Command*, char*);
-static void c8_print_help(void);
-static void c8_print_r_registers(const C8*);
-static void c8_print_stack(const C8*);
-static void c8_print_v_registers(const C8*);
-static void c8_print_value(C8*, const C8_Command*);
-static int  c8_run_command(C8*, const C8_Command*);
-static void c8_save_flags(const C8*, const char*);
-static void c8_save_state(const C8*, const char*);
-static int  c8_set_value(C8*, const C8_Command*);
+C8_STATIC int  c8_get_command(C8_Command*, char*);
+C8_STATIC int  c8_load_file_arg(C8_Command*, char*);
+C8_STATIC void c8_load_flags(C8*, const char*);
+C8_STATIC void c8_load_state(C8*, const char*);
+C8_STATIC int  c8_parse_arg(C8_Command*, char*);
+C8_STATIC void c8_print_help(void);
+C8_STATIC void c8_print_r_registers(const C8*);
+C8_STATIC void c8_print_stack(const C8*);
+C8_STATIC void c8_print_v_registers(const C8*);
+C8_STATIC void c8_print_value(C8*, const C8_Command*);
+C8_STATIC int  c8_run_command(C8*, const C8_Command*);
+C8_STATIC void c8_save_flags(const C8*, const char*);
+C8_STATIC void c8_save_state(const C8*, const char*);
+C8_STATIC int  c8_set_value(C8*, const C8_Command*);
 
 /**
  * These are string values of all possible argument, ordered to match the
@@ -211,7 +114,7 @@ int c8_has_breakpoint(C8* c8, uint16_t pc) { return c8->breakpoints[pc]; }
  * @param s command string
  * @return 1 if successful, 0 if not
  */
-static int c8_get_command(C8_Command* cmd, char* s) {
+C8_STATIC int c8_get_command(C8_Command* cmd, char* s) {
     int numCmds = (int) sizeof(c8_cmds) / sizeof(c8_cmds[0]);
 
     /* reset cmd */
@@ -248,7 +151,7 @@ static int c8_get_command(C8_Command* cmd, char* s) {
  * @param c8 struct to load to
  * @param path path to load from
  */
-static void c8_load_flags(C8* c8, const char* path) {
+C8_STATIC void c8_load_flags(C8* c8, const char* path) {
     FILE* f = fopen(path, "rb");
     if (!f) {
         printf("Invalid file\n");
@@ -265,7 +168,7 @@ static void c8_load_flags(C8* c8, const char* path) {
  * @param c8 struct to load to
  * @param path path to load from
  */
-static void c8_load_state(C8* c8, const char* path) {
+C8_STATIC void c8_load_state(C8* c8, const char* path) {
     FILE* f = fopen(path, "rb");
     if (!f) {
         printf("Invalid file\n");
@@ -286,7 +189,7 @@ static void c8_load_state(C8* c8, const char* path) {
  *
  * @return 1
  */
-static int c8_load_file_arg(C8_Command* cmd, char* arg) {
+C8_STATIC int c8_load_file_arg(C8_Command* cmd, char* arg) {
     cmd->arg.type    = C8_ARG_FILE;
     cmd->arg.value.s = c8_trim(arg);
     return 1;
@@ -300,7 +203,7 @@ static int c8_load_file_arg(C8_Command* cmd, char* arg) {
  *
  * @return 1 if success, 0 otherwise
  */
-static int c8_parse_arg(C8_Command* cmd, char* s) {
+C8_STATIC int c8_parse_arg(C8_Command* cmd, char* s) {
     C8_Arg* arg       = &cmd->arg;
     char*   value     = NULL;
     int     argsCount = sizeof(c8_args) / sizeof(c8_args[0]);
@@ -386,14 +289,14 @@ static int c8_parse_arg(C8_Command* cmd, char* s) {
 /**
  * @brief Print the help string.
  */
-static void c8_print_help(void) { printf("%s\n", C8_DEBUG_HELP_STRING); }
+C8_STATIC void c8_print_help(void) { printf("%s\n", C8_DEBUG_HELP_STRING); }
 
 /**
  * @brief print quirk identifiers in `flags`
  *
  * @param flags flags to get enabled quirks from
  */
-static void print_quirks(int flags) {
+C8_STATIC void print_quirks(int flags) {
     int f = 0;
     printf("Quirks: ");
     if (flags & C8_FLAG_QUIRK_BITWISE) {
@@ -427,7 +330,7 @@ static void print_quirks(int flags) {
  *
  * @param c8 the current CHIP-8 state
  */
-static void c8_print_r_registers(const C8* c8) {
+C8_STATIC void c8_print_r_registers(const C8* c8) {
     for (int i = 0; i < 4; i++) {
         printf("R%01x: %02x\t\t", i, c8->R[i]);
         printf("R%01x: %02x\n", i + 4, c8->R[i + 4]);
@@ -439,7 +342,7 @@ static void c8_print_r_registers(const C8* c8) {
  *
  * @param c8 the current CHIP-8 state
  */
-static void c8_print_v_registers(const C8* c8) {
+C8_STATIC void c8_print_v_registers(const C8* c8) {
     for (int i = 0; i < 8; i++) {
         printf("V%01x: %02x\t\t", i, c8->V[i]);
         printf("V%01x: %02x\n", i + 8, c8->V[i + 8]);
@@ -451,7 +354,7 @@ static void c8_print_v_registers(const C8* c8) {
  *
  * @param c8 the current CHIP-8 state
  */
-static void c8_print_stack(const C8* c8) {
+C8_STATIC void c8_print_stack(const C8* c8) {
     for (int i = 0; i < 8; i++) {
         printf("x%01x: $%03x\t\t", i, c8->stack[i]);
         printf("x%01x: $%03x\n", i + 8, c8->stack[i + 8]);
@@ -464,7 +367,7 @@ static void c8_print_stack(const C8* c8) {
  * @param c8 the current CHIP-8 state
  * @param cmd the command structure to get the arg from
  */
-static void c8_print_value(C8* c8, const C8_Command* cmd) {
+C8_STATIC void c8_print_value(C8* c8, const C8_Command* cmd) {
     uint16_t pc;
     uint16_t ins;
     int      addr;
@@ -557,7 +460,7 @@ static void c8_print_value(C8* c8, const C8_Command* cmd) {
  * @param cmd the command structure containing the command ID and arguments
  * @return `C8_DEBUG_CONTINUE`, `C8_DEBUG_STEP`, `C8_DEBUG_QUIT`, or 0
  */
-static int c8_run_command(C8* c8, const C8_Command* cmd) {
+C8_STATIC int c8_run_command(C8* c8, const C8_Command* cmd) {
     switch (cmd->id) {
     case C8_CMD_ADD_BREAKPOINT:
         if (cmd->arg.type == C8_ARG_NONE) {
@@ -614,7 +517,7 @@ static int c8_run_command(C8* c8, const C8_Command* cmd) {
  * @param c8 `C8` to grab flag registers from
  * @param path path to save to
  */
-static void c8_save_flags(const C8* c8, const char* path) {
+C8_STATIC void c8_save_flags(const C8* c8, const char* path) {
     FILE* f = fopen(path, "wb");
     if (!f) {
         printf("Invalid file\n");
@@ -631,7 +534,7 @@ static void c8_save_flags(const C8* c8, const char* path) {
  * @param c8 `C8` to save
  * @param path path to save to
  */
-static void c8_save_state(const C8* c8, const char* path) {
+C8_STATIC void c8_save_state(const C8* c8, const char* path) {
     FILE* f = fopen(path, "wb");
     if (!f) {
         printf("Invalid file\n");
@@ -651,7 +554,7 @@ static void c8_save_state(const C8* c8, const char* path) {
  * @param c8 the current CHIP-8 state
  * @param cmd the command structure
  */
-static int c8_set_value(C8* c8, const C8_Command* cmd) {
+C8_STATIC int c8_set_value(C8* c8, const C8_Command* cmd) {
     switch (cmd->arg.type) {
     case C8_ARG_NONE:
         return 0;

@@ -1,5 +1,4 @@
-#include "c8/private/exception.c"
-#include "c8/private/util.c"
+#include "c8/private/util.h"
 #include "unity.h"
 
 #include <stdint.h>

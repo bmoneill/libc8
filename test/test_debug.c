@@ -1,7 +1,6 @@
+#include "c8/private/debug.h"
 
 #include "unity.h"
-
-#include "c8/private/debug.c"
 
 #include <stdint.h>
 #include <string.h>
@@ -14,11 +13,26 @@
     TEST_ASSERT_EQUAL_INT(cmdid, cmd.id);                                                          \
     TEST_ASSERT_EQUAL_INT(argtype, cmd.arg.type);
 
-char       buf[BUFLEN];
-C8_Command cmd;
-C8         c8;
+char        buf[BUFLEN];
+C8_Command  cmd;
+C8          c8;
 
-void       setUp(void) {
+extern int  c8_get_command(C8_Command*, char*);
+extern int  c8_load_file_arg(C8_Command*, char*);
+extern void c8_load_flags(C8*, const char*);
+extern void c8_load_state(C8*, const char*);
+extern int  c8_parse_arg(C8_Command*, char*);
+extern void c8_print_help(void);
+extern void c8_print_r_registers(const C8*);
+extern void c8_print_stack(const C8*);
+extern void c8_print_v_registers(const C8*);
+extern void c8_print_value(C8*, const C8_Command*);
+extern int  c8_run_command(C8*, const C8_Command*);
+extern void c8_save_flags(const C8*, const char*);
+extern void c8_save_state(const C8*, const char*);
+extern int  c8_set_value(C8*, const C8_Command*);
+
+void        setUp(void) {
     memset(buf, 0, BUFLEN);
     memset(&cmd, 0, sizeof(C8_Command));
     memset(&c8, 0, sizeof(C8));

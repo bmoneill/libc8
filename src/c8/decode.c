@@ -17,9 +17,9 @@
 #define PRINT_ADDRESSES (args & C8_DECODE_PRINT_ADDRESSES)
 #define RESULT_SIZE     32
 
-static void find_labels(FILE*, uint8_t*);
+C8_STATIC void find_labels(FILE*, uint8_t*);
 
-char        result[RESULT_SIZE];
+char           result[RESULT_SIZE];
 
 /**
  * @brief Convert bytecode from `input` to assembly and writes it to `output`.
@@ -187,7 +187,7 @@ uint16_t jump(uint16_t in) {
  * @param input the ROM to get labels from
  * @param labelMap where to store the labels
  */
-static void find_labels(FILE* input, uint8_t* labelMap) {
+C8_STATIC void find_labels(FILE* input, uint8_t* labelMap) {
     uint16_t addr  = C8_PROG_START;
     uint8_t  count = 1;
     uint16_t ins   = 0;

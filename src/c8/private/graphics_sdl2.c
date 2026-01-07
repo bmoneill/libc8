@@ -6,6 +6,7 @@
  * graphics utility function definitions in `graphics.c`.
  */
 
+#include "../common.h"
 #include "../graphics.h"
 
 #include <SDL2/SDL.h>
@@ -15,8 +16,8 @@
 #define RGB_G(i) ((i >> 8) & 0xFF)
 #define RGB_B(i) (i & 0xFF)
 
-static SDL_Window*   window;
-static SDL_Renderer* renderer;
+C8_STATIC SDL_Window*   window;
+C8_STATIC SDL_Renderer* renderer;
 
 /**
  * Map of all keys to track.
@@ -26,7 +27,7 @@ static SDL_Renderer* renderer;
  * * `c8_keyMap[16]` enables debug mode / step,
  * * `c8_keyMap[17]` disables debug mode
  */
-static int c8_keyMap[18][2] = {
+C8_STATIC int c8_keyMap[18][2] = {
     { SDLK_1, 1 },   { SDLK_2, 2 },   { SDLK_3, 3 },   { SDLK_4, 0xC }, { SDLK_q, 4 },
     { SDLK_w, 5 },   { SDLK_e, 6 },   { SDLK_r, 0xD }, { SDLK_a, 7 },   { SDLK_s, 8 },
     { SDLK_d, 9 },   { SDLK_f, 0xE }, { SDLK_z, 0xA }, { SDLK_x, 0 },   { SDLK_c, 0xB },
@@ -34,7 +35,7 @@ static int c8_keyMap[18][2] = {
     { SDLK_m, 17 }, // Leave debug mode
 };
 
-static int c8_get_key(SDL_Keycode k);
+C8_STATIC int c8_get_key(SDL_Keycode k);
 
 /**
  * @brief Deinitialize the graphics library.
@@ -166,7 +167,7 @@ int c8_tick(int* key) {
  *
  * @return the CHIP-8 keycode
  */
-static int c8_get_key(SDL_Keycode k) {
+C8_STATIC int c8_get_key(SDL_Keycode k) {
     for (int i = 0; i < 18; i++) {
         if (c8_keyMap[i][0] == k) {
             return c8_keyMap[i][1];

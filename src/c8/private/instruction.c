@@ -57,64 +57,64 @@
 #define CARRIES(x, y) ((((int) x) + y) > UINT8_MAX)
 
 /* instruction groups */
-static int        c8_base_instruction(C8*, uint16_t, uint8_t);
-static int        c8_bitwise_instruction(C8*, uint16_t, uint8_t, uint8_t, uint8_t);
-static int        c8_key_instruction(C8*, uint16_t, uint8_t, uint8_t);
-static int        c8_misc_instruction(C8*, uint16_t, uint8_t, uint8_t);
+C8_STATIC int c8_base_instruction(C8*, uint16_t, uint8_t);
+C8_STATIC int c8_bitwise_instruction(C8*, uint16_t, uint8_t, uint8_t, uint8_t);
+C8_STATIC int c8_key_instruction(C8*, uint16_t, uint8_t, uint8_t);
+C8_STATIC int c8_misc_instruction(C8*, uint16_t, uint8_t, uint8_t);
 
-static inline int c8_i_scd_b(C8*, uint8_t);
+C8_STATIC int c8_i_scd_b(C8*, uint8_t);
 
 /* base (00kk) instructions */
-static inline int c8_i_cls(C8*);
-static inline int c8_i_ret(C8*);
-static inline int c8_i_scr(C8*);
-static inline int c8_i_scl(C8*);
-static inline int c8_i_exit(C8*);
-static inline int c8_i_low(C8*);
-static inline int c8_i_high(C8*);
+C8_STATIC int c8_i_cls(C8*);
+C8_STATIC int c8_i_ret(C8*);
+C8_STATIC int c8_i_scr(C8*);
+C8_STATIC int c8_i_scl(C8*);
+C8_STATIC int c8_i_exit(C8*);
+C8_STATIC int c8_i_low(C8*);
+C8_STATIC int c8_i_high(C8*);
 
-static inline int c8_i_jp_nnn(C8*, uint16_t);
-static inline int c8_i_call_nnn(C8*, uint16_t);
-static inline int c8_i_se_vx_kk(C8*, uint8_t, uint8_t);
-static inline int c8_i_sne_vx_kk(C8*, uint8_t, uint8_t);
-static inline int c8_i_se_vx_vy(C8*, uint8_t, uint8_t);
-static inline int c8_i_ld_vx_kk(C8*, uint8_t, uint8_t);
-static inline int c8_i_add_vx_kk(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_jp_nnn(C8*, uint16_t);
+C8_STATIC int c8_i_call_nnn(C8*, uint16_t);
+C8_STATIC int c8_i_se_vx_kk(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_sne_vx_kk(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_se_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_ld_vx_kk(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_add_vx_kk(C8*, uint8_t, uint8_t);
 
 /* bitwise (8xyb) instructions */
-static inline int c8_i_ld_vx_vy(C8*, uint8_t, uint8_t);
-static inline int c8_i_or_vx_vy(C8*, uint8_t, uint8_t);
-static inline int c8_i_and_vx_vy(C8*, uint8_t, uint8_t);
-static inline int c8_i_xor_vx_vy(C8*, uint8_t, uint8_t);
-static inline int c8_i_add_vx_vy(C8*, uint8_t, uint8_t);
-static inline int c8_i_sub_vx_vy(C8*, uint8_t, uint8_t);
-static inline int c8_i_shr_vx_vy(C8*, uint8_t, uint8_t);
-static inline int c8_i_subn_vx_vy(C8*, uint8_t, uint8_t);
-static inline int c8_i_shl_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_ld_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_or_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_and_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_xor_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_add_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_sub_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_shr_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_subn_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_shl_vx_vy(C8*, uint8_t, uint8_t);
 
-static inline int c8_i_sne_vx_vy(C8*, uint8_t, uint8_t);
-static inline int c8_i_ld_i_nnn(C8*, uint16_t);
-static inline int c8_i_jp_v0_nnn(C8*, uint16_t);
-static inline int c8_i_rnd_vx_kk(C8*, uint8_t, uint8_t);
-static inline int c8_i_drw_vx_vy_b(C8*, uint8_t, uint8_t, uint8_t);
+C8_STATIC int c8_i_sne_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_ld_i_nnn(C8*, uint16_t);
+C8_STATIC int c8_i_jp_v0_nnn(C8*, uint16_t);
+C8_STATIC int c8_i_rnd_vx_kk(C8*, uint8_t, uint8_t);
+C8_STATIC int c8_i_drw_vx_vy_b(C8*, uint8_t, uint8_t, uint8_t);
 
 /* key (Ex00) instructions */
-static inline int c8_i_skp_vx(C8*, uint8_t);
-static inline int c8_i_sknp_vx(C8*, uint8_t);
+C8_STATIC int c8_i_skp_vx(C8*, uint8_t);
+C8_STATIC int c8_i_sknp_vx(C8*, uint8_t);
 
 /* misc (Fxkk) instructions */
-static inline int c8_i_ld_vx_dt(C8*, uint8_t);
-static inline int c8_i_ld_vx_k(C8*, uint8_t);
-static inline int c8_i_ld_dt_vx(C8*, uint8_t);
-static inline int c8_i_ld_st_vx(C8*, uint8_t);
-static inline int c8_i_add_i_vx(C8*, uint8_t);
-static inline int c8_i_ld_f_vx(C8*, uint8_t);
-static inline int c8_i_ld_hf_vx(C8*, uint8_t);
-static inline int c8_i_ld_b_vx(C8*, uint8_t);
-static inline int c8_i_ld_ip_vx(C8*, uint8_t);
-static inline int c8_i_ld_vx_ip(C8*, uint8_t);
-static inline int c8_i_ld_r_vx(C8*, uint8_t);
-static inline int c8_i_ld_vx_r(C8*, uint8_t);
+C8_STATIC int c8_i_ld_vx_dt(C8*, uint8_t);
+C8_STATIC int c8_i_ld_vx_k(C8*, uint8_t);
+C8_STATIC int c8_i_ld_dt_vx(C8*, uint8_t);
+C8_STATIC int c8_i_ld_st_vx(C8*, uint8_t);
+C8_STATIC int c8_i_add_i_vx(C8*, uint8_t);
+C8_STATIC int c8_i_ld_f_vx(C8*, uint8_t);
+C8_STATIC int c8_i_ld_hf_vx(C8*, uint8_t);
+C8_STATIC int c8_i_ld_b_vx(C8*, uint8_t);
+C8_STATIC int c8_i_ld_ip_vx(C8*, uint8_t);
+C8_STATIC int c8_i_ld_vx_ip(C8*, uint8_t);
+C8_STATIC int c8_i_ld_r_vx(C8*, uint8_t);
+C8_STATIC int c8_i_ld_vx_r(C8*, uint8_t);
 
 /**
  * @brief Execute the instruction at `c8->pc`
@@ -175,7 +175,7 @@ int c8_parse_instruction(C8* c8) {
     }
 }
 
-static int c8_base_instruction(C8* c8, uint16_t in, uint8_t kk) {
+C8_STATIC int c8_base_instruction(C8* c8, uint16_t in, uint8_t kk) {
     switch (kk) {
     case 0xE0:
         return c8_i_cls(c8);
@@ -207,7 +207,7 @@ static int c8_base_instruction(C8* c8, uint16_t in, uint8_t kk) {
  * @param b The bitwise operation code.
  * @return The result of the bitwise operation.
  */
-static int c8_bitwise_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t y, uint8_t b) {
+C8_STATIC int c8_bitwise_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t y, uint8_t b) {
     switch (b) {
     case 0x0:
         return c8_i_ld_vx_vy(c8, x, y);
@@ -242,7 +242,7 @@ static int c8_bitwise_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t y, uin
  * @param kk The key code.
  * @return The result of the key instruction.
  */
-static int c8_key_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
+C8_STATIC int c8_key_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
     switch (kk) {
     case 0x9E:
         return c8_i_skp_vx(c8, x);
@@ -263,7 +263,7 @@ static int c8_key_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
  * @param kk The key code.
  * @return The result of the miscellaneous instruction.
  */
-static int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
+C8_STATIC int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
     switch (kk) {
     case 0x07:
         return c8_i_ld_vx_dt(c8, x);
@@ -309,7 +309,7 @@ static int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
  * @return 2, the number of bytes to increase the program counter by,
  * or C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int c8_i_scd_b(C8* c8, uint8_t b) {
+C8_STATIC int c8_i_scd_b(C8* c8, uint8_t b) {
     SCHIP_EXCLUSIVE(c8);
     c8->display.y += b;
     if (c8->display.y > C8_HIGH_DISPLAY_HEIGHT) {
@@ -328,7 +328,7 @@ static inline int c8_i_scd_b(C8* c8, uint8_t b) {
  * @param c8 the `C8` to execute the instruction from
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_cls(C8* c8) {
+C8_STATIC int c8_i_cls(C8* c8) {
     memset(&c8->display.p, 0, C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT);
     c8->draw = 1;
     return 2;
@@ -346,7 +346,7 @@ static inline int c8_i_cls(C8* c8) {
  * @return 2, the number of bytes to increase the program counter by,
  * or STACK_UNDERFLOW_EXCEPTION if the stack is empty.
  */
-static inline int c8_i_ret(C8* c8) {
+C8_STATIC int c8_i_ret(C8* c8) {
     if (c8->sp == 0) {
         C8_EXCEPTION(C8_STACK_UNDERFLOW_EXCEPTION, "Stack underflow at %03x", c8->pc);
         return C8_STACK_UNDERFLOW_EXCEPTION;
@@ -370,7 +370,7 @@ static inline int c8_i_ret(C8* c8) {
  * @return 2, the number of bytes to increase the program counter by, or
  * C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int c8_i_scr(C8* c8) {
+C8_STATIC int c8_i_scr(C8* c8) {
     SCHIP_EXCLUSIVE(c8);
     c8->display.x += 4;
     if (c8->display.x > C8_HIGH_DISPLAY_WIDTH) {
@@ -393,7 +393,7 @@ static inline int c8_i_scr(C8* c8) {
  * @return 2, the number of bytes to increase the program counter by, or
  * C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int c8_i_scl(C8* c8) {
+C8_STATIC int c8_i_scl(C8* c8) {
     SCHIP_EXCLUSIVE(c8);
     if (c8->display.x < 4) {
         c8->display.x += C8_HIGH_DISPLAY_WIDTH;
@@ -414,7 +414,7 @@ static inline int c8_i_scl(C8* c8) {
  *
  * @return 0, or C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in SCHIP mode.
  */
-static inline int c8_i_exit(C8* c8) {
+C8_STATIC int c8_i_exit(C8* c8) {
     SCHIP_EXCLUSIVE(c8);
     c8->running = 0;
     return 0;
@@ -433,7 +433,7 @@ static inline int c8_i_exit(C8* c8) {
  * @return 2, the number of bytes to increase the program counter by, or
  * C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int c8_i_low(C8* c8) {
+C8_STATIC int c8_i_low(C8* c8) {
     SCHIP_EXCLUSIVE(c8);
     c8->display.mode = C8_DISPLAYMODE_LOW;
     return 2;
@@ -452,7 +452,7 @@ static inline int c8_i_low(C8* c8) {
  * @return 2, the number of bytes to increase the program counter by, or
  * C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int c8_i_high(C8* c8) {
+C8_STATIC int c8_i_high(C8* c8) {
     SCHIP_EXCLUSIVE(c8);
     c8->display.mode = C8_DISPLAYMODE_HIGH;
     return 2;
@@ -468,7 +468,7 @@ static inline int c8_i_high(C8* c8) {
  *
  * @return 0, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_jp_nnn(C8* c8, uint16_t nnn) {
+C8_STATIC int c8_i_jp_nnn(C8* c8, uint16_t nnn) {
     c8->pc = nnn;
     return 0;
 }
@@ -484,7 +484,7 @@ static inline int c8_i_jp_nnn(C8* c8, uint16_t nnn) {
  *
  * @return 0, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_call_nnn(C8* c8, uint16_t nnn) {
+C8_STATIC int c8_i_call_nnn(C8* c8, uint16_t nnn) {
     if (c8->sp >= 15) {
         C8_EXCEPTION(C8_STACK_OVERFLOW_EXCEPTION, "Stack overflow at %03x", c8->pc);
         return C8_STACK_OVERFLOW_EXCEPTION;
@@ -507,7 +507,7 @@ static inline int c8_i_call_nnn(C8* c8, uint16_t nnn) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_se_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
+C8_STATIC int c8_i_se_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
     if (c8->V[x] == kk) {
         c8->pc += 2;
     }
@@ -526,7 +526,7 @@ static inline int c8_i_se_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_sne_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
+C8_STATIC int c8_i_sne_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
     if (c8->V[x] != kk) {
         c8->pc += 2;
     }
@@ -545,7 +545,7 @@ static inline int c8_i_sne_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_se_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_se_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     if (c8->V[x] == c8->V[y]) {
         c8->pc += 2;
     }
@@ -563,7 +563,7 @@ static inline int c8_i_se_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_ld_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
+C8_STATIC int c8_i_ld_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
     c8->V[x] = kk;
     return 2;
 }
@@ -580,7 +580,7 @@ static inline int c8_i_ld_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_add_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
+C8_STATIC int c8_i_add_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
     c8->V[0xF] = CARRIES(c8->V[x], kk);
     c8->V[x] += kk;
     return 2;
@@ -597,7 +597,7 @@ static inline int c8_i_add_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_ld_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_ld_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] = c8->V[y];
     return 2;
 }
@@ -617,7 +617,7 @@ static inline int c8_i_ld_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_or_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_or_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] |= c8->V[y];
     QUIRK_BITWISE(c8);
     return 2;
@@ -638,7 +638,7 @@ static inline int c8_i_or_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_and_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_and_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] &= c8->V[y];
     QUIRK_BITWISE(c8);
     return 2;
@@ -659,7 +659,7 @@ static inline int c8_i_and_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_xor_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_xor_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] = c8->V[x] ^ c8->V[y];
     QUIRK_BITWISE(c8);
     return 2;
@@ -677,7 +677,7 @@ static inline int c8_i_xor_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_add_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_add_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[0xF] = CARRIES(c8->V[x], c8->V[y]);
     c8->V[x] += c8->V[y];
     return 2;
@@ -695,7 +695,7 @@ static inline int c8_i_add_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_sub_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_sub_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[0xF] = !BORROWS(c8->V[x], c8->V[y]);
     c8->V[x] -= c8->V[y];
     return 2;
@@ -718,7 +718,7 @@ static inline int c8_i_sub_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_shr_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_shr_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
     c8->V[x]   = c8->V[y] >> 1;
     c8->V[0xF] = c8->V[x] & 0x1;
@@ -737,7 +737,7 @@ static inline int c8_i_shr_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_subn_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_subn_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[0xF] = !BORROWS(c8->V[y], c8->V[x]);
     c8->V[x]   = c8->V[y] - c8->V[x];
     return 2;
@@ -760,7 +760,7 @@ static inline int c8_i_subn_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_shl_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_shl_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
     c8->V[x]   = c8->V[y] << 1;
     c8->V[0xF] = (c8->V[x] >> 7) & 1;
@@ -779,7 +779,7 @@ static inline int c8_i_shl_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_sne_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+C8_STATIC int c8_i_sne_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     if (c8->V[x] != c8->V[y]) {
         c8->pc += 2;
     }
@@ -796,7 +796,7 @@ static inline int c8_i_sne_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_ld_i_nnn(C8* c8, uint16_t nnn) {
+C8_STATIC int c8_i_ld_i_nnn(C8* c8, uint16_t nnn) {
     c8->I = nnn;
     return 2;
 }
@@ -814,7 +814,7 @@ static inline int c8_i_ld_i_nnn(C8* c8, uint16_t nnn) {
  *
  * @return 0, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_jp_v0_nnn(C8* c8, uint16_t nnn) {
+C8_STATIC int c8_i_jp_v0_nnn(C8* c8, uint16_t nnn) {
     if (c8->flags & C8_FLAG_QUIRK_JUMP) {
         c8->pc = nnn + c8->V[(nnn >> 8) & 0xF];
     } else {
@@ -835,7 +835,7 @@ static inline int c8_i_jp_v0_nnn(C8* c8, uint16_t nnn) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_rnd_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
+C8_STATIC int c8_i_rnd_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
     c8->V[x] = rand() & kk;
     return 2;
 }
@@ -856,7 +856,7 @@ static inline int c8_i_rnd_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b) {
+C8_STATIC int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b) {
     c8->V[0xF] = 0;
     int dw     = C8_LOW_DISPLAY_WIDTH;
     int dh     = C8_LOW_DISPLAY_HEIGHT;
@@ -912,7 +912,7 @@ static inline int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_skp_vx(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_skp_vx(C8* c8, uint8_t x) {
     if (c8->key[c8->V[x]]) {
         c8->pc += 2;
     }
@@ -930,7 +930,7 @@ static inline int c8_i_skp_vx(C8* c8, uint8_t x) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_sknp_vx(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_sknp_vx(C8* c8, uint8_t x) {
     if (!c8->key[c8->V[x]]) {
         c8->pc += 2;
     }
@@ -947,7 +947,7 @@ static inline int c8_i_sknp_vx(C8* c8, uint8_t x) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_ld_vx_dt(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_vx_dt(C8* c8, uint8_t x) {
     c8->V[x] = c8->dt;
     return 2;
 }
@@ -964,7 +964,7 @@ static inline int c8_i_ld_vx_dt(C8* c8, uint8_t x) {
  *
  * @return 2 if a key is pressed, 0 if no key is pressed and waitingForKey is set.
  */
-static inline int c8_i_ld_vx_k(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_vx_k(C8* c8, uint8_t x) {
     // Check if a key is already pressed
     for (int i = 0; i < 16; i++) {
         if (c8->key[i]) {
@@ -989,7 +989,7 @@ static inline int c8_i_ld_vx_k(C8* c8, uint8_t x) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_ld_dt_vx(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_dt_vx(C8* c8, uint8_t x) {
     c8->dt = c8->V[x];
     return 2;
 }
@@ -1003,7 +1003,7 @@ static inline int c8_i_ld_dt_vx(C8* c8, uint8_t x) {
  * @param x the index of the register Vx (0-15)
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_ld_st_vx(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_st_vx(C8* c8, uint8_t x) {
     c8->st = c8->V[x];
     return 2;
 }
@@ -1018,7 +1018,7 @@ static inline int c8_i_ld_st_vx(C8* c8, uint8_t x) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_add_i_vx(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_add_i_vx(C8* c8, uint8_t x) {
     c8->I += c8->V[x];
     return 2;
 }
@@ -1036,7 +1036,7 @@ static inline int c8_i_add_i_vx(C8* c8, uint8_t x) {
  * @param x the index of the register Vx (0-15)
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_ld_f_vx(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_f_vx(C8* c8, uint8_t x) {
     c8->I = C8_FONT_START + (c8->V[x] * 5);
     return 2;
 }
@@ -1057,7 +1057,7 @@ static inline int c8_i_ld_f_vx(C8* c8, uint8_t x) {
  * @return 2, the number of bytes to increase the program counter by, or
  * `C8_INVALID_INSTRUCTION_EXCEPTION` if `c8` is in CHIP-8 mode.
  */
-static inline int c8_i_ld_hf_vx(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_hf_vx(C8* c8, uint8_t x) {
     SCHIP_EXCLUSIVE(c8);
 
     c8->I = C8_HIGH_FONT_START + (c8->V[x] * 10);
@@ -1076,7 +1076,7 @@ static inline int c8_i_ld_hf_vx(C8* c8, uint8_t x) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_ld_b_vx(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_b_vx(C8* c8, uint8_t x) {
     c8->mem[c8->I]     = (c8->V[x] / 100) % 10; // hundreds
     c8->mem[c8->I + 1] = (c8->V[x] / 10) % 10; // tens
     c8->mem[c8->I + 2] = c8->V[x] % 10; // ones
@@ -1094,7 +1094,7 @@ static inline int c8_i_ld_b_vx(C8* c8, uint8_t x) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_ld_ip_vx(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_ip_vx(C8* c8, uint8_t x) {
     for (int i = 0; i < x; i++) {
         c8->mem[c8->I + i] = c8->V[i];
     }
@@ -1113,7 +1113,7 @@ static inline int c8_i_ld_ip_vx(C8* c8, uint8_t x) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-static inline int c8_i_ld_vx_ip(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_vx_ip(C8* c8, uint8_t x) {
     for (int i = 0; i < x; i++) {
         c8->V[i] = c8->mem[c8->I + i];
     }
@@ -1136,7 +1136,7 @@ static inline int c8_i_ld_vx_ip(C8* c8, uint8_t x) {
  * @return 2, the number of bytes to increase the program counter by,
  * or C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int c8_i_ld_r_vx(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_r_vx(C8* c8, uint8_t x) {
     SCHIP_EXCLUSIVE(c8);
     for (int i = 0; i < x; i++) {
         c8->R[i] = c8->V[i];
@@ -1159,7 +1159,7 @@ static inline int c8_i_ld_r_vx(C8* c8, uint8_t x) {
  * @return 2, the number of bytes to increase the program counter by,
  * or C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
-static inline int c8_i_ld_vx_r(C8* c8, uint8_t x) {
+C8_STATIC int c8_i_ld_vx_r(C8* c8, uint8_t x) {
     SCHIP_EXCLUSIVE(c8);
 
     for (int i = 0; i < x; i++) {

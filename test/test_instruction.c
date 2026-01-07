@@ -1,10 +1,12 @@
-#include "c8/chip8.c"
 #include "c8/font.h"
 #include "c8/private/exception.h"
+#include "c8/private/instruction.h"
+
 #include "unity.h"
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 #define FORMAT_A(a)     ((a << 12) & 0xF000)
@@ -37,7 +39,66 @@ uint8_t        vy  = 0;
 uint16_t       nnn = 0;
 const uint16_t pc  = 0x200;
 
-void           setUp(void) {
+extern int     c8_base_instruction(C8*, uint16_t, uint8_t);
+extern int     c8_bitwise_instruction(C8*, uint16_t, uint8_t, uint8_t, uint8_t);
+extern int     c8_key_instruction(C8*, uint16_t, uint8_t, uint8_t);
+extern int     c8_misc_instruction(C8*, uint16_t, uint8_t, uint8_t);
+
+extern int     c8_i_scd_b(C8*, uint8_t);
+
+/* base (00kk) instructions */
+extern int c8_i_cls(C8*);
+extern int c8_i_ret(C8*);
+extern int c8_i_scr(C8*);
+extern int c8_i_scl(C8*);
+extern int c8_i_exit(C8*);
+extern int c8_i_low(C8*);
+extern int c8_i_high(C8*);
+
+extern int c8_i_jp_nnn(C8*, uint16_t);
+extern int c8_i_call_nnn(C8*, uint16_t);
+extern int c8_i_se_vx_kk(C8*, uint8_t, uint8_t);
+extern int c8_i_sne_vx_kk(C8*, uint8_t, uint8_t);
+extern int c8_i_se_vx_vy(C8*, uint8_t, uint8_t);
+extern int c8_i_ld_vx_kk(C8*, uint8_t, uint8_t);
+extern int c8_i_add_vx_kk(C8*, uint8_t, uint8_t);
+
+/* bitwise (8xyb) instructions */
+extern int c8_i_ld_vx_vy(C8*, uint8_t, uint8_t);
+extern int c8_i_or_vx_vy(C8*, uint8_t, uint8_t);
+extern int c8_i_and_vx_vy(C8*, uint8_t, uint8_t);
+extern int c8_i_xor_vx_vy(C8*, uint8_t, uint8_t);
+extern int c8_i_add_vx_vy(C8*, uint8_t, uint8_t);
+extern int c8_i_sub_vx_vy(C8*, uint8_t, uint8_t);
+extern int c8_i_shr_vx_vy(C8*, uint8_t, uint8_t);
+extern int c8_i_subn_vx_vy(C8*, uint8_t, uint8_t);
+extern int c8_i_shl_vx_vy(C8*, uint8_t, uint8_t);
+
+extern int c8_i_sne_vx_vy(C8*, uint8_t, uint8_t);
+extern int c8_i_ld_i_nnn(C8*, uint16_t);
+extern int c8_i_jp_v0_nnn(C8*, uint16_t);
+extern int c8_i_rnd_vx_kk(C8*, uint8_t, uint8_t);
+extern int c8_i_drw_vx_vy_b(C8*, uint8_t, uint8_t, uint8_t);
+
+/* key (Ex00) instructions */
+extern int c8_i_skp_vx(C8*, uint8_t);
+extern int c8_i_sknp_vx(C8*, uint8_t);
+
+/* misc (Fxkk) instructions */
+extern int c8_i_ld_vx_dt(C8*, uint8_t);
+extern int c8_i_ld_vx_k(C8*, uint8_t);
+extern int c8_i_ld_dt_vx(C8*, uint8_t);
+extern int c8_i_ld_st_vx(C8*, uint8_t);
+extern int c8_i_add_i_vx(C8*, uint8_t);
+extern int c8_i_ld_f_vx(C8*, uint8_t);
+extern int c8_i_ld_hf_vx(C8*, uint8_t);
+extern int c8_i_ld_b_vx(C8*, uint8_t);
+extern int c8_i_ld_ip_vx(C8*, uint8_t);
+extern int c8_i_ld_vx_ip(C8*, uint8_t);
+extern int c8_i_ld_r_vx(C8*, uint8_t);
+extern int c8_i_ld_vx_r(C8*, uint8_t);
+
+void       setUp(void) {
     srand(time(NULL));
     /* clear c8_t */
     memset(&c8, 0, sizeof(C8));
