@@ -19,17 +19,16 @@ execute_process(
 )
 
 # Version
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DLIBC8_VERSION=\'\"${GIT_COMMIT_HASH}\"\'")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DC8_VERSION='\"${GIT_COMMIT_HASH}\"'")
 
-# C standard
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_FILE_OFFSET_BITS=64")
+# C Standard
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -pedantic -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_FILE_OFFSET_BITS=64")
 
 # Warnings
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wpedantic -Werror")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-unused-parameter -Wno-unused-function -Wno-unused-variable -Wno-missing-field-initializers")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wall -Wextra -Wno-unused-parameter -Wno-unused-function -Wno-unused-variable -Wno-missing-field-initializers")
 
-# etc
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
+# Optimization
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -ffast-math")
 
 
 function(SDL2_Required)
@@ -43,7 +42,7 @@ function(Enable_Tests)
     SDL2_Required()
     set(TEST ON CACHE INTERNAL "")
     if(CMAKE_COMPILER_IS_GNUCC)
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg -fprofile-arcs -ftest-coverage -fsanitize=address -fno-omit-frame-pointer")
         set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
         include(CodeCoverage)
     endif()
