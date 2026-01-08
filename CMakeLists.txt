@@ -22,11 +22,15 @@ execute_process(
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DLIBC8_VERSION=\'\"${GIT_COMMIT_HASH}\"\'")
 
 # C standard
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_FILE_OFFSET_BITS=64")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_FILE_OFFSET_BITS=64")
 
 # Warnings
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wpedantic -Werror")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-unused-parameter -Wno-unused-function -Wno-unused-variable -Wno-missing-field-initializers")
+
+# etc
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
+
 
 function(SDL2_Required)
     if(SDL2 EQUAL OFF)
