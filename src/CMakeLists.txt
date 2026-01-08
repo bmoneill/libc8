@@ -59,7 +59,7 @@ if(SDL2)
 endif()
 
 # Compiler definitions
-ADD_DEFINITIONS("-g")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
 if(TEST)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTEST")
 endif()

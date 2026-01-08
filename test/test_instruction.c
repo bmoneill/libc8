@@ -778,8 +778,9 @@ void test_c8_parse_instruction_WhereInstructionIsLDIPX(void) {
     AXKK(0xF, x, 0x55);
 
     c8.I = 0x300;
-    for (int i = 0; i < x; i++) {
-        c8.V[i] = (uint8_t) rand();
+
+    for (int i = 0; i < 16; i++) {
+        c8.V[i] = rand() % 0x100;
     }
 
     int ret = c8_parse_instruction(&c8);
@@ -836,10 +837,12 @@ void test_c8_parse_instruction_WhereInstructionIsLDXR_InCHIP8Mode(void) {
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLDXR_InSCHIPMode(void) {
+    if (x > 8)
+        x = 8;
     AXKK(0xF, x, 0x85);
     c8.mode = C8_MODE_SCHIP;
 
-    for (int i = 0; i < x; i++) {
+    for (int i = 0; i < 8; i++) {
         c8.R[i] = rand() % 0x100;
     }
 
