@@ -837,7 +837,8 @@ void test_c8_parse_instruction_WhereInstructionIsLDXR_InCHIP8Mode(void) {
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLDXR_InSCHIPMode(void) {
-    if (x > 8) x = 8;
+    if (x > 8)
+        x = 8;
     AXKK(0xF, x, 0x85);
     c8.mode = C8_MODE_SCHIP;
 
