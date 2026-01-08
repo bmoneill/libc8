@@ -54,3 +54,6 @@ jobs:
 
       - name: Run tests
         run: ctest --test-dir ${{github.workspace}}/build --output-on-failure --verbose
+
+      - name: Run test coverage analysis
+        run: ctest --test-dir ${{github.workspace}}/build -T coverage
