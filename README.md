@@ -45,13 +45,13 @@ Testing is done using
 
 ```shell
 git submodule update
-cmake -S . -B build -DTARGET_GROUP=test -DSDL2=OFF
+cmake -S . -B build -DTEST=ON -DSDL2=OFF
 cmake --build build 
 cd build
 ctest --verbose
 ```
 
-**Note**: When built with tests enabled (`-DTARGET_GROUP=test`),
+**Note**: When built with tests enabled (`-DTEST`),
 `libc8` will not halt execution after encountering an error, potentially leading
 to undefined behavior.
 

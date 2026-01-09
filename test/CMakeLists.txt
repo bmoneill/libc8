@@ -10,6 +10,7 @@ function(add_libc8_test name)
     )
 
     # Define the test executable
+
     add_executable(${name}_tests ${test_src} ${runner_src})
     target_link_libraries(${name}_tests c8 Unity)
 

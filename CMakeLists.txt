@@ -7,7 +7,8 @@ include(CTest)
 add_subdirectory(docs/man)
 
 # defaults
-option(SDL2 "Enable SDL2 support" OFF)
+option(SDL2 "Enable SDL2 support" ON)
+option(TEST "Build tests" OFF)
 
 
 # Store git commit hash in GIT_COMMIT_HASH
@@ -31,13 +32,9 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wall -Wextra -Wno-unused-parameter 
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -ffast-math")
 
 function(Enable_Tests)
-    SDL2_Required()
-    set(TEST ON CACHE INTERNAL "")
-    if(CMAKE_COMPILER_IS_GNUCC)
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg -fprofile-arcs -ftest-coverage -fsanitize=address -fno-omit-frame-pointer")
-        set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
-        include(CodeCoverage)
-    endif()
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg -fprofile-arcs -ftest-coverage -fsanitize=address -fno-omit-frame-pointer")
+    set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
+    include(CodeCoverage)
 endfunction()
 
 function(SDL2_Required)
@@ -54,20 +51,10 @@ function(Build_Tests)
     add_subdirectory(test)
 endfunction()
 
-if(TARGET_GROUP STREQUAL all)
-    SDL2_Required()
+if(TEST)
     Enable_Tests()
     Build_Library()
     Build_Tests()
-    add_subdirectory(tools)
-elseif(TARGET_GROUP STREQUAL test)
-    Enable_Tests()
-    Build_Library()
-    Build_Tests()
-elseif(TARGET_GROUP STREQUAL tools)
-    SDL2_Required()
-    Build_Library()
-    add_subdirectory(tools)
 elseif(TARGET_GROUP STREQUAL lib)
     SDL2_Required()
     Build_Library()

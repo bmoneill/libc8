@@ -52,9 +52,16 @@ if(SDL2)
     list(APPEND LIBRARY_PRIVATE_SRC "${LIBRARY_BASE_PATH}/c8/private/graphics_sdl2.c")
 endif()
 
+
 add_library (
  ${LIBRARY_NAME} SHARED ${LIBRARY_PUBLIC_SRC} ${LIBRARY_PRIVATE_SRC}
 )
+
+if(TEST)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTEST")
+    target_compile_options(${LIBRARY_NAME} PRIVATE "-fprofile-arcs" "-ftest-coverage")
+    target_link_options(${LIBRARY_NAME} PRIVATE "-fprofile-arcs" "-ftest-coverage")
+endif()
 
 if(SDL2)
     if(TARGET SDL2::SDL2)
@@ -67,9 +74,6 @@ endif()
 
 # Compiler definitions
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
-if(TEST)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTEST")
-endif()
 
 # Library installation directives
 INSTALL (
