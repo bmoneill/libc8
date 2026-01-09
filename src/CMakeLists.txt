@@ -48,7 +48,6 @@ set(LIBRARY_PRIVATE_HEADERS
 )
 
 if(SDL2)
-    message("GOT HERE")
     find_package(SDL2 REQUIRED)
     list(APPEND LIBRARY_PRIVATE_SRC "${LIBRARY_BASE_PATH}/c8/private/graphics_sdl2.c")
 endif()
