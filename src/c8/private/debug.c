@@ -158,7 +158,7 @@ C8_STATIC void c8_load_flags(C8* c8, const char* path) {
         return;
     }
 
-    fread(&c8->R, 1, 8, f);
+    int ret = fread(&c8->R, 1, 8, f);
     fclose(f);
 }
 
@@ -174,7 +174,7 @@ C8_STATIC void c8_load_state(C8* c8, const char* path) {
         printf("Invalid file\n");
         return;
     }
-    fread(c8, sizeof(C8), 1, f);
+    int ret = fread(c8, sizeof(C8), 1, f);
     fclose(f);
 
     c8->draw = 1;
