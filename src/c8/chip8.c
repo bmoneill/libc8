@@ -76,7 +76,7 @@ C8* c8_init(const char* path, int flags) {
  * @return 1 if success
  */
 int c8_load_palette_s(C8* c8, char* s) {
-    char* c[2];
+    char* c[2] = {NULL, NULL};
     int   len = strlen(s);
 
     c[0]      = s;
