@@ -117,8 +117,12 @@ int c8_load_palette_f(C8* c8, const char* path) {
         return 0;
     }
     for (int i = 0; i < 2; i++) {
-        int c;
-        fgets(buf + 1, 64 - 1, f);
+        int   c;
+        char* s = fgets(buf + 1, 64 - 1, f);
+        if (!s) {
+            C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette.");
+            return 0;
+        }
         if ((c = c8_parse_int(buf)) == -1) {
             C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette: %s", buf);
             return 0;
@@ -169,8 +173,8 @@ void c8_load_quirks(C8* c8, const char* s) {
  * @return 1 if success.
  */
 int c8_load_rom(C8* c8, const char* addr) {
-    FILE* f;
-    int   size;
+    FILE*         f;
+    unsigned long size;
 
     f = fopen(addr, "r");
     if (!f) {
@@ -188,9 +192,11 @@ int c8_load_rom(C8* c8, const char* addr) {
     rewind(f);
 
     /* Read the file into memory */
-    fread(c8->mem + C8_PROG_START, size, 1, f);
+    unsigned long l = fread(c8->mem + C8_PROG_START, size, 1, f);
+    if (l != size) {
+        //C8_EXCEPTION(C8_LOAD_FILE_FAILURE_EXCEPTION, "Error occurred while reading ROM file.");
+    }
     fclose(f);
-
     return 1;
 }
 
