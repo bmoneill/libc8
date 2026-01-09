@@ -28,8 +28,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -pedantic -D_DEFAULT_SOURCE -D_BSD_
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wall -Wextra -Wno-unused-parameter -Wno-unused-function -Wno-unused-variable -Wno-missing-field-initializers")
 
 # Optimization
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -ffast-math")
-
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -ffast-math")
 
 function(Enable_Tests)
     SDL2_Required()
