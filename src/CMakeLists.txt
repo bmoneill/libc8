@@ -7,9 +7,10 @@ set(LIBRARY_NAME "c8")
 
 include(GNUInstallDirs)
 
+
 set(LIBRARY_BASE_PATH ".")
 
-INCLUDE_DIRECTORIES (
+include_directories(
  "${LIBRARY_BASE_PATH}"
 )
 
@@ -47,6 +48,8 @@ set(LIBRARY_PRIVATE_HEADERS
 )
 
 if(SDL2)
+    message("GOT HERE")
+    find_package(SDL2 REQUIRED)
     list(APPEND LIBRARY_PRIVATE_SRC "${LIBRARY_BASE_PATH}/c8/private/graphics_sdl2.c")
 endif()
 
@@ -55,7 +58,12 @@ add_library (
 )
 
 if(SDL2)
-    target_link_libraries(${LIBRARY_NAME} PRIVATE SDL2)
+    if(TARGET SDL2::SDL2)
+        target_link_libraries(${LIBRARY_NAME} PRIVATE SDL2::SDL2)
+    else()
+        # Fallback: attempt to link the common "sdl2" library name if imported target isn't available
+        target_link_libraries(${LIBRARY_NAME} PRIVATE sdl2)
+    endif()
 endif()
 
 # Compiler definitions

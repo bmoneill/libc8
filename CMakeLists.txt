@@ -7,7 +7,7 @@ include(CTest)
 add_subdirectory(docs/man)
 
 # defaults
-set(SDL2 OFF)
+option(SDL2 "Enable SDL2 support" OFF)
 
 
 # Store git commit hash in GIT_COMMIT_HASH
@@ -31,13 +31,6 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wall -Wextra -Wno-unused-parameter 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -ffast-math")
 
 
-function(SDL2_Required)
-    if(SDL2 EQUAL OFF)
-        message(STATUS "SDL2 required for tools target group, setting SDL2 to ON")
-        set(SDL2 ON CACHE INTERNAL "")
-    endif()
-endfunction()
-
 function(Enable_Tests)
     SDL2_Required()
     set(TEST ON CACHE INTERNAL "")
@@ -46,6 +39,10 @@ function(Enable_Tests)
         set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
         include(CodeCoverage)
     endif()
+endfunction()
+
+function(SDL2_Required)
+    message("Note: SDL2 is required here - make sure this is run with -DSDL2=ON")
 endfunction()
 
 function(Build_Library)
@@ -76,6 +73,7 @@ elseif(TARGET_GROUP STREQUAL lib)
     SDL2_Required()
     Build_Library()
 else()
+    SDL2_Required()
     Build_Library()
     add_subdirectory(tools)
 endif()
