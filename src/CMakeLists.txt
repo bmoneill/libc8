@@ -31,12 +31,12 @@ set(LIBRARY_PRIVATE_SRC
 )
 
 set(LIBRARY_PUBLIC_HEADERS
- "${LIBRARY_BASE_PATH}/chip8.h"
- "${LIBRARY_BASE_PATH}/common.h"
- "${LIBRARY_BASE_PATH}/decode.h"
- "${LIBRARY_BASE_PATH}/encode.h"
- "${LIBRARY_BASE_PATH}/font.h"
- "${LIBRARY_BASE_PATH}/graphics.h"
+ "${LIBRARY_BASE_PATH}/c8/chip8.h"
+ "${LIBRARY_BASE_PATH}/c8/common.h"
+ "${LIBRARY_BASE_PATH}/c8/decode.h"
+ "${LIBRARY_BASE_PATH}/c8/encode.h"
+ "${LIBRARY_BASE_PATH}/c8/font.h"
+ "${LIBRARY_BASE_PATH}/c8/graphics.h"
 )
 
 set(LIBRARY_PRIVATE_HEADERS
@@ -77,7 +77,11 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
 
 # Library installation directives
 INSTALL (
- TARGETS ${LIBRARY_NAME}
- LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
- PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    TARGETS ${LIBRARY_NAME}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
+
+foreach(header IN LISTS LIBRARY_PUBLIC_HEADERS)
+    get_filename_component(header_name ${header} NAME)
+    install(FILES ${header} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/c8 RENAME ${header_name})
+endforeach()
