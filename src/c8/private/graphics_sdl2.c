@@ -46,15 +46,15 @@ C8_STATIC uint16_t samples[C8_AUDIO_WAVE_LENGTH];
 
 C8_STATIC int      c8_get_key(SDL_Keycode k);
 
-void               c8_end_sound(void) { Mix_HaltChannel(C8_AUDIO_CHANNEL); }
-
-void               c8_start_sound(void) {
+void               c8_sound_play(void) {
     Mix_Chunk wave_chunk;
     wave_chunk.abuf   = (uint8_t*) samples;
     wave_chunk.alen   = C8_AUDIO_WAVE_LENGTH;
     wave_chunk.volume = MIX_MAX_VOLUME;
     Mix_PlayChannel(C8_AUDIO_CHANNEL, &wave_chunk, 0);
 }
+
+void c8_sound_stop(void) { Mix_HaltChannel(C8_AUDIO_CHANNEL); }
 
 /**
  * @brief Deinitialize the graphics library.

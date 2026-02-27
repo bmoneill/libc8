@@ -76,8 +76,8 @@ typedef struct {
 
 uint8_t*       c8_get_pixel(C8_Display*, int, int);
 
-extern void    c8_end_sound(void);
-extern void    c8_start_sound(void);
+extern void    c8_sound_play(void);
+extern void    c8_sound_stop(void);
 extern void    c8_deinit_graphics(void);
 extern uint8_t c8_init_graphics(void);
 extern void    c8_render(C8_Display*, int*);

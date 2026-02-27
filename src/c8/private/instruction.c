@@ -1006,7 +1006,7 @@ C8_STATIC C8_INLINE int c8_i_ld_dt_vx(C8* c8, uint8_t x) {
  */
 C8_STATIC C8_INLINE int c8_i_ld_st_vx(C8* c8, uint8_t x) {
     if (c8->st == 0) {
-        c8_start_sound();
+        c8_sound_stop();
     }
 
     c8->st = c8->V[x];

@@ -29,11 +29,12 @@ SDL2 support is enabled by default. To disable it to use another graphics
 library, run `cmake` with `-DSDL2=OFF`. If `simulate()` is ever called in your
 code, you must implement these functions with your preferred graphics library:
 
-* [`void c8_beep(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5)
-* [`void c8_deinit_graphics(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5)
-* [`int c8_init_graphics(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4)
-* [`void c8_render(c8_display_t *, int *)`](https://bmoneill.github.io/libc8/graphics_8h.html#a57897d69496a19a080b3af70ce26c010)
-* [`int c8_tick(int *, int)`](https://bmoneill.github.io/libc8/graphics_8h.html#a020c1df5341d906fb19266b94235f884)
+- [`void c8_deinit_graphics(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5)
+- `void c8_end_sound(void)`
+- [`int c8_init_graphics(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4)
+- [`void c8_render(c8_display_t *, int *)`](https://bmoneill.github.io/libc8/graphics_8h.html#a57897d69496a19a080b3af70ce26c010)
+- `void c8_start_sound(void)`
+- [`int c8_tick(int *, int)`](https://bmoneill.github.io/libc8/graphics_8h.html#a020c1df5341d906fb19266b94235f884)
 
 **Note**: the `all` and `tools` targets require `SDL2` to be `ON`.
 
@@ -46,7 +47,7 @@ Testing is done using
 ```shell
 git submodule update
 cmake -S . -B build -DTEST=ON -DSDL2=OFF
-cmake --build build 
+cmake --build build
 cd build
 ctest --verbose
 ```
@@ -68,10 +69,10 @@ available on the GitHub pages site.
 
 ## Further Reading
 
-* [Cowgod's Chip-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM)
-* [S-CHIP 1.1 Reference](http://devernay.free.fr/hacks/chip8/schip.txt)
-* [Octo](https://github.com/JohnEarnest/Octo)
-* [CHIP-8 Extensions and Compatibility](https://chip-8.github.io/extensions/)
+- [Cowgod's Chip-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM)
+- [S-CHIP 1.1 Reference](http://devernay.free.fr/hacks/chip8/schip.txt)
+- [Octo](https://github.com/JohnEarnest/Octo)
+- [CHIP-8 Extensions and Compatibility](https://chip-8.github.io/extensions/)
 
 ## Bugs
 

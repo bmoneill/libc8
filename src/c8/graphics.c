@@ -15,7 +15,7 @@
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
  */
-__attribute__((weak)) void c8_end_sound(void) {
+__attribute__((weak)) void c8_sound_play(void) {
     fprintf(stderr, "libc8: c8_end_sound() not implemented.");
 }
 
@@ -26,7 +26,7 @@ __attribute__((weak)) void c8_end_sound(void) {
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
  */
-__attribute__((weak)) void c8_start_sound(void) {
+__attribute__((weak)) void c8_sound_stop(void) {
     fprintf(stderr, "libc8: c8_start_sound() not implemented.");
 }
 
