@@ -14,17 +14,17 @@
 #include <SDL2/SDL_mixer.h>
 #include <stdint.h>
 
-#define RGB_R(i) ((i >> 12) & 0xFF)
-#define RGB_G(i) ((i >> 8) & 0xFF)
-#define RGB_B(i) (i & 0xFF)
+#define C8_RGB_R(i) ((i >> 12) & 0xFF)
+#define C8_RGB_G(i) ((i >> 8) & 0xFF)
+#define C8_RGB_B(i) (i & 0xFF)
 
-#define CHANNEL     1
-#define SAMPLE_RATE 44100
-#define WAVE_FREQ   440
-#define WAVE_LENGTH SAMPLE_RATE / WAVE_FREQ
+#define C8_AUDIO_CHANNEL     1
+#define C8_AUDIO_SAMPLE_RATE 44100
+#define C8_AUDIO_WAVE_FREQ   440
+#define C8_AUDIO_WAVE_LENGTH C8_AUDIO_SAMPLE_RATE / C8_AUDIO_WAVE_FREQ
 
-C8_STATIC SDL_Window*   window;
-C8_STATIC SDL_Renderer* renderer;
+C8_STATIC SDL_Window*   c8_window;
+C8_STATIC SDL_Renderer* c8_renderer;
 
 /**
  * Map of all keys to track.
@@ -42,26 +42,26 @@ const C8_STATIC int c8_keyMap[18][2] = {
     { SDLK_m, 17 }, // Leave debug mode
 };
 
-C8_STATIC uint16_t samples[WAVE_LENGTH];
+C8_STATIC uint16_t samples[C8_AUDIO_WAVE_LENGTH];
 
 C8_STATIC int      c8_get_key(SDL_Keycode k);
 
-void               c8_end_sound(void) { Mix_HaltChannel(CHANNEL); }
+void               c8_end_sound(void) { Mix_HaltChannel(C8_AUDIO_CHANNEL); }
 
 void               c8_start_sound(void) {
     Mix_Chunk wave_chunk;
     wave_chunk.abuf   = (uint8_t*) samples;
-    wave_chunk.alen   = WAVE_LENGTH;
+    wave_chunk.alen   = C8_AUDIO_WAVE_LENGTH;
     wave_chunk.volume = MIX_MAX_VOLUME;
-    Mix_PlayChannel(CHANNEL, &wave_chunk, 0);
+    Mix_PlayChannel(C8_AUDIO_CHANNEL, &wave_chunk, 0);
 }
 
 /**
  * @brief Deinitialize the graphics library.
  */
 void c8_deinit_graphics(void) {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(c8_renderer);
+    SDL_DestroyWindow(c8_window);
     Mix_CloseAudio();
     SDL_Quit();
 }
@@ -76,29 +76,29 @@ uint8_t c8_init_graphics(void) {
         return 0;
     }
 
-    if (!(window = SDL_CreateWindow("CHIP8",
-                                    SDL_WINDOWPOS_UNDEFINED,
-                                    SDL_WINDOWPOS_UNDEFINED,
-                                    C8_DEFAULT_WINDOW_WIDTH,
-                                    C8_DEFAULT_WINDOW_HEIGHT,
-                                    SDL_WINDOW_RESIZABLE))) {
+    if (!(c8_window = SDL_CreateWindow("CHIP8",
+                                       SDL_WINDOWPOS_UNDEFINED,
+                                       SDL_WINDOWPOS_UNDEFINED,
+                                       C8_DEFAULT_WINDOW_WIDTH,
+                                       C8_DEFAULT_WINDOW_HEIGHT,
+                                       SDL_WINDOW_RESIZABLE))) {
         return 0;
     }
 
-    if (!(renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED))) {
-        SDL_DestroyWindow(window);
+    if (!(c8_renderer = SDL_CreateRenderer(c8_window, -1, SDL_RENDERER_ACCELERATED))) {
+        SDL_DestroyWindow(c8_window);
         return 0;
     }
 
-    if (!Mix_OpenAudio(SAMPLE_RATE, AUDIO_S16SYS, 1, 4096)) {
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
+    if (!Mix_OpenAudio(C8_AUDIO_SAMPLE_RATE, AUDIO_S16SYS, 1, 4096)) {
+        SDL_DestroyRenderer(c8_renderer);
+        SDL_DestroyWindow(c8_window);
         SDL_Quit();
         return 0;
     }
 
-    for (int i = 0; i < WAVE_LENGTH; i++) {
-        samples[i] = i < WAVE_LENGTH / 2 ? INT16_MAX : INT16_MIN;
+    for (int i = 0; i < C8_AUDIO_WAVE_LENGTH; i++) {
+        samples[i] = i < C8_AUDIO_WAVE_LENGTH / 2 ? INT16_MAX : INT16_MIN;
     }
     return 1;
 }
@@ -126,17 +126,17 @@ void c8_render(C8_Display* display, int* colors) {
     int dx = 0;
     int dy = 0;
 
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer,
-                           RGB_R(colors[0]),
-                           RGB_G(colors[0]),
-                           RGB_B(colors[0]),
+    SDL_RenderClear(c8_renderer);
+    SDL_SetRenderDrawColor(c8_renderer,
+                           C8_RGB_R(colors[0]),
+                           C8_RGB_G(colors[0]),
+                           C8_RGB_B(colors[0]),
                            SDL_ALPHA_OPAQUE);
-    SDL_RenderFillRect(renderer, &winRect);
-    SDL_SetRenderDrawColor(renderer,
-                           RGB_R(colors[1]),
-                           RGB_G(colors[1]),
-                           RGB_B(colors[1]),
+    SDL_RenderFillRect(c8_renderer, &winRect);
+    SDL_SetRenderDrawColor(c8_renderer,
+                           C8_RGB_R(colors[1]),
+                           C8_RGB_G(colors[1]),
+                           C8_RGB_B(colors[1]),
                            SDL_ALPHA_OPAQUE);
 
     if (display->mode == C8_DISPLAYMODE_HIGH) {
@@ -149,19 +149,19 @@ void c8_render(C8_Display* display, int* colors) {
             if (*c8_get_pixel(display, i + dx, j + dy)) {
                 pix.x = i * C8_WINDOW_SCALE_X;
                 pix.y = j * C8_WINDOW_SCALE_Y;
-                SDL_RenderFillRect(renderer, &pix);
+                SDL_RenderFillRect(c8_renderer, &pix);
             }
         }
     }
 
-    SDL_SetRenderDrawColor(renderer,
-                           RGB_R(colors[0]),
-                           RGB_G(colors[0]),
-                           RGB_B(colors[0]),
+    SDL_SetRenderDrawColor(c8_renderer,
+                           C8_RGB_R(colors[0]),
+                           C8_RGB_G(colors[0]),
+                           C8_RGB_B(colors[0]),
                            SDL_ALPHA_OPAQUE);
-    SDL_RenderFillRect(renderer, &winRect);
+    SDL_RenderFillRect(c8_renderer, &winRect);
 
-    SDL_RenderPresent(renderer);
+    SDL_RenderPresent(c8_renderer);
 }
 
 /**
