@@ -279,6 +279,10 @@ void c8_simulate(C8* c8) {
                 c8->st--; // TODO sound
             }
 
+            if (c8->st == 0) {
+                c8_end_sound();
+            }
+
             if (c8->draw) {
                 c8_render(&c8->display, c8->colors);
                 c8->draw = 0;

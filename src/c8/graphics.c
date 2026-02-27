@@ -9,13 +9,26 @@
 #include <stdio.h>
 
 /**
+ * @brief Stop sound
+ *
+ * This function is weak and is overridden by internal/graphics_sdl.c by
+ * default. This can also be overridden by the user when compiling without
+ * SDL2 support.
+ */
+__attribute__((weak)) void c8_end_sound(void) {
+    fprintf(stderr, "libc8: c8_end_sound() not implemented.");
+}
+
+/**
  * @brief Play sound
  *
  * This function is weak and is overridden by internal/graphics_sdl.c by
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
  */
-__attribute__((weak)) void c8_beep(void) { fprintf(stderr, "c8_beep() not implemented."); }
+__attribute__((weak)) void c8_start_sound(void) {
+    fprintf(stderr, "libc8: c8_start_sound() not implemented.");
+}
 
 /**
  * @brief Deinitialize graphics system
@@ -25,7 +38,7 @@ __attribute__((weak)) void c8_beep(void) { fprintf(stderr, "c8_beep() not implem
  * SDL2 support.
  */
 __attribute__((weak)) void c8_deinit_graphics(void) {
-    fprintf(stderr, "c8_deinit_graphics() not implemented.");
+    fprintf(stderr, "libc8: c8_deinit_graphics() not implemented.");
 }
 
 /**
@@ -36,7 +49,7 @@ __attribute__((weak)) void c8_deinit_graphics(void) {
  * SDL2 support.
  */
 __attribute__((weak)) uint8_t c8_init_graphics(void) {
-    fprintf(stderr, "c8_init_graphics() not implemented.\n");
+    fprintf(stderr, "libc8: c8_init_graphics() not implemented.\n");
     return -1;
 }
 
@@ -48,7 +61,7 @@ __attribute__((weak)) uint8_t c8_init_graphics(void) {
  * SDL2 support.
  */
 __attribute__((weak)) void c8_render(C8_Display* display, int* colors) {
-    fprintf(stderr, "c8_render() not implemented.");
+    fprintf(stderr, "libc8: c8_render() not implemented.");
 }
 
 /**
@@ -59,7 +72,7 @@ __attribute__((weak)) void c8_render(C8_Display* display, int* colors) {
  * SDL2 support.
  */
 __attribute__((weak)) int c8_tick(int* key) {
-    fprintf(stderr, "tick() not implemented.\n");
+    fprintf(stderr, "libc8: c8_tick() not implemented.\n");
     return -1;
 }
 

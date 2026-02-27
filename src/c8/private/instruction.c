@@ -1005,6 +1005,10 @@ C8_STATIC C8_INLINE int c8_i_ld_dt_vx(C8* c8, uint8_t x) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_ld_st_vx(C8* c8, uint8_t x) {
+    if (c8->st == 0) {
+        c8_start_sound();
+    }
+
     c8->st = c8->V[x];
     return 2;
 }

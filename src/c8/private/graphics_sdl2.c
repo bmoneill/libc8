@@ -10,11 +10,18 @@
 #include "../graphics.h"
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_audio.h>
+#include <SDL2/SDL_mixer.h>
 #include <stdint.h>
 
 #define RGB_R(i) ((i >> 12) & 0xFF)
 #define RGB_G(i) ((i >> 8) & 0xFF)
 #define RGB_B(i) (i & 0xFF)
+
+#define CHANNEL     1
+#define SAMPLE_RATE 44100
+#define WAVE_FREQ   440
+#define WAVE_LENGTH SAMPLE_RATE / WAVE_FREQ
 
 C8_STATIC SDL_Window*   window;
 C8_STATIC SDL_Renderer* renderer;
@@ -27,7 +34,7 @@ C8_STATIC SDL_Renderer* renderer;
  * * `c8_keyMap[16]` enables debug mode / step,
  * * `c8_keyMap[17]` disables debug mode
  */
-C8_STATIC int c8_keyMap[18][2] = {
+const C8_STATIC int c8_keyMap[18][2] = {
     { SDLK_1, 1 },   { SDLK_2, 2 },   { SDLK_3, 3 },   { SDLK_4, 0xC }, { SDLK_q, 4 },
     { SDLK_w, 5 },   { SDLK_e, 6 },   { SDLK_r, 0xD }, { SDLK_a, 7 },   { SDLK_s, 8 },
     { SDLK_d, 9 },   { SDLK_f, 0xE }, { SDLK_z, 0xA }, { SDLK_x, 0 },   { SDLK_c, 0xB },
@@ -35,7 +42,19 @@ C8_STATIC int c8_keyMap[18][2] = {
     { SDLK_m, 17 }, // Leave debug mode
 };
 
-C8_STATIC int c8_get_key(SDL_Keycode k);
+C8_STATIC uint16_t samples[WAVE_LENGTH];
+
+C8_STATIC int      c8_get_key(SDL_Keycode k);
+
+void               c8_end_sound(void) { Mix_HaltChannel(CHANNEL); }
+
+void               c8_start_sound(void) {
+    Mix_Chunk wave_chunk;
+    wave_chunk.abuf   = (uint8_t*) samples;
+    wave_chunk.alen   = WAVE_LENGTH;
+    wave_chunk.volume = MIX_MAX_VOLUME;
+    Mix_PlayChannel(CHANNEL, &wave_chunk, 0);
+}
 
 /**
  * @brief Deinitialize the graphics library.
@@ -51,18 +70,35 @@ void c8_deinit_graphics(void) {
  * @return 1 if successful, 0 otherwise.
  */
 uint8_t c8_init_graphics(void) {
-    SDL_Init(SDL_INIT_VIDEO);
-    window = SDL_CreateWindow("CHIP8",
-                              SDL_WINDOWPOS_UNDEFINED,
-                              SDL_WINDOWPOS_UNDEFINED,
-                              C8_DEFAULT_WINDOW_WIDTH,
-                              C8_DEFAULT_WINDOW_HEIGHT,
-                              SDL_WINDOW_RESIZABLE);
-    if (!window) {
+    if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
         return 0;
     }
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    return renderer != NULL;
+
+    if (!(window = SDL_CreateWindow("CHIP8",
+                                    SDL_WINDOWPOS_UNDEFINED,
+                                    SDL_WINDOWPOS_UNDEFINED,
+                                    C8_DEFAULT_WINDOW_WIDTH,
+                                    C8_DEFAULT_WINDOW_HEIGHT,
+                                    SDL_WINDOW_RESIZABLE))) {
+        return 0;
+    }
+
+    if (!(renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED))) {
+        SDL_DestroyWindow(window);
+        return 0;
+    }
+
+    if (!Mix_OpenAudio(SAMPLE_RATE, AUDIO_S16SYS, 1, 4096)) {
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 0;
+    }
+
+    for (int i = 0; i < WAVE_LENGTH; i++) {
+        samples[i] = i < WAVE_LENGTH / 2 ? INT16_MAX : INT16_MIN;
+    }
+    return 1;
 }
 
 /**
