@@ -34,7 +34,7 @@ C8_STATIC SDL_Renderer* c8_renderer;
  * * `c8_keyMap[16]` enables debug mode / step,
  * * `c8_keyMap[17]` disables debug mode
  */
-const C8_STATIC int c8_keyMap[18][2] = {
+C8_STATIC const int c8_keyMap[18][2] = {
     { SDLK_1, 1 },   { SDLK_2, 2 },   { SDLK_3, 3 },   { SDLK_4, 0xC }, { SDLK_q, 4 },
     { SDLK_w, 5 },   { SDLK_e, 6 },   { SDLK_r, 0xD }, { SDLK_a, 7 },   { SDLK_s, 8 },
     { SDLK_d, 9 },   { SDLK_f, 0xE }, { SDLK_z, 0xA }, { SDLK_x, 0 },   { SDLK_c, 0xB },

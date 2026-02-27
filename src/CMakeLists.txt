@@ -49,6 +49,7 @@ set(LIBRARY_PRIVATE_HEADERS
 
 if(SDL2)
     find_package(SDL2 REQUIRED)
+    find_package(SDL2_mixer REQUIRED)
     list(APPEND LIBRARY_PRIVATE_SRC "${LIBRARY_BASE_PATH}/c8/private/graphics_sdl2.c")
 endif()
 
@@ -65,10 +66,10 @@ endif()
 
 if(SDL2)
     if(TARGET SDL2::SDL2)
-        target_link_libraries(${LIBRARY_NAME} PRIVATE SDL2::SDL2)
+        target_link_libraries(${LIBRARY_NAME} PRIVATE SDL2::SDL2 SDL2_mixer::SDL2_mixer)
     else()
         # Fallback: attempt to link the common "sdl2" library name if imported target isn't available
-        target_link_libraries(${LIBRARY_NAME} PRIVATE sdl2)
+        target_link_libraries(${LIBRARY_NAME} PRIVATE sdl2 sdl2_mixer)
     endif()
 endif()
 
