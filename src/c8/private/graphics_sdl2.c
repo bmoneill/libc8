@@ -60,7 +60,9 @@ void               c8_start_sound(void) {
  * @brief Deinitialize the graphics library.
  */
 void c8_deinit_graphics(void) {
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    Mix_CloseAudio();
     SDL_Quit();
 }
 
