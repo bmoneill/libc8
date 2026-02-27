@@ -38,7 +38,9 @@ function(Enable_Tests)
 endfunction()
 
 function(SDL2_Required)
-    message("Note: SDL2 is required here - make sure this is run with -DSDL2=ON")
+    if(NOT SDL2)
+        message(FATAL_ERROR "SDL2 is required for the given TARGET_GROUP.")
+    endif()
 endfunction()
 
 function(Build_Library)

@@ -65,10 +65,10 @@ if(TEST)
 endif()
 
 if(SDL2)
-    if(TARGET SDL2::SDL2)
+    if(TARGET SDL2::SDL2 AND TARGET SDL2_mixer::SDL2_mixer)
         target_link_libraries(${LIBRARY_NAME} PRIVATE SDL2::SDL2 SDL2_mixer::SDL2_mixer)
     else()
-        # Fallback: attempt to link the common "sdl2" library name if imported target isn't available
+        # Fallback: attempt to link the common "sdl2" and "sdl2_mixer" library names if imported targets aren't available
         target_link_libraries(${LIBRARY_NAME} PRIVATE sdl2 sdl2_mixer)
     endif()
 endif()
