@@ -32,8 +32,8 @@ code, you must implement these functions with your preferred graphics library:
 - [`void c8_deinit_graphics(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5)
 - [`int c8_init_graphics(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4)
 - [`void c8_render(c8_display_t *, int *)`](https://bmoneill.github.io/libc8/graphics_8h.html#a57897d69496a19a080b3af70ce26c010)
-- `void c8_sound_play(void)`
-- `void c8_sound_stop(void)`
+- [`void c8_sound_play(void)`](https://bmoneill.github.io/libc8/graphics_8c.html#aeabec1bbe4ff6953cbd3ad4eb0ef069e)
+- [`void c8_sound_stop(void)`](https://bmoneill.github.io/libc8/graphics_8c.html#ab4a5d4072d61da0f397cf9e8cac3d7c0)
 - [`int c8_tick(int *, int)`](https://bmoneill.github.io/libc8/graphics_8h.html#a020c1df5341d906fb19266b94235f884)
 
 **Note**: the `all` and `tools` targets require `SDL2` to be `ON`.
