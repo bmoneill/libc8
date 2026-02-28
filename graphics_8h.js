@@ -11,10 +11,11 @@ var graphics_8h =
     [ "C8_LOW_DISPLAY_WIDTH", "graphics_8h.html#a142ae690b02e240e2a678485173ca651", null ],
     [ "C8_WINDOW_SCALE_X", "graphics_8h.html#aab70d9202bcfc983806b5c35b4e76670", null ],
     [ "C8_WINDOW_SCALE_Y", "graphics_8h.html#ad5255936364b46efc6190f78de0bf52b", null ],
-    [ "c8_beep", "graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5", null ],
     [ "c8_deinit_graphics", "graphics_8h.html#a04f712dc6e338364ae5e43e0b6ae9762", null ],
     [ "c8_get_pixel", "graphics_8h.html#a3249f29e5cb1a8d42f7d8c833e0581a5", null ],
     [ "c8_init_graphics", "graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4", null ],
     [ "c8_render", "graphics_8h.html#a14dbc786812ddb26546b6adb9f85d888", null ],
+    [ "c8_sound_play", "graphics_8h.html#aeabec1bbe4ff6953cbd3ad4eb0ef069e", null ],
+    [ "c8_sound_stop", "graphics_8h.html#ab4a5d4072d61da0f397cf9e8cac3d7c0", null ],
     [ "c8_tick", "graphics_8h.html#a020c1df5341d906fb19266b94235f884", null ]
 ];

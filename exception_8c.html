@@ -145,6 +145,8 @@ Macros</h2></td></tr>
 <tr class="separator:a6b509376252d0b80be75f917ad6f8c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe9ff3e16df954c93e8e38ce43c692c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#abe9ff3e16df954c93e8e38ce43c692c3">C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Stack underflow occurred during execution.&quot;</td></tr>
 <tr class="separator:abe9ff3e16df954c93e8e38ce43c692c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ad8387fe8a609bf54872342f7a024a3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a6ad8387fe8a609bf54872342f7a024a3">C8_AUDIO_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;An error occurred while playing audio.&quot;</td></tr>
+<tr class="separator:a6ad8387fe8a609bf54872342f7a024a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -164,6 +166,20 @@ Variables</h2></td></tr>
 <div class="textblock"><dl class="section note"><dt>Note</dt><dd>NOT EXPORTED</dd></dl>
 <p>Stuff for handling exceptions. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a6ad8387fe8a609bf54872342f7a024a3" name="a6ad8387fe8a609bf54872342f7a024a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ad8387fe8a609bf54872342f7a024a3">&#9670;&#160;</a></span>C8_AUDIO_EXCEPTION_MESSAGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define C8_AUDIO_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;An error occurred while playing audio.&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0730a52505e899a3422c91355882b6cc" name="a0730a52505e899a3422c91355882b6cc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0730a52505e899a3422c91355882b6cc">&#9670;&#160;</a></span>C8_DUPLICATE_LABEL_EXCEPTION_MESSAGE</h2>
 
@@ -476,6 +492,7 @@ Variables</h2></td></tr>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7952be3cdc38b30f8c3a9fa0ae8a6e7c">C8_INVALID_FONT_EXCEPTION</a>,  <span class="stringliteral">&quot;Invalid font.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272">C8_INVALID_CLOCK_SPEED_EXCEPTION</a>,  <span class="stringliteral">&quot;Clock speed cannot be less than 1.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880">C8_STACK_UNDERFLOW_EXCEPTION</a>,  <span class="stringliteral">&quot;Stack underflow occurred during execution.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a6c49d1e64c7f97e4e90be6b109019ba5">C8_AUDIO_EXCEPTION</a>,  <span class="stringliteral">&quot;An error occurred while playing audio.&quot;</span>  },</div>
 <div class="line">}</div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272">C8_INVALID_CLOCK_SPEED_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_CLOCK_SPEED_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:46</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a142790ed1dc30cd295f39b9e641a2c85"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a142790ed1dc30cd295f39b9e641a2c85">C8_UNKNOWN_EXCEPTION</a></div><div class="ttdeci">@ C8_UNKNOWN_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:38</div></div>
@@ -484,6 +501,7 @@ Variables</h2></td></tr>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a526c94418797d663a630f29b4fda9838"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a526c94418797d663a630f29b4fda9838">C8_MEMORY_ALLOCATION_EXCEPTION</a></div><div class="ttdeci">@ C8_MEMORY_ALLOCATION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:37</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a5628e8f6e83af54b4c7fef49e1a80abf"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5628e8f6e83af54b4c7fef49e1a80abf">C8_LOAD_FILE_FAILURE_EXCEPTION</a></div><div class="ttdeci">@ C8_LOAD_FILE_FAILURE_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:40</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a5637fe6bf703e39df8b3b097d28ad276"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5637fe6bf703e39df8b3b097d28ad276">C8_TOO_MANY_LABELS_EXCEPTION</a></div><div class="ttdeci">@ C8_TOO_MANY_LABELS_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:32</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a6c49d1e64c7f97e4e90be6b109019ba5"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a6c49d1e64c7f97e4e90be6b109019ba5">C8_AUDIO_EXCEPTION</a></div><div class="ttdeci">@ C8_AUDIO_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:48</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a7952be3cdc38b30f8c3a9fa0ae8a6e7c"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7952be3cdc38b30f8c3a9fa0ae8a6e7c">C8_INVALID_FONT_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_FONT_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:45</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627">C8_STACK_OVERFLOW_EXCEPTION</a></div><div class="ttdeci">@ C8_STACK_OVERFLOW_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:33</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a929af25c310f19442ef4b27593b69d97"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a929af25c310f19442ef4b27593b69d97">C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION</a></div><div class="ttdeci">@ C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:44</div></div>

@@ -1,6 +1,7 @@
 var exception_8c =
 [
     [ "C8_Exception", "structC8__Exception.html", "structC8__Exception" ],
+    [ "C8_AUDIO_EXCEPTION_MESSAGE", "exception_8c.html#a6ad8387fe8a609bf54872342f7a024a3", null ],
     [ "C8_DUPLICATE_LABEL_EXCEPTION_MESSAGE", "exception_8c.html#a0730a52505e899a3422c91355882b6cc", null ],
     [ "C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE", "exception_8c.html#a355033c16b5c05303b6c56205f38079b", null ],
     [ "C8_FILE_TOO_BIG_EXCEPTION_MESSAGE", "exception_8c.html#ada243640e464ef056a82be07917d684a", null ],

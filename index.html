@@ -106,12 +106,13 @@ Linux</h2>
 </div><!-- fragment --><p>This will build libc8 as well as the example tools.</p>
 <h2><a class="anchor" id="autotoc_md14"></a>
 SDL2</h2>
-<p>SDL2 support is enabled by default. To disable it to use another graphics library, run <code>cmake</code> with <code>-DSDL2=OFF</code>. If <code>simulate()</code> is ever called in your code, you must implement these functions with your preferred graphics library:</p>
+<p>SDL2 support is enabled by default. To disable it to use another graphics library, run <code>cmake</code> with <code>-DSDL2=OFF</code>. If <code><a class="el" href="chip8_8c.html#a03d4120716da11f4d48a8025b360e6e4" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a></code> is ever called in your code, you must implement these functions with your preferred graphics library:</p>
 <ul>
-<li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5"><code>void c8_beep(void)</code></a></li>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5"><code>void c8_deinit_graphics(void)</code></a></li>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4"><code>int c8_init_graphics(void)</code></a></li>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a57897d69496a19a080b3af70ce26c010"><code>void c8_render(c8_display_t *, int *)</code></a></li>
+<li><code>void <a class="el" href="graphics_8c.html#aeabec1bbe4ff6953cbd3ad4eb0ef069e" title="Stop sound.">c8_sound_play(void)</a></code></li>
+<li><code>void <a class="el" href="graphics_8c.html#ab4a5d4072d61da0f397cf9e8cac3d7c0" title="Play sound.">c8_sound_stop(void)</a></code></li>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a020c1df5341d906fb19266b94235f884"><code>int c8_tick(int *, int)</code></a></li>
 </ul>
 <p><b>Note</b>: the <code>all</code> and <code>tools</code> targets require <code>SDL2</code> to be <code>ON</code>.</p>
@@ -120,7 +121,7 @@ Testing</h1>
 <p>Testing is done using <a href="https://cmake.org/cmake/help/latest/manual/ctest.1.html">ctest</a> and <a href="https://github.com/ThrowTheSwitch/Unity">Unity</a>.</p>
 <div class="fragment"><div class="line">git submodule update</div>
 <div class="line">cmake -S . -B build -DTEST=ON -DSDL2=OFF</div>
-<div class="line">cmake --build build </div>
+<div class="line">cmake --build build</div>
 <div class="line">cd build</div>
 <div class="line">ctest --verbose</div>
 </div><!-- fragment --><p><b>Note</b>: When built with tests enabled (<code>-DTEST</code>), <code>libc8</code> will not halt execution after encountering an error, potentially leading to undefined behavior.</p>

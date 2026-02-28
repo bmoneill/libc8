@@ -19,7 +19,8 @@ var exception_8h =
       [ "C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a929af25c310f19442ef4b27593b69d97", null ],
       [ "C8_INVALID_FONT_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7952be3cdc38b30f8c3a9fa0ae8a6e7c", null ],
       [ "C8_INVALID_CLOCK_SPEED_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272", null ],
-      [ "C8_STACK_UNDERFLOW_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880", null ]
+      [ "C8_STACK_UNDERFLOW_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880", null ],
+      [ "C8_AUDIO_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a6c49d1e64c7f97e4e90be6b109019ba5", null ]
     ] ],
     [ "c8_handle_exception", "exception_8h.html#aea5e356b64a2e9b93342fb3b130b084f", null ],
     [ "c8_exception", "exception_8h.html#a220454f62a07328378e890bf6f2488b0", null ]
