@@ -63,7 +63,13 @@ C8* c8_init(const char* path, int flags) {
         c8_load_rom(c8, path);
     }
     c8_set_fonts(c8, 0, 0);
-    c8_init_graphics();
+
+    int ret = c8_init_graphics();
+    if (ret <= 0) {
+        fprintf(stderr, "Failed to initialize graphics\n");
+        return NULL;
+    }
+
     return c8;
 }
 

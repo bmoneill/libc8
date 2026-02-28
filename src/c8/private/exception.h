@@ -44,7 +44,8 @@ typedef enum {
     C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION = -16,
     C8_INVALID_FONT_EXCEPTION                   = -17,
     C8_INVALID_CLOCK_SPEED_EXCEPTION            = -18,
-    C8_STACK_UNDERFLOW_EXCEPTION                = -19
+    C8_STACK_UNDERFLOW_EXCEPTION                = -19,
+    C8_AUDIO_EXCEPTION                          = -20,
 } C8_ExceptionCode;
 
 /**

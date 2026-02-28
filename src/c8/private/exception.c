@@ -28,6 +28,7 @@
 #define C8_INVALID_FONT_EXCEPTION_MESSAGE                   "Invalid font."
 #define C8_INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE            "Clock speed cannot be less than 1."
 #define C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE                "Stack underflow occurred during execution."
+#define C8_AUDIO_EXCEPTION_MESSAGE                          "An error occurred while playing audio."
 
 /**
  * @struct C8_Exception
@@ -60,6 +61,7 @@ const C8_Exception c8_exceptions[] = {
     { C8_INVALID_FONT_EXCEPTION, C8_INVALID_FONT_EXCEPTION_MESSAGE },
     { C8_INVALID_CLOCK_SPEED_EXCEPTION, C8_INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE },
     { C8_STACK_UNDERFLOW_EXCEPTION, C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE },
+    { C8_AUDIO_EXCEPTION, C8_AUDIO_EXCEPTION_MESSAGE },
 };
 
 char c8_exception[C8_EXCEPTION_MESSAGE_SIZE];

@@ -8,6 +8,7 @@
 
 #include "../common.h"
 #include "../graphics.h"
+#include "exception.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_audio.h>
@@ -25,6 +26,8 @@
 
 C8_STATIC SDL_Window*   c8_window;
 C8_STATIC SDL_Renderer* c8_renderer;
+C8_STATIC int16_t       samples[C8_AUDIO_WAVE_LENGTH];
+C8_STATIC Mix_Chunk*    c8_wave_chunk = NULL;
 
 /**
  * Map of all keys to track.
@@ -42,19 +45,31 @@ C8_STATIC const int c8_keyMap[18][2] = {
     { SDLK_m, 17 }, // Leave debug mode
 };
 
-C8_STATIC uint16_t samples[C8_AUDIO_WAVE_LENGTH];
+C8_STATIC int c8_get_key(SDL_Keycode k);
 
-C8_STATIC int      c8_get_key(SDL_Keycode k);
+void          c8_sound_play(void) {
+    if (c8_wave_chunk == NULL) {
+        printf("Beep\n");
+        uint32_t bytes = (uint32_t) (C8_AUDIO_WAVE_LENGTH * sizeof(int16_t));
+        c8_wave_chunk  = Mix_QuickLoad_RAW((uint8_t*) samples, bytes);
 
-void               c8_sound_play(void) {
-    Mix_Chunk wave_chunk;
-    wave_chunk.abuf   = (uint8_t*) samples;
-    wave_chunk.alen   = C8_AUDIO_WAVE_LENGTH;
-    wave_chunk.volume = MIX_MAX_VOLUME;
-    Mix_PlayChannel(C8_AUDIO_CHANNEL, &wave_chunk, 0);
+        if (!c8_wave_chunk) {
+            Mix_GetError();
+            printf("%s\n", SDL_GetError());
+            C8_EXCEPTION(C8_AUDIO_EXCEPTION, "An error occurred while loading the audio chunk.");
+        }
+        c8_wave_chunk->volume = MIX_MAX_VOLUME / 4;
+        Mix_PlayChannel(-1, c8_wave_chunk, -1);
+    }
 }
 
-void c8_sound_stop(void) { Mix_HaltChannel(C8_AUDIO_CHANNEL); }
+void c8_sound_stop(void) {
+    Mix_HaltChannel(C8_AUDIO_CHANNEL);
+    if (c8_wave_chunk) {
+        Mix_FreeChunk(c8_wave_chunk);
+        c8_wave_chunk = NULL;
+    }
+}
 
 /**
  * @brief Deinitialize the graphics library.
@@ -72,7 +87,7 @@ void c8_deinit_graphics(void) {
  * @return 1 if successful, 0 otherwise.
  */
 uint8_t c8_init_graphics(void) {
-    if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
         return 0;
     }
 
@@ -90,16 +105,19 @@ uint8_t c8_init_graphics(void) {
         return 0;
     }
 
-    if (!Mix_OpenAudio(C8_AUDIO_SAMPLE_RATE, AUDIO_S16SYS, 1, 4096)) {
+    if (Mix_OpenAudio(C8_AUDIO_SAMPLE_RATE, AUDIO_S16SYS, 1, 4096)) {
         SDL_DestroyRenderer(c8_renderer);
         SDL_DestroyWindow(c8_window);
         SDL_Quit();
         return 0;
     }
 
+    Mix_AllocateChannels(1);
+
     for (int i = 0; i < C8_AUDIO_WAVE_LENGTH; i++) {
         samples[i] = i < C8_AUDIO_WAVE_LENGTH / 2 ? INT16_MAX : INT16_MIN;
     }
+    printf("Graphics initialized successfully\n");
     return 1;
 }
 
