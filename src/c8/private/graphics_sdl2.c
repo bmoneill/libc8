@@ -49,14 +49,11 @@ C8_STATIC int c8_get_key(SDL_Keycode k);
 
 void          c8_sound_play(void) {
     if (c8_wave_chunk == NULL) {
-        printf("Beep\n");
         uint32_t bytes = (uint32_t) (C8_AUDIO_WAVE_LENGTH * sizeof(int16_t));
         c8_wave_chunk  = Mix_QuickLoad_RAW((uint8_t*) samples, bytes);
 
         if (!c8_wave_chunk) {
-            Mix_GetError();
-            printf("%s\n", SDL_GetError());
-            C8_EXCEPTION(C8_AUDIO_EXCEPTION, "An error occurred while loading the audio chunk.");
+            C8_EXCEPTION(C8_AUDIO_EXCEPTION, Mix_GetError());
         }
         c8_wave_chunk->volume = MIX_MAX_VOLUME / 4;
         Mix_PlayChannel(-1, c8_wave_chunk, -1);
@@ -117,7 +114,6 @@ uint8_t c8_init_graphics(void) {
     for (int i = 0; i < C8_AUDIO_WAVE_LENGTH; i++) {
         samples[i] = i < C8_AUDIO_WAVE_LENGTH / 2 ? INT16_MAX : INT16_MIN;
     }
-    printf("Graphics initialized successfully\n");
     return 1;
 }
 
