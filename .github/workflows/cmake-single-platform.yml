@@ -59,7 +59,7 @@ jobs:
         id: coverage
         run: |
           raw="$(ctest --test-dir ${{github.workspace}}/build -T coverage)"
-          echo "percentage=$(echo "$raw" | tail -n 1 | sed 's/.*: //')" >> "$GITHUB_OUTPUT"
+          echo "percentage=$(echo "$raw" | tail -n 1 | sed 's/.*: //' | sed 's/\..*//')" >> "$GITHUB_OUTPUT"
 
       - name: Update coverage badge
         uses: appleboy/ssh-action@master
@@ -72,3 +72,4 @@ jobs:
           script: |
             sed "s/coverage-../coverage-${{ steps.coverage.outputs.percentage }}/" /etc/nginx/includes/libc8.conf > tmp.conf
             mv tmp.conf /etc/nginx/includes/libc8.conf
+            sudo nginx-reload
