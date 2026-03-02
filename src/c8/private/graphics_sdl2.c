@@ -231,7 +231,7 @@ int c8_tick(int* key) {
  *
  * @param k the SDL_Keycode
  *
- * @return the CHIP-8 keycode
+ * @return the CHIP-8 keycode, or -1 if no match is found.
  */
 C8_STATIC int c8_get_key(SDL_Keycode k) {
     for (int i = 0; i < 18; i++) {
