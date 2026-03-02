@@ -5,6 +5,7 @@
  */
 
 #include "graphics.h"
+#include "exception.h"
 
 #include <stdio.h>
 
@@ -16,7 +17,7 @@
  * SDL2 support.
  */
 __attribute__((weak)) void c8_sound_play(void) {
-    fprintf(stderr, "libc8: c8_end_sound() not implemented.");
+    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
 }
 
 /**
@@ -27,7 +28,7 @@ __attribute__((weak)) void c8_sound_play(void) {
  * SDL2 support.
  */
 __attribute__((weak)) void c8_sound_stop(void) {
-    fprintf(stderr, "libc8: c8_start_sound() not implemented.");
+    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
 }
 
 /**
@@ -38,7 +39,7 @@ __attribute__((weak)) void c8_sound_stop(void) {
  * SDL2 support.
  */
 __attribute__((weak)) void c8_deinit_graphics(void) {
-    fprintf(stderr, "libc8: c8_deinit_graphics() not implemented.");
+    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
 }
 
 /**
@@ -49,8 +50,8 @@ __attribute__((weak)) void c8_deinit_graphics(void) {
  * SDL2 support.
  */
 __attribute__((weak)) uint8_t c8_init_graphics(void) {
-    fprintf(stderr, "libc8: c8_init_graphics() not implemented.\n");
-    return -1;
+    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
+    return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
 }
 
 /**
@@ -61,7 +62,7 @@ __attribute__((weak)) uint8_t c8_init_graphics(void) {
  * SDL2 support.
  */
 __attribute__((weak)) void c8_render(C8_Display* display, int* colors) {
-    fprintf(stderr, "libc8: c8_render() not implemented.");
+    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
 }
 
 /**
@@ -72,7 +73,7 @@ __attribute__((weak)) void c8_render(C8_Display* display, int* colors) {
  * SDL2 support.
  */
 __attribute__((weak)) int c8_tick(int* key) {
-    fprintf(stderr, "libc8: c8_tick() not implemented.\n");
+    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
     return -1;
 }
 
