@@ -147,6 +147,8 @@ Macros</h2></td></tr>
 <tr class="separator:abe9ff3e16df954c93e8e38ce43c692c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ad8387fe8a609bf54872342f7a024a3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a6ad8387fe8a609bf54872342f7a024a3">C8_AUDIO_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;An error occurred while playing audio.&quot;</td></tr>
 <tr class="separator:a6ad8387fe8a609bf54872342f7a024a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33614b30cf35a9a999f34f3056fbe3fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a33614b30cf35a9a999f34f3056fbe3fb">C8_INVALID_STATE_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;The CHIP-8 emulator is in an invalid state.&quot;</td></tr>
+<tr class="separator:a33614b30cf35a9a999f34f3056fbe3fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -300,6 +302,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define C8_INVALID_QUIRK_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Invalid quirk.&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a33614b30cf35a9a999f34f3056fbe3fb" name="a33614b30cf35a9a999f34f3056fbe3fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33614b30cf35a9a999f34f3056fbe3fb">&#9670;&#160;</a></span>C8_INVALID_STATE_EXCEPTION_MESSAGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define C8_INVALID_STATE_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;The CHIP-8 emulator is in an invalid state.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -493,6 +509,7 @@ Variables</h2></td></tr>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272">C8_INVALID_CLOCK_SPEED_EXCEPTION</a>,  <span class="stringliteral">&quot;Clock speed cannot be less than 1.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880">C8_STACK_UNDERFLOW_EXCEPTION</a>,  <span class="stringliteral">&quot;Stack underflow occurred during execution.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a6c49d1e64c7f97e4e90be6b109019ba5">C8_AUDIO_EXCEPTION</a>,  <span class="stringliteral">&quot;An error occurred while playing audio.&quot;</span>  },</div>
+<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714">C8_INVALID_STATE_EXCEPTION</a>,  <span class="stringliteral">&quot;The CHIP-8 emulator is in an invalid state.&quot;</span>  },</div>
 <div class="line">}</div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272">C8_INVALID_CLOCK_SPEED_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_CLOCK_SPEED_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:46</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a142790ed1dc30cd295f39b9e641a2c85"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a142790ed1dc30cd295f39b9e641a2c85">C8_UNKNOWN_EXCEPTION</a></div><div class="ttdeci">@ C8_UNKNOWN_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:38</div></div>
@@ -505,6 +522,7 @@ Variables</h2></td></tr>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a7952be3cdc38b30f8c3a9fa0ae8a6e7c"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7952be3cdc38b30f8c3a9fa0ae8a6e7c">C8_INVALID_FONT_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_FONT_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:45</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627">C8_STACK_OVERFLOW_EXCEPTION</a></div><div class="ttdeci">@ C8_STACK_OVERFLOW_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:33</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a929af25c310f19442ef4b27593b69d97"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a929af25c310f19442ef4b27593b69d97">C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION</a></div><div class="ttdeci">@ C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:44</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714">C8_INVALID_STATE_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_STATE_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:49</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a9e3f63e708ac14bf5921f70ed7bf54ac"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9e3f63e708ac14bf5921f70ed7bf54ac">C8_INVALID_COLOR_PALETTE_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_COLOR_PALETTE_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:42</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ab4eff6980b381cb483fa19853b3fc386"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab4eff6980b381cb483fa19853b3fc386">C8_TOO_MANY_SYMBOLS_EXCEPTION</a></div><div class="ttdeci">@ C8_TOO_MANY_SYMBOLS_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:39</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880">C8_STACK_UNDERFLOW_EXCEPTION</a></div><div class="ttdeci">@ C8_STACK_UNDERFLOW_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:47</div></div>

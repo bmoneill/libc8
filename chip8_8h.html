@@ -168,12 +168,15 @@ Functions</h2></td></tr>
 <tr class="memitem:adfb38610f49e9df8b5162256fd136ac2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8h.html#adfb38610f49e9df8b5162256fd136ac2">c8_load_rom</a> (<a class="el" href="structC8.html">C8</a> *, const char *)</td></tr>
 <tr class="memdesc:adfb38610f49e9df8b5162256fd136ac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a ROM to <code>c8-&gt;mem</code> at path <code>addr</code>.  <br /></td></tr>
 <tr class="separator:adfb38610f49e9df8b5162256fd136ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa76017d740372fad1c3f29e09b6db6e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8h.html#afa76017d740372fad1c3f29e09b6db6e">c8_version</a> (void)</td></tr>
-<tr class="memdesc:afa76017d740372fad1c3f29e09b6db6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the version of libc8.  <br /></td></tr>
-<tr class="separator:afa76017d740372fad1c3f29e09b6db6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85893f029a1fbf7360c0d7258366ea7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8h.html#a85893f029a1fbf7360c0d7258366ea7f">c8_simulate</a> (<a class="el" href="structC8.html">C8</a> *)</td></tr>
 <tr class="memdesc:a85893f029a1fbf7360c0d7258366ea7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main interpreter simulation loop. Exits when <code>c8-&gt;running</code> is 0.  <br /></td></tr>
 <tr class="separator:a85893f029a1fbf7360c0d7258366ea7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac816d269ecdc1b2ac9f94075d58eac84"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8h.html#ac816d269ecdc1b2ac9f94075d58eac84">c8_validate</a> (const <a class="el" href="structC8.html">C8</a> *)</td></tr>
+<tr class="memdesc:ac816d269ecdc1b2ac9f94075d58eac84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate the state of the chip8 emulator.  <br /></td></tr>
+<tr class="separator:ac816d269ecdc1b2ac9f94075d58eac84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa76017d740372fad1c3f29e09b6db6e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8h.html#afa76017d740372fad1c3f29e09b6db6e">c8_version</a> (void)</td></tr>
+<tr class="memdesc:afa76017d740372fad1c3f29e09b6db6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the version of libc8.  <br /></td></tr>
+<tr class="separator:afa76017d740372fad1c3f29e09b6db6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stuff for simulating and modifying <code>CHIP8</code>s. </p>
@@ -610,6 +613,33 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ac816d269ecdc1b2ac9f94075d58eac84" name="ac816d269ecdc1b2ac9f94075d58eac84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac816d269ecdc1b2ac9f94075d58eac84">&#9670;&#160;</a></span>c8_validate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int c8_validate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structC8.html">C8</a> *&#160;</td>
+          <td class="paramname"><em>c8</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validate the state of the chip8 emulator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c8</td><td>The <a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a> emulator instance </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int 0 on success, non-zero on failure </dd></dl>
 
 </div>
 </div>

@@ -8,5 +8,6 @@ var chip8_8c =
     [ "c8_load_quirks", "chip8_8c.html#a201c27b7ab103769cafe551d2b6b07dd", null ],
     [ "c8_load_rom", "chip8_8c.html#a8980b0fd7901592650048de2fd25986c", null ],
     [ "c8_simulate", "chip8_8c.html#a03d4120716da11f4d48a8025b360e6e4", null ],
+    [ "c8_validate", "chip8_8c.html#a1d19b160e0de66c906ec70bec3db5640", null ],
     [ "c8_version", "chip8_8c.html#afa76017d740372fad1c3f29e09b6db6e", null ]
 ];

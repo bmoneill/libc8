@@ -11,6 +11,7 @@ var exception_8c =
     [ "C8_INVALID_FONT_EXCEPTION_MESSAGE", "exception_8c.html#acce6a15178cebe54e17dfbd2caec5d6f", null ],
     [ "C8_INVALID_INSTRUCTION_EXCEPTION_MESSAGE", "exception_8c.html#a926bf99e610c65000fa88ce0142f7860", null ],
     [ "C8_INVALID_QUIRK_EXCEPTION_MESSAGE", "exception_8c.html#a44fadbaffd4abfc7f8f1b078d8fade65", null ],
+    [ "C8_INVALID_STATE_EXCEPTION_MESSAGE", "exception_8c.html#a33614b30cf35a9a999f34f3056fbe3fb", null ],
     [ "C8_INVALID_SYMBOL_EXCEPTION_MESSAGE", "exception_8c.html#a57588907fe171f31bd4724efd98bf099", null ],
     [ "C8_LOAD_FILE_FAILURE_EXCEPTION_MESSAGE", "exception_8c.html#a6e1550c06acaa7a359f448c168a42047", null ],
     [ "C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE", "exception_8c.html#a64d6ccc3c8165d80fa110d9b9fd3305d", null ],
