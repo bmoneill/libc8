@@ -74,7 +74,7 @@ __attribute__((weak)) void c8_render(C8_Display* display, int* colors) {
  */
 __attribute__((weak)) int c8_tick(int* key) {
     C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
-    return -1;
+    return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
 }
 
 /**
