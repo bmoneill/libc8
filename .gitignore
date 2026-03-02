@@ -5,6 +5,11 @@ gmon.out
 a.c8
 docs/html
 
+pkg/libc8
+pkg/pkg
+pkg/src
+pkg/*tar.*
+
 # Editor stuff
 .zed
 .clangd
