@@ -53,7 +53,7 @@ void          c8_sound_play(void) {
         c8_wave_chunk  = Mix_QuickLoad_RAW((uint8_t*) samples, bytes);
 
         if (!c8_wave_chunk) {
-            C8_EXCEPTION(C8_AUDIO_EXCEPTION, Mix_GetError());
+            C8_EXCEPTION(C8_AUDIO_EXCEPTION, "%s", Mix_GetError());
         }
         c8_wave_chunk->volume = MIX_MAX_VOLUME / 4;
         Mix_PlayChannel(-1, c8_wave_chunk, -1);
