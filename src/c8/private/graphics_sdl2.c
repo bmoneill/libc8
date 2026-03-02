@@ -85,7 +85,10 @@ void c8_deinit_graphics(void) {
  */
 uint8_t c8_init_graphics(void) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
-        return 0;
+        C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION,
+                     "Failed to initialize SDL window.\n%s\n",
+                     SDL_GetError());
+        return C8;
     }
 
     if (!(c8_window = SDL_CreateWindow("CHIP8",
@@ -94,15 +97,26 @@ uint8_t c8_init_graphics(void) {
                                        C8_DEFAULT_WINDOW_WIDTH,
                                        C8_DEFAULT_WINDOW_HEIGHT,
                                        SDL_WINDOW_RESIZABLE))) {
+        C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION,
+                     "Failed to initialize SDL window.\n%s\n",
+                     SDL_GetError());
+        SDL_Quit();
         return 0;
     }
 
     if (!(c8_renderer = SDL_CreateRenderer(c8_window, -1, SDL_RENDERER_ACCELERATED))) {
+        C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION,
+                     "Failed to initialize SDL renderer.\n%s\n",
+                     SDL_GetError());
         SDL_DestroyWindow(c8_window);
+        SDL_Quit();
         return 0;
     }
 
     if (Mix_OpenAudio(C8_AUDIO_SAMPLE_RATE, AUDIO_S16SYS, 1, 4096)) {
+        C8_EXCEPTION(C8_AUDIO_EXCEPTION,
+                     "Failed to initialize SDL audio mixer.\n%s\n",
+                     SDL_GetError());
         SDL_DestroyRenderer(c8_renderer);
         SDL_DestroyWindow(c8_window);
         SDL_Quit();
