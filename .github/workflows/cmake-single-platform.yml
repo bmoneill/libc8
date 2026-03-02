@@ -70,5 +70,4 @@ jobs:
           passphrase: ${{ secrets.wwwpass }}
           port: 22
           script: |
-            cd /etc/nginx/includes
-            sed -i "s/coverage-../coverage-${{ steps.coverage.outputs.percentage }}/" libc8.conf
+            sed -i "s/coverage-../coverage-${{ steps.coverage.outputs.percentage }}/" /etc/nginx/includes/libc8.conf
