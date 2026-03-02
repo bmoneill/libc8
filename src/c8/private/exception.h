@@ -46,6 +46,7 @@ typedef enum {
     C8_INVALID_CLOCK_SPEED_EXCEPTION            = -18,
     C8_STACK_UNDERFLOW_EXCEPTION                = -19,
     C8_AUDIO_EXCEPTION                          = -20,
+    C8_INVALID_STATE_EXCEPTION                  = -21,
 } C8_ExceptionCode;
 
 /**

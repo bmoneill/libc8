@@ -302,3 +302,47 @@ void c8_simulate(C8* c8) {
  * @return const char* version string
  */
 const char* c8_version(void) { return C8_VERSION; }
+
+/**
+ * @brief Validate the state of the chip8 emulator.
+ *
+ * @param c8 The C8 emulator instance
+ * @return int 0 on success, non-zero on failure
+ */
+int c8_validate(const C8* c8) {
+    if (!c8) {
+        return 0;
+    }
+
+    if (c8->pc > C8_MEMSIZE) {
+        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION,
+                     "PC out of bounds: 0x%04x > 0x%04x",
+                     c8->pc,
+                     C8_MEMSIZE)
+        return 1;
+    }
+
+    if (c8->cs <= 0) {
+        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION,
+                     "Clock speed cannot be less than or equal to zero: cs=%d",
+                     c8->cs)
+        return 1;
+    }
+
+    if (c8->VK < 0 || c8->VK > 16) {
+        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "VK out of bounds (0-15): VK=%d", c8->VK)
+        return 1;
+    }
+
+    if (c8->mode < C8_MODE_CHIP8 || c8->mode > C8_MODE_XOCHIP) {
+        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "Invalid mode: mode=%d", c8->mode)
+        return 1;
+    }
+
+    if (c8->display.mode != C8_DISPLAYMODE_LOW && c8->display.mode != C8_DISPLAYMODE_HIGH) {
+        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "Invalid display mode: mode=%d", c8->display.mode)
+        return 1;
+    }
+
+    return 0;
+}
