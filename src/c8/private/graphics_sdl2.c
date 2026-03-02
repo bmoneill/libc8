@@ -88,7 +88,7 @@ uint8_t c8_init_graphics(void) {
         C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION,
                      "Failed to initialize SDL window.\n%s\n",
                      SDL_GetError());
-        return C8;
+        return 0;
     }
 
     if (!(c8_window = SDL_CreateWindow("CHIP8",

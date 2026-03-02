@@ -5,7 +5,7 @@
  */
 
 #include "graphics.h"
-#include "exception.h"
+#include "private/exception.h"
 
 #include <stdio.h>
 
