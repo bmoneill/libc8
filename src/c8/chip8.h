@@ -106,7 +106,8 @@ int         c8_load_palette_s(C8*, char*);
 int         c8_load_palette_f(C8*, const char*);
 void        c8_load_quirks(C8*, const char*);
 int         c8_load_rom(C8*, const char*);
-const char* c8_version(void);
 void        c8_simulate(C8*);
+int         c8_validate(const C8*);
+const char* c8_version(void);
 
 #endif

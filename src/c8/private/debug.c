@@ -19,8 +19,8 @@
 
 C8_STATIC int  c8_get_command(C8_Command*, char*);
 C8_STATIC int  c8_load_file_arg(C8_Command*, char*);
-C8_STATIC void c8_load_flags(C8*, const char*);
-C8_STATIC void c8_load_state(C8*, const char*);
+C8_STATIC int  c8_load_flags(C8*, const char*);
+C8_STATIC int  c8_load_state(C8*, const char*);
 C8_STATIC int  c8_parse_arg(C8_Command*, char*);
 C8_STATIC void c8_print_help(void);
 C8_STATIC void c8_print_r_registers(const C8*);
@@ -28,8 +28,8 @@ C8_STATIC void c8_print_stack(const C8*);
 C8_STATIC void c8_print_v_registers(const C8*);
 C8_STATIC void c8_print_value(C8*, const C8_Command*);
 C8_STATIC int  c8_run_command(C8*, const C8_Command*);
-C8_STATIC void c8_save_flags(const C8*, const char*);
-C8_STATIC void c8_save_state(const C8*, const char*);
+C8_STATIC int  c8_save_flags(const C8*, const char*);
+C8_STATIC int  c8_save_state(const C8*, const char*);
 C8_STATIC int  c8_set_value(C8*, const C8_Command*);
 
 /**
@@ -64,7 +64,7 @@ const char* c8_cmds[] = {
  * @param c8 the current CHIP-8 state
  * @return `C8_DEBUG_CONTINUE`, `C8_DEBUG_STEP`, or `C8_DEBUG_QUIT`
  */
-int c8_debug_repl(C8* c8) {
+C8_DebugState c8_debug_repl(C8* c8) {
     char       buf[64];
     C8_Command cmd;
 
@@ -150,16 +150,22 @@ C8_STATIC int c8_get_command(C8_Command* cmd, char* s) {
  *
  * @param c8 struct to load to
  * @param path path to load from
+ *
+ * @return 0 on success, non-zero on failure
  */
-C8_STATIC void c8_load_flags(C8* c8, const char* path) {
+C8_STATIC int c8_load_flags(C8* c8, const char* path) {
     FILE* f = fopen(path, "rb");
     if (!f) {
-        printf("Invalid file\n");
-        return;
+        return 0;
     }
 
     int ret = fread(&c8->R, 1, 8, f);
+    if (ret != 1) {
+        fclose(f);
+        return 0;
+    }
     fclose(f);
+    return ret;
 }
 
 /**
@@ -167,17 +173,24 @@ C8_STATIC void c8_load_flags(C8* c8, const char* path) {
  *
  * @param c8 struct to load to
  * @param path path to load from
+ *
+ * @return 1 on success.
  */
-C8_STATIC void c8_load_state(C8* c8, const char* path) {
+C8_STATIC int c8_load_state(C8* c8, const char* path) {
     FILE* f = fopen(path, "rb");
     if (!f) {
-        printf("Invalid file\n");
-        return;
+        return 0;
     }
+
     int ret = fread(c8, sizeof(C8), 1, f);
-    fclose(f);
+    if (ret != 1) {
+        fclose(f);
+        return 0;
+    }
 
     c8->draw = 1;
+    fclose(f);
+    return 1;
 }
 
 /**
@@ -481,10 +494,14 @@ C8_STATIC int c8_run_command(C8* c8, const C8_Command* cmd) {
     case C8_CMD_NEXT:
         return C8_DEBUG_STEP;
     case C8_CMD_LOAD:
-        c8_load_state(c8, cmd->arg.value.s);
+        if (!c8_load_state(c8, cmd->arg.value.s)) {
+            printf("Failed to load state from %s\n", cmd->arg.value.s);
+        }
         break;
     case C8_CMD_SAVE:
-        c8_save_state(c8, cmd->arg.value.s);
+        if (!c8_save_state(c8, cmd->arg.value.s)) {
+            printf("Failed to save state to %s\n", cmd->arg.value.s);
+        }
         break;
     case C8_CMD_PRINT:
         c8_print_value(c8, cmd);
@@ -498,10 +515,14 @@ C8_STATIC int c8_run_command(C8* c8, const C8_Command* cmd) {
     case C8_CMD_QUIT:
         return C8_DEBUG_QUIT;
     case C8_CMD_LOADFLAGS:
-        c8_load_flags(c8, cmd->arg.value.s);
+        if (!c8_load_flags(c8, cmd->arg.value.s)) {
+            printf("Failed to load flags from %s\n", cmd->arg.value.s);
+        }
         break;
     case C8_CMD_SAVEFLAGS:
-        c8_save_flags(c8, cmd->arg.value.s);
+        if (!c8_save_flags(c8, cmd->arg.value.s)) {
+            printf("Failed to save flags to %s\n", cmd->arg.value.s);
+        }
         break;
     default:
         printf("Invalid command\n");
@@ -516,16 +537,24 @@ C8_STATIC int c8_run_command(C8* c8, const C8_Command* cmd) {
  *
  * @param c8 `C8` to grab flag registers from
  * @param path path to save to
+
+ * @return 1 on success, 0 on failure
  */
-C8_STATIC void c8_save_flags(const C8* c8, const char* path) {
+C8_STATIC int c8_save_flags(const C8* c8, const char* path) {
     FILE* f = fopen(path, "wb");
     if (!f) {
         printf("Invalid file\n");
-        return;
+        return 0;
     }
 
-    fwrite(&c8->R, 1, 8, f);
+    if (fwrite(&c8->R, 1, 8, f) != 8) {
+        printf("Failed to write to file\n");
+        fclose(f);
+        return 0;
+    }
+
     fclose(f);
+    return 1;
 }
 
 /**
@@ -533,16 +562,24 @@ C8_STATIC void c8_save_flags(const C8* c8, const char* path) {
  *
  * @param c8 `C8` to save
  * @param path path to save to
+ *
+ * @return 1 on success, 0 on failure
  */
-C8_STATIC void c8_save_state(const C8* c8, const char* path) {
+C8_STATIC int c8_save_state(const C8* c8, const char* path) {
     FILE* f = fopen(path, "wb");
     if (!f) {
         printf("Invalid file\n");
-        return;
+        return 0;
     }
 
-    fwrite(c8, sizeof(C8), 1, f);
+    if (fwrite(c8, sizeof(C8), 1, f) != 1) {
+        printf("Failed to write to file\n");
+        fclose(f);
+        return 0;
+    }
+
     fclose(f);
+    return 1;
 }
 
 /**

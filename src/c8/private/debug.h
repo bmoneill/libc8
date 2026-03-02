@@ -147,7 +147,7 @@ $[address]: Value at given address\n\
 If no argument is given to print, it will print all of the above attributes\n\
 except for address values.\n"
 
-int c8_debug_repl(C8*);
-int c8_has_breakpoint(C8*, uint16_t);
+C8_DebugState c8_debug_repl(C8*);
+int           c8_has_breakpoint(C8*, uint16_t);
 
 #endif
