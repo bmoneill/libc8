@@ -7,6 +7,7 @@
 #include "font.h"
 
 #include "chip8.h"
+#include "exception.h"
 
 #include <stdint.h>
 #include <stdio.h>
@@ -194,12 +195,12 @@ int c8_set_fonts_s(C8* c8, char* s) {
     }
 
     if (!c8_set_small_font(c8, s)) {
-        fprintf(stderr, "Invalid font: %s\n", s);
+        C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
         return 0;
     }
     if (s2) {
         if (!c8_set_big_font(c8, s2)) {
-            fprintf(stderr, "Invalid font: %s\n", s2);
+            C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
             return 0;
         }
     }
@@ -224,8 +225,14 @@ int c8_set_small_font(C8* c8, const char* s) {
             f = i;
         }
     }
-    c8_set_fonts(c8, f, -1);
-    return f != -1;
+
+    if (f == -1) {
+        C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
+        return 0;
+    }
+
+    c8_set_fonts(c8, -1, f);
+    return 1;
 }
 
 /**
@@ -244,8 +251,13 @@ int c8_set_big_font(C8* c8, const char* s) {
         }
     }
 
+    if (f == -1) {
+        C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
+        return 0;
+    }
+
     c8_set_fonts(c8, -1, f);
-    return f != -1;
+    return 1;
 }
 
 /**
