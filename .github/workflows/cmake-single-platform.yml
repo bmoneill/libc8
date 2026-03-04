@@ -70,6 +70,4 @@ jobs:
           passphrase: ${{ secrets.wwwpass }}
           port: 22
           script: |
-            sed "s/coverage-../coverage-${{ steps.coverage.outputs.percentage }}/" /etc/nginx/includes/libc8.conf > tmp.conf
-            mv tmp.conf /etc/nginx/includes/libc8.conf
-            sudo nginx-reload
+            update-coverage libc8 ${{ steps.coverage.outputs.percentage }}
