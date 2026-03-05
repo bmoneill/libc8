@@ -62,6 +62,21 @@ void tearDown(void) {
     free(labels.l);
 }
 
+void test_c8_encode_WithEmptyInput(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_encode_WithValidInput(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_encode_WithInvalidInput(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
 void test_c8_remove_comment_WhereStringHasNoComment(void) {
     const char* s = "String without a comment";
     sprintf(buf, "%s", s);
@@ -86,6 +101,16 @@ void test_c8_encode_WhereStringIsOnlyComment(void) {
     int r = c8_encode(buf, bytecode, 0);
     TEST_ASSERT_EQUAL_INT(0, r);
     TEST_ASSERT_EQUAL_INT(0, bytecode[0]);
+}
+
+void test_c8_initialize_labels(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_initialize_symbols(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
 }
 
 void test_c8_line_count_WhereStringHasOneLine(void) {
@@ -254,8 +279,38 @@ void test_c8_parse_word_WhereWordIsInvalid(void) {
     TEST_ASSERT_EQUAL_INT(0, symbols.len);
 }
 
+void test_c8_put16(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
 void test_c8_tokenize_WhereStringIsOnlyWhitespace(void) {
     sprintf(buf, "\t\t      ");
     char* s[64];
     TEST_ASSERT_EQUAL_INT(1, c8_tokenize(s, buf, " ", 10));
+}
+
+void test_c8_tokenize_WhereStringContainsMultipleWords(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_remove_comma_WhereStringHasTrailingComma(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_remove_comma_WhereStringHasNoTrailingComma(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_to_upper(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_write(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
 }

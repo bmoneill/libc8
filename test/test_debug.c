@@ -40,6 +40,31 @@ void        setUp(void) {
 }
 void tearDown(void) {}
 
+void test_c8_debug_repl_WhereInputContainsEOF(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_debug_repl_WhereInputIsContinueCommand(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_debug_repl_WhereInputIsStepCommand(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_has_breakpoint_WhereBreakpointExists(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_has_breakpoint_WhereBreakpointDoesNotExist(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
 void test_c8_get_command_WhereCommandIsBreak(void) {
     TEST_COMMAND("break", C8_CMD_ADD_BREAKPOINT, C8_ARG_NONE);
 }
@@ -112,6 +137,114 @@ void test_c8_get_command_WhereCommandIsInvalid(void) {
     TEST_ASSERT_EQUAL_INT(0, c8_get_command(&cmd, buf));
     TEST_ASSERT_EQUAL_INT(C8_CMD_NONE, cmd.id);
     TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
+}
+
+void test_c8_load_file_arg(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_load_flags(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_load_state(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_parse_arg_WhereCommandIsLoadSave(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_parse_arg_WhereCommandIsSet_WhereArgIsAddress(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_parse_arg_WhereCommandIsSet_WhereArgIsOther(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_parse_arg_WhereCommandIsSet_WhereArgIsInvalid(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_help(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_quirks(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_r_registers(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_stack(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_value_WhereValueIsNone(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_value_WhereValueIsSP(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_value_WhereValueIsV(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_value_WhereValueIsR(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_value_WhereValueIsInternalRegister(void) {
+    // TODO
+    // Combine PC, DT, ST, I, VK
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_value_WhereValueIsColor(void) {
+    // TODO
+    // Combine BG, FG
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_value_WhereValueIsFont(void) {
+    // TODO
+    // Combine BFONT, SFONT
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_value_WhereValueIsQuirks(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_value_WhereValueIsStack(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_print_value_WhereValueIsAddr(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
 }
 
 void test_c8_run_command_WhereCommandIsAddBreakpoint_WithNoArgument(void) {
@@ -189,4 +322,66 @@ void test_c8_run_command_WhereCommandIsSet_WhereArgIsADDR(void) {
 
     TEST_ASSERT_EQUAL_INT(0, c8_run_command(&c8, &cmd));
     TEST_ASSERT_EQUAL_INT(value, c8.mem[addr]);
+}
+
+void test_c8_save_flags_WhereOutputFileIsValid(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_save_flags_WhereOutputFileIsInvalid(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_save_state_WhereOutputFileIsValid(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_save_state_WhereOutputFileIsInvalid(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_set_value_WhereValueIsAddr(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_set_value_WhereValueIsInternalRegister(void) {
+    // TODO
+    // Combine PC, DT, ST, I, VK
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_set_value_WhereValueIsVRegister(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_set_value_WhereValueIsRRegister(void) {
+    // TODO
+    // Not implemented yet
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_set_value_WhereValueIsColor(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_set_value_WhereValueIsQuirks(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_set_value_WhereValueIsFont(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_set_value_WhereValueIsInvalid(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
 }

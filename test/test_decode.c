@@ -47,6 +47,26 @@ void        setUp(void) {
 
 void tearDown(void) {}
 
+void test_c8_decode_WithDefineLabels_WithPrintAddresses(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_decode_WithDefineLabels_WithoutPrintAddresses(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_decode_WithoutDefineLabels_WithPrintAddresses(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_decode_WithoutDefineLabels_WithoutPrintAddresses(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
 void test_c8_decode_instruction_WhereInstructionIsCLS(void) { SHOULD_PARSE("CLS", 0x00E0); }
 
 void test_c8_decode_instruction_WhereInstructionIsRET(void) { SHOULD_PARSE("RET", 0x00EE); }
@@ -347,4 +367,14 @@ void test_c8_decode_instruction_WhereInstructionIsLDXR(void) {
 
     sprintf(buf, "LD V%01X, R", x);
     SHOULD_PARSE(buf, ins);
+}
+
+void test_c8_jump(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
+}
+
+void test_c8_find_labels(void) {
+    // TODO
+    TEST_ASSERT_EQUAL_INT(1, 2);
 }
