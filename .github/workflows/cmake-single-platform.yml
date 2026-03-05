@@ -62,6 +62,7 @@ jobs:
           echo "percentage=$(echo "$raw" | tail -n 1 | sed 's/.*: //' | sed 's/\..*//')" >> "$GITHUB_OUTPUT"
 
       - name: Update coverage badge
+        if: github.ref == 'refs/heads/master'
         uses: appleboy/ssh-action@master
         with:
           host: oneill.sh
