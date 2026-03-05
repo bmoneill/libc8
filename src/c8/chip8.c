@@ -19,7 +19,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#define DEBUG(c) (c->flags & C8_FLAG_DEBUG)
+#define C8_DEBUG(c) (c->flags & C8_FLAG_DEBUG)
 
 /**
  * @brief Deinitialize graphics and free c8
@@ -245,12 +245,12 @@ void c8_simulate(C8* c8) {
 
         if (c8->key[17]) {
             /* Exit debug mode */
-            if (DEBUG(c8)) {
+            if (C8_DEBUG(c8)) {
                 c8->flags ^= C8_FLAG_DEBUG;
             }
         }
 
-        if (DEBUG(c8) && (c8_has_breakpoint(c8, c8->pc) || step)) {
+        if (C8_DEBUG(c8) && (c8_has_breakpoint(c8, c8->pc) || step)) {
             /* Call debug REPL and process return value */
             debugRet = c8_debug_repl(c8);
 
@@ -297,13 +297,6 @@ void c8_simulate(C8* c8) {
 }
 
 /**
- * @brief Get the version of libc8.
- *
- * @return const char* version string
- */
-const char* c8_version(void) { return C8_VERSION; }
-
-/**
  * @brief Validate the state of the chip8 emulator.
  *
  * @param c8 The C8 emulator instance
@@ -346,3 +339,10 @@ int c8_validate(const C8* c8) {
 
     return 0;
 }
+
+/**
+ * @brief Get the version of libc8.
+ *
+ * @return const char* version string
+ */
+const char* c8_version(void) { return C8_VERSION; }

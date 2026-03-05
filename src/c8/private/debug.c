@@ -309,7 +309,7 @@ C8_STATIC void c8_print_help(void) { printf("%s\n", C8_DEBUG_HELP_STRING); }
  *
  * @param flags flags to get enabled quirks from
  */
-C8_STATIC void print_quirks(int flags) {
+C8_STATIC void c8_print_quirks(int flags) {
     int f = 0;
     printf("Quirks: ");
     if (flags & C8_FLAG_QUIRK_BITWISE) {
@@ -400,7 +400,7 @@ C8_STATIC void c8_print_value(C8* c8, const C8_Command* cmd) {
         c8_print_r_registers(c8);
         printf("Stack:\n");
         c8_print_stack(c8);
-        print_quirks(c8->flags);
+        c8_print_quirks(c8->flags);
         break;
     case C8_ARG_SP:
         printf("SP: %02x\n", c8->sp);
@@ -447,7 +447,7 @@ C8_STATIC void c8_print_value(C8* c8, const C8_Command* cmd) {
         printf("SFONT: %s\n", c8_fontNames[0][c8->fonts[0]]);
         break;
     case C8_ARG_QUIRKS:
-        print_quirks(c8->flags);
+        c8_print_quirks(c8->flags);
         break;
     case C8_ARG_STACK:
         c8_print_stack(c8);

@@ -13,13 +13,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define DEFINE_LABELS   (args & C8_DECODE_DEFINE_LABELS)
-#define PRINT_ADDRESSES (args & C8_DECODE_PRINT_ADDRESSES)
-#define RESULT_SIZE     32
+#define C8_DEFINE_LABELS   (args & C8_DECODE_DEFINE_LABELS)
+#define C8_PRINT_ADDRESSES (args & C8_DECODE_PRINT_ADDRESSES)
+#define C8_RESULT_SIZE     32
 
-C8_STATIC void find_labels(FILE*, uint8_t*);
+C8_STATIC void c8_find_labels(FILE*, uint8_t*);
 
-char           result[RESULT_SIZE];
+char           result[C8_RESULT_SIZE];
 
 /**
  * @brief Convert bytecode from `input` to assembly and writes it to `output`.
@@ -40,9 +40,9 @@ void c8_decode(FILE* input, FILE* output, int args) {
     uint16_t addr     = C8_PROG_START;
     uint16_t ins      = 0;
 
-    if (DEFINE_LABELS) {
+    if (C8_DEFINE_LABELS) {
         labelMap = (uint8_t*) calloc(0x1000, sizeof(uint8_t));
-        find_labels(input, labelMap);
+        c8_find_labels(input, labelMap);
         rewind(input);
     }
 
@@ -52,11 +52,11 @@ void c8_decode(FILE* input, FILE* output, int args) {
         } else {
             ins |= (uint16_t) c;
 
-            if (DEFINE_LABELS && labelMap[addr]) {
+            if (C8_DEFINE_LABELS && labelMap[addr]) {
                 fprintf(output, "label%d:\n", labelMap[addr]);
             }
 
-            if (PRINT_ADDRESSES) {
+            if (C8_PRINT_ADDRESSES) {
                 fprintf(output, "%03x: ", addr - 1);
             }
             fprintf(output, "%s\n", c8_decode_instruction(ins, labelMap));
@@ -95,7 +95,7 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
     if ((in & 0xFFF0) == 0x00C0) {
         // Special case for SCD n
         // SCD is the only a=0 instruction that has a b parameter.
-        snprintf(result, RESULT_SIZE, "SCD 0x%01X", b);
+        snprintf(result, C8_RESULT_SIZE, "SCD 0x%01X", b);
         return result;
     }
     for (int i = 0; c8_formats[i].cmd != C8_I_NULL; i++) {
@@ -110,43 +110,46 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
             }
 
             if (match) {
-                snprintf(result, RESULT_SIZE, "%s", c8_instructionStrings[c8_formats[i].cmd]);
+                snprintf(result, C8_RESULT_SIZE, "%s", c8_instructionStrings[c8_formats[i].cmd]);
 
                 int idx = strlen(result);
                 for (int j = 0; j < c8_formats[i].pcount; j++) {
                     if (j > 0) {
-                        snprintf(result + idx, RESULT_SIZE - idx, ",");
+                        snprintf(result + idx, C8_RESULT_SIZE - idx, ",");
                         idx++;
                     }
                     switch (c8_formats[i].ptype[j]) {
                     case C8_SYM_INT12:
                         if (label_map[nnn]) {
-                            snprintf(result + idx, RESULT_SIZE - idx, " label%d", label_map[nnn]);
+                            snprintf(result + idx,
+                                     C8_RESULT_SIZE - idx,
+                                     " label%d",
+                                     label_map[nnn]);
                         } else {
-                            snprintf(result + idx, RESULT_SIZE - idx, " $%03X", nnn);
+                            snprintf(result + idx, C8_RESULT_SIZE - idx, " $%03X", nnn);
                         }
                         break;
                     case C8_SYM_INT8:
                         snprintf(result + idx,
-                                 RESULT_SIZE - idx,
+                                 C8_RESULT_SIZE - idx,
                                  " 0x%02X",
                                  (in & c8_formats[i].pmask[j]) >> c8_shift(c8_formats[i].pmask[j]));
                         break;
                     case C8_SYM_INT4:
                         snprintf(result + idx,
-                                 RESULT_SIZE - idx,
+                                 C8_RESULT_SIZE - idx,
                                  " 0x%01X",
                                  (in & c8_formats[i].pmask[j]) >> c8_shift(c8_formats[i].pmask[j]));
                         break;
                     case C8_SYM_V:
                         snprintf(result + idx,
-                                 RESULT_SIZE - idx,
+                                 C8_RESULT_SIZE - idx,
                                  " V%01X",
                                  (in & c8_formats[i].pmask[j]) >> c8_shift(c8_formats[i].pmask[j]));
                         break;
                     default:
                         snprintf(result + idx,
-                                 RESULT_SIZE - idx,
+                                 C8_RESULT_SIZE - idx,
                                  " %s",
                                  c8_identifierStrings[c8_formats[i].ptype[j]]);
                         break;
@@ -158,7 +161,7 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
         }
     }
 
-    snprintf(result, RESULT_SIZE, ".DW 0x%04X", in);
+    snprintf(result, C8_RESULT_SIZE, ".DW 0x%04X", in);
     return result;
 }
 
@@ -169,7 +172,7 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
  *
  * @return `in`'s `nnn` value if it exists, 0 otherwise.
  */
-uint16_t jump(uint16_t in) {
+uint16_t c8_jump(uint16_t in) {
     uint16_t a = C8_A(in);
 
     if (a == 0x1 || a == 0x2 || a == 0xa || a == 0xb) {
@@ -187,7 +190,7 @@ uint16_t jump(uint16_t in) {
  * @param input the ROM to get labels from
  * @param labelMap where to store the labels
  */
-C8_STATIC void find_labels(FILE* input, uint8_t* labelMap) {
+C8_STATIC void c8_find_labels(FILE* input, uint8_t* labelMap) {
     uint16_t addr  = C8_PROG_START;
     uint8_t  count = 1;
     uint16_t ins   = 0;
@@ -199,7 +202,7 @@ C8_STATIC void find_labels(FILE* input, uint8_t* labelMap) {
             ins = ((uint16_t) c) << 8;
         } else {
             ins |= (uint16_t) c;
-            if ((to = jump(ins))) {
+            if ((to = c8_jump(ins))) {
                 labelMap[to] = count++;
             }
         }
