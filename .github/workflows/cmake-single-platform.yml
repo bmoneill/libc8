@@ -49,6 +49,9 @@ jobs:
           name: build
           path: ${{ github.workspace }}/build
 
+      - name: Copy test data
+        run: cp -r ${{ github.workspace }}/test/data ${{ github.workspace }}/build/test/data
+
       - name: Restore execute permissions to test binaries
         run: chmod -R +x ${{ github.workspace }}/build
 
@@ -62,7 +65,7 @@ jobs:
           echo "percentage=$(echo "$raw" | tail -n 1 | sed 's/.*: //' | sed 's/\..*//')" >> "$GITHUB_OUTPUT"
 
       - name: Update coverage badge
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         uses: appleboy/ssh-action@master
         with:
           host: oneill.sh

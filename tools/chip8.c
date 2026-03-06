@@ -34,16 +34,22 @@ int         main(int argc, char* argv[]) {
             fontstr = optarg;
             break;
         case 'p':
-            c8_load_palette_f(c8, optarg);
+            if (c8_load_palette_f(c8, optarg) != 0) {
+                return EXIT_FAILURE;
+            }
             break;
         case 'P':
-            c8_load_palette_s(c8, optarg);
+            if (c8_load_palette_s(c8, optarg) != 0) {
+                return EXIT_FAILURE;
+            }
             break;
         case 'v':
             c8->flags |= C8_FLAG_VERBOSE;
             break;
         case 'q':
-            c8_load_quirks(c8, optarg);
+            if (c8_load_quirks(c8, optarg) != 0) {
+                return EXIT_FAILURE;
+            }
             break;
         case 'V':
             printf("%s %s\n", argv[0], c8_version());
@@ -53,11 +59,14 @@ int         main(int argc, char* argv[]) {
         }
     }
 
-    if (fontstr) {
-        c8_set_fonts_s(c8, fontstr);
+    if (fontstr && c8_set_fonts_s(c8, fontstr) != 0) {
+        return EXIT_FAILURE;
     }
 
-    c8_load_rom(c8, argv[optind]);
+    if (c8_load_rom(c8, argv[optind]) != 0) {
+        return EXIT_FAILURE;
+    }
+
     c8_simulate(c8);
     c8_deinit(c8);
 

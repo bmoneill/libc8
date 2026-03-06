@@ -78,7 +78,7 @@ C8* c8_init(const char* path, int flags) {
  * @param c8 where to store the color codes
  * @param s string to load
  *
- * @return 1 if success
+ * @return 0 if success, non-zero if failure
  */
 int c8_load_palette_s(C8* c8, char* s) {
     char* c[2] = { NULL, NULL };
@@ -94,17 +94,17 @@ int c8_load_palette_s(C8* c8, char* s) {
 
     if (!c[1]) {
         C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette: %s", s);
-        return 0;
+        return C8_INVALID_COLOR_PALETTE_EXCEPTION;
     }
 
     for (int i = 0; i < 2; i++) {
         if ((c8->colors[i] = c8_parse_int(c[i])) == -1) {
             C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette: %s", s);
-            return 0;
+            return C8_INVALID_COLOR_PALETTE_EXCEPTION;
         }
     }
 
-    return 1;
+    return 0;
 }
 
 /**
@@ -113,7 +113,7 @@ int c8_load_palette_s(C8* c8, char* s) {
  * @param c8 where to store the color codes
  * @param path palette file location
  *
- * @return 1 if success
+ * @return 0 if success
  */
 int c8_load_palette_f(C8* c8, const char* path) {
     char buf[64];
@@ -121,24 +121,24 @@ int c8_load_palette_f(C8* c8, const char* path) {
     FILE* f = fopen(path, "r");
     if (!f) {
         C8_EXCEPTION(C8_LOAD_FILE_FAILURE_EXCEPTION, "Could not open color palette file: %s", path);
-        return 0;
+        return C8_LOAD_FILE_FAILURE_EXCEPTION;
     }
     for (int i = 0; i < 2; i++) {
         int   c;
         char* s = fgets(buf + 1, 64 - 1, f);
         if (!s) {
             C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette.");
-            return 0;
+            return C8_INVALID_COLOR_PALETTE_EXCEPTION;
         }
         if ((c = c8_parse_int(buf)) == -1) {
             C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette: %s", buf);
-            return 0;
+            return C8_INVALID_COLOR_PALETTE_EXCEPTION;
         }
         c8->colors[i] = c;
     }
 
     fclose(f);
-    return 1;
+    return 0;
 }
 
 /**
@@ -153,7 +153,7 @@ int c8_load_palette_f(C8* c8, const char* path) {
  *
  * @param c8 where to store flags
  * @param s string to get quirks from
- * @return 1 if success, 0 if failure
+ * @return 0 if success, non-zero if failure
  */
 int c8_load_quirks(C8* c8, const char* s) {
     for (size_t i = 0; i < strlen(s); i++) {
@@ -175,7 +175,7 @@ int c8_load_quirks(C8* c8, const char* s) {
             break;
         default:
             C8_EXCEPTION(C8_INVALID_QUIRK_EXCEPTION, "Invalid quirk: %c", s[i]);
-            return 0;
+            return C8_INVALID_QUIRK_EXCEPTION;
         }
     }
     return 1;
@@ -187,7 +187,7 @@ int c8_load_quirks(C8* c8, const char* s) {
  * @param c8 `C8` to store the ROM's contents
  * @param addr path to the ROM
  *
- * @return 1 if success, exception code on error.
+ * @return 0 if success, exception code on error.
  */
 int c8_load_rom(C8* c8, const char* addr) {
     FILE*         f;
@@ -215,7 +215,7 @@ int c8_load_rom(C8* c8, const char* addr) {
         //C8_EXCEPTION(C8_LOAD_FILE_FAILURE_EXCEPTION, "Error occurred while reading ROM file.");
     }
     fclose(f);
-    return 1;
+    return 0;
 }
 
 /**
@@ -303,11 +303,14 @@ int c8_simulate(C8* c8) {
             }
 
             if (c8->draw) {
-                c8_render(&c8->display, c8->colors);
+                if (c8_render(&c8->display, c8->colors) < 0) {
+                    return C8_GRAPHICS_EXCEPTION;
+                }
                 c8->draw = 0;
             }
         }
     }
+    return 0;
 }
 
 /**

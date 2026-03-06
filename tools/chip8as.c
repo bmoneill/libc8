@@ -69,8 +69,6 @@ static int assemble(const char* inpath, const char* outpath, int args) {
 
     len    = c8_encode(input, output, args);
 
-    printf("length: %d\n", len);
-
     for (int i = 0; i < len; i++) {
         fputc(output[i], out);
     }
