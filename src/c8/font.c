@@ -178,7 +178,7 @@ void c8_set_fonts(C8* c8, C8_SmallFont small, C8_BigFont big) {
  * @param c8 `C8` to set fonts
  * @param s string to get fonts from (comma-separated `fontNames` names)
  *
- * @return 1 if success, 0 otherwise
+ * @return 0 if success, exception code otherwise
  */
 int c8_set_fonts_s(C8* c8, char* s) {
     int         len   = strlen(s);
@@ -196,17 +196,17 @@ int c8_set_fonts_s(C8* c8, char* s) {
 
     if (!c8_set_small_font(c8, s)) {
         C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
-        return 0;
+        return C8_INVALID_FONT_EXCEPTION;
     }
     if (s2) {
         if (!c8_set_big_font(c8, s2)) {
             C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
-            return 0;
+            return C8_INVALID_FONT_EXCEPTION;
         }
     }
 
     c8_set_fonts(c8, small, big);
-    return 1;
+    return 0;
 }
 
 /**
@@ -215,7 +215,7 @@ int c8_set_fonts_s(C8* c8, char* s) {
  * @param c8 `C8` to set font from
  * @param s string to get font from
  *
- * @return 1 if success, 0 otherwise
+ * @return 0 if success, exception code otherwise
  */
 int c8_set_small_font(C8* c8, const char* s) {
     int f = -1;
@@ -228,11 +228,11 @@ int c8_set_small_font(C8* c8, const char* s) {
 
     if (f == -1) {
         C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
-        return 0;
+        return C8_INVALID_FONT_EXCEPTION;
     }
 
     c8_set_fonts(c8, -1, f);
-    return 1;
+    return 0;
 }
 
 /**
@@ -241,7 +241,7 @@ int c8_set_small_font(C8* c8, const char* s) {
  * @param c8 `C8` to set font from
  * @param s string to get font from
  *
- * @return 1 if success, 0 otherwise
+ * @return 0 if success, exception code otherwise
  */
 int c8_set_big_font(C8* c8, const char* s) {
     int f = -1;
@@ -253,11 +253,11 @@ int c8_set_big_font(C8* c8, const char* s) {
 
     if (f == -1) {
         C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
-        return 0;
+        return C8_INVALID_FONT_EXCEPTION;
     }
 
     c8_set_fonts(c8, -1, f);
-    return 1;
+    return 0;
 }
 
 /**

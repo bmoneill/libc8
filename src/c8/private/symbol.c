@@ -356,7 +356,7 @@ int c8_populate_labels(C8_LabelList* labels) {
  * @param symbols list of symbols
  * @param labels list of labels
  *
- * @return 1 if success, 0 if failure
+ * @return 0 if success, 1 if failure
  */
 int c8_resolve_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
     int byte     = C8_PROG_START;
@@ -381,7 +381,7 @@ int c8_resolve_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
         }
     }
 
-    return labelIdx == labels->len;
+    return labelIdx != labels->len;
 }
 
 /**

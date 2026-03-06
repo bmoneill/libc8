@@ -187,7 +187,7 @@ int c8_load_quirks(C8* c8, const char* s) {
  * @param c8 `C8` to store the ROM's contents
  * @param addr path to the ROM
  *
- * @return 1 if success.
+ * @return 1 if success, exception code on error.
  */
 int c8_load_rom(C8* c8, const char* addr) {
     FILE*         f;
@@ -205,6 +205,7 @@ int c8_load_rom(C8* c8, const char* addr) {
     if (ftell(f) > (0x1000 - 0x200)) {
         /* File is too big, failure */
         C8_EXCEPTION(C8_FILE_TOO_BIG_EXCEPTION, "ROM file too big: %s", addr);
+        return C8_FILE_TOO_BIG_EXCEPTION;
     }
     rewind(f);
 
@@ -222,7 +223,7 @@ int c8_load_rom(C8* c8, const char* addr) {
  *
  * @param c8 the `C8` to simulate
  */
-void c8_simulate(C8* c8) {
+int c8_simulate(C8* c8) {
     int debugRet;
     int ret;
     int step = 1;
@@ -232,11 +233,8 @@ void c8_simulate(C8* c8) {
     c8->pc      = C8_PROG_START;
     c8->running = 1;
 
-    if (c8->cs <= 0) {
-        C8_EXCEPTION(C8_INVALID_CLOCK_SPEED_EXCEPTION,
-                     "Clock speed must be greater than 0 (got %d).",
-                     c8->cs);
-        return;
+    if ((ret = c8_validate(c8)) != 1) {
+        return ret;
     }
 
     while (c8->running) {
@@ -286,6 +284,10 @@ void c8_simulate(C8* c8) {
             /* Not waiting for key, parse next instruction */
             ret = c8_parse_instruction(c8);
 
+            if (ret < 0) {
+                return ret;
+            }
+
             c8->pc += ret;
 
             if (c8->dt > 0) {
@@ -312,11 +314,12 @@ void c8_simulate(C8* c8) {
  * @brief Validate the state of the chip8 emulator.
  *
  * @param c8 The C8 emulator instance
- * @return int 1 on success, non-zero on failure
+ * @return int 0 on success, non-zero on failure
  */
 int c8_validate(const C8* c8) {
     if (!c8) {
-        return 1;
+        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "C8 is NULL");
+        return C8_INVALID_STATE_EXCEPTION;
     }
 
     if (c8->pc > C8_MEMSIZE) {
@@ -324,32 +327,32 @@ int c8_validate(const C8* c8) {
                      "PC out of bounds: 0x%04x > 0x%04x",
                      c8->pc,
                      C8_MEMSIZE)
-        return 0;
+        return C8_INVALID_STATE_EXCEPTION;
     }
 
     if (c8->cs <= 0) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION,
                      "Clock speed cannot be less than or equal to zero: cs=%d",
                      c8->cs)
-        return 0;
+        return C8_INVALID_STATE_EXCEPTION;
     }
 
     if (c8->VK < 0 || c8->VK >= 16) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "VK out of bounds (0-15): VK=%d", c8->VK)
-        return 0;
+        return C8_INVALID_STATE_EXCEPTION;
     }
 
     if (c8->mode < C8_MODE_CHIP8 || c8->mode > C8_MODE_XOCHIP) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "Invalid mode: mode=%d", c8->mode)
-        return 0;
+        return C8_INVALID_STATE_EXCEPTION;
     }
 
     if (c8->display.mode != C8_DISPLAYMODE_LOW && c8->display.mode != C8_DISPLAYMODE_HIGH) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "Invalid display mode: mode=%d", c8->display.mode)
-        return 0;
+        return C8_INVALID_STATE_EXCEPTION;
     }
 
-    return 1;
+    return 0;
 }
 
 /**

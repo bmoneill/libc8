@@ -15,8 +15,10 @@
  * This function is weak and is overridden by internal/graphics_sdl.c by
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
+ *
+ * This function should return 0 on success and a negative value on failure.
  */
-__attribute__((weak)) void c8_sound_play(void) {
+__attribute__((weak)) int c8_sound_play(void) {
     C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
 }
 
@@ -26,8 +28,10 @@ __attribute__((weak)) void c8_sound_play(void) {
  * This function is weak and is overridden by internal/graphics_sdl.c by
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
+ *
+ * This function should return 0 on success and a negative value on failure.
  */
-__attribute__((weak)) void c8_sound_stop(void) {
+__attribute__((weak)) int c8_sound_stop(void) {
     C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
 }
 
@@ -37,8 +41,10 @@ __attribute__((weak)) void c8_sound_stop(void) {
  * This function is weak and is overridden by internal/graphics_sdl.c by
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
+ *
+ * This function should return 0 on success and a negative value on failure.
  */
-__attribute__((weak)) void c8_deinit_graphics(void) {
+__attribute__((weak)) int c8_deinit_graphics(void) {
     C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
 }
 
@@ -48,8 +54,10 @@ __attribute__((weak)) void c8_deinit_graphics(void) {
  * This function is weak and is overridden by internal/graphics_sdl.c by
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
+ *
+ * This function should return 0 on success and a negative value on failure.
  */
-__attribute__((weak)) uint8_t c8_init_graphics(void) {
+__attribute__((weak)) int c8_init_graphics(void) {
     C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
     return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
 }
@@ -60,8 +68,10 @@ __attribute__((weak)) uint8_t c8_init_graphics(void) {
  * This function is weak and is overridden by internal/graphics_sdl.c by
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
+ *
+ * This function should return 0 on success and a negative value on failure.
  */
-__attribute__((weak)) void c8_render(C8_Display* display, int* colors) {
+__attribute__((weak)) int c8_render(C8_Display* display, int* colors) {
     C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
 }
 
@@ -71,6 +81,8 @@ __attribute__((weak)) void c8_render(C8_Display* display, int* colors) {
  * This function is weak and is overridden by internal/graphics_sdl.c by
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
+ *
+ * This function should return 0 on success and a negative value on failure.
  */
 __attribute__((weak)) int c8_tick(int* key) {
     C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);

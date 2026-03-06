@@ -19,6 +19,8 @@
 #define C8_RGB_G(i) ((i >> 8) & 0xFF)
 #define C8_RGB_B(i) (i & 0xFF)
 
+#define C8_SET_RENDER_COLOR()
+
 #define C8_AUDIO_CHANNEL     1
 #define C8_AUDIO_SAMPLE_RATE 44100
 #define C8_AUDIO_WAVE_FREQ   440
@@ -47,48 +49,66 @@ C8_STATIC const int c8_keyMap[18][2] = {
 
 C8_STATIC int c8_get_key(SDL_Keycode k);
 
-void          c8_sound_play(void) {
+/**
+ * @brief Start playing the sound.
+ *
+ * @return 0 if successful, error code otherwise.
+ */
+int c8_sound_play(void) {
     if (c8_wave_chunk == NULL) {
         uint32_t bytes = (uint32_t) (C8_AUDIO_WAVE_LENGTH * sizeof(int16_t));
         c8_wave_chunk  = Mix_QuickLoad_RAW((uint8_t*) samples, bytes);
 
         if (!c8_wave_chunk) {
             C8_EXCEPTION(C8_AUDIO_EXCEPTION, "%s", Mix_GetError());
+            return C8_AUDIO_EXCEPTION;
         }
         c8_wave_chunk->volume = MIX_MAX_VOLUME / 4;
-        Mix_PlayChannel(-1, c8_wave_chunk, -1);
+
+        if (Mix_PlayChannel(-1, c8_wave_chunk, -1) == -1) {
+            C8_EXCEPTION(C8_AUDIO_EXCEPTION, "%s", Mix_GetError());
+            return C8_AUDIO_EXCEPTION;
+        }
     }
+    return 0;
 }
 
-void c8_sound_stop(void) {
-    Mix_HaltChannel(C8_AUDIO_CHANNEL);
+/**
+ * @brief Stop the sound playing.
+ *
+ * @return 0 if successful, error code otherwise.
+ */
+int c8_sound_stop(void) {
+    int result = Mix_HaltChannel(C8_AUDIO_CHANNEL);
     if (c8_wave_chunk) {
         Mix_FreeChunk(c8_wave_chunk);
         c8_wave_chunk = NULL;
     }
+    return result == -1 ? C8_AUDIO_EXCEPTION : 0;
 }
 
 /**
  * @brief Deinitialize the graphics library.
  */
-void c8_deinit_graphics(void) {
+int c8_deinit_graphics(void) {
     SDL_DestroyRenderer(c8_renderer);
     SDL_DestroyWindow(c8_window);
     Mix_CloseAudio();
     SDL_Quit();
+    return 0;
 }
 
 /**
  * @brief Initialize the graphics library.
  *
- * @return 1 if successful, 0 otherwise.
+ * @return 0 if successful, error code otherwise.
  */
-uint8_t c8_init_graphics(void) {
+int c8_init_graphics(void) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
         C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION,
                      "Failed to initialize SDL window.\n%s\n",
                      SDL_GetError());
-        return 0;
+        return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
     }
 
     if (!(c8_window = SDL_CreateWindow("CHIP8",
@@ -101,7 +121,7 @@ uint8_t c8_init_graphics(void) {
                      "Failed to initialize SDL window.\n%s\n",
                      SDL_GetError());
         SDL_Quit();
-        return 0;
+        return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
     }
 
     if (!(c8_renderer = SDL_CreateRenderer(c8_window, -1, SDL_RENDERER_ACCELERATED))) {
@@ -110,7 +130,7 @@ uint8_t c8_init_graphics(void) {
                      SDL_GetError());
         SDL_DestroyWindow(c8_window);
         SDL_Quit();
-        return 0;
+        return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
     }
 
     if (Mix_OpenAudio(C8_AUDIO_SAMPLE_RATE, AUDIO_S16SYS, 1, 4096)) {
@@ -120,7 +140,7 @@ uint8_t c8_init_graphics(void) {
         SDL_DestroyRenderer(c8_renderer);
         SDL_DestroyWindow(c8_window);
         SDL_Quit();
-        return 0;
+        return C8_AUDIO_EXCEPTION;
     }
 
     Mix_AllocateChannels(1);
@@ -128,7 +148,7 @@ uint8_t c8_init_graphics(void) {
     for (int i = 0; i < C8_AUDIO_WAVE_LENGTH; i++) {
         samples[i] = i < C8_AUDIO_WAVE_LENGTH / 2 ? INT16_MAX : INT16_MIN;
     }
-    return 1;
+    return 0;
 }
 
 /**
@@ -137,7 +157,7 @@ uint8_t c8_init_graphics(void) {
  * @param display `C8_Display` to render
  * @param colors colors to render
  */
-void c8_render(C8_Display* display, int* colors) {
+int c8_render(C8_Display* display, int* colors) {
     SDL_Rect pix = {
         .x = 0,
         .y = 0,
@@ -151,21 +171,36 @@ void c8_render(C8_Display* display, int* colors) {
         .h = C8_LOW_DISPLAY_HEIGHT,
     };
 
-    int dx = 0;
-    int dy = 0;
+    int dx     = 0;
+    int dy     = 0;
 
-    SDL_RenderClear(c8_renderer);
-    SDL_SetRenderDrawColor(c8_renderer,
-                           C8_RGB_R(colors[0]),
-                           C8_RGB_G(colors[0]),
-                           C8_RGB_B(colors[0]),
-                           SDL_ALPHA_OPAQUE);
-    SDL_RenderFillRect(c8_renderer, &winRect);
-    SDL_SetRenderDrawColor(c8_renderer,
-                           C8_RGB_R(colors[1]),
-                           C8_RGB_G(colors[1]),
-                           C8_RGB_B(colors[1]),
-                           SDL_ALPHA_OPAQUE);
+    int result = SDL_RenderClear(c8_renderer);
+    if (result == -1) {
+        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_RenderClear failed: %s", SDL_GetError());
+    }
+
+    result = SDL_SetRenderDrawColor(c8_renderer,
+                                    C8_RGB_R(colors[0]),
+                                    C8_RGB_G(colors[0]),
+                                    C8_RGB_B(colors[0]),
+                                    SDL_ALPHA_OPAQUE);
+    if (result == -1) {
+        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
+    }
+
+    result = SDL_RenderFillRect(c8_renderer, &winRect);
+    if (result == -1) {
+        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_RenderFillRect failed: %s", SDL_GetError());
+    }
+
+    result = SDL_SetRenderDrawColor(c8_renderer,
+                                    C8_RGB_R(colors[1]),
+                                    C8_RGB_G(colors[1]),
+                                    C8_RGB_B(colors[1]),
+                                    SDL_ALPHA_OPAQUE);
+    if (result == -1) {
+        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
+    }
 
     if (display->mode == C8_DISPLAYMODE_HIGH) {
         dx = display->x;
@@ -175,21 +210,34 @@ void c8_render(C8_Display* display, int* colors) {
     for (int i = 0; i < C8_LOW_DISPLAY_WIDTH; i++) {
         for (int j = 0; j < C8_LOW_DISPLAY_HEIGHT; j++) {
             if (*c8_get_pixel(display, i + dx, j + dy)) {
-                pix.x = i * C8_WINDOW_SCALE_X;
-                pix.y = j * C8_WINDOW_SCALE_Y;
-                SDL_RenderFillRect(c8_renderer, &pix);
+                pix.x  = i * C8_WINDOW_SCALE_X;
+                pix.y  = j * C8_WINDOW_SCALE_Y;
+                result = SDL_RenderFillRect(c8_renderer, &pix);
+                if (result == -1) {
+                    C8_EXCEPTION(C8_GRAPHICS_EXCEPTION,
+                                 "SDL_SetRenderFillRect failed: %s",
+                                 SDL_GetError());
+                }
             }
         }
     }
 
-    SDL_SetRenderDrawColor(c8_renderer,
-                           C8_RGB_R(colors[0]),
-                           C8_RGB_G(colors[0]),
-                           C8_RGB_B(colors[0]),
-                           SDL_ALPHA_OPAQUE);
-    SDL_RenderFillRect(c8_renderer, &winRect);
+    result = SDL_SetRenderDrawColor(c8_renderer,
+                                    C8_RGB_R(colors[0]),
+                                    C8_RGB_G(colors[0]),
+                                    C8_RGB_B(colors[0]),
+                                    SDL_ALPHA_OPAQUE);
+    if (result == -1) {
+        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
+    }
+
+    result = SDL_RenderFillRect(c8_renderer, &winRect);
+    if (result == -1) {
+        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
+    }
 
     SDL_RenderPresent(c8_renderer);
+    return 0;
 }
 
 /**

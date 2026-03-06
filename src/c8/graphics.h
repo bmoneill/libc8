@@ -74,13 +74,13 @@ typedef struct {
     uint8_t y; //!< Offset (for `C8_DISPLAYMODE_HIGH`)
 } C8_Display;
 
-uint8_t*       c8_get_pixel(C8_Display*, int, int);
+uint8_t*   c8_get_pixel(C8_Display*, int, int);
 
-extern void    c8_sound_play(void);
-extern void    c8_sound_stop(void);
-extern void    c8_deinit_graphics(void);
-extern uint8_t c8_init_graphics(void);
-extern void    c8_render(C8_Display*, int*);
-extern int     c8_tick(int*);
+extern int c8_sound_play(void);
+extern int c8_sound_stop(void);
+extern int c8_deinit_graphics(void);
+extern int c8_init_graphics(void);
+extern int c8_render(C8_Display*, int*);
+extern int c8_tick(int*);
 
 #endif

@@ -51,6 +51,13 @@ int             c8_lineCount;
  * @return length of resulting bytecode.
  */
 int c8_encode(const char* s, uint8_t* out, int args) {
+#define C8_ENCODE_CLEANUP                                                                          \
+    free(scpy);                                                                                    \
+    free(symbols.s);                                                                               \
+    free(labels.l);                                                                                \
+    free(c8_lines);                                                                                \
+    free(c8_linesUnformatted);
+
     char* scpy;
     int   len            = strlen(s);
     int   count          = 0;
@@ -91,39 +98,50 @@ int c8_encode(const char* s, uint8_t* out, int args) {
 
     if (validLineCount == 0) {
         VERBOSE_PRINT(args, "No valid tokens found in input");
-        free(scpy);
-        free(symbols.s);
-        free(labels.l);
-        free(c8_lines);
-        free(c8_linesUnformatted);
-        return 0;
+        C8_ENCODE_CLEANUP;
+        return C8_INVALID_SYMBOL_EXCEPTION;
     }
 
     VERBOSE_PRINT(args, "Populating identifiers in label map\n");
-    c8_populate_labels(&labels);
+    int result = c8_populate_labels(&labels);
+    if (result < 0) {
+        VERBOSE_PRINT(args, "Failed to populate labels\n");
+        C8_ENCODE_CLEANUP;
+        return result;
+    }
 
     VERBOSE_PRINT(args, "Populating symbol list\n");
     for (int i = 0; i < c8_lineCount; i++) {
         if (c8_lines[i] == NULL) {
             continue;
         }
-        c8_parse_line(c8_lines[i], i + 1, &symbols, &labels);
+        result = c8_parse_line(c8_lines[i], i + 1, &symbols, &labels);
+        if (result < 0) {
+            VERBOSE_PRINT(args, "Failed to parse line %d\n", i + 1);
+            C8_ENCODE_CLEANUP;
+            return result;
+        }
     }
 
     VERBOSE_PRINT(args, "Resolving label addresses\n");
-    c8_resolve_labels(&symbols, &labels);
+    if (c8_resolve_labels(&symbols, &labels) != 0) {
+        VERBOSE_PRINT(args, "Failed to resolve labels\n");
+        C8_ENCODE_CLEANUP;
+        return C8_INVALID_SYMBOL_EXCEPTION;
+    }
 
     VERBOSE_PRINT(args, "Substituting label addresses in symbol table\n");
-    c8_substitute_labels(&symbols, &labels);
+    result = c8_substitute_labels(&symbols, &labels);
+    if (result != 0) {
+        VERBOSE_PRINT(args, "Failed to substitute labels\n");
+        C8_ENCODE_CLEANUP;
+        return result;
+    }
 
     VERBOSE_PRINT(args, "Writing output\n");
     count = c8_write(out, &symbols);
 
-    free(scpy);
-    free(symbols.s);
-    free(labels.l);
-    free(c8_lines);
-    free(c8_linesUnformatted);
+    C8_ENCODE_CLEANUP;
     return count;
 }
 
@@ -157,7 +175,7 @@ char* c8_remove_comment(char* s) {
  *
  * @param labels label list to initialize
  *
- * @return 1 if success, exception code otherwise
+ * @return 0 if success, exception code otherwise
  */
 C8_STATIC int c8_initialize_labels(C8_LabelList* labels) {
     labels->l = (C8_Label*) calloc(C8_LABEL_CEILING, sizeof(C8_Label));
@@ -168,7 +186,7 @@ C8_STATIC int c8_initialize_labels(C8_LabelList* labels) {
 
     labels->len  = 0;
     labels->ceil = C8_LABEL_CEILING;
-    return 1;
+    return 0;
 }
 
 /**
@@ -176,7 +194,7 @@ C8_STATIC int c8_initialize_labels(C8_LabelList* labels) {
  *
  * @param symbols symbol list to initialize
  *
- * @return 1 if success, exception code otherwise
+ * @return 0 if success, exception code otherwise
  */
 C8_STATIC int c8_initialize_symbols(C8_SymbolList* symbols) {
     symbols->s = (C8_Symbol*) calloc(C8_SYMBOL_CEILING, sizeof(C8_Symbol));
@@ -187,7 +205,7 @@ C8_STATIC int c8_initialize_symbols(C8_SymbolList* symbols) {
 
     symbols->len  = 0;
     symbols->ceil = C8_SYMBOL_CEILING;
-    return 1;
+    return 0;
 }
 
 /**
@@ -216,14 +234,14 @@ C8_STATIC int c8_line_count(const char* s) {
  * @param symbols symbol list
  * @param labels label list
  *
- * @return 1 if success, exception code otherwise
+ * @return 0 if success, exception code otherwise
  */
 C8_STATIC int c8_parse_line(char* s, int ln, C8_SymbolList* symbols, const C8_LabelList* labels) {
     s = c8_trim(s);
     s = c8_remove_comment(s);
     if (strlen(s) == 0) {
         // empty line
-        return 1;
+        return 0;
     }
 
     C8_Symbol* sym = c8_next_symbol(symbols);
@@ -244,7 +262,7 @@ C8_STATIC int c8_parse_line(char* s, int ln, C8_SymbolList* symbols, const C8_La
 
             for (int j = i == 1 ? 1 : 0; word[j] != '\0'; j++) {
                 if (word[j] == '"' && (i > 1 || j > 0)) {
-                    return 1;
+                    return 0;
                 }
                 printf("%c", word[j]);
                 sym->type  = C8_SYM_DB;
@@ -253,7 +271,7 @@ C8_STATIC int c8_parse_line(char* s, int ln, C8_SymbolList* symbols, const C8_La
                 sym        = c8_next_symbol(symbols);
             }
         }
-        return 1;
+        return 0;
     }
 
     for (int i = 0; i < wc; i++) {
@@ -265,7 +283,7 @@ C8_STATIC int c8_parse_line(char* s, int ln, C8_SymbolList* symbols, const C8_La
         sym = c8_next_symbol(symbols);
     }
 
-    return 1;
+    return 0;
 }
 
 /**
