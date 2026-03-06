@@ -94,11 +94,13 @@ int c8_load_palette_s(C8* c8, char* s) {
 
     if (!c[1]) {
         C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette: %s", s);
+        return 0;
     }
 
     for (int i = 0; i < 2; i++) {
         if ((c8->colors[i] = c8_parse_int(c[i])) == -1) {
             C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette: %s", s);
+            return 0;
         }
     }
 
@@ -142,10 +144,18 @@ int c8_load_palette_f(C8* c8, const char* path) {
 /**
  * @brief Load quirk flags from string
  *
+ * Quirk flags are specified as a string of characters, where each character represents a flag:
+ * - `b`: bitwise quirks
+ * - `d`: draw quirks
+ * - `j`: jump quirks
+ * - `l`: load/store quirks
+ * - `s`: shift quirks
+ *
  * @param c8 where to store flags
  * @param s string to get quirks from
+ * @return 1 if success, 0 if failure
  */
-void c8_load_quirks(C8* c8, const char* s) {
+int c8_load_quirks(C8* c8, const char* s) {
     for (size_t i = 0; i < strlen(s); i++) {
         switch (s[i]) {
         case 'b':
@@ -165,8 +175,10 @@ void c8_load_quirks(C8* c8, const char* s) {
             break;
         default:
             C8_EXCEPTION(C8_INVALID_QUIRK_EXCEPTION, "Invalid quirk: %c", s[i]);
+            return 0;
         }
     }
+    return 1;
 }
 
 /**
@@ -300,11 +312,11 @@ void c8_simulate(C8* c8) {
  * @brief Validate the state of the chip8 emulator.
  *
  * @param c8 The C8 emulator instance
- * @return int 0 on success, non-zero on failure
+ * @return int 1 on success, non-zero on failure
  */
 int c8_validate(const C8* c8) {
     if (!c8) {
-        return 0;
+        return 1;
     }
 
     if (c8->pc > C8_MEMSIZE) {
@@ -312,32 +324,32 @@ int c8_validate(const C8* c8) {
                      "PC out of bounds: 0x%04x > 0x%04x",
                      c8->pc,
                      C8_MEMSIZE)
-        return 1;
+        return 0;
     }
 
     if (c8->cs <= 0) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION,
                      "Clock speed cannot be less than or equal to zero: cs=%d",
                      c8->cs)
-        return 1;
+        return 0;
     }
 
-    if (c8->VK < 0 || c8->VK > 16) {
+    if (c8->VK < 0 || c8->VK >= 16) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "VK out of bounds (0-15): VK=%d", c8->VK)
-        return 1;
+        return 0;
     }
 
     if (c8->mode < C8_MODE_CHIP8 || c8->mode > C8_MODE_XOCHIP) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "Invalid mode: mode=%d", c8->mode)
-        return 1;
+        return 0;
     }
 
     if (c8->display.mode != C8_DISPLAYMODE_LOW && c8->display.mode != C8_DISPLAYMODE_HIGH) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "Invalid display mode: mode=%d", c8->display.mode)
-        return 1;
+        return 0;
     }
 
-    return 0;
+    return 1;
 }
 
 /**
