@@ -99,7 +99,7 @@ int c8_encode(const char* s, uint8_t* out, int args) {
     if (validLineCount == 0) {
         VERBOSE_PRINT(args, "No valid tokens found in input");
         C8_ENCODE_CLEANUP;
-        return C8_INVALID_SYMBOL_EXCEPTION;
+        return C8_SYNTAX_ERROR_EXCEPTION;
     }
 
     VERBOSE_PRINT(args, "Populating identifiers in label map\n");
@@ -124,10 +124,10 @@ int c8_encode(const char* s, uint8_t* out, int args) {
     }
 
     VERBOSE_PRINT(args, "Resolving label addresses\n");
-    if (c8_resolve_labels(&symbols, &labels) != 0) {
+    if ((result = c8_resolve_labels(&symbols, &labels)) != 0) {
         VERBOSE_PRINT(args, "Failed to resolve labels\n");
         C8_ENCODE_CLEANUP;
-        return C8_INVALID_SYMBOL_EXCEPTION;
+        return result;
     }
 
     VERBOSE_PRINT(args, "Substituting label addresses in symbol table\n");
@@ -350,8 +350,8 @@ c8_parse_word(char* s, const char* next, int ln, C8_Symbol* sym, const C8_LabelL
         return 0;
     }
 
-    C8_EXCEPTION(C8_INVALID_SYMBOL_EXCEPTION, "Line %d: Invalid symbol '%s'", ln, s);
-    return C8_INVALID_SYMBOL_EXCEPTION;
+    C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION, "Line %d: Invalid symbol '%s'", ln, s);
+    return C8_SYNTAX_ERROR_EXCEPTION;
 }
 
 /**
@@ -429,7 +429,8 @@ C8_STATIC int c8_write(uint8_t* output, C8_SymbolList* symbols) {
 
     for (int i = 0; i < symbols->len; i++) {
         if (byte >= C8_MEMSIZE - C8_PROG_START) {
-            return C8_TOO_MANY_SYMBOLS_EXCEPTION;
+            C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION, "Program too large.");
+            return C8_SYNTAX_ERROR_EXCEPTION;
         }
 
         int ln = symbols->s[i].ln;
@@ -442,11 +443,11 @@ C8_STATIC int c8_write(uint8_t* output, C8_SymbolList* symbols) {
             break;
         case C8_SYM_DB:
             if (symbols->s[i].value > UINT8_MAX) {
-                C8_EXCEPTION(C8_INVALID_ARGUMENT_EXCEPTION,
+                C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION,
                              "DB value too big.\nLine %d: %s",
                              ln,
                              c8_linesUnformatted[ln]);
-                return C8_INVALID_ARGUMENT_EXCEPTION;
+                return C8_SYNTAX_ERROR_EXCEPTION;
             } else {
                 output[byte] = symbols->s[i].value;
                 byte++;

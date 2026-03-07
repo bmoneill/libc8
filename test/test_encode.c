@@ -275,7 +275,7 @@ void test_c8_parse_word_WhereWordIsInvalid(void) {
     sprintf(buf, "%s", s);
 
     int r = c8_parse_word(buf, NULL, 1, &symbols.s[0], &labels);
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_SYMBOL_EXCEPTION, r);
+    TEST_ASSERT_EQUAL_INT(C8_SYNTAX_ERROR_EXCEPTION, r);
     TEST_ASSERT_EQUAL_INT(0, symbols.len);
 }
 

@@ -19,18 +19,17 @@
 
 #define SCHIP_EXCLUSIVE(c)                                                                         \
     if (c->mode == C8_MODE_CHIP8) {                                                                \
-        C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION,                                             \
-                     "SCHIP instruction detected in CHIP-8 mode.\n");                              \
-        return C8_INVALID_INSTRUCTION_EXCEPTION;                                                   \
+        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "SCHIP instruction detected in CHIP-8 mode.\n");  \
+        return C8_INVALID_STATE_EXCEPTION;                                                         \
     }
 
 #define XOCHIP_EXCLUSIVE(c)                                                                        \
     if (c->mode != C8_MODE_XOCHIP) {                                                               \
         const char* modeStr = (c->mode == C8_MODE_CHIP8) ? "CHIP-8" : "SCHIP";                     \
-        C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION,                                             \
+        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION,                                                   \
                      "XOCHIP instruction detected in %s mode.\n",                                  \
                      modeStr);                                                                     \
-        return C8_INVALID_INSTRUCTION_EXCEPTION;                                                   \
+        return C8_INVALID_STATE_EXCEPTION;                                                         \
     }
 
 #define QUIRK_BITWISE(c)                                                                           \
@@ -170,8 +169,8 @@ int c8_parse_instruction(C8* c8) {
     case 0xF:
         return c8_misc_instruction(c8, in, x, kk);
     default: // unreachable
-        C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION, "Unreachable Invalid instruction: %04x", in);
-        return C8_INVALID_INSTRUCTION_EXCEPTION;
+        C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION, "Unreachable Invalid instruction: %04x", in);
+        return C8_SYNTAX_ERROR_EXCEPTION;
     }
 }
 
@@ -192,8 +191,8 @@ C8_STATIC C8_INLINE int c8_base_instruction(C8* c8, uint16_t in, uint8_t kk) {
     case 0xFF:
         return c8_i_high(c8);
     default:
-        C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION, "Invalid instruction: %04x", in);
-        return C8_INVALID_INSTRUCTION_EXCEPTION;
+        C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION, "Invalid instruction: %04x", in);
+        return C8_SYNTAX_ERROR_EXCEPTION;
     }
 }
 
@@ -229,8 +228,8 @@ c8_bitwise_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t y, uint8_t b) {
     case 0xE:
         return c8_i_shl_vx_vy(c8, x, y);
     default:
-        C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION, "Invalid instruction: %04x", in);
-        return C8_INVALID_INSTRUCTION_EXCEPTION;
+        C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION, "Invalid instruction: %04x", in);
+        return C8_SYNTAX_ERROR_EXCEPTION;
     }
 }
 
@@ -250,8 +249,8 @@ C8_STATIC C8_INLINE int c8_key_instruction(C8* c8, uint16_t in, uint8_t x, uint8
     case 0xA1:
         return c8_i_sknp_vx(c8, x);
     default:
-        C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION, "Invalid instruction: %04x", in);
-        return C8_INVALID_INSTRUCTION_EXCEPTION;
+        C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION, "Invalid instruction: %04x", in);
+        return C8_SYNTAX_ERROR_EXCEPTION;
     }
 }
 
@@ -291,8 +290,8 @@ C8_STATIC C8_INLINE int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint
     case 0x85:
         return c8_i_ld_vx_r(c8, x);
     default:
-        C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION, "Invalid instruction: %04x", in);
-        return C8_INVALID_INSTRUCTION_EXCEPTION;
+        C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION, "Invalid instruction: %04x", in);
+        return C8_SYNTAX_ERROR_EXCEPTION;
     }
 }
 

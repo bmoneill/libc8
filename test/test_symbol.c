@@ -300,7 +300,7 @@ void test_c8_populate_labels_WhereLinesHasDuplicateLabelDefinitions(void) {
 
     int r        = c8_populate_labels(&labels);
 
-    TEST_ASSERT_EQUAL_INT(C8_DUPLICATE_LABEL_EXCEPTION, r);
+    TEST_ASSERT_EQUAL_INT(C8_SYNTAX_ERROR_EXCEPTION, r);
 }
 
 void test_c8_resolve_labels_WhereLabelListHasOneLabel_WhereSymbolListHasLabelDefinition(void) {
@@ -422,7 +422,7 @@ void test_c8_substitute_labels_WhereLabelListIsMissingLabels(void) {
 
     int r              = c8_substitute_labels(&symbols, &labels);
 
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_SYMBOL_EXCEPTION, r);
+    TEST_ASSERT_EQUAL_INT(C8_SYNTAX_ERROR_EXCEPTION, r);
 }
 
 void test_c8_substitute_labels_WhereSymbolListIsEmpty(void) {

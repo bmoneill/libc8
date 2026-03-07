@@ -59,7 +59,7 @@ C8* c8_init(const char* path, int flags) {
     c8->display.mode = C8_DISPLAYMODE_HIGH;
     c8->mode         = C8_MODE_CHIP8;
 
-    if (path != NULL && c8_load_rom(c8, path) != 1) {
+    if (path != NULL && c8_load_rom(c8, path) != 0) {
         return NULL;
     }
 
@@ -93,14 +93,14 @@ int c8_load_palette_s(C8* c8, char* s) {
     }
 
     if (!c[1]) {
-        C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette: %s", s);
-        return C8_INVALID_COLOR_PALETTE_EXCEPTION;
+        C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid color palette: %s", s);
+        return C8_INVALID_PARAMETER_EXCEPTION;
     }
 
     for (int i = 0; i < 2; i++) {
         if ((c8->colors[i] = c8_parse_int(c[i])) == -1) {
-            C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette: %s", s);
-            return C8_INVALID_COLOR_PALETTE_EXCEPTION;
+            C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid color palette: %s", s);
+            return C8_INVALID_PARAMETER_EXCEPTION;
         }
     }
 
@@ -120,19 +120,19 @@ int c8_load_palette_f(C8* c8, const char* path) {
     buf[0]  = '$';
     FILE* f = fopen(path, "r");
     if (!f) {
-        C8_EXCEPTION(C8_LOAD_FILE_FAILURE_EXCEPTION, "Could not open color palette file: %s", path);
-        return C8_LOAD_FILE_FAILURE_EXCEPTION;
+        C8_EXCEPTION(C8_IO_EXCEPTION, "Could not open color palette file: %s", path);
+        return C8_IO_EXCEPTION;
     }
     for (int i = 0; i < 2; i++) {
         int   c;
         char* s = fgets(buf + 1, 64 - 1, f);
         if (!s) {
-            C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette.");
-            return C8_INVALID_COLOR_PALETTE_EXCEPTION;
+            C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid color palette.");
+            return C8_INVALID_PARAMETER_EXCEPTION;
         }
-        if ((c = c8_parse_int(buf)) == -1) {
-            C8_EXCEPTION(C8_INVALID_COLOR_PALETTE_EXCEPTION, "Invalid color palette: %s", buf);
-            return C8_INVALID_COLOR_PALETTE_EXCEPTION;
+        if ((c = c8_parse_int(buf)) == -1 || c > 0xFFFFFF) {
+            C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid color palette: %s", buf);
+            return C8_INVALID_PARAMETER_EXCEPTION;
         }
         c8->colors[i] = c;
     }
@@ -153,7 +153,7 @@ int c8_load_palette_f(C8* c8, const char* path) {
  *
  * @param c8 where to store flags
  * @param s string to get quirks from
- * @return 0 if success, non-zero if failure
+ * @return 0 if success, non-zero exception code if failure
  */
 int c8_load_quirks(C8* c8, const char* s) {
     for (size_t i = 0; i < strlen(s); i++) {
@@ -174,11 +174,11 @@ int c8_load_quirks(C8* c8, const char* s) {
             c8->flags ^= C8_FLAG_QUIRK_SHIFT;
             break;
         default:
-            C8_EXCEPTION(C8_INVALID_QUIRK_EXCEPTION, "Invalid quirk: %c", s[i]);
-            return C8_INVALID_QUIRK_EXCEPTION;
+            C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid quirk: %c", s[i]);
+            return C8_INVALID_PARAMETER_EXCEPTION;
         }
     }
-    return 1;
+    return 0;
 }
 
 /**
@@ -195,8 +195,8 @@ int c8_load_rom(C8* c8, const char* addr) {
 
     f = fopen(addr, "r");
     if (!f) {
-        C8_EXCEPTION(C8_LOAD_FILE_FAILURE_EXCEPTION, "Could not open ROM file: %s", addr);
-        return C8_LOAD_FILE_FAILURE_EXCEPTION;
+        C8_EXCEPTION(C8_IO_EXCEPTION, "Could not open ROM file: %s", addr);
+        return C8_IO_EXCEPTION;
     }
 
     /* Get file size */
@@ -204,15 +204,16 @@ int c8_load_rom(C8* c8, const char* addr) {
     size = ftell(f);
     if (ftell(f) > (0x1000 - 0x200)) {
         /* File is too big, failure */
-        C8_EXCEPTION(C8_FILE_TOO_BIG_EXCEPTION, "ROM file too big: %s", addr);
-        return C8_FILE_TOO_BIG_EXCEPTION;
+        C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "ROM file too big: %s", addr);
+        return C8_INVALID_PARAMETER_EXCEPTION;
     }
     rewind(f);
 
     /* Read the file into memory */
     unsigned long l = fread(c8->mem + C8_PROG_START, size, 1, f);
-    if (l != size) {
-        //C8_EXCEPTION(C8_LOAD_FILE_FAILURE_EXCEPTION, "Error occurred while reading ROM file.");
+    if (l != 1) {
+        C8_EXCEPTION(C8_IO_EXCEPTION, "Error occurred while reading ROM file.");
+        return C8_IO_EXCEPTION;
     }
     fclose(f);
     return 0;

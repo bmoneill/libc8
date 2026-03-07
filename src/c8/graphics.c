@@ -19,8 +19,8 @@
  * This function should return 0 on success and a negative value on failure.
  */
 __attribute__((weak)) int c8_sound_play(void) {
-    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
-    return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
+    C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "%s not implemented.", __func__);
+    return C8_GRAPHICS_EXCEPTION;
 }
 
 /**
@@ -33,8 +33,8 @@ __attribute__((weak)) int c8_sound_play(void) {
  * This function should return 0 on success and a negative value on failure.
  */
 __attribute__((weak)) int c8_sound_stop(void) {
-    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
-    return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
+    C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "%s not implemented.", __func__);
+    return C8_GRAPHICS_EXCEPTION;
 }
 
 /**
@@ -47,8 +47,8 @@ __attribute__((weak)) int c8_sound_stop(void) {
  * This function should return 0 on success and a negative value on failure.
  */
 __attribute__((weak)) int c8_deinit_graphics(void) {
-    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
-    return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
+    C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "%s not implemented.", __func__);
+    return C8_GRAPHICS_EXCEPTION;
 }
 
 /**
@@ -61,8 +61,8 @@ __attribute__((weak)) int c8_deinit_graphics(void) {
  * This function should return 0 on success and a negative value on failure.
  */
 __attribute__((weak)) int c8_init_graphics(void) {
-    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
-    return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
+    C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "%s not implemented.", __func__);
+    return C8_GRAPHICS_EXCEPTION;
 }
 
 /**
@@ -75,8 +75,8 @@ __attribute__((weak)) int c8_init_graphics(void) {
  * This function should return 0 on success and a negative value on failure.
  */
 __attribute__((weak)) int c8_render(C8_Display* display, int* colors) {
-    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
-    return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
+    C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "%s not implemented.", __func__);
+    return C8_GRAPHICS_EXCEPTION;
 }
 
 /**
@@ -89,8 +89,8 @@ __attribute__((weak)) int c8_render(C8_Display* display, int* colors) {
  * This function should return 0 on success and a negative value on failure.
  */
 __attribute__((weak)) int c8_tick(int* key) {
-    C8_EXCEPTION(C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION, "%s not implemented.", __func__);
-    return C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION;
+    C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "%s not implemented.", __func__);
+    return C8_GRAPHICS_EXCEPTION;
 }
 
 /**

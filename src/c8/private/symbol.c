@@ -304,11 +304,11 @@ int c8_populate_labels(C8_LabelList* labels) {
                 if (!strncmp(labels->l[j].identifier,
                              c8_lines[i],
                              strlen(labels->l[j].identifier))) {
-                    C8_EXCEPTION(C8_DUPLICATE_LABEL_EXCEPTION,
+                    C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION,
                                  "Duplicate label definition.\nLine %d: %s",
                                  i + 1,
                                  c8_linesUnformatted[i + 1]);
-                    return C8_DUPLICATE_LABEL_EXCEPTION;
+                    return C8_SYNTAX_ERROR_EXCEPTION;
                 }
             }
 
@@ -324,11 +324,11 @@ int c8_populate_labels(C8_LabelList* labels) {
             labels->len++;
         }
         if (labels->len == labels->ceil) {
-            C8_EXCEPTION(C8_TOO_MANY_LABELS_EXCEPTION,
+            C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION,
                          "Too many labels defined in source code.\nLine %d: %s",
                          i + 1,
                          c8_lines[i]);
-            return C8_TOO_MANY_LABELS_EXCEPTION;
+            return C8_SYNTAX_ERROR_EXCEPTION;
         }
     }
 
@@ -401,11 +401,11 @@ int c8_substitute_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
     for (int i = 0; i < symbols->len; i++) {
         if (symbols->s[i].type == C8_SYM_LABEL) {
             if (symbols->s[i].value >= labels->len) {
-                C8_EXCEPTION(C8_INVALID_SYMBOL_EXCEPTION,
+                C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION,
                              "Label does not exist.\nLine %d: %s",
                              symbols->s[i].ln,
                              c8_linesUnformatted[symbols->s[i].ln]);
-                return C8_INVALID_SYMBOL_EXCEPTION;
+                return C8_SYNTAX_ERROR_EXCEPTION;
             }
             symbols->s[i].type  = C8_SYM_INT12;
             symbols->s[i].value = labels->l[symbols->s[i].value].byte;
@@ -446,11 +446,11 @@ C8_STATIC int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, 
         case C8_SYM_INT4:
             max = max == 0 ? 0xF : max;
             if (symbols->s[i].value > max) {
-                C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION,
+                C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION,
                              "Line %d: Integer argument too big: %d",
                              symbols->s[i].ln,
                              symbols->s[i].value);
-                return C8_INVALID_INSTRUCTION_EXCEPTION;
+                return C8_SYNTAX_ERROR_EXCEPTION;
             }
             ins->p[j] = symbols->s[i].value;
             // fall through
@@ -542,11 +542,11 @@ C8_STATIC int validate_instruction(C8_Instruction* ins) {
         }
     }
 
-    C8_EXCEPTION(C8_INVALID_INSTRUCTION_EXCEPTION,
+    C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION,
                  "Line %d: %s",
                  ins->line,
                  c8_linesUnformatted[ins->line - 1]);
-    return C8_INVALID_INSTRUCTION_EXCEPTION;
+    return C8_SYNTAX_ERROR_EXCEPTION;
 }
 
 /**

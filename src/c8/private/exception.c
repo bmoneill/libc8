@@ -11,26 +11,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define C8_INVALID_INSTRUCTION_EXCEPTION_MESSAGE            "An invalid instruction exists in the input file."
-#define C8_TOO_MANY_LABELS_EXCEPTION_MESSAGE                "Too many labels are defined in the input file."
-#define C8_STACK_OVERFLOW_EXCEPTION_MESSAGE                 "A stack overflow occurred during execution."
-#define C8_INVALID_ARGUMENT_EXCEPTION_MESSAGE               "An invalid instruction argument was given."
-#define C8_DUPLICATE_LABEL_EXCEPTION_MESSAGE                "A label was defined multiple times."
-#define C8_INVALID_SYMBOL_EXCEPTION_MESSAGE                 "An invalid symbol exists in the input file."
-#define C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE              "Failed to allocate memory."
-#define C8_UNKNOWN_EXCEPTION_MESSAGE                        "An unknown error has occurred."
-#define C8_TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE               "Too many symbols exist in the input file."
-#define C8_LOAD_FILE_FAILURE_EXCEPTION_MESSAGE              "Failed to load file."
-#define C8_FILE_TOO_BIG_EXCEPTION_MESSAGE                   "The given file is too big."
-#define C8_INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE          "Invalid color palette."
-#define C8_INVALID_QUIRK_EXCEPTION_MESSAGE                  "Invalid quirk."
-#define C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE "Failed to initialize graphics."
-#define C8_INVALID_FONT_EXCEPTION_MESSAGE                   "Invalid font."
-#define C8_INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE            "Clock speed cannot be less than 1."
-#define C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE                "Stack underflow occurred during execution."
-#define C8_AUDIO_EXCEPTION_MESSAGE                          "An error occurred while playing audio."
-#define C8_INVALID_STATE_EXCEPTION_MESSAGE                  "The CHIP-8 emulator is in an invalid state."
-#define C8_GRAPHICS_EXCEPTION_MESSAGE                       "An error occurred while rendering graphics."
+#define C8_SYNTAX_ERROR_EXCEPTION_MESSAGE      "A syntax error was encountered in the input file."
+#define C8_STACK_OVERFLOW_EXCEPTION_MESSAGE    "A stack overflow occurred during execution."
+#define C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE   "A stack underflow occurred during execution."
+#define C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE "Failed to allocate memory."
+#define C8_IO_EXCEPTION_MESSAGE                "A file I/O error occurred during execution."
+#define C8_INVALID_STATE_EXCEPTION_MESSAGE     "The c8 instance is in an invalid state."
+#define C8_INVALID_PARAMETER_EXCEPTION_MESSAGE "An invalid parameter was passed to a function."
+#define C8_GRAPHICS_EXCEPTION_MESSAGE          "An error occurred while rendering graphics."
+#define C8_AUDIO_EXCEPTION_MESSAGE             "An error occurred while playing audio."
 
 /**
  * @struct C8_Exception
@@ -45,27 +34,15 @@ typedef struct {
 } C8_Exception;
 
 const C8_Exception c8_exceptions[] = {
-    { C8_INVALID_INSTRUCTION_EXCEPTION, C8_INVALID_INSTRUCTION_EXCEPTION_MESSAGE },
-    { C8_TOO_MANY_LABELS_EXCEPTION, C8_TOO_MANY_LABELS_EXCEPTION_MESSAGE },
+    { C8_SYNTAX_ERROR_EXCEPTION, C8_SYNTAX_ERROR_EXCEPTION_MESSAGE},
     { C8_STACK_OVERFLOW_EXCEPTION, C8_STACK_OVERFLOW_EXCEPTION_MESSAGE },
-    { C8_INVALID_ARGUMENT_EXCEPTION, C8_INVALID_ARGUMENT_EXCEPTION_MESSAGE },
-    { C8_DUPLICATE_LABEL_EXCEPTION, C8_DUPLICATE_LABEL_EXCEPTION_MESSAGE },
-    { C8_INVALID_SYMBOL_EXCEPTION, C8_INVALID_SYMBOL_EXCEPTION_MESSAGE },
-    { C8_MEMORY_ALLOCATION_EXCEPTION, C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE },
-    { C8_UNKNOWN_EXCEPTION, C8_UNKNOWN_EXCEPTION_MESSAGE },
-    { C8_TOO_MANY_SYMBOLS_EXCEPTION, C8_TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE },
-    { C8_LOAD_FILE_FAILURE_EXCEPTION, C8_LOAD_FILE_FAILURE_EXCEPTION_MESSAGE },
-    { C8_FILE_TOO_BIG_EXCEPTION, C8_FILE_TOO_BIG_EXCEPTION_MESSAGE },
-    { C8_INVALID_COLOR_PALETTE_EXCEPTION, C8_INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE },
-    { C8_INVALID_QUIRK_EXCEPTION, C8_INVALID_QUIRK_EXCEPTION_MESSAGE },
-    { C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION,
-      C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE },
-    { C8_INVALID_FONT_EXCEPTION, C8_INVALID_FONT_EXCEPTION_MESSAGE },
-    { C8_INVALID_CLOCK_SPEED_EXCEPTION, C8_INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE },
     { C8_STACK_UNDERFLOW_EXCEPTION, C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE },
-    { C8_AUDIO_EXCEPTION, C8_AUDIO_EXCEPTION_MESSAGE },
+    { C8_MEMORY_ALLOCATION_EXCEPTION, C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE },
+    { C8_IO_EXCEPTION, C8_IO_EXCEPTION_MESSAGE },
     { C8_INVALID_STATE_EXCEPTION, C8_INVALID_STATE_EXCEPTION_MESSAGE },
+    { C8_INVALID_PARAMETER_EXCEPTION, C8_INVALID_PARAMETER_EXCEPTION_MESSAGE},
     { C8_GRAPHICS_EXCEPTION, C8_GRAPHICS_EXCEPTION_MESSAGE },
+    { C8_AUDIO_EXCEPTION, C8_AUDIO_EXCEPTION_MESSAGE },
 };
 
 char c8_exception[C8_EXCEPTION_MESSAGE_SIZE];

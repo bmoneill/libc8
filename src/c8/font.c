@@ -195,13 +195,13 @@ int c8_set_fonts_s(C8* c8, char* s) {
     }
 
     if (!c8_set_small_font(c8, s)) {
-        C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
-        return C8_INVALID_FONT_EXCEPTION;
+        C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid font: %s\n", s);
+        return C8_INVALID_PARAMETER_EXCEPTION;
     }
     if (s2) {
         if (!c8_set_big_font(c8, s2)) {
-            C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
-            return C8_INVALID_FONT_EXCEPTION;
+            C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid font: %s\n", s);
+            return C8_INVALID_PARAMETER_EXCEPTION;
         }
     }
 
@@ -227,8 +227,8 @@ int c8_set_small_font(C8* c8, const char* s) {
     }
 
     if (f == -1) {
-        C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
-        return C8_INVALID_FONT_EXCEPTION;
+        C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid font: %s\n", s);
+        return C8_INVALID_PARAMETER_EXCEPTION;
     }
 
     c8_set_fonts(c8, -1, f);
@@ -252,8 +252,8 @@ int c8_set_big_font(C8* c8, const char* s) {
     }
 
     if (f == -1) {
-        C8_EXCEPTION(C8_INVALID_FONT_EXCEPTION, "Invalid font: %s\n", s);
-        return C8_INVALID_FONT_EXCEPTION;
+        C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid font: %s\n", s);
+        return C8_INVALID_PARAMETER_EXCEPTION;
     }
 
     c8_set_fonts(c8, -1, f);

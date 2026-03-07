@@ -28,26 +28,15 @@
  * @brief Exception code enum
  */
 typedef enum {
-    C8_INVALID_INSTRUCTION_EXCEPTION            = -3,
-    C8_TOO_MANY_LABELS_EXCEPTION                = -4,
-    C8_STACK_OVERFLOW_EXCEPTION                 = -5,
-    C8_INVALID_ARGUMENT_EXCEPTION               = -6,
-    C8_DUPLICATE_LABEL_EXCEPTION                = -7,
-    C8_INVALID_SYMBOL_EXCEPTION                 = -8,
-    C8_MEMORY_ALLOCATION_EXCEPTION              = -9,
-    C8_UNKNOWN_EXCEPTION                        = -10,
-    C8_TOO_MANY_SYMBOLS_EXCEPTION               = -11,
-    C8_LOAD_FILE_FAILURE_EXCEPTION              = -12,
-    C8_FILE_TOO_BIG_EXCEPTION                   = -13,
-    C8_INVALID_COLOR_PALETTE_EXCEPTION          = -14,
-    C8_INVALID_QUIRK_EXCEPTION                  = -15,
-    C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION = -16,
-    C8_INVALID_FONT_EXCEPTION                   = -17,
-    C8_INVALID_CLOCK_SPEED_EXCEPTION            = -18,
-    C8_STACK_UNDERFLOW_EXCEPTION                = -19,
-    C8_AUDIO_EXCEPTION                          = -20,
-    C8_INVALID_STATE_EXCEPTION                  = -21,
-    C8_GRAPHICS_EXCEPTION                       = -22,
+    C8_SYNTAX_ERROR_EXCEPTION      = -3,
+    C8_STACK_OVERFLOW_EXCEPTION    = -4,
+    C8_STACK_UNDERFLOW_EXCEPTION   = -5,
+    C8_MEMORY_ALLOCATION_EXCEPTION = -6,
+    C8_IO_EXCEPTION                = -7,
+    C8_INVALID_STATE_EXCEPTION     = -8,
+    C8_INVALID_PARAMETER_EXCEPTION = -9,
+    C8_GRAPHICS_EXCEPTION          = -10,
+    C8_AUDIO_EXCEPTION             = -11,
 } C8_ExceptionCode;
 
 /**
