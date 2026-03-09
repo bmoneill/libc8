@@ -2,12 +2,14 @@
 #include <unistd.h>
 
 #define WRITE_TO_STDIN(s)                                                                          \
+    fflush(stdin);                                                                                 \
     int fds[2];                                                                                    \
     pipe(fds);                                                                                     \
     write(fds[1], s, strlen(s));                                                                   \
     close(fds[1]);                                                                                 \
     dup2(fds[0], STDIN_FILENO);                                                                    \
-    close(fds[0]);
+    close(fds[0]);                                                                                 \
+    clearerr(stdin);
 
 #define REDIRECT_STDOUT                                                                            \
     freopen("/dev/null", "a", stdout);                                                             \

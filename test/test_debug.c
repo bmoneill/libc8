@@ -1,8 +1,10 @@
 #include "c8/private/debug.h"
 
 #include "unity.h"
+#include "util.c"
 
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 
 #define BUFLEN 64
@@ -41,28 +43,28 @@ void        setUp(void) {
 void tearDown(void) {}
 
 void test_c8_debug_repl_WhereInputContainsEOF(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    WRITE_TO_STDIN("\0"); // NULL treated as EOF here
+    TEST_ASSERT_EQUAL_INT(C8_DEBUG_QUIT, c8_debug_repl(&c8));
 }
 
 void test_c8_debug_repl_WhereInputIsContinueCommand(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    WRITE_TO_STDIN("continue\n\0");
+    TEST_ASSERT_EQUAL_INT(C8_DEBUG_CONTINUE, c8_debug_repl(&c8));
 }
 
-void test_c8_debug_repl_WhereInputIsStepCommand(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+void test_c8_debug_repl_WhereInputIsNextCommand(void) {
+    WRITE_TO_STDIN("next\n\0");
+    TEST_ASSERT_EQUAL_INT(C8_DEBUG_STEP, c8_debug_repl(&c8));
 }
 
 void test_c8_has_breakpoint_WhereBreakpointExists(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    c8.breakpoints[0x200] = 1;
+    TEST_ASSERT_EQUAL_INT(1, c8_has_breakpoint(&c8, 0x200));
 }
 
 void test_c8_has_breakpoint_WhereBreakpointDoesNotExist(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    c8.breakpoints[0x200] = 0;
+    TEST_ASSERT_EQUAL_INT(0, c8_has_breakpoint(&c8, 0x200));
 }
 
 void test_c8_get_command_WhereCommandIsBreak(void) {

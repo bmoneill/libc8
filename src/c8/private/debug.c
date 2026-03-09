@@ -67,22 +67,31 @@ const char* c8_cmds[] = {
 C8_DebugState c8_debug_repl(C8* c8) {
     char       buf[64];
     C8_Command cmd;
+    int        c;
+    int        i;
 
     printf("debug > ");
-    while (scanf("%63[^\n]", buf) != EOF) {
-        if (c8_get_command(&cmd, buf)) {
-            int result = c8_run_command(c8, &cmd);
-            if (result != 0) {
-                return result;
+    while ((c = getchar()) != EOF) {
+        printf("%c", c);
+        if (c == '\n') {
+            buf[i] = '\0';
+            printf("running command: %s\n", buf);
+            if (c8_get_command(&cmd, buf)) {
+                int result = c8_run_command(c8, &cmd);
+                if (result != 0) {
+                    return result;
+                }
+            } else {
+                printf("Invalid command\n");
             }
+            printf("debug > ");
+            i = 0;
         } else {
-            printf("Invalid command\n");
-        }
-        printf("debug > ");
-
-        // Consume newline
-        if (getchar() == EOF) {
-            break;
+            buf[i++] = c;
+            if (i == 64) {
+                printf("Command too long\n");
+                i = 0;
+            }
         }
     }
 

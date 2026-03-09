@@ -15,9 +15,9 @@
  * @brief Debug state enum
  */
 typedef enum {
-    C8_DEBUG_QUIT,
-    C8_DEBUG_CONTINUE,
-    C8_DEBUG_STEP,
+    C8_DEBUG_QUIT     = 1,
+    C8_DEBUG_CONTINUE = 2,
+    C8_DEBUG_STEP     = 3,
 } C8_DebugState;
 
 /**
