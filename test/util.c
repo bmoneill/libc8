@@ -16,6 +16,11 @@
     setbuf(stdout, stdout_buffer);
 #define RESTORE_STDOUT freopen("/dev/tty", "w", stdout);
 
+#define REDIRECT_STDERR                                                                            \
+    freopen("/dev/null", "a", stderr);                                                             \
+    setbuf(stderr, stdout_buffer);
+#define RESTORE_STDERR freopen("/dev/tty", "w", stderr);
+
 #define TEST_DATA_DIR_1 "test/data/"
 #define TEST_DATA_DIR_2 "data/"
 #define TEST_DATA_DIR_3 "../test/data/"
