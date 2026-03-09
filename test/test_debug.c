@@ -1,5 +1,7 @@
 #include "c8/private/debug.h"
 
+#include "c8/graphics.h"
+#include "c8/private/exception.h"
 #include "unity.h"
 #include "util.c"
 
@@ -21,8 +23,8 @@ C8          c8;
 
 extern int  c8_get_command(C8_Command*, char*);
 extern int  c8_load_file_arg(C8_Command*, char*);
-extern void c8_load_flags(C8*, const char*);
-extern void c8_load_state(C8*, const char*);
+extern int  c8_load_flags(C8*, const char*);
+extern int  c8_load_state(C8*, const char*);
 extern int  c8_parse_arg(C8_Command*, char*);
 extern void c8_print_help(void);
 extern void c8_print_r_registers(const C8*);
@@ -30,8 +32,8 @@ extern void c8_print_stack(const C8*);
 extern void c8_print_v_registers(const C8*);
 extern void c8_print_value(C8*, const C8_Command*);
 extern int  c8_run_command(C8*, const C8_Command*);
-extern void c8_save_flags(const C8*, const char*);
-extern void c8_save_state(const C8*, const char*);
+extern int  c8_save_flags(const C8*, const char*);
+extern int  c8_save_state(const C8*, const char*);
 extern int  c8_set_value(C8*, const C8_Command*);
 
 void        setUp(void) {
@@ -39,6 +41,7 @@ void        setUp(void) {
     memset(&cmd, 0, sizeof(C8_Command));
     memset(&c8, 0, sizeof(C8));
     c8.pc = 0x200;
+    c8.cs = 1;
 }
 void tearDown(void) {}
 
@@ -327,23 +330,88 @@ void test_c8_run_command_WhereCommandIsSet_WhereArgIsADDR(void) {
 }
 
 void test_c8_save_flags_WhereOutputFileIsValid(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    for (int i = 0; i < 8; i++) {
+        c8.R[i] = i;
+    }
+
+    int result = c8_save_flags(&c8, "my_flags.bin");
+    TEST_ASSERT_EQUAL_INT(0, result);
+
+    // Verify the flags were saved correctly
+    uint8_t flags[8];
+    FILE*   fp = fopen("my_flags.bin", "rb");
+    TEST_ASSERT_NOT_NULL(fp);
+    fread(flags, sizeof(uint8_t), 8, fp);
+    fclose(fp);
+    for (int i = 0; i < 8; i++) {
+        TEST_ASSERT_EQUAL_INT(c8.R[i], flags[i]);
+    }
 }
 
 void test_c8_save_flags_WhereOutputFileIsInvalid(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    int result = c8_save_flags(&c8, "");
+    TEST_ASSERT_EQUAL_INT(C8_IO_EXCEPTION, result);
+
+    result = c8_save_flags(&c8, NULL);
+    TEST_ASSERT_EQUAL_INT(C8_IO_EXCEPTION, result);
 }
 
 void test_c8_save_state_WhereOutputFileIsValid(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    int result = c8_save_state(&c8, "my_state.bin");
+    TEST_ASSERT_EQUAL_INT(0, result);
+
+    // Verify the state was saved correctly
+    // draw is set to 1 in c8_load_state to force display update,
+    // so we don't need to check it here
+    C8 loaded_c8;
+    result = c8_load_state(&loaded_c8, "my_state.bin");
+    TEST_ASSERT_EQUAL_INT(0, result);
+
+    for (int i = 0; i < C8_MEMSIZE; i++) {
+        TEST_ASSERT_EQUAL_INT(c8.mem[i], loaded_c8.mem[i]);
+        TEST_ASSERT_EQUAL_INT(c8.breakpoints[i], loaded_c8.breakpoints[i]);
+    }
+
+    for (int i = 0; i < 16; i++) {
+        TEST_ASSERT_EQUAL_INT(c8.V[i], loaded_c8.V[i]);
+    }
+
+    for (int i = 0; i < 18; i++) {
+        TEST_ASSERT_EQUAL_INT(c8.key[i], loaded_c8.key[i]);
+    }
+
+    for (int i = 0; i < 8; i++) {
+        TEST_ASSERT_EQUAL_INT(c8.R[i], loaded_c8.R[i]);
+    }
+
+    TEST_ASSERT_EQUAL_INT(c8.colors[0], loaded_c8.colors[0]);
+    TEST_ASSERT_EQUAL_INT(c8.colors[1], loaded_c8.colors[1]);
+    TEST_ASSERT_EQUAL_INT(c8.cs, loaded_c8.cs);
+
+    TEST_ASSERT_EQUAL_INT(c8.display.mode, loaded_c8.display.mode);
+    TEST_ASSERT_EQUAL_INT(c8.display.x, loaded_c8.display.x);
+    TEST_ASSERT_EQUAL_INT(c8.display.y, loaded_c8.display.y);
+    for (int i = 0; i < C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT; i++) {
+        TEST_ASSERT_EQUAL_INT(c8.display.p[i], loaded_c8.display.p[i]);
+    }
+
+    TEST_ASSERT_EQUAL_INT(c8.flags, loaded_c8.flags);
+    TEST_ASSERT_EQUAL_INT(c8.waitingForKey, loaded_c8.waitingForKey);
+    TEST_ASSERT_EQUAL_INT(c8.running, loaded_c8.running);
+    TEST_ASSERT_EQUAL_INT(c8.pc, loaded_c8.pc);
+    TEST_ASSERT_EQUAL_INT(c8.I, loaded_c8.I);
+    TEST_ASSERT_EQUAL_INT(c8.sp, loaded_c8.sp);
+    TEST_ASSERT_EQUAL_INT(c8.dt, loaded_c8.dt);
+    TEST_ASSERT_EQUAL_INT(c8.st, loaded_c8.st);
+    TEST_ASSERT_EQUAL_INT(c8.VK, loaded_c8.VK);
 }
 
 void test_c8_save_state_WhereOutputFileIsInvalid(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    int result = c8_save_state(&c8, "");
+    TEST_ASSERT_EQUAL_INT(C8_IO_EXCEPTION, result);
+
+    result = c8_save_state(&c8, NULL);
+    TEST_ASSERT_EQUAL_INT(C8_IO_EXCEPTION, result);
 }
 
 void test_c8_set_value_WhereValueIsAddr(void) {

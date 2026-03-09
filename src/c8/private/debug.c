@@ -10,6 +10,7 @@
 #include "../chip8.h"
 #include "../decode.h"
 #include "../font.h"
+#include "exception.h"
 #include "util.h"
 
 #include <ctype.h>
@@ -547,23 +548,23 @@ C8_STATIC int c8_run_command(C8* c8, const C8_Command* cmd) {
  * @param c8 `C8` to grab flag registers from
  * @param path path to save to
 
- * @return 1 on success, 0 on failure
+ * @return 0 on success, non-zero on failure
  */
 C8_STATIC int c8_save_flags(const C8* c8, const char* path) {
     FILE* f = fopen(path, "wb");
     if (!f) {
         printf("Invalid file\n");
-        return 0;
+        return C8_IO_EXCEPTION;
     }
 
     if (fwrite(&c8->R, 1, 8, f) != 8) {
         printf("Failed to write to file\n");
         fclose(f);
-        return 0;
+        return C8_IO_EXCEPTION;
     }
 
     fclose(f);
-    return 1;
+    return 0;
 }
 
 /**
@@ -572,23 +573,23 @@ C8_STATIC int c8_save_flags(const C8* c8, const char* path) {
  * @param c8 `C8` to save
  * @param path path to save to
  *
- * @return 1 on success, 0 on failure
+ * @return 0 on success, non-zero on failure
  */
 C8_STATIC int c8_save_state(const C8* c8, const char* path) {
     FILE* f = fopen(path, "wb");
     if (!f) {
         printf("Invalid file\n");
-        return 0;
+        return C8_IO_EXCEPTION;
     }
 
     if (fwrite(c8, sizeof(C8), 1, f) != 1) {
         printf("Failed to write to file\n");
         fclose(f);
-        return 0;
+        return C8_IO_EXCEPTION;
     }
 
     fclose(f);
-    return 1;
+    return 0;
 }
 
 /**
