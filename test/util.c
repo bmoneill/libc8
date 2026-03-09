@@ -2,7 +2,6 @@
 #include <unistd.h>
 
 #define WRITE_TO_STDIN(s)                                                                          \
-    fflush(stdin);                                                                                 \
     int fds[2];                                                                                    \
     pipe(fds);                                                                                     \
     write(fds[1], s, strlen(s));                                                                   \
