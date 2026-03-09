@@ -1,6 +1,7 @@
 #include "c8/common.h"
 #include "c8/encode.h"
 #include "c8/private/exception.h"
+#include "c8/private/instruction.h"
 #include "c8/private/symbol.h"
 
 #include "unity.h"
@@ -63,18 +64,20 @@ void tearDown(void) {
 }
 
 void test_c8_encode_WithEmptyInput(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    int result = c8_encode("", bytecode, C8_ARG_VERBOSE);
+    TEST_ASSERT_EQUAL_INT(C8_SYNTAX_ERROR_EXCEPTION, result);
 }
 
 void test_c8_encode_WithValidInput(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    int result = c8_encode("ADD V0, x12\n", bytecode, C8_ARG_VERBOSE);
+    TEST_ASSERT_EQUAL_INT(2, result);
+    TEST_ASSERT_EQUAL_INT(0x70, bytecode[0]);
+    TEST_ASSERT_EQUAL_INT(0x12, bytecode[1]);
 }
 
 void test_c8_encode_WithInvalidInput(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    int result = c8_encode("ADD V0, x123456\n", bytecode, C8_ARG_VERBOSE);
+    TEST_ASSERT_EQUAL_INT(C8_SYNTAX_ERROR_EXCEPTION, result);
 }
 
 void test_c8_remove_comment_WhereStringHasNoComment(void) {
@@ -104,13 +107,17 @@ void test_c8_encode_WhereStringIsOnlyComment(void) {
 }
 
 void test_c8_initialize_labels(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    free(labels.l);
+    TEST_ASSERT_EQUAL_INT(0, c8_initialize_labels(&labels));
+    TEST_ASSERT_EQUAL_INT(0, labels.len);
+    TEST_ASSERT_EQUAL_INT(C8_LABEL_CEILING, labels.ceil);
 }
 
 void test_c8_initialize_symbols(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    free(symbols.s);
+    TEST_ASSERT_EQUAL_INT(0, c8_initialize_symbols(&symbols));
+    TEST_ASSERT_EQUAL_INT(0, symbols.len);
+    TEST_ASSERT_EQUAL_INT(C8_SYMBOL_CEILING, symbols.ceil);
 }
 
 void test_c8_line_count_WhereStringHasOneLine(void) {
@@ -281,7 +288,9 @@ void test_c8_parse_word_WhereWordIsInvalid(void) {
 
 void test_c8_put16(void) {
     // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    c8_put16(bytecode, 0xABCD, 0);
+    TEST_ASSERT_EQUAL_INT(0xAB, bytecode[0]);
+    TEST_ASSERT_EQUAL_INT(0xCD, bytecode[1]);
 }
 
 void test_c8_tokenize_WhereStringIsOnlyWhitespace(void) {
@@ -291,26 +300,92 @@ void test_c8_tokenize_WhereStringIsOnlyWhitespace(void) {
 }
 
 void test_c8_tokenize_WhereStringContainsMultipleWords(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    sprintf(buf, "hello, world!");
+    char* s[64];
+    TEST_ASSERT_EQUAL_INT(2, c8_tokenize(s, buf, " ", 10));
+    TEST_ASSERT_EQUAL_STRING("hello,", s[0]);
+    TEST_ASSERT_EQUAL_STRING("world!", s[1]);
 }
 
 void test_c8_remove_comma_WhereStringHasTrailingComma(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    sprintf(buf, "hello,");
+    c8_remove_comma(buf);
+    TEST_ASSERT_EQUAL_STRING("hello", buf);
 }
 
 void test_c8_remove_comma_WhereStringHasNoTrailingComma(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    sprintf(buf, "hello, world!");
+    c8_remove_comma(buf);
+    TEST_ASSERT_EQUAL_STRING("hello, world!", buf);
 }
 
 void test_c8_to_upper(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    sprintf(buf, "hello, world!");
+    c8_to_upper(buf);
+    TEST_ASSERT_EQUAL_STRING("HELLO, WORLD!", buf);
 }
 
 void test_c8_write(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    for (int i = 0; i < 64; i++) {
+        switch (i % 3) {
+        case 0:
+            symbols.s[i].type  = C8_SYM_INSTRUCTION;
+            symbols.s[i].value = C8_I_RET;
+            break;
+        case 1:
+            symbols.s[i].type  = C8_SYM_DB;
+            symbols.s[i].value = 16;
+            break;
+        case 2:
+            symbols.s[i].type  = C8_SYM_DW;
+            symbols.s[i].value = 512;
+            break;
+        }
+    }
+    TEST_ASSERT_EQUAL_INT(0, c8_write(bytecode, &symbols));
+
+    int i           = 0;
+    int bytecodeIdx = 0;
+    while (i < symbols.len) {
+        switch (symbols.s[i].type) {
+        case C8_SYM_INSTRUCTION:
+            TEST_ASSERT_EQUAL_INT(C8_I_RET, bytecode[bytecodeIdx++]);
+            break;
+        case C8_SYM_DB:
+            TEST_ASSERT_EQUAL_INT(16, bytecode[bytecodeIdx++]);
+            break;
+        case C8_SYM_DW:
+            TEST_ASSERT_EQUAL_INT(512, bytecode[bytecodeIdx]);
+            bytecodeIdx += 2;
+            break;
+        default:
+            break;
+        }
+        i++;
+    }
+}
+
+void test_c8_write_WhereProgramIsTooLarge(void) {
+    symbols.len  = 4096;
+    symbols.ceil = 4096;
+    free(symbols.s);
+    symbols.s = malloc(sizeof(C8_Symbol) * 4096);
+    for (int i = 0; i < 4096; i++) {
+        switch (i % 3) {
+        case 0:
+            symbols.s[i].type  = C8_SYM_INSTRUCTION;
+            symbols.s[i].value = C8_I_RET;
+            break;
+        case 1:
+            symbols.s[i].type  = C8_SYM_DB;
+            symbols.s[i].value = 16;
+            break;
+        case 2:
+            symbols.s[i].type  = C8_SYM_DW;
+            symbols.s[i].value = 512;
+            break;
+        }
+    }
+
+    TEST_ASSERT_EQUAL_INT(C8_SYNTAX_ERROR_EXCEPTION, c8_write(bytecode, &symbols));
 }

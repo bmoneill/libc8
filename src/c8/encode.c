@@ -437,6 +437,10 @@ C8_STATIC int c8_write(uint8_t* output, C8_SymbolList* symbols) {
         switch (symbols->s[i].type) {
         case C8_SYM_INSTRUCTION:
             ret = c8_build_instruction(&ins, symbols, i);
+
+            if (ret < 0) {
+                return ret;
+            }
             c8_put16(output, ret, byte);
             i += ins.pcount;
             byte += 2;

@@ -114,8 +114,13 @@ int c8_build_instruction(C8_Instruction* ins, C8_SymbolList* symbols, int idx) {
     ins->line   = symbols->s[idx].ln;
     ins->pcount = 0;
 
-    get_instruction_args(ins, symbols, idx + 1);
-    validate_instruction(ins);
+    if (get_instruction_args(ins, symbols, idx + 1) != 0) {
+        return C8_SYNTAX_ERROR_EXCEPTION;
+    }
+
+    if (validate_instruction(ins) != 0) {
+        return C8_SYNTAX_ERROR_EXCEPTION;
+    }
     return parse_instruction(ins);
 }
 
@@ -412,7 +417,7 @@ int c8_substitute_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
         }
     }
 
-    return 1;
+    return 0;
 }
 
 /**
@@ -423,13 +428,13 @@ int c8_substitute_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
  * the value to the instruction's parameter array.
  *
  * If an integer argument is too large for the expected type, it throws a
- * `C8_INVALID_INSTRUCTION_EXCEPTION`.
+ * `C8_SYNTAX_ERROR_EXCEPTION`.
  *
  * @param ins instruction to populate
  * @param symbols symbol list
  * @param idx index of first argument in symbols
  *
- * @return 1 if success, exception code otherwise.
+ * @return 0 if success, exception code otherwise.
  */
 C8_STATIC int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, int idx) {
     int j   = 0;
@@ -472,7 +477,8 @@ C8_STATIC int get_instruction_args(C8_Instruction* ins, C8_SymbolList* symbols, 
         }
         j++;
     }
-    return 1;
+
+    return 0;
 }
 
 /**
@@ -504,7 +510,7 @@ C8_STATIC int parse_instruction(C8_Instruction* ins) {
  *
  * @param ins instruction to validate
  *
- * @return 1 if success, 0 if failure
+ * @return 0 if success, non-zero if failure
  */
 C8_STATIC int validate_instruction(C8_Instruction* ins) {
     int match;
@@ -537,7 +543,7 @@ C8_STATIC int validate_instruction(C8_Instruction* ins) {
 
             if (match) {
                 ins->format = f;
-                return 1;
+                return 0;
             }
         }
     }

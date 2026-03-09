@@ -51,11 +51,11 @@ int c8_parse_int(const char* s) {
     int   result = -1;
     char* endptr = NULL;
     errno        = 0;
-    if (s[0] == '$' || s[0] == 'x' || s[0] == 'V' || s[0] == 'v') {
+    if (s[0] == '$' || s[0] == 'X' || s[0] == 'V' || s[0] == 'V') {
         result = strtol(s + 1, &endptr, 16);
-    } else if (len > 2 && s[0] == '0' && s[1] == 'x') {
+    } else if (len > 2 && s[0] == '0' && s[1] == 'X') {
         result = strtol(s + 2, &endptr, 16);
-    } else if (len > 2 && s[0] == '0' && s[1] == 'b') {
+    } else if (len > 2 && s[0] == '0' && s[1] == 'B') {
         result = strtol(s + 2, &endptr, 2);
     } else {
         result = strtol(s, &endptr, 10);

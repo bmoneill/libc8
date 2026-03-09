@@ -194,18 +194,16 @@ int c8_set_fonts_s(C8* c8, char* s) {
         }
     }
 
-    if (!c8_set_small_font(c8, s)) {
+    if (c8_set_small_font(c8, s)) {
         C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid font: %s\n", s);
         return C8_INVALID_PARAMETER_EXCEPTION;
     }
     if (s2) {
-        if (!c8_set_big_font(c8, s2)) {
+        if (c8_set_big_font(c8, s2)) {
             C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid font: %s\n", s);
             return C8_INVALID_PARAMETER_EXCEPTION;
         }
     }
-
-    c8_set_fonts(c8, small, big);
     return 0;
 }
 
@@ -222,6 +220,7 @@ int c8_set_small_font(C8* c8, const char* s) {
 
     for (int i = 0; i < 5; i++) {
         if (!strcmp(s, c8_fontNames[0][i])) {
+            printf("%s\n", s);
             f = i;
         }
     }
