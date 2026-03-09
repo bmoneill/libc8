@@ -33,7 +33,16 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    if (optind >= argc) {
+        fprintf(stderr, "Error: no input file specified\n");
+        exit(1);
+    }
+
     inf = fopen(argv[optind], "r");
+    if (!inf) {
+        fprintf(stderr, "Error: could not open file %s\n", argv[optind]);
+        exit(1);
+    }
 
     if (outp) {
         outf = fopen(outp, "w");
