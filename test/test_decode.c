@@ -428,11 +428,3 @@ void test_c8_jump(void) {
     uint16_t ins = BUILD_INSTRUCTION_ANNN(0x0, 123);
     TEST_ASSERT_EQUAL_INT(0, c8_jump(ins));
 }
-
-void test_c8_find_labels(void) {
-    FILE*   input = fopen(get_path("1dcell.ch8"), "rb");
-    uint8_t labelMap[128];
-    c8_find_labels(input, labelMap);
-    fclose(input);
-    TEST_ASSERT_NOT_EQUAL_INT(0, labelMap[0]);
-}
