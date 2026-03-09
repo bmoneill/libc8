@@ -363,7 +363,7 @@ int c8_resolve_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
     int labelIdx = 0;
     for (int i = 0; i < symbols->len; i++) {
         if (labelIdx == labels->len) {
-            return 1;
+            return 0; // All labels resolved successfully
         }
 
         switch (symbols->s[i].type) {

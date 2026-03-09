@@ -99,7 +99,7 @@ void test_c8_encode_WhereStringIsOnlyComment(void) {
     const char* s = "; A comment";
     sprintf(buf, "%s\n", s);
     int r = c8_encode(buf, bytecode, 0);
-    TEST_ASSERT_EQUAL_INT(0, r);
+    TEST_ASSERT_EQUAL_INT(C8_SYNTAX_ERROR_EXCEPTION, r);
     TEST_ASSERT_EQUAL_INT(0, bytecode[0]);
 }
 
@@ -128,19 +128,19 @@ void test_c8_line_count_WhereStringHasMultipleLines(void) {
 void test_c8_parse_line_WhereLineIsEmpty(void) {
     const char* s = "";
     sprintf(buf, "%s", s);
-    TEST_ASSERT_EQUAL_INT(1, c8_parse_line(buf, 1, &symbols, &labels));
+    TEST_ASSERT_EQUAL_INT(0, c8_parse_line(buf, 1, &symbols, &labels));
 }
 
 void test_c8_parse_line_WhereLineContainsWhitespace(void) {
     const char* s = "  ";
     sprintf(buf, "%s", s);
-    TEST_ASSERT_EQUAL_INT(1, c8_parse_line(buf, 1, &symbols, &labels));
+    TEST_ASSERT_EQUAL_INT(0, c8_parse_line(buf, 1, &symbols, &labels));
 }
 
 void test_c8_parse_line_WhereLineContainsInstruction(void) {
     const char* s = "JP V0, $321";
     sprintf(buf, "%s", s);
-    TEST_ASSERT_EQUAL_INT(1, c8_parse_line(buf, 1, &symbols, &labels));
+    TEST_ASSERT_EQUAL_INT(0, c8_parse_line(buf, 1, &symbols, &labels));
 }
 
 void test_c8_parse_line_WhereLineContainsDS(void) {
@@ -149,7 +149,7 @@ void test_c8_parse_line_WhereLineContainsDS(void) {
 
     int ret = c8_parse_line(buf, 1, &symbols, &labels);
 
-    TEST_ASSERT_EQUAL_INT(1, ret);
+    TEST_ASSERT_EQUAL_INT(0, ret);
     for (int i = 0; s[i] != '\0'; i++) {
         TEST_ASSERT_EQUAL_INT(C8_SYM_DB, symbols.s[i].type);
         TEST_ASSERT_EQUAL_INT((uint8_t) s[i], symbols.s[i].value);

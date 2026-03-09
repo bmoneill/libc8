@@ -73,11 +73,9 @@ C8_DebugState c8_debug_repl(C8* c8) {
 
     printf("debug > ");
     while ((c = getchar()) != EOF) {
-        printf("%c", c);
         if (c == '\n') {
             buf[i] = '\0';
-            printf("running command: %s\n", buf);
-            if (c8_get_command(&cmd, buf)) {
+            if (c8_get_command(&cmd, buf) == 0) {
                 int result = c8_run_command(c8, &cmd);
                 if (result != 0) {
                     return result;
@@ -122,7 +120,7 @@ int c8_has_breakpoint(C8* c8, uint16_t pc) { return c8->breakpoints[pc]; }
  *
  * @param cmd where to store the command attributes
  * @param s command string
- * @return 1 if successful, 0 if not
+ * @return 0 if successful, non-zero if not
  */
 C8_STATIC int c8_get_command(C8_Command* cmd, char* s) {
     int numCmds = (int) sizeof(c8_cmds) / sizeof(c8_cmds[0]);
@@ -144,7 +142,7 @@ C8_STATIC int c8_get_command(C8_Command* cmd, char* s) {
             if (s[len] == '\0') {
                 /* No arg */
                 cmd->arg.type = C8_ARG_NONE;
-                return 1;
+                return 0;
             } else if (isspace(s[len])) {
                 /* With arg */
                 return c8_parse_arg(cmd, c8_trim(s + len));
@@ -152,7 +150,7 @@ C8_STATIC int c8_get_command(C8_Command* cmd, char* s) {
         }
     }
 
-    return 0; // Unknown command
+    return C8_INVALID_PARAMETER_EXCEPTION; // Unknown command
 }
 
 /**
@@ -166,16 +164,16 @@ C8_STATIC int c8_get_command(C8_Command* cmd, char* s) {
 C8_STATIC int c8_load_flags(C8* c8, const char* path) {
     FILE* f = fopen(path, "rb");
     if (!f) {
-        return 0;
+        return C8_IO_EXCEPTION;
     }
 
     int ret = fread(&c8->R, 1, 8, f);
-    if (ret != 1) {
+    if (ret != 8) {
         fclose(f);
-        return 0;
+        return C8_IO_EXCEPTION;
     }
     fclose(f);
-    return ret;
+    return 0;
 }
 
 /**
@@ -184,18 +182,18 @@ C8_STATIC int c8_load_flags(C8* c8, const char* path) {
  * @param c8 struct to load to
  * @param path path to load from
  *
- * @return 1 on success.
+ * @return 0 on success.
  */
 C8_STATIC int c8_load_state(C8* c8, const char* path) {
     FILE* f = fopen(path, "rb");
     if (!f) {
-        return 0;
+        return C8_IO_EXCEPTION;
     }
 
     int ret = fread(c8, sizeof(C8), 1, f);
     if (ret != 1) {
         fclose(f);
-        return 0;
+        return C8_IO_EXCEPTION;
     }
 
     c8->draw = 1;
@@ -210,12 +208,12 @@ C8_STATIC int c8_load_state(C8* c8, const char* path) {
  * @param cmd where to store the path
  * @param arg the argument to store
  *
- * @return 1
+ * @return 0
  */
 C8_STATIC int c8_load_file_arg(C8_Command* cmd, char* arg) {
     cmd->arg.type    = C8_ARG_FILE;
     cmd->arg.value.s = c8_trim(arg);
-    return 1;
+    return 0;
 }
 
 /**
@@ -224,7 +222,7 @@ C8_STATIC int c8_load_file_arg(C8_Command* cmd, char* arg) {
  * @param cmd where to store the argument (cmd->id must be correct)
  * @param s arg string (user input after command)
  *
- * @return 1 if success, 0 otherwise
+ * @return 0 if success, non-zero otherwise
  */
 C8_STATIC int c8_parse_arg(C8_Command* cmd, char* s) {
     C8_Arg* arg       = &cmd->arg;
@@ -301,12 +299,12 @@ C8_STATIC int c8_parse_arg(C8_Command* cmd, char* s) {
     case '$':
         arg->type    = C8_ARG_ADDR;
         arg->value.i = c8_parse_int(s);
-        return arg->value.i > 0;
+        return arg->value.i <= 0;
     default:
         break;
     }
 
-    return 1;
+    return 0;
 }
 
 /**
@@ -604,48 +602,48 @@ C8_STATIC int c8_save_state(const C8* c8, const char* path) {
 C8_STATIC int c8_set_value(C8* c8, const C8_Command* cmd) {
     switch (cmd->arg.type) {
     case C8_ARG_NONE:
-        return 0;
+        return 1;
     case C8_ARG_ADDR:
         c8->mem[cmd->arg.value.i] = cmd->setValue;
-        return 1;
+        return 0;
     case C8_ARG_DT:
         c8->dt = cmd->setValue;
-        return 1;
+        return 0;
     case C8_ARG_I:
         c8->I = cmd->setValue;
-        return 1;
+        return 0;
     case C8_ARG_PC:
         c8->pc = cmd->setValue;
-        return 1;
+        return 0;
     case C8_ARG_SP:
         c8->sp = cmd->setValue;
-        return 1;
+        return 0;
     case C8_ARG_ST:
         c8->st = cmd->setValue;
-        return 1;
+        return 0;
     case C8_ARG_V:
         c8->V[cmd->arg.value.i] = cmd->setValue;
-        return 1;
+        return 0;
+    case C8_ARG_R:
+        c8->R[cmd->arg.value.i] = cmd->setValue;
+        return 0;
     case C8_ARG_VK:
-        c8->VK = cmd->arg.value.i;
-        return 1;
+        c8->VK = cmd->setValue;
+        return 0;
     case C8_ARG_BG:
-        c8->colors[0] = cmd->arg.value.i;
-        return 1;
+        c8->colors[0] = cmd->setValue;
+        return 0;
     case C8_ARG_FG:
-        c8->colors[1] = cmd->arg.value.i;
-        return 1;
+        c8->colors[1] = cmd->setValue;
+        return 0;
     case C8_ARG_QUIRKS:
-        c8_load_quirks(c8, cmd->arg.value.s);
-        return 1;
+        return c8_load_quirks(c8, cmd->arg.value.s);
     case C8_ARG_BFONT:
-        c8_set_big_font(c8, cmd->arg.value.s);
-        return 1;
+        return c8_set_big_font(c8, cmd->arg.value.s);
     case C8_ARG_SFONT:
-        c8_set_small_font(c8, cmd->arg.value.s);
-        return 1;
+        return c8_set_small_font(c8, cmd->arg.value.s);
     default:
         printf("Invalid argument\n");
-        return 0;
+        return 1;
     }
 }

@@ -231,7 +231,7 @@ int c8_set_small_font(C8* c8, const char* s) {
         return C8_INVALID_PARAMETER_EXCEPTION;
     }
 
-    c8_set_fonts(c8, -1, f);
+    c8_set_fonts(c8, f, -1);
     return 0;
 }
 

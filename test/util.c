@@ -24,6 +24,7 @@
 
 static const char* paths[] = { TEST_DATA_DIR_1, TEST_DATA_DIR_2, TEST_DATA_DIR_3, TEST_DATA_DIR_4 };
 static char        path_buffer[64];
+static char        stdout_buffer[1024];
 
 char*              get_path(const char* filename) {
     for (int i = 0; i < 4; i++) {

@@ -317,7 +317,7 @@ void test_c8_resolve_labels_WhereLabelListHasOneLabel_WhereSymbolListHasLabelDef
     sprintf(labels.l[0].identifier, "%s", "LABEL");
 
     int r = c8_resolve_labels(&symbols, &labels);
-    TEST_ASSERT_EQUAL_INT(1, r);
+    TEST_ASSERT_EQUAL_INT(0, r);
     TEST_ASSERT_EQUAL_INT(0x202, labels.l[0].byte);
 }
 
@@ -333,11 +333,11 @@ void test_c8_resolve_labels_WhereLabelListHasOneLabel_WhereSymbolListDoesNotHave
     sprintf(labels.l[0].identifier, "%s", "LABEL");
 
     int r = c8_resolve_labels(&symbols, &labels);
-    TEST_ASSERT_EQUAL_INT(0, r);
+    TEST_ASSERT_NOT_EQUAL_INT(0, r);
     TEST_ASSERT_EQUAL_INT(0, labels.l[0].byte);
 }
 
-void test_c8_resolve_labels_WhereLabelListHasMultipleLabelC8_S_WhereSymbolListHasLabelDefinitions(
+void test_c8_resolve_labels_WhereLabelListHasMultipleLabels_WhereSymbolListHasLabelDefinitions(
     void) {
 
     symbols.len        = 5;
@@ -354,7 +354,7 @@ void test_c8_resolve_labels_WhereLabelListHasMultipleLabelC8_S_WhereSymbolListHa
     sprintf(labels.l[1].identifier, "%s", "OTHERLABEL");
 
     int r = c8_resolve_labels(&symbols, &labels);
-    TEST_ASSERT_EQUAL_INT(1, r);
+    TEST_ASSERT_EQUAL_INT(0, r);
     TEST_ASSERT_EQUAL_INT(0x202, labels.l[0].byte);
     TEST_ASSERT_EQUAL_INT(0x204, labels.l[1].byte);
 }
@@ -363,7 +363,7 @@ void test_c8_resolve_labels_WhereSymbolListIsEmpty(void) {
     labels.len = 1;
     sprintf(labels.l[0].identifier, "%s", "LABEL");
 
-    TEST_ASSERT_EQUAL_INT(0, c8_resolve_labels(&symbols, &labels));
+    TEST_ASSERT_NOT_EQUAL_INT(0, c8_resolve_labels(&symbols, &labels));
 }
 
 void test_c8_resolve_labels_WhereLabelListIsEmpty(void) {
@@ -371,7 +371,7 @@ void test_c8_resolve_labels_WhereLabelListIsEmpty(void) {
     symbols.len       = 1;
     symbols.s[0].type = C8_SYM_DB;
 
-    TEST_ASSERT_EQUAL_INT(1, c8_resolve_labels(&symbols, &labels));
+    TEST_ASSERT_EQUAL_INT(0, c8_resolve_labels(&symbols, &labels));
 }
 
 void test_c8_substitute_labels_WhereLabelListContainsAllLabels(void) {
@@ -434,7 +434,7 @@ void test_c8_substitute_labels_WhereSymbolListIsEmpty(void) {
     TEST_ASSERT_EQUAL_INT(1, r);
 }
 
-void test_c8_substitute_labels_WhereSymbolListContainsNoLabelC8_S_WhereLabelListIsEmpty(void) {
+void test_c8_substitute_labels_WhereSymbolListContainsNoLabels_WhereLabelListIsEmpty(void) {
     symbols.len       = 4;
     symbols.s[0].type = C8_SYM_INSTRUCTION;
     symbols.s[1].type = C8_SYM_INSTRUCTION;
