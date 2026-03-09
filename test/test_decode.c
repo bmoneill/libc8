@@ -1,5 +1,6 @@
 #include "c8/common.h"
 #include "c8/decode.h"
+#include "util.c"
 
 #include "unity.h"
 
@@ -48,23 +49,71 @@ void        setUp(void) {
 void tearDown(void) {}
 
 void test_c8_decode_WithDefineLabels_WithPrintAddresses(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    FILE* input  = fopen(get_path("1dcell.ch8"), "rb");
+    FILE* output = fopen("output.txt", "w");
+    c8_decode(input, output, C8_DECODE_DEFINE_LABELS | C8_DECODE_PRINT_ADDRESSES);
+    fclose(input);
+    fclose(output);
+
+    FILE* expected = fopen(get_path("1dcell_dis_al.txt"), "r");
+    FILE* actual   = fopen("output.txt", "r");
+    int   c;
+    while ((c = fgetc(expected)) != EOF) {
+        TEST_ASSERT_EQUAL_INT(c, fgetc(actual));
+    }
+    fclose(expected);
+    fclose(actual);
 }
 
 void test_c8_decode_WithDefineLabels_WithoutPrintAddresses(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    FILE* input  = fopen(get_path("1dcell.ch8"), "rb");
+    FILE* output = fopen("output.txt", "w");
+    c8_decode(input, output, C8_DECODE_DEFINE_LABELS);
+    fclose(input);
+    fclose(output);
+
+    FILE* expected = fopen(get_path("1dcell_dis_l.txt"), "r");
+    FILE* actual   = fopen("output.txt", "r");
+    int   c;
+    while ((c = fgetc(expected)) != EOF) {
+        TEST_ASSERT_EQUAL_INT(c, fgetc(actual));
+    }
+    fclose(expected);
+    fclose(actual);
 }
 
 void test_c8_decode_WithoutDefineLabels_WithPrintAddresses(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    FILE* input  = fopen(get_path("1dcell.ch8"), "rb");
+    FILE* output = fopen("output.txt", "w");
+    c8_decode(input, output, C8_DECODE_PRINT_ADDRESSES);
+    fclose(input);
+    fclose(output);
+
+    FILE* expected = fopen(get_path("1dcell_dis_a.txt"), "r");
+    FILE* actual   = fopen("output.txt", "r");
+    int   c;
+    while ((c = fgetc(expected)) != EOF) {
+        TEST_ASSERT_EQUAL_INT(c, fgetc(actual));
+    }
+    fclose(expected);
+    fclose(actual);
 }
 
 void test_c8_decode_WithoutDefineLabels_WithoutPrintAddresses(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    FILE* input  = fopen(get_path("1dcell.ch8"), "rb");
+    FILE* output = fopen("output.txt", "w");
+    c8_decode(input, output, 0);
+    fclose(input);
+    fclose(output);
+
+    FILE* expected = fopen(get_path("1dcell_dis.txt"), "r");
+    FILE* actual   = fopen("output.txt", "r");
+    int   c;
+    while ((c = fgetc(expected)) != EOF) {
+        TEST_ASSERT_EQUAL_INT(c, fgetc(actual));
+    }
+    fclose(expected);
+    fclose(actual);
 }
 
 void test_c8_decode_instruction_WhereInstructionIsCLS(void) { SHOULD_PARSE("CLS", 0x00E0); }
@@ -370,8 +419,14 @@ void test_c8_decode_instruction_WhereInstructionIsLDXR(void) {
 }
 
 void test_c8_jump(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    int a[4] = { 0x1, 0x2, 0xa, 0xb };
+    for (int i = 0; i < 4; i++) {
+        uint16_t ins = BUILD_INSTRUCTION_ANNN(a[i], 123);
+        TEST_ASSERT_EQUAL_INT(123, c8_jump(ins));
+    }
+
+    uint16_t ins = BUILD_INSTRUCTION_ANNN(0x0, 123);
+    TEST_ASSERT_EQUAL_INT(0, c8_jump(ins));
 }
 
 void test_c8_find_labels(void) {
