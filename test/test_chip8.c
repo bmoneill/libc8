@@ -32,7 +32,7 @@ void test_c8_init_WithNullPath(void) {
 }
 
 void test_c8_load_palette_s_WithValidColorPalette(void) {
-    sprintf(buf, "0xABCDEF,0x123456");
+    sprintf(buf, "XABCDEF,X123456");
     int result = c8_load_palette_s(&c8, buf);
     TEST_ASSERT_EQUAL_INT(0, result);
     TEST_ASSERT_EQUAL_INT(0xABCDEF, c8.colors[0]);

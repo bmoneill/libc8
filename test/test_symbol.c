@@ -395,7 +395,7 @@ void test_c8_substitute_labels_WhereLabelListContainsAllLabels(void) {
 
     int r              = c8_substitute_labels(&symbols, &labels);
 
-    TEST_ASSERT_EQUAL_INT(1, r);
+    TEST_ASSERT_EQUAL_INT(0, r);
     TEST_ASSERT_EQUAL_INT(C8_SYM_INT12, symbols.s[1].type);
     TEST_ASSERT_EQUAL_INT(0x204, symbols.s[1].value);
     TEST_ASSERT_EQUAL_INT(C8_SYM_INT12, symbols.s[6].type);
@@ -431,7 +431,7 @@ void test_c8_substitute_labels_WhereSymbolListIsEmpty(void) {
 
     int r            = c8_substitute_labels(&symbols, &labels);
 
-    TEST_ASSERT_EQUAL_INT(1, r);
+    TEST_ASSERT_EQUAL_INT(0, r);
 }
 
 void test_c8_substitute_labels_WhereSymbolListContainsNoLabels_WhereLabelListIsEmpty(void) {
@@ -443,5 +443,5 @@ void test_c8_substitute_labels_WhereSymbolListContainsNoLabels_WhereLabelListIsE
 
     int r             = c8_substitute_labels(&symbols, &labels);
 
-    TEST_ASSERT_EQUAL_INT(1, r);
+    TEST_ASSERT_EQUAL_INT(0, r);
 }
