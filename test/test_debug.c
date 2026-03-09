@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define BUFLEN 64
+#define BUFLEN 128
 
 #define TEST_COMMAND(s, cmdid, argtype)                                                            \
     strcpy(buf, s);                                                                                \
@@ -32,6 +32,7 @@ extern void          c8_print_help(void);
 extern void          c8_print_r_registers(const C8*);
 extern void          c8_print_stack(const C8*);
 extern void          c8_print_v_registers(const C8*);
+extern void          c8_print_quirks(int);
 extern void          c8_print_value(C8*, const C8_Command*);
 extern int           c8_run_command(C8*, const C8_Command*);
 extern int           c8_save_flags(const C8*, const char*);
@@ -166,100 +167,281 @@ void test_c8_load_flags(void) {
 }
 
 void test_c8_load_state(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    int result = c8_load_state(&c8, get_path("state.bin"));
+    TEST_ASSERT_EQUAL_INT(0, result);
 }
 
 void test_c8_parse_arg_WhereCommandIsLoadSave(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    sprintf(buf, "state.bin");
+    cmd.id = C8_CMD_LOAD;
+    TEST_ASSERT_EQUAL_INT(0, c8_parse_arg(&cmd, buf));
+    TEST_ASSERT_EQUAL_INT(C8_ARG_FILE, cmd.arg.type);
+    TEST_ASSERT_EQUAL_STRING("state.bin", cmd.arg.value.s);
+
+    cmd.id = C8_CMD_SAVE;
+    TEST_ASSERT_EQUAL_INT(0, c8_parse_arg(&cmd, buf));
+    TEST_ASSERT_EQUAL_INT(C8_ARG_FILE, cmd.arg.type);
+    TEST_ASSERT_EQUAL_STRING("state.bin", cmd.arg.value.s);
+
+    cmd.id = C8_CMD_LOADFLAGS;
+    TEST_ASSERT_EQUAL_INT(0, c8_parse_arg(&cmd, buf));
+    TEST_ASSERT_EQUAL_INT(C8_ARG_FILE, cmd.arg.type);
+    TEST_ASSERT_EQUAL_STRING("state.bin", cmd.arg.value.s);
+
+    cmd.id = C8_CMD_SAVEFLAGS;
+    TEST_ASSERT_EQUAL_INT(0, c8_parse_arg(&cmd, buf));
+    TEST_ASSERT_EQUAL_INT(C8_ARG_FILE, cmd.arg.type);
+    TEST_ASSERT_EQUAL_STRING("state.bin", cmd.arg.value.s);
 }
 
 void test_c8_parse_arg_WhereCommandIsSet_WhereArgIsAddress(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    sprintf(buf, "$200 5");
+    cmd.id = C8_CMD_SET;
+    TEST_ASSERT_EQUAL_INT(0, c8_parse_arg(&cmd, buf));
+    TEST_ASSERT_EQUAL_INT(C8_ARG_ADDR, cmd.arg.type);
+    TEST_ASSERT_EQUAL_INT(0x200, cmd.arg.value.i);
+    TEST_ASSERT_EQUAL_INT(5, cmd.setValue);
 }
 
 void test_c8_parse_arg_WhereCommandIsSet_WhereArgIsOther(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    sprintf(buf, "VF 5");
+    cmd.id = C8_CMD_SET;
+    TEST_ASSERT_EQUAL_INT(0, c8_parse_arg(&cmd, buf));
+    TEST_ASSERT_EQUAL_INT(C8_ARG_V, cmd.arg.type);
+    TEST_ASSERT_EQUAL_INT(0xF, cmd.arg.value.i);
+    TEST_ASSERT_EQUAL_INT(5, cmd.setValue);
 }
 
 void test_c8_parse_arg_WhereCommandIsSet_WhereArgIsInvalid(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    sprintf(buf, "foo 5");
+    cmd.id = C8_CMD_SET;
+    TEST_ASSERT_EQUAL_INT(0, c8_parse_arg(&cmd, buf));
+    TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
 }
 
 void test_c8_print_help(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    REDIRECT_STDOUT;
+    c8_print_help();
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING(C8_DEBUG_HELP_STRING, stdout_buffer);
 }
 
 void test_c8_print_quirks(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    REDIRECT_STDOUT;
+    c8_print_quirks(C8_FLAG_QUIRK_BITWISE | C8_FLAG_QUIRK_DRAW);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING("Quirks: bd\n", stdout_buffer);
 }
 
 void test_c8_print_r_registers(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    int bufIdx = 0;
+    for (int i = 0; i < 4; i++) {
+        c8.R[i]     = i;
+        c8.R[i + 4] = i + 4;
+        bufIdx += sprintf(buf + bufIdx, "R%01X: %02X\t\tR%01X: %02X\n", i, i, i + 4, i + 4);
+    }
+    REDIRECT_STDOUT;
+    c8_print_r_registers(&c8);
+    RESTORE_STDOUT;
+
+    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
+}
+
+void test_c8_print_v_registers(void) {
+    int bufIdx = 0;
+    for (int i = 0; i < 8; i++) {
+        c8.V[i]     = i;
+        c8.V[i + 8] = i + 8;
+        bufIdx += sprintf(buf + bufIdx, "V%01X: %02X\t\tV%01X: %02X\n", i, i, i + 8, i + 8);
+    }
+    REDIRECT_STDOUT;
+    c8_print_v_registers(&c8);
+    RESTORE_STDOUT;
+
+    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
 }
 
 void test_c8_print_stack(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
-}
+    int bufIdx = 0;
+    for (int i = 0; i < 8; i++) {
+        c8.stack[i]     = i;
+        c8.stack[i + 8] = i + 8;
+        bufIdx += sprintf(buf + bufIdx,
+                          "%01X: $%03X\t\t%01X: $%03X\n",
+                          i,
+                          c8.stack[i],
+                          i + 8,
+                          c8.stack[i + 8]);
+    }
+    REDIRECT_STDOUT;
+    c8_print_stack(&c8);
+    RESTORE_STDOUT;
 
-void test_c8_print_value_WhereValueIsNone(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
 }
 
 void test_c8_print_value_WhereValueIsSP(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    cmd.arg.type = C8_ARG_SP;
+
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+
+    TEST_ASSERT_EQUAL_STRING("SP: 00\n", stdout_buffer);
 }
 
 void test_c8_print_value_WhereValueIsV(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    cmd.arg.type = C8_ARG_V;
+
+    // Print all V registers
+    cmd.arg.value.i = -1;
+
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+
+    memcpy(buf, stdout_buffer, strlen(stdout_buffer));
+
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+
+    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
+
+    // Print single V register
+    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    cmd.arg.value.i = 0;
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+
+    TEST_ASSERT_EQUAL_STRING("V0: 00\n", stdout_buffer);
 }
 
 void test_c8_print_value_WhereValueIsR(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    cmd.arg.type    = C8_ARG_R;
+    cmd.arg.value.i = -1;
+
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+
+    memcpy(buf, stdout_buffer, strlen(stdout_buffer));
+
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+
+    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
 }
 
 void test_c8_print_value_WhereValueIsInternalRegister(void) {
-    // TODO
-    // Combine PC, DT, ST, I, VK
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    // PC
+    cmd.arg.type = C8_ARG_PC;
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING("PC: $200\n", stdout_buffer);
+
+    // DT
+    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    cmd.arg.type = C8_ARG_DT;
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING("DT: 00\n", stdout_buffer);
+
+    // ST
+    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    cmd.arg.type = C8_ARG_ST;
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING("ST: 00\n", stdout_buffer);
+
+    // I
+    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    cmd.arg.type = C8_ARG_I;
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING("I:  000\n", stdout_buffer);
+
+    // VK
+    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    cmd.arg.type = C8_ARG_VK;
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING("VK: V0\n", stdout_buffer);
 }
 
 void test_c8_print_value_WhereValueIsColor(void) {
-    // TODO
-    // Combine BG, FG
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    cmd.arg.type = C8_ARG_BG;
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING("BG: 000000\n", stdout_buffer);
+
+    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    cmd.arg.type = C8_ARG_FG;
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING("FG: 000000\n", stdout_buffer);
 }
 
 void test_c8_print_value_WhereValueIsFont(void) {
-    // TODO
-    // Combine BFONT, SFONT
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    cmd.arg.type = C8_ARG_BFONT;
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING("BFONT: octo\n", stdout_buffer);
+
+    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    cmd.arg.type = C8_ARG_SFONT;
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_STRING("SFONT: octo\n", stdout_buffer);
 }
 
 void test_c8_print_value_WhereValueIsQuirks(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    c8.flags     = C8_FLAG_QUIRK_BITWISE | C8_FLAG_QUIRK_DRAW;
+    cmd.arg.type = C8_ARG_QUIRKS;
+
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+
+    memcpy(buf, stdout_buffer, strlen(stdout_buffer));
+    buf[strlen(stdout_buffer)] = '\0';
+
+    REDIRECT_STDOUT;
+    c8_print_quirks(c8.flags);
+    RESTORE_STDOUT;
+
+    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
 }
 
 void test_c8_print_value_WhereValueIsStack(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    cmd.arg.type = C8_ARG_STACK;
+
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+
+    memcpy(buf, stdout_buffer, strlen(stdout_buffer));
+    buf[strlen(stdout_buffer)] = '\0';
+
+    REDIRECT_STDOUT;
+    c8_print_stack(&c8);
+    RESTORE_STDOUT;
+
+    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
 }
 
 void test_c8_print_value_WhereValueIsAddr(void) {
-    // TODO
     C8_Command cmd;
     cmd.id          = C8_CMD_PRINT;
     cmd.arg.type    = C8_ARG_ADDR;
@@ -267,7 +449,6 @@ void test_c8_print_value_WhereValueIsAddr(void) {
     REDIRECT_STDOUT;
     TEST_ASSERT_EQUAL_INT(0, c8_run_command(&c8, &cmd));
     RESTORE_STDOUT;
-    printf("%s", stdout_buffer);
 }
 
 void test_c8_run_command_WhereCommandIsAddBreakpoint_WithNoArgument(void) {
@@ -433,7 +614,6 @@ void test_c8_save_state_WhereOutputFileIsInvalid(void) {
 }
 
 void test_c8_set_value_WhereValueIsAddr(void) {
-    C8_Command cmd;
     cmd.id          = C8_CMD_SET;
     cmd.arg.type    = C8_ARG_ADDR;
     cmd.arg.value.i = 0x200;
@@ -444,8 +624,6 @@ void test_c8_set_value_WhereValueIsAddr(void) {
 }
 
 void test_c8_set_value_WhereValueIsInternalRegister(void) {
-    // TODO
-    C8_Command cmd;
     cmd.id       = C8_CMD_SET;
     cmd.setValue = 123;
 
@@ -477,7 +655,6 @@ void test_c8_set_value_WhereValueIsInternalRegister(void) {
 }
 
 void test_c8_set_value_WhereValueIsVRegister(void) {
-    C8_Command cmd;
     cmd.id          = C8_CMD_SET;
     cmd.arg.type    = C8_ARG_V;
     cmd.arg.value.i = 1;
@@ -489,7 +666,6 @@ void test_c8_set_value_WhereValueIsVRegister(void) {
 }
 
 void test_c8_set_value_WhereValueIsRRegister(void) {
-    C8_Command cmd;
     cmd.id          = C8_CMD_SET;
     cmd.arg.type    = C8_ARG_R;
     cmd.arg.value.i = 1;
@@ -501,7 +677,6 @@ void test_c8_set_value_WhereValueIsRRegister(void) {
 }
 
 void test_c8_set_value_WhereValueIsColor(void) {
-    C8_Command cmd;
     cmd.id       = C8_CMD_SET;
     cmd.arg.type = C8_ARG_BG;
     cmd.setValue = 123;
@@ -519,7 +694,6 @@ void test_c8_set_value_WhereValueIsColor(void) {
 }
 
 void test_c8_set_value_WhereValueIsQuirks(void) {
-    C8_Command cmd;
     cmd.id          = C8_CMD_SET;
     cmd.arg.type    = C8_ARG_QUIRKS;
     cmd.arg.value.s = "bdj";
@@ -536,7 +710,6 @@ void test_c8_set_value_WhereValueIsQuirks(void) {
 }
 
 void test_c8_set_value_WhereValueIsBFont(void) {
-    C8_Command cmd;
     cmd.id          = C8_CMD_SET;
     cmd.arg.type    = C8_ARG_BFONT;
     cmd.arg.value.s = "fish";
@@ -550,7 +723,6 @@ void test_c8_set_value_WhereValueIsBFont(void) {
 }
 
 void test_c8_set_value_WhereValueIsSFont(void) {
-    C8_Command cmd;
     cmd.id          = C8_CMD_SET;
     cmd.arg.type    = C8_ARG_SFONT;
     cmd.arg.value.s = "fish";
@@ -564,8 +736,6 @@ void test_c8_set_value_WhereValueIsSFont(void) {
 }
 
 void test_c8_set_value_WhereValueIsInvalid(void) {
-    // TODO
-    C8_Command cmd;
-    cmd.id = C8_CMD_NONE;
+    cmd.arg.type = C8_ARG_NONE;
     TEST_ASSERT_NOT_EQUAL_INT(0, c8_set_value(&c8, &cmd));
 }
