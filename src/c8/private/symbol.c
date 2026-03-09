@@ -73,7 +73,7 @@ C8_InstructionFormat c8_formats[] = {
     { C8_I_SNE, 0x9000, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
     { C8_I_LD, 0xA000, 2, { C8_SYM_I, C8_SYM_INT12 }, { 0x0000, 0x0FFF } },
     { C8_I_JP_V0, 0xB000, 1, { C8_SYM_INT12 }, { 0x0FFF } }, // For decoding
-    { C8_I_JP, 0xB000, 1, { C8_SYM_V, C8_SYM_INT12 }, { 0x0000, 0x0FFF } }, // For encoding
+    { C8_I_JP, 0xB000, 2, { C8_SYM_V, C8_SYM_INT12 }, { 0x0000, 0x0FFF } }, // For encoding
     { C8_I_RND, 0xC000, 2, { C8_SYM_V, C8_SYM_INT8 }, { 0x0F00, 0x00FF } },
     { C8_I_DRW, 0xD000, 3, { C8_SYM_V, C8_SYM_V, C8_SYM_INT4 }, { 0x0F00, 0x00F0, 0x000F } },
     { C8_I_SKP, 0xE09E, 1, { C8_SYM_V }, { 0x0F00 } },
@@ -119,6 +119,7 @@ int c8_build_instruction(C8_Instruction* ins, C8_SymbolList* symbols, int idx) {
     }
 
     if (validate_instruction(ins) != 0) {
+        printf("error here2\n");
         return C8_SYNTAX_ERROR_EXCEPTION;
     }
     return parse_instruction(ins);

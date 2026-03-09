@@ -310,7 +310,7 @@ C8_STATIC int c8_parse_arg(C8_Command* cmd, char* s) {
 /**
  * @brief Print the help string.
  */
-C8_STATIC void c8_print_help(void) { printf("%s\n", C8_DEBUG_HELP_STRING); }
+C8_STATIC void c8_print_help(void) { printf("%s", C8_DEBUG_HELP_STRING); }
 
 /**
  * @brief print quirk identifiers in `flags`
@@ -353,8 +353,8 @@ C8_STATIC void c8_print_quirks(int flags) {
  */
 C8_STATIC void c8_print_r_registers(const C8* c8) {
     for (int i = 0; i < 4; i++) {
-        printf("R%01x: %02x\t\t", i, c8->R[i]);
-        printf("R%01x: %02x\n", i + 4, c8->R[i + 4]);
+        printf("R%01X: %02X\t\t", i, c8->R[i]);
+        printf("R%01X: %02X\n", i + 4, c8->R[i + 4]);
     }
 }
 
@@ -365,8 +365,8 @@ C8_STATIC void c8_print_r_registers(const C8* c8) {
  */
 C8_STATIC void c8_print_v_registers(const C8* c8) {
     for (int i = 0; i < 8; i++) {
-        printf("V%01x: %02x\t\t", i, c8->V[i]);
-        printf("V%01x: %02x\n", i + 8, c8->V[i + 8]);
+        printf("V%01X: %02X\t\t", i, c8->V[i]);
+        printf("V%01X: %02X\n", i + 8, c8->V[i + 8]);
     }
 }
 
@@ -377,8 +377,8 @@ C8_STATIC void c8_print_v_registers(const C8* c8) {
  */
 C8_STATIC void c8_print_stack(const C8* c8) {
     for (int i = 0; i < 8; i++) {
-        printf("x%01x: $%03x\t\t", i, c8->stack[i]);
-        printf("x%01x: $%03x\n", i + 8, c8->stack[i + 8]);
+        printf("%01X: $%03X\t\t", i, c8->stack[i]);
+        printf("%01X: $%03X\n", i + 8, c8->stack[i + 8]);
     }
 }
 
@@ -411,42 +411,42 @@ C8_STATIC void c8_print_value(C8* c8, const C8_Command* cmd) {
         c8_print_quirks(c8->flags);
         break;
     case C8_ARG_SP:
-        printf("SP: %02x\n", c8->sp);
+        printf("SP: %02X\n", c8->sp);
         break;
     case C8_ARG_V:
         if (cmd->arg.value.i == -1) {
             c8_print_v_registers(c8);
         } else {
-            printf("V%01x: %02x\n", cmd->arg.value.i, c8->V[cmd->arg.value.i]);
+            printf("V%01X: %02X\n", cmd->arg.value.i, c8->V[cmd->arg.value.i]);
         }
         break;
     case C8_ARG_R:
         if (cmd->arg.value.i == -1) {
             c8_print_r_registers(c8);
         } else {
-            printf("R%01x: %02x\n", cmd->arg.value.i, c8->R[cmd->arg.value.i]);
+            printf("R%01X: %02X\n", cmd->arg.value.i, c8->R[cmd->arg.value.i]);
         }
         break;
     case C8_ARG_PC:
-        printf("PC: %03x\n", c8->pc);
+        printf("PC: $%03X\n", c8->pc);
         break;
     case C8_ARG_DT:
-        printf("DT: %02x\n", c8->dt);
+        printf("DT: %02X\n", c8->dt);
         break;
     case C8_ARG_ST:
-        printf("ST: %02x\n", c8->st);
+        printf("ST: %02X\n", c8->st);
         break;
     case C8_ARG_I:
-        printf("I:  %03x\n", c8->I);
+        printf("I:  %03X\n", c8->I);
         break;
     case C8_ARG_VK:
-        printf("VK: V%01x\n", c8->VK);
+        printf("VK: V%01X\n", c8->VK);
         break;
     case C8_ARG_BG:
-        printf("BG: %06x\n", c8->colors[0]);
+        printf("BG: %06X\n", c8->colors[0]);
         break;
     case C8_ARG_FG:
-        printf("FG: %06x\n", c8->colors[1]);
+        printf("FG: %06X\n", c8->colors[1]);
         break;
     case C8_ARG_BFONT:
         printf("BFONT: %s\n", c8_fontNames[1][c8->fonts[1]]);
@@ -462,7 +462,7 @@ C8_STATIC void c8_print_value(C8* c8, const C8_Command* cmd) {
         break;
     case C8_ARG_ADDR:
         addr = cmd->arg.value.i;
-        printf("$%03x: %04x\t%s\n",
+        printf("$%03X: %04X\t%s\n",
                addr,
                c8->mem[addr],
                c8_decode_instruction(c8->mem[addr], NULL));

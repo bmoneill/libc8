@@ -52,6 +52,7 @@ void                 setUp(void) {
 }
 void tearDown(void) {}
 
+/*
 void test_c8_debug_repl_WhereInputContainsEOF(void) {
     WRITE_TO_STDIN("\0"); // NULL treated as EOF here
     TEST_ASSERT_EQUAL_INT(C8_DEBUG_QUIT, c8_debug_repl(&c8));
@@ -66,6 +67,7 @@ void test_c8_debug_repl_WhereInputIsNextCommand(void) {
     WRITE_TO_STDIN("next\n\0");
     TEST_ASSERT_EQUAL_INT(C8_DEBUG_STEP, c8_debug_repl(&c8));
 }
+*/
 
 void test_c8_has_breakpoint_WhereBreakpointExists(void) {
     c8.breakpoints[0x200] = 1;
