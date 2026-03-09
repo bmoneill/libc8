@@ -90,21 +90,6 @@ void test_c8_load_rom_WhereFileDoesNotExist(void) {
     TEST_ASSERT_EQUAL_INT(C8_IO_EXCEPTION, result);
 }
 
-void test_c8_simulate_WithDebugModeEnabledOnStart(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
-}
-
-void test_c8_simulate_WithDebugModeEnabledDuringExecution(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
-}
-
-void test_c8_simulate_WithKeyboardInput(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
-}
-
 void test_c8_validate_WithValidC8(void) {
     C8* c8_allocd = c8_init(NULL, 0);
     TEST_ASSERT_EQUAL_INT(0, c8_validate(c8_allocd));

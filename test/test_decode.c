@@ -34,7 +34,7 @@ int         b     = 0;
 int         nnn   = 0;
 const int   label = 1;
 
-extern void find_labels(FILE*, uint8_t*);
+extern void c8_find_labels(FILE*, uint8_t*);
 
 void        setUp(void) {
     srand(time(NULL));
@@ -430,6 +430,9 @@ void test_c8_jump(void) {
 }
 
 void test_c8_find_labels(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_INT(1, 2);
+    FILE*   input = fopen(get_path("1dcell.ch8"), "rb");
+    uint8_t labelMap[128];
+    c8_find_labels(input, labelMap);
+    fclose(input);
+    TEST_ASSERT_NOT_EQUAL_INT(0, labelMap[0]);
 }
