@@ -120,7 +120,7 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
                     }
                     switch (c8_formats[i].ptype[j]) {
                     case C8_SYM_INT12:
-                        if (label_map[nnn]) {
+                        if (label_map && label_map[nnn]) {
                             snprintf(result + idx,
                                      C8_RESULT_SIZE - idx,
                                      " label%d",
