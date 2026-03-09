@@ -112,6 +112,8 @@ $(document).ready(function(){initNavTree('encode_8c.html',''); initResizable(); 
 Macros</h2></td></tr>
 <tr class="memitem:a16e027ed946c00a879920dabaf8e8058"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8c.html#a16e027ed946c00a879920dabaf8e8058">VERBOSE_PRINT</a>(a, ...)</td></tr>
 <tr class="separator:a16e027ed946c00a879920dabaf8e8058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b690e4615ca80a57e39f040850a84a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="encode_8c.html#a36b690e4615ca80a57e39f040850a84a">C8_ENCODE_CLEANUP</a></td></tr>
+<tr class="separator:a36b690e4615ca80a57e39f040850a84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -137,6 +139,27 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base assembler code </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a36b690e4615ca80a57e39f040850a84a" name="a36b690e4615ca80a57e39f040850a84a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36b690e4615ca80a57e39f040850a84a">&#9670;&#160;</a></span>C8_ENCODE_CLEANUP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define C8_ENCODE_CLEANUP</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    free(scpy);                                                                                    \</div>
+<div class="line">    free(symbols.s);                                                                               \</div>
+<div class="line">    free(labels.l);                                                                                \</div>
+<div class="line">    free(<a class="code hl_variable" href="encode_8c.html#a179391db175aa866ebcd9ddbc9c3d212">c8_lines</a>);                                                                                \</div>
+<div class="line">    free(<a class="code hl_variable" href="encode_8c.html#aee4570db439df7f596832d56af34219b">c8_linesUnformatted</a>);</div>
+<div class="ttc" id="aencode_8c_html_a179391db175aa866ebcd9ddbc9c3d212"><div class="ttname"><a href="encode_8c.html#a179391db175aa866ebcd9ddbc9c3d212">c8_lines</a></div><div class="ttdeci">char ** c8_lines</div><div class="ttdoc">Source code (will be manipulated when encoding)</div><div class="ttdef"><b>Definition:</b> encode.c:36</div></div>
+<div class="ttc" id="aencode_8c_html_aee4570db439df7f596832d56af34219b"><div class="ttname"><a href="encode_8c.html#aee4570db439df7f596832d56af34219b">c8_linesUnformatted</a></div><div class="ttdeci">char ** c8_linesUnformatted</div><div class="ttdoc">Source code (will not be manipulated when encoding)</div><div class="ttdef"><b>Definition:</b> encode.c:37</div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a16e027ed946c00a879920dabaf8e8058" name="a16e027ed946c00a879920dabaf8e8058"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a16e027ed946c00a879920dabaf8e8058">&#9670;&#160;</a></span>VERBOSE_PRINT</h2>
 

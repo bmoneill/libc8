@@ -1,5 +1,6 @@
 var encode_8c =
 [
+    [ "C8_ENCODE_CLEANUP", "encode_8c.html#a36b690e4615ca80a57e39f040850a84a", null ],
     [ "VERBOSE_PRINT", "encode_8c.html#a16e027ed946c00a879920dabaf8e8058", null ],
     [ "c8_encode", "encode_8c.html#ac3e1d3347742cd4908266fd0fb50c7c9", null ],
     [ "c8_remove_comment", "encode_8c.html#aeeff9f6ca963924285235b500a1e2054", null ],

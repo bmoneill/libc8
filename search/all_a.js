@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['l_0',['l',['../structC8__LabelList.html#a00e2b8d541c2a39a4bee72303c5e464e',1,'C8_LabelList']]],
-  ['len_1',['len',['../structC8__LabelList.html#afed088663f8704004425cdae2120b9b3',1,'C8_LabelList::len()'],['../structC8__SymbolList.html#afed088663f8704004425cdae2120b9b3',1,'C8_SymbolList::len()']]],
-  ['libc8_2',['libc8',['../index.html',1,'']]],
-  ['line_3',['line',['../structC8__Instruction.html#a41ebd28ef1d7c6ade45642cb6acc1039',1,'C8_Instruction']]],
-  ['ln_4',['ln',['../structC8__Symbol.html#accee38f3ab1694807a1f9e71db1cd32b',1,'C8_Symbol']]]
+  ['mem_0',['mem',['../structC8.html#a84c6959d25e97453ac31ae2d4263986b',1,'C8']]],
+  ['message_1',['message',['../structC8__Exception.html#a254bf0858da09c96a48daf64404eb4f8',1,'C8_Exception']]],
+  ['mode_2',['mode',['../structC8.html#a1ea5d0cb93f22f7d0fdf804bd68c3326',1,'C8::mode()'],['../structC8__Display.html#a37e90f5e3bd99fac2021fb3a326607d4',1,'C8_Display::mode()']]]
 ];

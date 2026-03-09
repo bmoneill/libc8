@@ -143,6 +143,7 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>C8_CMD_SET&#160;:&#160;<a class="el" href="debug_8h.html#a989e78ad6e241d7dbe20dfbce3d0364da4be6d1ed38e30af291e2a40e50ab7e7f">debug.h</a></li>
 <li>c8_cmds&#160;:&#160;<a class="el" href="debug_8c.html#a4a7668668a6a4c82d6a08d33c60dc69e">debug.c</a></li>
 <li>C8_CommandIdentifier&#160;:&#160;<a class="el" href="debug_8h.html#a989e78ad6e241d7dbe20dfbce3d0364d">debug.h</a></li>
+<li>C8_DEBUG&#160;:&#160;<a class="el" href="chip8_8c.html#ac658875b0fad106be1da2f656b9d20ae">chip8.c</a></li>
 <li>C8_DEBUG_CONTINUE&#160;:&#160;<a class="el" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5caddb58edf2ca2f8a283cebb8e3dbff5f8">debug.h</a></li>
 <li>C8_DEBUG_HELP_STRING&#160;:&#160;<a class="el" href="debug_8h.html#abf516ab66b6e3e913e5bd640e5742276">debug.h</a></li>
 <li>C8_DEBUG_QUIT&#160;:&#160;<a class="el" href="debug_8h.html#ae6e8d9ce1c24d1140b3b35bc8881dc5cad94cd2a88e788b64dfa68c8fb4e9f6c9">debug.h</a></li>
@@ -155,26 +156,22 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>C8_DECODE_PRINT_ADDRESSES&#160;:&#160;<a class="el" href="decode_8h.html#aa656d70570e455f29c44e52d9462a33e">decode.h</a></li>
 <li>C8_DEFAULT_WINDOW_HEIGHT&#160;:&#160;<a class="el" href="graphics_8h.html#a86e1f0d52149e286b68944652beab113">graphics.h</a></li>
 <li>C8_DEFAULT_WINDOW_WIDTH&#160;:&#160;<a class="el" href="graphics_8h.html#a78e81e94e944a8f94ed811f4eeaf3286">graphics.h</a></li>
+<li>C8_DEFINE_LABELS&#160;:&#160;<a class="el" href="decode_8c.html#a3d40409071e08c40c743056a99d733ea">decode.c</a></li>
 <li>c8_deinit()&#160;:&#160;<a class="el" href="chip8_8c.html#a52762f8a3c940953b944fe5e2a25a740">chip8.c</a>, <a class="el" href="chip8_8h.html#a2d3a7051c6137089c14b4f06b806cec8">chip8.h</a></li>
-<li>c8_deinit_graphics()&#160;:&#160;<a class="el" href="graphics__sdl2_8c.html#a04f712dc6e338364ae5e43e0b6ae9762">graphics_sdl2.c</a>, <a class="el" href="graphics_8h.html#a04f712dc6e338364ae5e43e0b6ae9762">graphics.h</a>, <a class="el" href="graphics_8c.html#a04f712dc6e338364ae5e43e0b6ae9762">graphics.c</a></li>
+<li>c8_deinit_graphics()&#160;:&#160;<a class="el" href="graphics_8c.html#a1895f5efe875cbdbf9a61259e26f9ad5">graphics.c</a>, <a class="el" href="graphics_8h.html#a1895f5efe875cbdbf9a61259e26f9ad5">graphics.h</a>, <a class="el" href="graphics__sdl2_8c.html#a1895f5efe875cbdbf9a61259e26f9ad5">graphics_sdl2.c</a></li>
 <li>C8_DISPLAYMODE_HIGH&#160;:&#160;<a class="el" href="graphics_8h.html#a886c46378d83eba0138b70f716ce76f2">graphics.h</a></li>
 <li>C8_DISPLAYMODE_LOW&#160;:&#160;<a class="el" href="graphics_8h.html#a93b44cde84096f87611becabba3a61ac">graphics.h</a></li>
-<li>C8_DUPLICATE_LABEL_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ad59e88c91356fdbf9f753d3c8644cf83">exception.h</a></li>
-<li>C8_DUPLICATE_LABEL_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a0730a52505e899a3422c91355882b6cc">exception.c</a></li>
 <li>c8_encode()&#160;:&#160;<a class="el" href="encode_8c.html#ac3e1d3347742cd4908266fd0fb50c7c9">encode.c</a>, <a class="el" href="encode_8h.html#ad2b230eb5e830668bd198f331fc39d32">encode.h</a></li>
+<li>C8_ENCODE_CLEANUP&#160;:&#160;<a class="el" href="encode_8c.html#a36b690e4615ca80a57e39f040850a84a">encode.c</a></li>
 <li>C8_ENCODE_MAX_LINE_LENGTH&#160;:&#160;<a class="el" href="encode_8h.html#a629720d47ee3ec426685eb44f234a681">encode.h</a></li>
 <li>C8_ENCODE_MAX_LINES&#160;:&#160;<a class="el" href="encode_8h.html#aaa5480924e97b4150b91ad05e00192c2">encode.h</a></li>
 <li>C8_ENCODE_MAX_WORDS&#160;:&#160;<a class="el" href="encode_8h.html#ae5114adf4c471dfa0fe6ae7d2aa0f5fd">encode.h</a></li>
 <li>C8_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a3049a797967abc96f1861c63dbef01f3">exception.h</a></li>
-<li>c8_exception&#160;:&#160;<a class="el" href="exception_8h.html#a220454f62a07328378e890bf6f2488b0">exception.h</a>, <a class="el" href="exception_8c.html#a220454f62a07328378e890bf6f2488b0">exception.c</a></li>
+<li>c8_exception&#160;:&#160;<a class="el" href="exception_8c.html#a220454f62a07328378e890bf6f2488b0">exception.c</a>, <a class="el" href="exception_8h.html#a220454f62a07328378e890bf6f2488b0">exception.h</a></li>
 <li>C8_EXCEPTION_MESSAGE_SIZE&#160;:&#160;<a class="el" href="exception_8h.html#abed01c912860e11b613187b5a801fd26">exception.h</a></li>
 <li>C8_ExceptionCode&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480">exception.h</a></li>
 <li>c8_exceptions&#160;:&#160;<a class="el" href="exception_8c.html#a01a182af7759f1fb977e2d3140fd80d8">exception.c</a></li>
 <li>C8_EXPAND&#160;:&#160;<a class="el" href="common_8h.html#a0c845c4d46fd2ee04977be885e156265">common.h</a></li>
-<li>C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a929af25c310f19442ef4b27593b69d97">exception.h</a></li>
-<li>C8_FAILED_GRAPHICS_INITIALIZATION_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a355033c16b5c05303b6c56205f38079b">exception.c</a></li>
-<li>C8_FILE_TOO_BIG_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae12c50afda02689ba17a4f46b6995c9b">exception.h</a></li>
-<li>C8_FILE_TOO_BIG_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#ada243640e464ef056a82be07917d684a">exception.c</a></li>
 <li>C8_FLAG_DEBUG&#160;:&#160;<a class="el" href="chip8_8h.html#a1e452f92855b0431bf69159754d29a68">chip8.h</a></li>
 <li>C8_FLAG_QUIRK_BITWISE&#160;:&#160;<a class="el" href="chip8_8h.html#a974238d8fa061c50c721fdcd4f5726e1">chip8.h</a></li>
 <li>C8_FLAG_QUIRK_DRAW&#160;:&#160;<a class="el" href="chip8_8h.html#ae028401e02e00f6bd3df02fdc0a08087">chip8.h</a></li>
@@ -185,10 +182,12 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>C8_FONT_START&#160;:&#160;<a class="el" href="font_8h.html#aa9e1941b97eb8b96c2c89b7283429793">font.h</a></li>
 <li>c8_fontNames&#160;:&#160;<a class="el" href="font_8c.html#ac677f9c5dce232b0682cafb3c0c29554">font.c</a>, <a class="el" href="font_8h.html#ac677f9c5dce232b0682cafb3c0c29554">font.h</a></li>
 <li>c8_formats&#160;:&#160;<a class="el" href="symbol_8c.html#a6222302c1ea220b15f85a73b33db9a70">symbol.c</a>, <a class="el" href="symbol_8h.html#a6222302c1ea220b15f85a73b33db9a70">symbol.h</a></li>
-<li>c8_get_pixel()&#160;:&#160;<a class="el" href="graphics_8h.html#a3249f29e5cb1a8d42f7d8c833e0581a5">graphics.h</a>, <a class="el" href="graphics_8c.html#adeb29d95e708ccd5bd777f8407bfaf1e">graphics.c</a></li>
+<li>c8_get_pixel()&#160;:&#160;<a class="el" href="graphics_8c.html#adeb29d95e708ccd5bd777f8407bfaf1e">graphics.c</a>, <a class="el" href="graphics_8h.html#a3249f29e5cb1a8d42f7d8c833e0581a5">graphics.h</a></li>
+<li>C8_GRAPHICS_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a500b085601a623c03df828509099651c">exception.h</a></li>
+<li>C8_GRAPHICS_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a565150c296ad9c9b25da8eb21d6375c4">exception.c</a></li>
 <li>c8_handle_exception()&#160;:&#160;<a class="el" href="exception_8c.html#ac0b1dd47826fe873e66fc467f5a46738">exception.c</a>, <a class="el" href="exception_8h.html#aea5e356b64a2e9b93342fb3b130b084f">exception.h</a></li>
 <li>c8_has_breakpoint()&#160;:&#160;<a class="el" href="debug_8c.html#a8820f4a7978cd01c5ae49e3c1022577d">debug.c</a>, <a class="el" href="debug_8h.html#a3b0ffcf00f0287c892a8a921021f0a82">debug.h</a></li>
-<li>c8_hex_to_int()&#160;:&#160;<a class="el" href="util_8c.html#a7df8c982f85efbf45b2ede99f43e128a">util.c</a>, <a class="el" href="util_8h.html#afed85962255262f3da3eaa60e66ec744">util.h</a></li>
+<li>c8_hex_to_int()&#160;:&#160;<a class="el" href="util_8h.html#afed85962255262f3da3eaa60e66ec744">util.h</a>, <a class="el" href="util_8c.html#a7df8c982f85efbf45b2ede99f43e128a">util.c</a></li>
 <li>C8_HIGH_DISPLAY_HEIGHT&#160;:&#160;<a class="el" href="graphics_8h.html#a9308d4c8ffbc14327d6b9e105e62cacd">graphics.h</a></li>
 <li>C8_HIGH_DISPLAY_WIDTH&#160;:&#160;<a class="el" href="graphics_8h.html#adc869b2a189822edf5c89d1e9ce20a16">graphics.h</a></li>
 <li>C8_HIGH_FONT_START&#160;:&#160;<a class="el" href="font_8h.html#a2bb9752566cb00e344134dc57a4e9cb4">font.h</a></li>
@@ -219,51 +218,39 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>C8_I_SUB&#160;:&#160;<a class="el" href="symbol_8h.html#a07a28f1ba52034ec968e5a1da7712b5ba47d22ecad29e2c1283876e70799b87b4">symbol.h</a></li>
 <li>C8_I_SUBN&#160;:&#160;<a class="el" href="symbol_8h.html#a07a28f1ba52034ec968e5a1da7712b5bae2a9b6a935eac1ce514633fd67923126">symbol.h</a></li>
 <li>C8_I_XOR&#160;:&#160;<a class="el" href="symbol_8h.html#a07a28f1ba52034ec968e5a1da7712b5ba928f72c1595f4a5ec628678b98a801bd">symbol.h</a></li>
-<li>c8_identifierStrings&#160;:&#160;<a class="el" href="symbol_8c.html#a7db6741810ae8ae021411544250757a1">symbol.c</a>, <a class="el" href="symbol_8h.html#a7db6741810ae8ae021411544250757a1">symbol.h</a></li>
+<li>c8_identifierStrings&#160;:&#160;<a class="el" href="symbol_8h.html#a7db6741810ae8ae021411544250757a1">symbol.h</a>, <a class="el" href="symbol_8c.html#a7db6741810ae8ae021411544250757a1">symbol.c</a></li>
 <li>c8_init()&#160;:&#160;<a class="el" href="chip8_8c.html#ab5b767180bfc27942c402f8303ec5c01">chip8.c</a>, <a class="el" href="chip8_8h.html#a2211781a0a46f75683c708be272b6af9">chip8.h</a></li>
-<li>c8_init_graphics()&#160;:&#160;<a class="el" href="graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4">graphics.h</a>, <a class="el" href="graphics__sdl2_8c.html#a10c02b36be48214fec64cc6a9d4f20e4">graphics_sdl2.c</a>, <a class="el" href="graphics_8c.html#a10c02b36be48214fec64cc6a9d4f20e4">graphics.c</a></li>
+<li>c8_init_graphics()&#160;:&#160;<a class="el" href="graphics_8c.html#a5db679b42f3f7ce5aec081ae83fa8005">graphics.c</a>, <a class="el" href="graphics_8h.html#a5db679b42f3f7ce5aec081ae83fa8005">graphics.h</a>, <a class="el" href="graphics__sdl2_8c.html#a5db679b42f3f7ce5aec081ae83fa8005">graphics_sdl2.c</a></li>
 <li>C8_INLINE&#160;:&#160;<a class="el" href="common_8h.html#a8bed8e40f510ca0765fcb6fca5a11e82">common.h</a></li>
 <li>C8_INSTRUCTION_COUNT&#160;:&#160;<a class="el" href="symbol_8h.html#aeedd46673751a90d246ee61240271cb0">symbol.h</a></li>
 <li>C8_InstructionIdentifier&#160;:&#160;<a class="el" href="symbol_8h.html#a07a28f1ba52034ec968e5a1da7712b5b">symbol.h</a></li>
 <li>c8_instructionStrings&#160;:&#160;<a class="el" href="symbol_8c.html#aad872539439157dacd82ef1ab739520d">symbol.c</a>, <a class="el" href="symbol_8h.html#aad872539439157dacd82ef1ab739520d">symbol.h</a></li>
-<li>C8_INVALID_ARGUMENT_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5062f4976d83e80bc391406c54a223f7">exception.h</a></li>
-<li>C8_INVALID_ARGUMENT_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a70302461c77c1b933be4a1cccdbe2d37">exception.c</a></li>
-<li>C8_INVALID_CLOCK_SPEED_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a0868c59b7cbe963e7b2323ac6e939272">exception.h</a></li>
-<li>C8_INVALID_CLOCK_SPEED_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a6b509376252d0b80be75f917ad6f8c9d">exception.c</a></li>
-<li>C8_INVALID_COLOR_PALETTE_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9e3f63e708ac14bf5921f70ed7bf54ac">exception.h</a></li>
-<li>C8_INVALID_COLOR_PALETTE_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a5b9e21ba5b4f196a6ab4c54a4fb05eca">exception.c</a></li>
-<li>C8_INVALID_FONT_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7952be3cdc38b30f8c3a9fa0ae8a6e7c">exception.h</a></li>
-<li>C8_INVALID_FONT_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#acce6a15178cebe54e17dfbd2caec5d6f">exception.c</a></li>
-<li>C8_INVALID_INSTRUCTION_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae5dbb80093b84ee38c5f56f52d6afd53">exception.h</a></li>
-<li>C8_INVALID_INSTRUCTION_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a926bf99e610c65000fa88ce0142f7860">exception.c</a></li>
-<li>C8_INVALID_QUIRK_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ae66de38a1743bd708966ef5393fa0a2c">exception.h</a></li>
-<li>C8_INVALID_QUIRK_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a44fadbaffd4abfc7f8f1b078d8fade65">exception.c</a></li>
+<li>C8_INVALID_PARAMETER_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ad9b280a6e9931243eb9725175fd2bed5">exception.h</a></li>
+<li>C8_INVALID_PARAMETER_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a4e30c6790bf346117e337e97fdc6c9b9">exception.c</a></li>
 <li>C8_INVALID_STATE_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714">exception.h</a></li>
 <li>C8_INVALID_STATE_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a33614b30cf35a9a999f34f3056fbe3fb">exception.c</a></li>
-<li>C8_INVALID_SYMBOL_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a409377cb39089af6be279ebfbea08051">exception.h</a></li>
-<li>C8_INVALID_SYMBOL_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a57588907fe171f31bd4724efd98bf099">exception.c</a></li>
+<li>C8_IO_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a1ec38c66296de28fda68a7444e4a6b35">exception.h</a></li>
+<li>C8_IO_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#ac3b411658aac2fa37907fffdd63df956">exception.c</a></li>
 <li>c8_is_comment()&#160;:&#160;<a class="el" href="symbol_8c.html#ae7711841516daa7c429355bb1eb4c208">symbol.c</a>, <a class="el" href="symbol_8h.html#a7a84b5c98e5e24afbe61615c379d6048">symbol.h</a></li>
-<li>c8_is_db()&#160;:&#160;<a class="el" href="symbol_8c.html#adffceb7f4c03dd4d1c6243aa0141e6d8">symbol.c</a>, <a class="el" href="symbol_8h.html#aa1454d6af7addd3e2701a96d18fadfff">symbol.h</a></li>
+<li>c8_is_db()&#160;:&#160;<a class="el" href="symbol_8h.html#aa1454d6af7addd3e2701a96d18fadfff">symbol.h</a>, <a class="el" href="symbol_8c.html#adffceb7f4c03dd4d1c6243aa0141e6d8">symbol.c</a></li>
 <li>c8_is_ds()&#160;:&#160;<a class="el" href="symbol_8c.html#a464f8e6acde38b0dc1fc704f6030b431">symbol.c</a>, <a class="el" href="symbol_8h.html#a85c9755d6ccc8f30dff984694bd1e7c3">symbol.h</a></li>
-<li>c8_is_dw()&#160;:&#160;<a class="el" href="symbol_8h.html#a097c2f443c14d050397706f0e3741d83">symbol.h</a>, <a class="el" href="symbol_8c.html#ad86e2d53431173a664b8b75edb302125">symbol.c</a></li>
+<li>c8_is_dw()&#160;:&#160;<a class="el" href="symbol_8c.html#ad86e2d53431173a664b8b75edb302125">symbol.c</a>, <a class="el" href="symbol_8h.html#a097c2f443c14d050397706f0e3741d83">symbol.h</a></li>
 <li>c8_is_instruction()&#160;:&#160;<a class="el" href="symbol_8c.html#a6f456408e3650439d8e0af8cf8e8d5d7">symbol.c</a>, <a class="el" href="symbol_8h.html#a6f2481de6e539973151fc0ee5f982636">symbol.h</a></li>
 <li>c8_is_label()&#160;:&#160;<a class="el" href="symbol_8c.html#a9c024562e610f6ab3b00d5919afe6df9">symbol.c</a>, <a class="el" href="symbol_8h.html#a0cae56b0c178caeb5728c7d34c0dc296">symbol.h</a></li>
 <li>c8_is_label_definition()&#160;:&#160;<a class="el" href="symbol_8c.html#a96859a378e19ca52c6b3a15261316fba">symbol.c</a>, <a class="el" href="symbol_8h.html#a736079c0e890e40f96a9f36a5f05fe9d">symbol.h</a></li>
 <li>c8_is_register()&#160;:&#160;<a class="el" href="symbol_8c.html#add5780c99b6aeae926d2ecea04e5fbbf">symbol.c</a>, <a class="el" href="symbol_8h.html#a2f9c1e5da3845a8ad618a05d5583a5e2">symbol.h</a></li>
 <li>c8_is_reserved_identifier()&#160;:&#160;<a class="el" href="symbol_8c.html#ad2c2ecb49f2e9c7a22a73186d813edf4">symbol.c</a>, <a class="el" href="symbol_8h.html#ab82a682eb00dc9edfa2a3a93dab3598f">symbol.h</a></li>
-<li>c8_jump()&#160;:&#160;<a class="el" href="decode_8h.html#a583f69b440a00133933e6b467ab7df86">decode.h</a></li>
+<li>c8_jump()&#160;:&#160;<a class="el" href="decode_8c.html#acc7695f2a22ad4ef0f7028c1ce57b532">decode.c</a>, <a class="el" href="decode_8h.html#a583f69b440a00133933e6b467ab7df86">decode.h</a></li>
 <li>C8_KK&#160;:&#160;<a class="el" href="common_8h.html#adbfd840282045dd988d09888d6f62b8d">common.h</a></li>
 <li>C8_LABEL_CEILING&#160;:&#160;<a class="el" href="symbol_8h.html#a62470248ab411d816b5fb82a1ae88fd9">symbol.h</a></li>
 <li>C8_LABEL_IDENTIFIER_SIZE&#160;:&#160;<a class="el" href="symbol_8h.html#a2423eb79720a5e564e68f3dece47d695">symbol.h</a></li>
 <li>c8_lineCount&#160;:&#160;<a class="el" href="encode_8c.html#af59c773541b0e4272a68600dd0dea514">encode.c</a>, <a class="el" href="encode_8h.html#af59c773541b0e4272a68600dd0dea514">encode.h</a></li>
 <li>c8_lines&#160;:&#160;<a class="el" href="encode_8c.html#a179391db175aa866ebcd9ddbc9c3d212">encode.c</a>, <a class="el" href="encode_8h.html#a179391db175aa866ebcd9ddbc9c3d212">encode.h</a></li>
 <li>c8_linesUnformatted&#160;:&#160;<a class="el" href="encode_8c.html#aee4570db439df7f596832d56af34219b">encode.c</a>, <a class="el" href="encode_8h.html#aee4570db439df7f596832d56af34219b">encode.h</a></li>
-<li>C8_LOAD_FILE_FAILURE_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5628e8f6e83af54b4c7fef49e1a80abf">exception.h</a></li>
-<li>C8_LOAD_FILE_FAILURE_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a6e1550c06acaa7a359f448c168a42047">exception.c</a></li>
-<li>c8_load_palette_f()&#160;:&#160;<a class="el" href="chip8_8h.html#a8e7f563085a76c3f452e5b80e94f93c3">chip8.h</a>, <a class="el" href="chip8_8c.html#a1e2f5307955dcd17790add6e448bcdac">chip8.c</a></li>
+<li>c8_load_palette_f()&#160;:&#160;<a class="el" href="chip8_8c.html#a1e2f5307955dcd17790add6e448bcdac">chip8.c</a>, <a class="el" href="chip8_8h.html#a8e7f563085a76c3f452e5b80e94f93c3">chip8.h</a></li>
 <li>c8_load_palette_s()&#160;:&#160;<a class="el" href="chip8_8c.html#a8c1f4267b532f7b56f202726c4d42394">chip8.c</a>, <a class="el" href="chip8_8h.html#a3b6cfea2290e01db9df0a91acf2ae24b">chip8.h</a></li>
-<li>c8_load_quirks()&#160;:&#160;<a class="el" href="chip8_8c.html#a201c27b7ab103769cafe551d2b6b07dd">chip8.c</a>, <a class="el" href="chip8_8h.html#a3ce8cc1f31e4c1412e31a3d00b03452d">chip8.h</a></li>
-<li>c8_load_rom()&#160;:&#160;<a class="el" href="chip8_8c.html#a8980b0fd7901592650048de2fd25986c">chip8.c</a>, <a class="el" href="chip8_8h.html#adfb38610f49e9df8b5162256fd136ac2">chip8.h</a></li>
+<li>c8_load_quirks()&#160;:&#160;<a class="el" href="chip8_8c.html#a07e2e08afb21361e0cb5b62424d6bd78">chip8.c</a>, <a class="el" href="chip8_8h.html#a800d0c19d6608d0d28a5df0694833294">chip8.h</a></li>
+<li>c8_load_rom()&#160;:&#160;<a class="el" href="chip8_8h.html#adfb38610f49e9df8b5162256fd136ac2">chip8.h</a>, <a class="el" href="chip8_8c.html#a8980b0fd7901592650048de2fd25986c">chip8.c</a></li>
 <li>C8_LOW_DISPLAY_HEIGHT&#160;:&#160;<a class="el" href="graphics_8h.html#aaa2f365dfe9bf72cf557b796c692bde7">graphics.h</a></li>
 <li>C8_LOW_DISPLAY_WIDTH&#160;:&#160;<a class="el" href="graphics_8h.html#a142ae690b02e240e2a678485173ca651">graphics.h</a></li>
 <li>C8_MEMORY_ALLOCATION_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a526c94418797d663a630f29b4fda9838">exception.h</a></li>
@@ -272,16 +259,18 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>C8_MODE_CHIP8&#160;:&#160;<a class="el" href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">chip8.h</a></li>
 <li>C8_MODE_SCHIP&#160;:&#160;<a class="el" href="chip8_8h.html#a6c0cad8caee464e16f998a2d0a2c37c3">chip8.h</a></li>
 <li>C8_MODE_XOCHIP&#160;:&#160;<a class="el" href="chip8_8h.html#acf75ba93ff6438063ec6a493e004429d">chip8.h</a></li>
-<li>c8_next_symbol()&#160;:&#160;<a class="el" href="symbol_8c.html#ad39ee6152779dd550480ff889023ab22">symbol.c</a>, <a class="el" href="symbol_8h.html#abf325074e4f01d1de3aa84703508f7fc">symbol.h</a></li>
+<li>c8_next_symbol()&#160;:&#160;<a class="el" href="symbol_8h.html#abf325074e4f01d1de3aa84703508f7fc">symbol.h</a>, <a class="el" href="symbol_8c.html#ad39ee6152779dd550480ff889023ab22">symbol.c</a></li>
 <li>C8_NNN&#160;:&#160;<a class="el" href="common_8h.html#af7b022502148c2b9883507a5be38e480">common.h</a></li>
 <li>c8_parse_instruction()&#160;:&#160;<a class="el" href="instruction_8c.html#ae80c4c97bf5dcad02f450ac800e9a019">instruction.c</a>, <a class="el" href="instruction_8h.html#ae80c4c97bf5dcad02f450ac800e9a019">instruction.h</a></li>
-<li>c8_parse_int()&#160;:&#160;<a class="el" href="util_8h.html#a8a99f1d973a44924cef21098aeebe12a">util.h</a>, <a class="el" href="util_8c.html#a16ff0557197523227c41c191a09b2d2c">util.c</a></li>
+<li>c8_parse_int()&#160;:&#160;<a class="el" href="util_8c.html#a16ff0557197523227c41c191a09b2d2c">util.c</a>, <a class="el" href="util_8h.html#a8a99f1d973a44924cef21098aeebe12a">util.h</a></li>
 <li>c8_populate_labels()&#160;:&#160;<a class="el" href="symbol_8c.html#abbac0afd6d97f6c4c50a822853bc22ae">symbol.c</a>, <a class="el" href="symbol_8h.html#a173b354bf32d1d6266e31f513180b7ce">symbol.h</a></li>
-<li>c8_print_fonts()&#160;:&#160;<a class="el" href="font_8c.html#aa60ab998eb2c236840be2c86bfe2f036">font.c</a>, <a class="el" href="font_8h.html#a3fae20edeb0a7b1f45872c297e63e85c">font.h</a></li>
+<li>C8_PRINT_ADDRESSES&#160;:&#160;<a class="el" href="decode_8c.html#acf260c821a4bd65200b578f40e3aad2a">decode.c</a></li>
+<li>c8_print_fonts()&#160;:&#160;<a class="el" href="font_8h.html#a3fae20edeb0a7b1f45872c297e63e85c">font.h</a>, <a class="el" href="font_8c.html#aa60ab998eb2c236840be2c86bfe2f036">font.c</a></li>
 <li>C8_PROG_START&#160;:&#160;<a class="el" href="common_8h.html#ad31055032e613d8a21356ece8394773d">common.h</a></li>
-<li>c8_remove_comment()&#160;:&#160;<a class="el" href="encode_8c.html#aeeff9f6ca963924285235b500a1e2054">encode.c</a>, <a class="el" href="encode_8h.html#adbb58faa80d2f7039282d4041621e2c0">encode.h</a></li>
-<li>c8_render()&#160;:&#160;<a class="el" href="graphics_8c.html#a7e4bf757cd9e349b6d33d44a0d09ab33">graphics.c</a>, <a class="el" href="graphics_8h.html#a14dbc786812ddb26546b6adb9f85d888">graphics.h</a>, <a class="el" href="graphics__sdl2_8c.html#a7e4bf757cd9e349b6d33d44a0d09ab33">graphics_sdl2.c</a></li>
-<li>c8_resolve_labels()&#160;:&#160;<a class="el" href="symbol_8h.html#a40913e22807a516d5d82e2024cb3820c">symbol.h</a>, <a class="el" href="symbol_8c.html#affd5cdb048f71bdf7c6a8cdf8ae1845f">symbol.c</a></li>
+<li>c8_remove_comment()&#160;:&#160;<a class="el" href="encode_8h.html#adbb58faa80d2f7039282d4041621e2c0">encode.h</a>, <a class="el" href="encode_8c.html#aeeff9f6ca963924285235b500a1e2054">encode.c</a></li>
+<li>c8_render()&#160;:&#160;<a class="el" href="graphics_8c.html#ae41efafd2113eaa0fc49d126930c1b1a">graphics.c</a>, <a class="el" href="graphics_8h.html#a16f26311ec06affdc694b5759771aa7a">graphics.h</a>, <a class="el" href="graphics__sdl2_8c.html#ae41efafd2113eaa0fc49d126930c1b1a">graphics_sdl2.c</a></li>
+<li>c8_resolve_labels()&#160;:&#160;<a class="el" href="symbol_8c.html#affd5cdb048f71bdf7c6a8cdf8ae1845f">symbol.c</a>, <a class="el" href="symbol_8h.html#a40913e22807a516d5d82e2024cb3820c">symbol.h</a></li>
+<li>C8_RESULT_SIZE&#160;:&#160;<a class="el" href="decode_8c.html#a20cabb10640e3bdee1b092584a3ffb13">decode.c</a></li>
 <li>C8_RGB_B&#160;:&#160;<a class="el" href="graphics__sdl2_8c.html#a7de0ec774b6ef7f950617ebac19fea60">graphics_sdl2.c</a></li>
 <li>C8_RGB_G&#160;:&#160;<a class="el" href="graphics__sdl2_8c.html#a33e1db365ab3fdadbd9e9afceb7d0ba5">graphics_sdl2.c</a></li>
 <li>C8_RGB_R&#160;:&#160;<a class="el" href="graphics__sdl2_8c.html#a5900d64245d0dd36d7818d4a7e1a8dfb">graphics_sdl2.c</a></li>
@@ -326,9 +315,10 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>c8_set_big_font()&#160;:&#160;<a class="el" href="font_8c.html#a95b80629df02c9c98a12d7a2c930f7ab">font.c</a>, <a class="el" href="font_8h.html#a689c13bbd47684072397243ea5989281">font.h</a></li>
 <li>c8_set_fonts()&#160;:&#160;<a class="el" href="font_8c.html#ade9621bf169032b2e66df7b10970b652">font.c</a>, <a class="el" href="font_8h.html#ad1ff1edcc6174ba37df7c5da80de62a5">font.h</a></li>
 <li>c8_set_fonts_s()&#160;:&#160;<a class="el" href="font_8c.html#ae4135a656d1a96a064e3f4cc90483a2d">font.c</a>, <a class="el" href="font_8h.html#a1d6f9576f44380d61b716ca50a727e06">font.h</a></li>
+<li>C8_SET_RENDER_COLOR&#160;:&#160;<a class="el" href="graphics__sdl2_8c.html#a6d8900a6ea5a3fdf8825ab7381ce1802">graphics_sdl2.c</a></li>
 <li>c8_set_small_font()&#160;:&#160;<a class="el" href="font_8c.html#aeae697735273c594e3c126fea1e9fd26">font.c</a>, <a class="el" href="font_8h.html#af0d797fa5f42f4d6b78321f7014a41dc">font.h</a></li>
 <li>c8_shift()&#160;:&#160;<a class="el" href="symbol_8c.html#a234ca27111d1dc0642675cefec195602">symbol.c</a>, <a class="el" href="symbol_8h.html#a9b28baf6684aa6113e005da5365bff20">symbol.h</a></li>
-<li>c8_simulate()&#160;:&#160;<a class="el" href="chip8_8c.html#a03d4120716da11f4d48a8025b360e6e4">chip8.c</a>, <a class="el" href="chip8_8h.html#a85893f029a1fbf7360c0d7258366ea7f">chip8.h</a></li>
+<li>c8_simulate()&#160;:&#160;<a class="el" href="chip8_8c.html#a7fa8311797eec907da9f1ae1a770fa00">chip8.c</a>, <a class="el" href="chip8_8h.html#a6aa9c02e31496eed95855541b65a2b45">chip8.h</a></li>
 <li>C8_SmallFont&#160;:&#160;<a class="el" href="font_8h.html#ae32768e135ce8a889cc0bf9b9f874663">font.h</a></li>
 <li>C8_SMALLFONT_DREAM6800&#160;:&#160;<a class="el" href="font_8h.html#ae32768e135ce8a889cc0bf9b9f874663ade7471f4ba1d510283c7fd0ea665ac66">font.h</a></li>
 <li>C8_SMALLFONT_ETI660&#160;:&#160;<a class="el" href="font_8h.html#ae32768e135ce8a889cc0bf9b9f874663a582f2001077b9a5171352ab595592ecc">font.h</a></li>
@@ -336,15 +326,15 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>C8_SMALLFONT_OCTO&#160;:&#160;<a class="el" href="font_8h.html#ae32768e135ce8a889cc0bf9b9f874663a1dab7e66834001e39a43d1489401069d">font.h</a></li>
 <li>C8_SMALLFONT_VIP&#160;:&#160;<a class="el" href="font_8h.html#ae32768e135ce8a889cc0bf9b9f874663affc506c4bb6158f4e3833009b74b285a">font.h</a></li>
 <li>c8_smallFonts&#160;:&#160;<a class="el" href="font_8c.html#a3d870669d476fe5528cbc948635eaeec">font.c</a></li>
-<li>c8_sound_play()&#160;:&#160;<a class="el" href="graphics_8c.html#aeabec1bbe4ff6953cbd3ad4eb0ef069e">graphics.c</a>, <a class="el" href="graphics_8h.html#aeabec1bbe4ff6953cbd3ad4eb0ef069e">graphics.h</a>, <a class="el" href="graphics__sdl2_8c.html#aeabec1bbe4ff6953cbd3ad4eb0ef069e">graphics_sdl2.c</a></li>
-<li>c8_sound_stop()&#160;:&#160;<a class="el" href="graphics__sdl2_8c.html#ab4a5d4072d61da0f397cf9e8cac3d7c0">graphics_sdl2.c</a>, <a class="el" href="graphics_8h.html#ab4a5d4072d61da0f397cf9e8cac3d7c0">graphics.h</a>, <a class="el" href="graphics_8c.html#ab4a5d4072d61da0f397cf9e8cac3d7c0">graphics.c</a></li>
+<li>c8_sound_play()&#160;:&#160;<a class="el" href="graphics_8c.html#a2df22abf4cee9582afea9418393599ee">graphics.c</a>, <a class="el" href="graphics_8h.html#a2df22abf4cee9582afea9418393599ee">graphics.h</a>, <a class="el" href="graphics__sdl2_8c.html#a2df22abf4cee9582afea9418393599ee">graphics_sdl2.c</a></li>
+<li>c8_sound_stop()&#160;:&#160;<a class="el" href="graphics_8c.html#a07b609f534f35057634cae29876f0836">graphics.c</a>, <a class="el" href="graphics__sdl2_8c.html#a07b609f534f35057634cae29876f0836">graphics_sdl2.c</a>, <a class="el" href="graphics_8h.html#a07b609f534f35057634cae29876f0836">graphics.h</a></li>
 <li>C8_STACK_OVERFLOW_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627">exception.h</a></li>
 <li>C8_STACK_OVERFLOW_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a403ffac146be66c1fe6ba938d22b026b">exception.c</a></li>
 <li>C8_STACK_SIZE&#160;:&#160;<a class="el" href="chip8_8h.html#a3daa3a7dfa3561839b1d71b7691b167e">chip8.h</a></li>
 <li>C8_STACK_UNDERFLOW_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880">exception.h</a></li>
 <li>C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#abe9ff3e16df954c93e8e38ce43c692c3">exception.c</a></li>
 <li>C8_STATIC&#160;:&#160;<a class="el" href="common_8h.html#a92e85352c662d1c6b4a0e1260ae42ff8">common.h</a></li>
-<li>c8_substitute_labels()&#160;:&#160;<a class="el" href="symbol_8c.html#a10b86ac951bb5d27f443719231896261">symbol.c</a>, <a class="el" href="symbol_8h.html#a0238a50ef51e68a2e66fe6bb2cd29fac">symbol.h</a></li>
+<li>c8_substitute_labels()&#160;:&#160;<a class="el" href="symbol_8h.html#a0238a50ef51e68a2e66fe6bb2cd29fac">symbol.h</a>, <a class="el" href="symbol_8c.html#a10b86ac951bb5d27f443719231896261">symbol.c</a></li>
 <li>C8_SYM_B&#160;:&#160;<a class="el" href="symbol_8h.html#a1ed5c36399f1b9c0ea9ff3c4a8cddaa0a9150e5eef8db659536520f2769cc7a49">symbol.h</a></li>
 <li>C8_SYM_DB&#160;:&#160;<a class="el" href="symbol_8h.html#a1ed5c36399f1b9c0ea9ff3c4a8cddaa0ae03753ad2487b2b7fa79edf83c7c9458">symbol.h</a></li>
 <li>C8_SYM_DS&#160;:&#160;<a class="el" href="symbol_8h.html#a1ed5c36399f1b9c0ea9ff3c4a8cddaa0a865ed3109a03cffcad9d0ade5de26298">symbol.h</a></li>
@@ -369,14 +359,10 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>C8_SYM_V&#160;:&#160;<a class="el" href="symbol_8h.html#a1ed5c36399f1b9c0ea9ff3c4a8cddaa0a2eea8a6a307f5a6c3fe6e4559a7d6386">symbol.h</a></li>
 <li>C8_SYMBOL_CEILING&#160;:&#160;<a class="el" href="symbol_8h.html#a9b1ae4c17c33e369ba6219394e3ec562">symbol.h</a></li>
 <li>C8_SymbolIdentifier&#160;:&#160;<a class="el" href="symbol_8h.html#a1ed5c36399f1b9c0ea9ff3c4a8cddaa0">symbol.h</a></li>
-<li>c8_tick()&#160;:&#160;<a class="el" href="graphics_8h.html#a020c1df5341d906fb19266b94235f884">graphics.h</a>, <a class="el" href="graphics__sdl2_8c.html#af589590e575cd12250c33c39fc22b1f5">graphics_sdl2.c</a>, <a class="el" href="graphics_8c.html#af589590e575cd12250c33c39fc22b1f5">graphics.c</a></li>
-<li>C8_TOO_MANY_LABELS_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a5637fe6bf703e39df8b3b097d28ad276">exception.h</a></li>
-<li>C8_TOO_MANY_LABELS_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a29d77fb13943ba10612b6c3a754a9893">exception.c</a></li>
-<li>C8_TOO_MANY_SYMBOLS_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab4eff6980b381cb483fa19853b3fc386">exception.h</a></li>
-<li>C8_TOO_MANY_SYMBOLS_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#ada90de898f3da58a68976c3bb42cefd7">exception.c</a></li>
+<li>C8_SYNTAX_ERROR_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ac5f761b8a4f85aa71f898a4eea85fce8">exception.h</a></li>
+<li>C8_SYNTAX_ERROR_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a840d982213bed3b22cbfddcf26c7ceff">exception.c</a></li>
+<li>c8_tick()&#160;:&#160;<a class="el" href="graphics_8c.html#af589590e575cd12250c33c39fc22b1f5">graphics.c</a>, <a class="el" href="graphics_8h.html#a020c1df5341d906fb19266b94235f884">graphics.h</a>, <a class="el" href="graphics__sdl2_8c.html#af589590e575cd12250c33c39fc22b1f5">graphics_sdl2.c</a></li>
 <li>c8_trim()&#160;:&#160;<a class="el" href="util_8c.html#a97b14f32d5fbfb89d6c14c7a38ed4afa">util.c</a>, <a class="el" href="util_8h.html#aee8e97490e24c4a1cf77f5a9073f44f4">util.h</a></li>
-<li>C8_UNKNOWN_EXCEPTION&#160;:&#160;<a class="el" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a142790ed1dc30cd295f39b9e641a2c85">exception.h</a></li>
-<li>C8_UNKNOWN_EXCEPTION_MESSAGE&#160;:&#160;<a class="el" href="exception_8c.html#a0520777407cdf942ed27f80c08e2d753">exception.c</a></li>
 <li>c8_validate()&#160;:&#160;<a class="el" href="chip8_8c.html#a1d19b160e0de66c906ec70bec3db5640">chip8.c</a>, <a class="el" href="chip8_8h.html#ac816d269ecdc1b2ac9f94075d58eac84">chip8.h</a></li>
 <li>c8_version()&#160;:&#160;<a class="el" href="chip8_8c.html#afa76017d740372fad1c3f29e09b6db6e">chip8.c</a>, <a class="el" href="chip8_8h.html#afa76017d740372fad1c3f29e09b6db6e">chip8.h</a></li>
 <li>C8_VERSION&#160;:&#160;<a class="el" href="common_8h.html#a996814d82ebbdf27188efe64e294f5fc">common.h</a></li>

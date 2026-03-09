@@ -119,6 +119,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a4b8854eba2a9a5ce2570e96d2239f244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decode <code>in</code> and return its assembly value.  <br /></td></tr>
 <tr class="separator:a4b8854eba2a9a5ce2570e96d2239f244"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a583f69b440a00133933e6b467ab7df86"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8h.html#a583f69b440a00133933e6b467ab7df86">c8_jump</a> (uint16_t)</td></tr>
+<tr class="memdesc:a583f69b440a00133933e6b467ab7df86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value to jump to if <code>n</code> is a jump instruction, or 0.  <br /></td></tr>
 <tr class="separator:a583f69b440a00133933e6b467ab7df86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -254,11 +255,20 @@ Functions</h2></td></tr>
           <td class="memname">uint16_t c8_jump </td>
           <td>(</td>
           <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>in</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns the value to jump to if <code>n</code> is a jump instruction, or 0. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in</td><td>The instruction to check</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>in</code>'s <code>nnn</code> value if it exists, 0 otherwise. </dd></dl>
 
 </div>
 </div>

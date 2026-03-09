@@ -17,9 +17,9 @@ var chip8_8h =
     [ "c8_init", "chip8_8h.html#a2211781a0a46f75683c708be272b6af9", null ],
     [ "c8_load_palette_f", "chip8_8h.html#a8e7f563085a76c3f452e5b80e94f93c3", null ],
     [ "c8_load_palette_s", "chip8_8h.html#a3b6cfea2290e01db9df0a91acf2ae24b", null ],
-    [ "c8_load_quirks", "chip8_8h.html#a3ce8cc1f31e4c1412e31a3d00b03452d", null ],
+    [ "c8_load_quirks", "chip8_8h.html#a800d0c19d6608d0d28a5df0694833294", null ],
     [ "c8_load_rom", "chip8_8h.html#adfb38610f49e9df8b5162256fd136ac2", null ],
-    [ "c8_simulate", "chip8_8h.html#a85893f029a1fbf7360c0d7258366ea7f", null ],
+    [ "c8_simulate", "chip8_8h.html#a6aa9c02e31496eed95855541b65a2b45", null ],
     [ "c8_validate", "chip8_8h.html#ac816d269ecdc1b2ac9f94075d58eac84", null ],
     [ "c8_version", "chip8_8h.html#afa76017d740372fad1c3f29e09b6db6e", null ]
 ];

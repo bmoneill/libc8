@@ -110,8 +110,8 @@ $(document).ready(function(){initNavTree('chip8_8c.html',''); initResizable(); }
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a3529014ea4024fe32413ee52b92fe3eb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#a3529014ea4024fe32413ee52b92fe3eb">DEBUG</a>(c)&#160;&#160;&#160;(c-&gt;flags &amp; <a class="el" href="chip8_8h.html#a1e452f92855b0431bf69159754d29a68">C8_FLAG_DEBUG</a>)</td></tr>
-<tr class="separator:a3529014ea4024fe32413ee52b92fe3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac658875b0fad106be1da2f656b9d20ae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#ac658875b0fad106be1da2f656b9d20ae">C8_DEBUG</a>(c)&#160;&#160;&#160;(c-&gt;flags &amp; <a class="el" href="chip8_8h.html#a1e452f92855b0431bf69159754d29a68">C8_FLAG_DEBUG</a>)</td></tr>
+<tr class="separator:ac658875b0fad106be1da2f656b9d20ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -127,33 +127,33 @@ Functions</h2></td></tr>
 <tr class="memitem:a1e2f5307955dcd17790add6e448bcdac"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#a1e2f5307955dcd17790add6e448bcdac">c8_load_palette_f</a> (<a class="el" href="structC8.html">C8</a> *c8, const char *path)</td></tr>
 <tr class="memdesc:a1e2f5307955dcd17790add6e448bcdac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load palette from the given path into <code>colors</code>.  <br /></td></tr>
 <tr class="separator:a1e2f5307955dcd17790add6e448bcdac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a201c27b7ab103769cafe551d2b6b07dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#a201c27b7ab103769cafe551d2b6b07dd">c8_load_quirks</a> (<a class="el" href="structC8.html">C8</a> *c8, const char *s)</td></tr>
-<tr class="memdesc:a201c27b7ab103769cafe551d2b6b07dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load quirk flags from string.  <br /></td></tr>
-<tr class="separator:a201c27b7ab103769cafe551d2b6b07dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07e2e08afb21361e0cb5b62424d6bd78"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#a07e2e08afb21361e0cb5b62424d6bd78">c8_load_quirks</a> (<a class="el" href="structC8.html">C8</a> *c8, const char *s)</td></tr>
+<tr class="memdesc:a07e2e08afb21361e0cb5b62424d6bd78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load quirk flags from string.  <br /></td></tr>
+<tr class="separator:a07e2e08afb21361e0cb5b62424d6bd78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8980b0fd7901592650048de2fd25986c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#a8980b0fd7901592650048de2fd25986c">c8_load_rom</a> (<a class="el" href="structC8.html">C8</a> *c8, const char *addr)</td></tr>
 <tr class="memdesc:a8980b0fd7901592650048de2fd25986c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a ROM to <code>c8-&gt;mem</code> at path <code>addr</code>.  <br /></td></tr>
 <tr class="separator:a8980b0fd7901592650048de2fd25986c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03d4120716da11f4d48a8025b360e6e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#a03d4120716da11f4d48a8025b360e6e4">c8_simulate</a> (<a class="el" href="structC8.html">C8</a> *c8)</td></tr>
-<tr class="memdesc:a03d4120716da11f4d48a8025b360e6e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main interpreter simulation loop. Exits when <code>c8-&gt;running</code> is 0.  <br /></td></tr>
-<tr class="separator:a03d4120716da11f4d48a8025b360e6e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa76017d740372fad1c3f29e09b6db6e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#afa76017d740372fad1c3f29e09b6db6e">c8_version</a> (void)</td></tr>
-<tr class="memdesc:afa76017d740372fad1c3f29e09b6db6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the version of libc8.  <br /></td></tr>
-<tr class="separator:afa76017d740372fad1c3f29e09b6db6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fa8311797eec907da9f1ae1a770fa00"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#a7fa8311797eec907da9f1ae1a770fa00">c8_simulate</a> (<a class="el" href="structC8.html">C8</a> *c8)</td></tr>
+<tr class="memdesc:a7fa8311797eec907da9f1ae1a770fa00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main interpreter simulation loop. Exits when <code>c8-&gt;running</code> is 0.  <br /></td></tr>
+<tr class="separator:a7fa8311797eec907da9f1ae1a770fa00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d19b160e0de66c906ec70bec3db5640"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#a1d19b160e0de66c906ec70bec3db5640">c8_validate</a> (const <a class="el" href="structC8.html">C8</a> *c8)</td></tr>
 <tr class="memdesc:a1d19b160e0de66c906ec70bec3db5640"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate the state of the chip8 emulator.  <br /></td></tr>
 <tr class="separator:a1d19b160e0de66c906ec70bec3db5640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa76017d740372fad1c3f29e09b6db6e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8c.html#afa76017d740372fad1c3f29e09b6db6e">c8_version</a> (void)</td></tr>
+<tr class="memdesc:afa76017d740372fad1c3f29e09b6db6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the version of libc8.  <br /></td></tr>
+<tr class="separator:afa76017d740372fad1c3f29e09b6db6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stuff for simulating and modifying <code><a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a></code>s. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a3529014ea4024fe32413ee52b92fe3eb" name="a3529014ea4024fe32413ee52b92fe3eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3529014ea4024fe32413ee52b92fe3eb">&#9670;&#160;</a></span>DEBUG</h2>
+<a id="ac658875b0fad106be1da2f656b9d20ae" name="ac658875b0fad106be1da2f656b9d20ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac658875b0fad106be1da2f656b9d20ae">&#9670;&#160;</a></span>C8_DEBUG</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define DEBUG</td>
+          <td class="memname">#define C8_DEBUG</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">c</td><td>)</td>
@@ -264,7 +264,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1 if success </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if success </dd></dl>
 
 </div>
 </div>
@@ -302,18 +302,18 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1 if success </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if success, non-zero if failure </dd></dl>
 
 </div>
 </div>
-<a id="a201c27b7ab103769cafe551d2b6b07dd" name="a201c27b7ab103769cafe551d2b6b07dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a201c27b7ab103769cafe551d2b6b07dd">&#9670;&#160;</a></span>c8_load_quirks()</h2>
+<a id="a07e2e08afb21361e0cb5b62424d6bd78" name="a07e2e08afb21361e0cb5b62424d6bd78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07e2e08afb21361e0cb5b62424d6bd78">&#9670;&#160;</a></span>c8_load_quirks()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void c8_load_quirks </td>
+          <td class="memname">int c8_load_quirks </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structC8.html">C8</a> *&#160;</td>
           <td class="paramname"><em>c8</em>, </td>
@@ -333,6 +333,13 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Load quirk flags from string. </p>
+<p>Quirk flags are specified as a string of characters, where each character represents a flag:</p><ul>
+<li><code>b</code>: bitwise quirks</li>
+<li><code>d</code>: draw quirks</li>
+<li><code>j</code>: jump quirks</li>
+<li><code>l</code>: load/store quirks</li>
+<li><code>s</code>: shift quirks</li>
+</ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">c8</td><td>where to store flags </td></tr>
@@ -340,6 +347,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if success, non-zero exception code if failure </dd></dl>
 
 </div>
 </div>
@@ -377,18 +385,18 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1 if success. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if success, exception code on error. </dd></dl>
 
 </div>
 </div>
-<a id="a03d4120716da11f4d48a8025b360e6e4" name="a03d4120716da11f4d48a8025b360e6e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03d4120716da11f4d48a8025b360e6e4">&#9670;&#160;</a></span>c8_simulate()</h2>
+<a id="a7fa8311797eec907da9f1ae1a770fa00" name="a7fa8311797eec907da9f1ae1a770fa00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fa8311797eec907da9f1ae1a770fa00">&#9670;&#160;</a></span>c8_simulate()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void c8_simulate </td>
+          <td class="memname">int c8_simulate </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structC8.html">C8</a> *&#160;</td>
           <td class="paramname"><em>c8</em></td><td>)</td>

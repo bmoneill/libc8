@@ -106,12 +106,12 @@ $(document).ready(function(){initNavTree('decode_8c.html',''); initResizable(); 
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:abf88a709ca68bf6b5d7399fe513cf50b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#abf88a709ca68bf6b5d7399fe513cf50b">DEFINE_LABELS</a>&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#a70cee0483970767fdabbf1e20aef389e">C8_DECODE_DEFINE_LABELS</a>)</td></tr>
-<tr class="separator:abf88a709ca68bf6b5d7399fe513cf50b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9931e6ab27d34613d577c78d02cc4ae1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a9931e6ab27d34613d577c78d02cc4ae1">PRINT_ADDRESSES</a>&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#aa656d70570e455f29c44e52d9462a33e">C8_DECODE_PRINT_ADDRESSES</a>)</td></tr>
-<tr class="separator:a9931e6ab27d34613d577c78d02cc4ae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c5e3db06e3b3ee37636d8348dc2c505"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a7c5e3db06e3b3ee37636d8348dc2c505">RESULT_SIZE</a>&#160;&#160;&#160;32</td></tr>
-<tr class="separator:a7c5e3db06e3b3ee37636d8348dc2c505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d40409071e08c40c743056a99d733ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a3d40409071e08c40c743056a99d733ea">C8_DEFINE_LABELS</a>&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#a70cee0483970767fdabbf1e20aef389e">C8_DECODE_DEFINE_LABELS</a>)</td></tr>
+<tr class="separator:a3d40409071e08c40c743056a99d733ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf260c821a4bd65200b578f40e3aad2a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#acf260c821a4bd65200b578f40e3aad2a">C8_PRINT_ADDRESSES</a>&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#aa656d70570e455f29c44e52d9462a33e">C8_DECODE_PRINT_ADDRESSES</a>)</td></tr>
+<tr class="separator:acf260c821a4bd65200b578f40e3aad2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20cabb10640e3bdee1b092584a3ffb13"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a20cabb10640e3bdee1b092584a3ffb13">C8_RESULT_SIZE</a>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:a20cabb10640e3bdee1b092584a3ffb13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -121,9 +121,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a2169032c4c6eeca3d68a5e90d332d68e"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a2169032c4c6eeca3d68a5e90d332d68e">c8_decode_instruction</a> (uint16_t in, uint8_t *label_map)</td></tr>
 <tr class="memdesc:a2169032c4c6eeca3d68a5e90d332d68e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decode <code>in</code> and return its assembly value.  <br /></td></tr>
 <tr class="separator:a2169032c4c6eeca3d68a5e90d332d68e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f2c7e32dd0cf76b15fb77a355405fc0"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#a0f2c7e32dd0cf76b15fb77a355405fc0">jump</a> (uint16_t in)</td></tr>
-<tr class="memdesc:a0f2c7e32dd0cf76b15fb77a355405fc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value to jump to if <code>n</code> is a jump instruction, or 0.  <br /></td></tr>
-<tr class="separator:a0f2c7e32dd0cf76b15fb77a355405fc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc7695f2a22ad4ef0f7028c1ce57b532"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="decode_8c.html#acc7695f2a22ad4ef0f7028c1ce57b532">c8_jump</a> (uint16_t in)</td></tr>
+<tr class="memdesc:acc7695f2a22ad4ef0f7028c1ce57b532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value to jump to if <code>n</code> is a jump instruction, or 0.  <br /></td></tr>
+<tr class="separator:acc7695f2a22ad4ef0f7028c1ce57b532"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -133,42 +133,42 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stuff for disassembling bytecode. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="abf88a709ca68bf6b5d7399fe513cf50b" name="abf88a709ca68bf6b5d7399fe513cf50b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf88a709ca68bf6b5d7399fe513cf50b">&#9670;&#160;</a></span>DEFINE_LABELS</h2>
+<a id="a3d40409071e08c40c743056a99d733ea" name="a3d40409071e08c40c743056a99d733ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d40409071e08c40c743056a99d733ea">&#9670;&#160;</a></span>C8_DEFINE_LABELS</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define DEFINE_LABELS&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#a70cee0483970767fdabbf1e20aef389e">C8_DECODE_DEFINE_LABELS</a>)</td>
+          <td class="memname">#define C8_DEFINE_LABELS&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#a70cee0483970767fdabbf1e20aef389e">C8_DECODE_DEFINE_LABELS</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a9931e6ab27d34613d577c78d02cc4ae1" name="a9931e6ab27d34613d577c78d02cc4ae1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9931e6ab27d34613d577c78d02cc4ae1">&#9670;&#160;</a></span>PRINT_ADDRESSES</h2>
+<a id="acf260c821a4bd65200b578f40e3aad2a" name="acf260c821a4bd65200b578f40e3aad2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf260c821a4bd65200b578f40e3aad2a">&#9670;&#160;</a></span>C8_PRINT_ADDRESSES</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PRINT_ADDRESSES&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#aa656d70570e455f29c44e52d9462a33e">C8_DECODE_PRINT_ADDRESSES</a>)</td>
+          <td class="memname">#define C8_PRINT_ADDRESSES&#160;&#160;&#160;(args &amp; <a class="el" href="decode_8h.html#aa656d70570e455f29c44e52d9462a33e">C8_DECODE_PRINT_ADDRESSES</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a7c5e3db06e3b3ee37636d8348dc2c505" name="a7c5e3db06e3b3ee37636d8348dc2c505"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c5e3db06e3b3ee37636d8348dc2c505">&#9670;&#160;</a></span>RESULT_SIZE</h2>
+<a id="a20cabb10640e3bdee1b092584a3ffb13" name="a20cabb10640e3bdee1b092584a3ffb13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20cabb10640e3bdee1b092584a3ffb13">&#9670;&#160;</a></span>C8_RESULT_SIZE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define RESULT_SIZE&#160;&#160;&#160;32</td>
+          <td class="memname">#define C8_RESULT_SIZE&#160;&#160;&#160;32</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -263,14 +263,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a0f2c7e32dd0cf76b15fb77a355405fc0" name="a0f2c7e32dd0cf76b15fb77a355405fc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f2c7e32dd0cf76b15fb77a355405fc0">&#9670;&#160;</a></span>jump()</h2>
+<a id="acc7695f2a22ad4ef0f7028c1ce57b532" name="acc7695f2a22ad4ef0f7028c1ce57b532"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc7695f2a22ad4ef0f7028c1ce57b532">&#9670;&#160;</a></span>c8_jump()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t jump </td>
+          <td class="memname">uint16_t c8_jump </td>
           <td>(</td>
           <td class="paramtype">uint16_t&#160;</td>
           <td class="paramname"><em>in</em></td><td>)</td>

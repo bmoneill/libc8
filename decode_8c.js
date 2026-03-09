@@ -1,10 +1,10 @@
 var decode_8c =
 [
-    [ "DEFINE_LABELS", "decode_8c.html#abf88a709ca68bf6b5d7399fe513cf50b", null ],
-    [ "PRINT_ADDRESSES", "decode_8c.html#a9931e6ab27d34613d577c78d02cc4ae1", null ],
-    [ "RESULT_SIZE", "decode_8c.html#a7c5e3db06e3b3ee37636d8348dc2c505", null ],
+    [ "C8_DEFINE_LABELS", "decode_8c.html#a3d40409071e08c40c743056a99d733ea", null ],
+    [ "C8_PRINT_ADDRESSES", "decode_8c.html#acf260c821a4bd65200b578f40e3aad2a", null ],
+    [ "C8_RESULT_SIZE", "decode_8c.html#a20cabb10640e3bdee1b092584a3ffb13", null ],
     [ "c8_decode", "decode_8c.html#a1a9370d74377ee6f6d2cb3a3bae0664b", null ],
     [ "c8_decode_instruction", "decode_8c.html#a2169032c4c6eeca3d68a5e90d332d68e", null ],
-    [ "jump", "decode_8c.html#a0f2c7e32dd0cf76b15fb77a355405fc0", null ],
+    [ "c8_jump", "decode_8c.html#acc7695f2a22ad4ef0f7028c1ce57b532", null ],
     [ "result", "decode_8c.html#af76b23c9cb471f971acded59d2d08f3e", null ]
 ];
