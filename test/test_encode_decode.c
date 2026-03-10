@@ -30,7 +30,7 @@ void                        test_encode_decode(void) {
             input |= rand() & format.pmask[j];
         }
 
-        // TODO decode and encode, assert output is the same
+        // Decode and encode, assert output is the same
         sprintf(asm, "%s", c8_decode_instruction(input, NULL));
         c8_encode(asm, bytecode, 0);
         printf("%s\n", asm);
