@@ -53,10 +53,6 @@ cd build
 ctest --verbose
 ```
 
-**Note**: When built with tests enabled (`-DTEST`),
-`libc8` will not halt execution after encountering an error, potentially leading
-to undefined behavior.
-
 ## Showcase
 
 The libc8 CHIP-8 interpreter running [Outlaw by John Earnest](https://johnearnest.github.io/chip8Archive/play.html?p=outlaw):
