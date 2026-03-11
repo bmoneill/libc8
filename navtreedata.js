@@ -41,12 +41,12 @@ var NAVTREE =
       [ "Quirks", "md_docs_chip8.html#autotoc_md3", null ],
       [ "Debug mode", "md_docs_chip8.html#autotoc_md4", null ]
     ] ],
-    [ "c8as (CHIP-8 Assembler)", "md_docs_chip8as.html", [
+    [ "chip8as (CHIP-8 Assembler)", "md_docs_chip8as.html", [
       [ "Usage", "md_docs_chip8as.html#autotoc_md6", null ],
       [ "Example Code", "md_docs_chip8as.html#autotoc_md7", null ],
       [ "Notes", "md_docs_chip8as.html#autotoc_md8", null ]
     ] ],
-    [ "c8dis (CHIP-8 Disassembler)", "md_docs_chip8dis.html", [
+    [ "chip8dis (CHIP-8 Disassembler)", "md_docs_chip8dis.html", [
       [ "Usage", "md_docs_chip8dis.html#autotoc_md10", null ]
     ] ],
     [ "Data Structures", "annotated.html", [
