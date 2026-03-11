@@ -210,6 +210,17 @@ void test_c8_parse_arg_WhereCommandIsSet_WhereArgIsInvalid(void) {
     TEST_ASSERT_EQUAL_INT(C8_ARG_NONE, cmd.arg.type);
 }
 
+void test_c8_parse_arg_WhereCommandIsSet_WhereArgIsEmpty(void) {
+    cmd.id = C8_CMD_SET;
+
+    REDIRECT_STDOUT;
+    int result = c8_parse_arg(&cmd, buf);
+    RESTORE_STDOUT;
+
+    TEST_ASSERT_EQUAL_INT(0, result);
+    TEST_ASSERT_EQUAL_STRING("Not enough arguments.\n", stdout_buffer);
+}
+
 void test_c8_print_help(void) {
     REDIRECT_STDOUT;
     c8_print_help();

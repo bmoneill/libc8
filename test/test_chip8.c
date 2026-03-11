@@ -61,10 +61,18 @@ void test_c8_load_palette_f_WithInvalidColorPalette(void) {
     char* path   = get_path("colors-invalid.txt");
     int   result = c8_load_palette_f(&c8, path);
     TEST_ASSERT_EQUAL_INT(C8_INVALID_PARAMETER_EXCEPTION, result);
+}
 
-    path   = get_path("foo.txt");
-    result = c8_load_palette_f(&c8, path);
+void test_c8_load_palette_f_WithInvalidPath(void) {
+    char* path   = "foo.txt";
+    int   result = c8_load_palette_f(&c8, path);
     TEST_ASSERT_EQUAL_INT(C8_IO_EXCEPTION, result);
+}
+
+void test_c8_load_palette_f_WithEmptyFile(void) {
+    char* path   = get_path("empty.txt");
+    int   result = c8_load_palette_f(&c8, path);
+    TEST_ASSERT_EQUAL_INT(C8_INVALID_PARAMETER_EXCEPTION, result);
 }
 
 void test_c8_load_quirks_WithValidQuirks(void) {
@@ -92,9 +100,11 @@ void test_c8_load_rom_WhereFileIsNotValidROM(void) {
     char* path   = get_path("colors.txt");
     int   result = c8_load_rom(&c8, path);
     TEST_ASSERT_EQUAL_INT(0, result);
+}
 
-    path   = get_path("bigrom.ch8");
-    result = c8_load_rom(&c8, path);
+void test_c8_load_rom_WhereFileIsTooBig(void) {
+    char* path   = get_path("bigrom.ch8");
+    int   result = c8_load_rom(&c8, path);
     TEST_ASSERT_EQUAL_INT(C8_INVALID_PARAMETER_EXCEPTION, result);
 }
 
