@@ -501,12 +501,12 @@ C8_STATIC int c8_run_command(C8* c8, const C8_Command* cmd) {
     case C8_CMD_NEXT:
         return C8_DEBUG_STEP;
     case C8_CMD_LOAD:
-        if (!c8_load_state(c8, cmd->arg.value.s)) {
+        if (c8_load_state(c8, cmd->arg.value.s)) {
             printf("Failed to load state from %s\n", cmd->arg.value.s);
         }
         break;
     case C8_CMD_SAVE:
-        if (!c8_save_state(c8, cmd->arg.value.s)) {
+        if (c8_save_state(c8, cmd->arg.value.s)) {
             printf("Failed to save state to %s\n", cmd->arg.value.s);
         }
         break;
@@ -522,12 +522,12 @@ C8_STATIC int c8_run_command(C8* c8, const C8_Command* cmd) {
     case C8_CMD_QUIT:
         return C8_DEBUG_QUIT;
     case C8_CMD_LOADFLAGS:
-        if (!c8_load_flags(c8, cmd->arg.value.s)) {
+        if (c8_load_flags(c8, cmd->arg.value.s)) {
             printf("Failed to load flags from %s\n", cmd->arg.value.s);
         }
         break;
     case C8_CMD_SAVEFLAGS:
-        if (!c8_save_flags(c8, cmd->arg.value.s)) {
+        if (c8_save_flags(c8, cmd->arg.value.s)) {
             printf("Failed to save flags to %s\n", cmd->arg.value.s);
         }
         break;

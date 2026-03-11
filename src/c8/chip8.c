@@ -355,7 +355,6 @@ int c8_validate(const C8* c8) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "Invalid display mode: mode=%d", c8->display.mode)
         return C8_INVALID_STATE_EXCEPTION;
     }
-
     return 0;
 }
 
