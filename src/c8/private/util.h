@@ -10,6 +10,7 @@
 
 int   c8_hex_to_int(char);
 int   c8_parse_int(const char*);
+int   c8_to_upper(char*);
 char* c8_trim(char*);
 
 #endif

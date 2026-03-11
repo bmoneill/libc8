@@ -46,9 +46,18 @@ void c8_decode(FILE* input, FILE* output, int args) {
         rewind(input);
     }
 
+    for (int i = C8_PROG_START; i < 0x1000; i++) {
+        if (labelMap[i]) {
+            fprintf(output, "label%d: %04x\n", labelMap[i], i);
+        }
+    }
+
     while ((c = fgetc(input)) != EOF) {
         if (addr % 2 == 0) {
             ins = ((uint16_t) c) << 8;
+            if (C8_DEFINE_LABELS && labelMap[addr]) {
+                fprintf(output, "label%d:\n", labelMap[addr]);
+            }
         } else {
             ins |= (uint16_t) c;
 
@@ -185,13 +194,20 @@ C8_STATIC void c8_find_labels(FILE* input, uint8_t* labelMap) {
     uint16_t ins   = 0;
     uint16_t to;
 
-    int      c;
+    uint16_t max = 0;
+
+    fseek(input, 0, SEEK_END);
+    max = ftell(input) + C8_PROG_START;
+    rewind(input);
+
+    int c;
     while ((c = fgetc(input)) != EOF) {
         if (addr % 2 == 0) {
             ins = ((uint16_t) c) << 8;
         } else {
             ins |= (uint16_t) c;
-            if ((to = c8_jump(ins))) {
+            to = c8_jump(ins);
+            if (to < max && to > C8_PROG_START) {
                 labelMap[to] = count++;
             }
         }

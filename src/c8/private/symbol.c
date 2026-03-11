@@ -276,10 +276,6 @@ C8_Symbol* c8_next_symbol(C8_SymbolList* symbols) {
  * It checks each line for a label definition (ending with a colon) and adds it
  * to the label list.
  *
- * If a duplicate label definition is found, it throws a `C8_DUPLICATE_LABEL_EXCEPTION`.
- *
- * If too many labels are defined, it throws a `C8_TOO_MANY_LABELS_EXCEPTION`.
- *
  * @param labels label list to populate
  *
  * @return 1 if success, 0 or error code otherwise
@@ -298,9 +294,10 @@ int c8_populate_labels(C8_LabelList* labels) {
 
         if (c8_is_label_definition(c8_lines[i])) {
             for (int j = 0; j < labels->len; j++) {
-                if (!strncmp(labels->l[j].identifier,
-                             c8_lines[i],
-                             strlen(labels->l[j].identifier))) {
+                if (strlen(labels->l[j].identifier) == strlen(c8_lines[i]) - 1
+                    && !strncmp(labels->l[j].identifier,
+                                c8_lines[i],
+                                strlen(labels->l[j].identifier))) {
                     C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION,
                                  "Duplicate label definition.\nLine %d: %s",
                                  i + 1,
@@ -309,6 +306,7 @@ int c8_populate_labels(C8_LabelList* labels) {
                 }
             }
 
+            c8_to_upper(c8_lines[i]);
             snprintf(labels->l[labels->len].identifier,
                      C8_LABEL_IDENTIFIER_SIZE - 1,
                      "%s",

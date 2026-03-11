@@ -29,7 +29,6 @@ C8_STATIC int   c8_parse_line(char*, int, C8_SymbolList*, const C8_LabelList*);
 C8_STATIC int   c8_parse_word(char*, const char*, int, C8_Symbol*, const C8_LabelList*);
 C8_STATIC void  c8_put16(uint8_t*, uint16_t, int);
 C8_STATIC int   c8_tokenize(char**, char*, const char*, int);
-C8_STATIC int   c8_to_upper(char*);
 C8_STATIC char* c8_remove_comma(char*);
 C8_STATIC int   c8_write(uint8_t*, C8_SymbolList*);
 
@@ -388,19 +387,6 @@ C8_STATIC char* c8_remove_comma(char* s) {
     }
 
     return s;
-}
-
-/**
- * @brief Convert all characters in null-terminated string s to uppercase
- *
- * @param s string to convert
- */
-C8_STATIC int c8_to_upper(char* s) {
-    while (*s) {
-        *s = toupper(*s);
-        s++;
-    }
-    return 1;
 }
 
 /**

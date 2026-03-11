@@ -70,6 +70,19 @@ int c8_parse_int(const char* s) {
 }
 
 /**
+ * @brief Convert all characters in null-terminated string s to uppercase
+ *
+ * @param s string to convert
+ */
+int c8_to_upper(char* s) {
+    while (*s) {
+        *s = toupper(*s);
+        s++;
+    }
+    return 1;
+}
+
+/**
  * @brief Trim leading and trailing whitespace from `s`
  *
  * Puts a `NULL` character after the last non-whitespace character and
