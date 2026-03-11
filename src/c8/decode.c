@@ -88,9 +88,7 @@ void c8_decode(FILE* input, FILE* output, int args) {
  */
 char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
     C8_EXPAND(in);
-    for (int i = 0; i < 16; i++) {
-        result[i] = '\0';
-    }
+    memset(result, 0, 16);
 
     if ((in & 0xFFF0) == 0x00C0) {
         // Special case for SCD n
@@ -98,8 +96,9 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
         snprintf(result, C8_RESULT_SIZE, "SCD 0x%01X", b);
         return result;
     }
+
     for (int i = 0; c8_formats[i].cmd != C8_I_NULL; i++) {
-        if ((C8_A(c8_formats[i].base) & a) == C8_A(in)) {
+        if (C8_A(c8_formats[i].base) == C8_A(in)) {
             int match = 1;
             if (a == 0x0 || a == 0xE || a == 0xF) {
                 // 0x0, 0xE, and 0xF instructions have kk as a mask, so we need to check
@@ -109,7 +108,12 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
                 match = b == C8_B(c8_formats[i].base);
             }
 
-            if (match) {
+            // Ensure that all non-parameter nibbles match base
+            if (c8_formats[i].pcount == 0) {
+                match = in == c8_formats[i].base;
+            }
+
+            if (match && i != 0) { // c8_formats[0] is SCD n, if conditional isn't met, this is a DW
                 snprintf(result, C8_RESULT_SIZE, "%s", c8_instructionStrings[c8_formats[i].cmd]);
 
                 int idx = strlen(result);
