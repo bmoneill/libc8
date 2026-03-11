@@ -43,6 +43,10 @@ void test_c8_load_palette_s_WithInvalidColorPalette(void) {
     sprintf(buf, "blabla,123");
     int result = c8_load_palette_s(&c8, buf);
     TEST_ASSERT_EQUAL_INT(C8_INVALID_PARAMETER_EXCEPTION, result);
+
+    sprintf(buf, "blabla");
+    result = c8_load_palette_s(&c8, buf);
+    TEST_ASSERT_EQUAL_INT(C8_INVALID_PARAMETER_EXCEPTION, result);
 }
 
 void test_c8_load_palette_f_WithValidColorPalette(void) {
@@ -57,14 +61,20 @@ void test_c8_load_palette_f_WithInvalidColorPalette(void) {
     char* path   = get_path("colors-invalid.txt");
     int   result = c8_load_palette_f(&c8, path);
     TEST_ASSERT_EQUAL_INT(C8_INVALID_PARAMETER_EXCEPTION, result);
+
+    path   = get_path("foo.txt");
+    result = c8_load_palette_f(&c8, path);
+    TEST_ASSERT_EQUAL_INT(C8_IO_EXCEPTION, result);
 }
 
 void test_c8_load_quirks_WithValidQuirks(void) {
-    int result = c8_load_quirks(&c8, "bdj");
+    int result = c8_load_quirks(&c8, "bdjls");
     TEST_ASSERT_EQUAL_INT(0, result);
     TEST_ASSERT_EQUAL_INT(C8_FLAG_QUIRK_BITWISE, c8.flags & C8_FLAG_QUIRK_BITWISE);
     TEST_ASSERT_EQUAL_INT(C8_FLAG_QUIRK_DRAW, c8.flags & C8_FLAG_QUIRK_DRAW);
     TEST_ASSERT_EQUAL_INT(C8_FLAG_QUIRK_JUMP, c8.flags & C8_FLAG_QUIRK_JUMP);
+    TEST_ASSERT_EQUAL_INT(C8_FLAG_QUIRK_LOADSTORE, c8.flags & C8_FLAG_QUIRK_LOADSTORE);
+    TEST_ASSERT_EQUAL_INT(C8_FLAG_QUIRK_SHIFT, c8.flags & C8_FLAG_QUIRK_SHIFT);
 }
 
 void test_c8_load_quirks_WithInvalidQuirks(void) {
@@ -82,6 +92,10 @@ void test_c8_load_rom_WhereFileIsNotValidROM(void) {
     char* path   = get_path("colors.txt");
     int   result = c8_load_rom(&c8, path);
     TEST_ASSERT_EQUAL_INT(0, result);
+
+    path   = get_path("bigrom.ch8");
+    result = c8_load_rom(&c8, path);
+    TEST_ASSERT_EQUAL_INT(C8_INVALID_PARAMETER_EXCEPTION, result);
 }
 
 void test_c8_load_rom_WhereFileDoesNotExist(void) {
@@ -94,6 +108,10 @@ void test_c8_validate_WithValidC8(void) {
     C8* c8_allocd = c8_init(NULL, 0);
     TEST_ASSERT_EQUAL_INT(0, c8_validate(c8_allocd));
     free(c8_allocd);
+}
+
+void test_c8_validate_WithNullC8(void) {
+    TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, c8_validate(NULL));
 }
 
 void test_c8_validate_WithInvalidPC(void) {

@@ -154,6 +154,12 @@ void test_c8_load_flags(void) {
 void test_c8_load_state(void) {
     int result = c8_load_state(&c8, get_path("state.bin"));
     TEST_ASSERT_EQUAL_INT(0, result);
+
+    result = c8_load_state(&c8, get_path("flags.bin"));
+    TEST_ASSERT_EQUAL_INT(C8_IO_EXCEPTION, result);
+
+    result = c8_load_state(&c8, get_path("foo"));
+    TEST_ASSERT_EQUAL_INT(C8_IO_EXCEPTION, result);
 }
 
 void test_c8_parse_arg_WhereCommandIsLoadSave(void) {
@@ -213,9 +219,10 @@ void test_c8_print_help(void) {
 
 void test_c8_print_quirks(void) {
     REDIRECT_STDOUT;
-    c8_print_quirks(C8_FLAG_QUIRK_BITWISE | C8_FLAG_QUIRK_DRAW);
+    c8_print_quirks(C8_FLAG_QUIRK_BITWISE | C8_FLAG_QUIRK_DRAW | C8_FLAG_QUIRK_JUMP
+                    | C8_FLAG_QUIRK_LOADSTORE | C8_FLAG_QUIRK_SHIFT);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("Quirks: bd\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("Quirks: bdjls\n", stdout_buffer);
 }
 
 void test_c8_print_r_registers(void) {
@@ -263,6 +270,16 @@ void test_c8_print_stack(void) {
     RESTORE_STDOUT;
 
     TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
+}
+
+void test_c8_print_value_WhereValueIsNone(void) {
+    cmd.arg.type = C8_ARG_NONE;
+
+    REDIRECT_STDOUT;
+    c8_print_value(&c8, &cmd);
+    RESTORE_STDOUT;
+
+    TEST_ASSERT_GREATER_THAN_INT(0, strlen(stdout_buffer));
 }
 
 void test_c8_print_value_WhereValueIsSP(void) {
@@ -478,6 +495,110 @@ void test_c8_run_command_WhereCommandIsContinue(void) {
     cmd.id = C8_CMD_CONTINUE;
 
     TEST_ASSERT_EQUAL_INT(C8_DEBUG_CONTINUE, c8_run_command(&c8, &cmd));
+}
+
+void test_c8_run_command_WhereCommandIsHelp(void) {
+    cmd.id = C8_CMD_HELP;
+
+    REDIRECT_STDOUT;
+    int result = c8_run_command(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_INT(0, result);
+    TEST_ASSERT_EQUAL_STRING(C8_DEBUG_HELP_STRING, stdout_buffer);
+}
+
+void test_c8_run_command_WhereCommandIsLoad(void) {
+    cmd.id          = C8_CMD_LOAD;
+    cmd.arg.type    = C8_ARG_FILE;
+    cmd.arg.value.s = get_path("state.bin");
+
+    REDIRECT_STDOUT;
+    int result = c8_run_command(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_INT(0, result);
+    printf("%s\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_INT(0, strlen(stdout_buffer));
+}
+
+void test_c8_run_command_WhereCommandIsLoad_WhereFileIsInvalid(void) {
+    cmd.id          = C8_CMD_LOAD;
+    cmd.arg.type    = C8_ARG_FILE;
+    cmd.arg.value.s = "foo.bin";
+
+    REDIRECT_STDOUT;
+    int result = c8_run_command(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_INT(0, result);
+    TEST_ASSERT_EQUAL_STRING("Failed to load state from foo.bin\n", stdout_buffer);
+}
+
+void test_c8_run_command_WhereCommandIsSave(void) {
+    cmd.id          = C8_CMD_SAVE;
+    cmd.arg.type    = C8_ARG_FILE;
+    cmd.arg.value.s = "newstate.bin";
+
+    REDIRECT_STDOUT;
+    int result = c8_run_command(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_INT(0, result);
+    printf("%s\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_INT(0, strlen(stdout_buffer));
+}
+
+void test_c8_run_command_WhereCommandIsSave_WhereFileIsInvalid(void) {
+    cmd.id          = C8_CMD_SAVE;
+    cmd.arg.type    = C8_ARG_FILE;
+    cmd.arg.value.s = "/foo.bin";
+
+    REDIRECT_STDOUT;
+    int result = c8_run_command(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_INT(0, result);
+    TEST_ASSERT_EQUAL_STRING("Invalid file\nFailed to save state to /foo.bin\n", stdout_buffer);
+}
+
+void test_c8_run_command_WhereCommandIsLoadFlags(void) {
+    cmd.id          = C8_CMD_LOADFLAGS;
+    cmd.arg.type    = C8_ARG_FILE;
+    cmd.arg.value.s = get_path("flags.bin");
+
+    REDIRECT_STDOUT;
+    int result = c8_run_command(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_INT(0, result);
+    TEST_ASSERT_EQUAL_INT(0, strlen(stdout_buffer));
+
+    cmd.arg.value.s = "empty.txt";
+    REDIRECT_STDOUT;
+    result = c8_run_command(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_INT(0, result);
+    TEST_ASSERT_EQUAL_STRING("Failed to load flags from empty.txt\n", stdout_buffer);
+}
+
+void test_c8_run_command_WhereCommandIsSaveFlags(void) {
+    cmd.id          = C8_CMD_SAVEFLAGS;
+    cmd.arg.type    = C8_ARG_FILE;
+    cmd.arg.value.s = "newflags.bin";
+
+    REDIRECT_STDOUT;
+    int result = c8_run_command(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_INT(0, result);
+    printf("%s\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_INT(0, strlen(stdout_buffer));
+}
+
+void test_c8_run_command_WhereCommandIsSaveFlags_WhereFileIsInvalid(void) {
+    cmd.id          = C8_CMD_SAVEFLAGS;
+    cmd.arg.type    = C8_ARG_FILE;
+    cmd.arg.value.s = "/foo.bin";
+
+    REDIRECT_STDOUT;
+    int result = c8_run_command(&c8, &cmd);
+    RESTORE_STDOUT;
+    TEST_ASSERT_EQUAL_INT(0, result);
+    TEST_ASSERT_EQUAL_STRING("Invalid file\nFailed to save flags to /foo.bin\n", stdout_buffer);
 }
 
 void test_c8_run_command_WhereCommandIsNext(void) {
