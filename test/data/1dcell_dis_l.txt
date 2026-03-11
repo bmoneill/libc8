@@ -1,13 +1,13 @@
 JP label1
-label18:
+label4:
 .DW 0x807C
 .DW 0x016D
 .DW 0x0022
-CALL label2
+CALL $168
 .DW 0x0139
 .DW 0x0022
 SNE V3, 0x88
-LD I, label3
+LD I, label2
 .DW 0x00DD
 RND V1, 0x7D
 .DW 0x013D
@@ -18,29 +18,30 @@ SNE V0, 0x12
 .DW 0xEE69
 .DW 0x0080
 DRW V0, VD, 0x0
-JP V0, label8
+JP V0, $14F
 .DW 0x0179
 .DW 0x02D0
-JP V0, label7
+JP V0, $170
 .DW 0xFFD0
-JP V0, label8
+JP V0, $14F
 .DW 0x0179
 .DW 0x04D0
-JP V0, label7
+JP V0, $170
+label2:
 .DW 0x02D0
-JP V0, label8
+JP V0, $14F
 .DW 0x0179
 .DW 0x01D0
-JP V0, label12
+JP V0, $100
 .DW 0xEE62
 .DW 0x0088
 AND VE, V7
 .DW 0x018F
 .DW 0x908F
-CALL label10
+CALL $74F
 .DW 0x0012
 SNE V5, 0x00
-label19:
+label5:
 .DW 0xEE00
 .DW 0xE06D
 .DW 0x006C
@@ -48,30 +49,32 @@ label19:
 RND V0, 0x7A
 .DW 0x0122
 LD V9, 0x60
-JP label11
+JP $F81
 RND V0, 0xA2
 .DW 0x02D0
-JP label12
+JP $100
 .DW 0xEE80
-LD I, label13
+LD I, $0A2
 LD V7, VF
 SE V3, 0xF2
 LD V5, 0x64
 .DW 0x00F0
-CALL label14
+CALL $963
 .DW 0x00D3
 SNE V5, 0xF1
-CALL label16
+CALL $973
 .DW 0x05D3
 SNE V5, 0xF2
-CALL label16
+CALL $973
 .DW 0x05D3
 SNE V5, 0x00
 .DW 0xEE00
 .DW 0x0000
+label1:
 LD VA, 0x14
-CALL label19
-CALL label18
+CALL label5
+label6:
+CALL label4
 SNE VC, 0x1F
-CALL label19
-JP label20
+CALL label5
+JP label6
