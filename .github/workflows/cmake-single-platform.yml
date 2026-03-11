@@ -74,4 +74,4 @@ jobs:
           passphrase: ${{ secrets.wwwpass }}
           port: 22
           script: |
-            update-coverage libc8 ${{ steps.coverage.outputs.percentage }}
+            sudo update-coverage libc8 ${{ steps.coverage.outputs.percentage }}
