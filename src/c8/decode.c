@@ -46,12 +46,6 @@ void c8_decode(FILE* input, FILE* output, int args) {
         rewind(input);
     }
 
-    for (int i = C8_PROG_START; i < 0x1000; i++) {
-        if (labelMap[i]) {
-            fprintf(output, "label%d: %04x\n", labelMap[i], i);
-        }
-    }
-
     while ((c = fgetc(input)) != EOF) {
         if (addr % 2 == 0) {
             ins = ((uint16_t) c) << 8;
