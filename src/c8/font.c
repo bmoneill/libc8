@@ -220,7 +220,6 @@ int c8_set_small_font(C8* c8, const char* s) {
 
     for (int i = 0; i < 5; i++) {
         if (!strcmp(s, c8_fontNames[0][i])) {
-            printf("%s\n", s);
             f = i;
         }
     }

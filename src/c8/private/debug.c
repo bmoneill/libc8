@@ -244,7 +244,6 @@ C8_STATIC int c8_parse_arg(C8_Command* cmd, char* s) {
     /* Try to match with keywords */
     for (int i = 0; i < argsCount; i++) {
         if (!strcmp(s, c8_args[i])) {
-            printf("%s", s);
             arg->type = (C8_ArgIdentifier) i;
         }
     }

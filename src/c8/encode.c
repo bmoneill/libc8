@@ -264,7 +264,6 @@ C8_STATIC int c8_parse_line(char* s, int ln, C8_SymbolList* symbols, const C8_La
                 if (word[j] == '"' && (i > 1 || j > 0)) {
                     return 0;
                 }
-                printf("%c", word[j]);
                 sym->type  = C8_SYM_DB;
                 sym->value = (uint8_t) word[j];
                 sym->ln    = ln;

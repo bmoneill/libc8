@@ -119,7 +119,6 @@ int c8_build_instruction(C8_Instruction* ins, C8_SymbolList* symbols, int idx) {
     }
 
     if (validate_instruction(ins) != 0) {
-        printf("error here2\n");
         return C8_SYNTAX_ERROR_EXCEPTION;
     }
     return parse_instruction(ins);
