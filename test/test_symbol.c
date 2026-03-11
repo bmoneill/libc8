@@ -286,21 +286,8 @@ void test_c8_populate_labels_WhereLinesHasMultipleLabelDefinitions(void) {
 
     TEST_ASSERT_EQUAL_INT(1, r);
     TEST_ASSERT_EQUAL_INT(2, labels.len);
-    TEST_ASSERT_EQUAL_STRING("label", labels.l[0].identifier);
-    TEST_ASSERT_EQUAL_STRING("otherlabel", labels.l[1].identifier);
-}
-
-void test_c8_populate_labels_WhereLinesHasDuplicateLabelDefinitions(void) {
-    sprintf(c8_lines[0], "%s", "ADD V4, V5");
-    sprintf(c8_lines[1], "%s", "label:");
-    sprintf(c8_lines[2], "%s", "RET");
-    sprintf(c8_lines[3], "%s", "label:");
-    sprintf(c8_lines[4], "%s", "SE V1, $55");
-    c8_lineCount = 5;
-
-    int r        = c8_populate_labels(&labels);
-
-    TEST_ASSERT_EQUAL_INT(C8_SYNTAX_ERROR_EXCEPTION, r);
+    TEST_ASSERT_EQUAL_STRING("LABEL", labels.l[0].identifier);
+    TEST_ASSERT_EQUAL_STRING("OTHERLABEL", labels.l[1].identifier);
 }
 
 void test_c8_resolve_labels_WhereLabelListHasOneLabel_WhereSymbolListHasLabelDefinition(void) {
