@@ -92,20 +92,13 @@ char* c8_decode_instruction(uint16_t in, uint8_t* label_map) {
 
     for (int i = 0; c8_formats[i].cmd != C8_I_NULL; i++) {
         if (C8_A(c8_formats[i].base) == C8_A(in)) {
-            int match = 1;
-
             // Ensure that all non-parameter nibbles match base
-            if (c8_formats[i].pcount == 0) {
-                match = in == c8_formats[i].base;
-            } else {
-                uint16_t mask = 0xFFFF;
-                for (int j = 0; j < c8_formats[i].pcount; j++) {
-                    mask ^= c8_formats[i].pmask[j];
-                }
-                match = (in & mask) == c8_formats[i].base;
+            uint16_t mask = 0xFFFF;
+            for (int j = 0; j < c8_formats[i].pcount; j++) {
+                mask ^= c8_formats[i].pmask[j];
             }
 
-            if (match) {
+            if ((in & mask) == c8_formats[i].base) {
                 snprintf(result, C8_RESULT_SIZE, "%s", c8_instructionStrings[c8_formats[i].cmd]);
 
                 int idx = strlen(result);
