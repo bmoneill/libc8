@@ -41,18 +41,12 @@ void c8_deinit(C8* c8) {
  * @param path path to ROM file
  * @param flags flags
  *
- * @return pointer to initialized `C8`.
+ * @return pointer to initialized `C8`, or NULL on failure.
  */
 C8* c8_init(const char* path, int flags) {
     int res;
 
-    C8* c8 = (C8*) calloc(1, sizeof(C8));
-
-    if (!c8) {
-        C8_EXCEPTION(C8_MEMORY_ALLOCATION_EXCEPTION, "At %s", __func__);
-        return NULL;
-    }
-
+    C8* c8           = (C8*) calloc(1, sizeof(C8));
     c8->flags        = flags;
     c8->cs           = C8_CLOCK_SPEED;
     c8->colors[1]    = 0xFFFFFF;
@@ -78,7 +72,7 @@ C8* c8_init(const char* path, int flags) {
  * @param c8 where to store the color codes
  * @param s string to load
  *
- * @return 0 if success, non-zero if failure
+ * @return 0 if success, C8_INVALID_PARAMETER_EXCEPTION if failure
  */
 int c8_load_palette_s(C8* c8, char* s) {
     char* c[2] = { NULL, NULL };
@@ -113,7 +107,7 @@ int c8_load_palette_s(C8* c8, char* s) {
  * @param c8 where to store the color codes
  * @param path palette file location
  *
- * @return 0 if success
+ * @return 0 if success, C8_IO_EXCEPTION or C8_INVALID_PARAMETER_EXCEPTION if failure
  */
 int c8_load_palette_f(C8* c8, const char* path) {
     char buf[64];
@@ -153,7 +147,7 @@ int c8_load_palette_f(C8* c8, const char* path) {
  *
  * @param c8 where to store flags
  * @param s string to get quirks from
- * @return 0 if success, non-zero exception code if failure
+ * @return 0 if success, C8_INVALID_PARAMETER_EXCEPTION if failure
  */
 int c8_load_quirks(C8* c8, const char* s) {
     for (size_t i = 0; i < strlen(s); i++) {
@@ -187,7 +181,7 @@ int c8_load_quirks(C8* c8, const char* s) {
  * @param c8 `C8` to store the ROM's contents
  * @param addr path to the ROM
  *
- * @return 0 if success, exception code on error.
+ * @return 0 if success, C8_IO_EXCEPTION or C8_INVALID_PARAMETER_EXCEPTION on error.
  */
 int c8_load_rom(C8* c8, const char* addr) {
     FILE*         f;
@@ -223,6 +217,7 @@ int c8_load_rom(C8* c8, const char* addr) {
  * @brief Main interpreter simulation loop. Exits when `c8->running` is 0.
  *
  * @param c8 the `C8` to simulate
+ * @return 0 if success, exception code on failure
  */
 int c8_simulate(C8* c8) {
     int debugRet;
@@ -318,7 +313,7 @@ int c8_simulate(C8* c8) {
  * @brief Validate the state of the chip8 emulator.
  *
  * @param c8 The C8 emulator instance
- * @return int 0 on success, non-zero on failure
+ * @return int 0 on success, C8_INVALID_STATE_EXCEPTION on failure
  */
 int c8_validate(const C8* c8) {
     if (!c8) {

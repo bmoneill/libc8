@@ -31,12 +31,11 @@ typedef enum {
     C8_SYNTAX_ERROR_EXCEPTION      = -3,
     C8_STACK_OVERFLOW_EXCEPTION    = -4,
     C8_STACK_UNDERFLOW_EXCEPTION   = -5,
-    C8_MEMORY_ALLOCATION_EXCEPTION = -6,
-    C8_IO_EXCEPTION                = -7,
-    C8_INVALID_STATE_EXCEPTION     = -8,
-    C8_INVALID_PARAMETER_EXCEPTION = -9,
-    C8_GRAPHICS_EXCEPTION          = -10,
-    C8_AUDIO_EXCEPTION             = -11,
+    C8_IO_EXCEPTION                = -6,
+    C8_INVALID_STATE_EXCEPTION     = -7,
+    C8_INVALID_PARAMETER_EXCEPTION = -8,
+    C8_GRAPHICS_EXCEPTION          = -9,
+    C8_AUDIO_EXCEPTION             = -10,
 } C8_ExceptionCode;
 
 /**

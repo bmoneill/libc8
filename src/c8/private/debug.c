@@ -120,7 +120,7 @@ int c8_has_breakpoint(C8* c8, uint16_t pc) { return c8->breakpoints[pc]; }
  *
  * @param cmd where to store the command attributes
  * @param s command string
- * @return 0 if successful, non-zero if not
+ * @return 0 if successful, non-zero error code if not
  */
 C8_STATIC int c8_get_command(C8_Command* cmd, char* s) {
     int numCmds = (int) sizeof(c8_cmds) / sizeof(c8_cmds[0]);
@@ -159,7 +159,7 @@ C8_STATIC int c8_get_command(C8_Command* cmd, char* s) {
  * @param c8 struct to load to
  * @param path path to load from
  *
- * @return 0 on success, non-zero on failure
+ * @return 0 on success, C8_IO_EXCEPTION on failure
  */
 C8_STATIC int c8_load_flags(C8* c8, const char* path) {
     FILE* f = fopen(path, "rb");
@@ -182,7 +182,7 @@ C8_STATIC int c8_load_flags(C8* c8, const char* path) {
  * @param c8 struct to load to
  * @param path path to load from
  *
- * @return 0 on success.
+ * @return 0 on success, C8_IO_EXCEPTION or C8_INVALID_STATE_EXCEPTION on failure.
  */
 C8_STATIC int c8_load_state(C8* c8, const char* path) {
     FILE* f = fopen(path, "rb");
@@ -545,7 +545,7 @@ C8_STATIC int c8_run_command(C8* c8, const C8_Command* cmd) {
  * @param c8 `C8` to grab flag registers from
  * @param path path to save to
 
- * @return 0 on success, non-zero on failure
+ * @return 0 on success, C8_IO_EXCEPTION on failure
  */
 C8_STATIC int c8_save_flags(const C8* c8, const char* path) {
     FILE* f = fopen(path, "wb");
@@ -570,7 +570,7 @@ C8_STATIC int c8_save_flags(const C8* c8, const char* path) {
  * @param c8 `C8` to save
  * @param path path to save to
  *
- * @return 0 on success, non-zero on failure
+ * @return 0 on success, C8_IO_EXCEPTION on failure
  */
 C8_STATIC int c8_save_state(const C8* c8, const char* path) {
     FILE* f = fopen(path, "wb");
@@ -597,6 +597,7 @@ C8_STATIC int c8_save_state(const C8* c8, const char* path) {
  *
  * @param c8 the current CHIP-8 state
  * @param cmd the command structure
+ * @return 0 on success, nonzero on failure
  */
 C8_STATIC int c8_set_value(C8* c8, const C8_Command* cmd) {
     switch (cmd->arg.type) {

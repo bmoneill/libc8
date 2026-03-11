@@ -14,7 +14,6 @@
 #define C8_SYNTAX_ERROR_EXCEPTION_MESSAGE      "A syntax error was encountered in the input file."
 #define C8_STACK_OVERFLOW_EXCEPTION_MESSAGE    "A stack overflow occurred during execution."
 #define C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE   "A stack underflow occurred during execution."
-#define C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE "Failed to allocate memory."
 #define C8_IO_EXCEPTION_MESSAGE                "A file I/O error occurred during execution."
 #define C8_INVALID_STATE_EXCEPTION_MESSAGE     "The c8 instance is in an invalid state."
 #define C8_INVALID_PARAMETER_EXCEPTION_MESSAGE "An invalid parameter was passed to a function."
@@ -37,7 +36,6 @@ const C8_Exception c8_exceptions[] = {
     { C8_SYNTAX_ERROR_EXCEPTION, C8_SYNTAX_ERROR_EXCEPTION_MESSAGE },
     { C8_STACK_OVERFLOW_EXCEPTION, C8_STACK_OVERFLOW_EXCEPTION_MESSAGE },
     { C8_STACK_UNDERFLOW_EXCEPTION, C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE },
-    { C8_MEMORY_ALLOCATION_EXCEPTION, C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE },
     { C8_IO_EXCEPTION, C8_IO_EXCEPTION_MESSAGE },
     { C8_INVALID_STATE_EXCEPTION, C8_INVALID_STATE_EXCEPTION_MESSAGE },
     { C8_INVALID_PARAMETER_EXCEPTION, C8_INVALID_PARAMETER_EXCEPTION_MESSAGE },

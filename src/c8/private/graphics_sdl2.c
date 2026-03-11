@@ -156,6 +156,7 @@ int c8_init_graphics(void) {
  *
  * @param display `C8_Display` to render
  * @param colors colors to render
+ * @return 0 on success, non-zero on failure
  */
 int c8_render(C8_Display* display, int* colors) {
     SDL_Rect pix = {
@@ -177,6 +178,7 @@ int c8_render(C8_Display* display, int* colors) {
     int result = SDL_RenderClear(c8_renderer);
     if (result == -1) {
         C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_RenderClear failed: %s", SDL_GetError());
+        return C8_GRAPHICS_EXCEPTION;
     }
 
     result = SDL_SetRenderDrawColor(c8_renderer,
@@ -186,11 +188,13 @@ int c8_render(C8_Display* display, int* colors) {
                                     SDL_ALPHA_OPAQUE);
     if (result == -1) {
         C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
+        return C8_GRAPHICS_EXCEPTION;
     }
 
     result = SDL_RenderFillRect(c8_renderer, &winRect);
     if (result == -1) {
         C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_RenderFillRect failed: %s", SDL_GetError());
+        return C8_GRAPHICS_EXCEPTION;
     }
 
     result = SDL_SetRenderDrawColor(c8_renderer,
@@ -200,6 +204,7 @@ int c8_render(C8_Display* display, int* colors) {
                                     SDL_ALPHA_OPAQUE);
     if (result == -1) {
         C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
+        return C8_GRAPHICS_EXCEPTION;
     }
 
     if (display->mode == C8_DISPLAYMODE_HIGH) {
@@ -217,6 +222,7 @@ int c8_render(C8_Display* display, int* colors) {
                     C8_EXCEPTION(C8_GRAPHICS_EXCEPTION,
                                  "SDL_SetRenderFillRect failed: %s",
                                  SDL_GetError());
+                    return C8_GRAPHICS_EXCEPTION;
                 }
             }
         }
@@ -229,11 +235,13 @@ int c8_render(C8_Display* display, int* colors) {
                                     SDL_ALPHA_OPAQUE);
     if (result == -1) {
         C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
+        return C8_GRAPHICS_EXCEPTION;
     }
 
     result = SDL_RenderFillRect(c8_renderer, &winRect);
     if (result == -1) {
         C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
+        return C8_GRAPHICS_EXCEPTION;
     }
 
     SDL_RenderPresent(c8_renderer);

@@ -175,15 +175,10 @@ char* c8_remove_comment(char* s) {
  *
  * @param labels label list to initialize
  *
- * @return 0 if success, exception code otherwise
+ * @return 0
  */
 C8_STATIC int c8_initialize_labels(C8_LabelList* labels) {
-    labels->l = (C8_Label*) calloc(C8_LABEL_CEILING, sizeof(C8_Label));
-    if (!labels->l) {
-        C8_EXCEPTION(C8_MEMORY_ALLOCATION_EXCEPTION, "At function %s", __func__);
-        return C8_MEMORY_ALLOCATION_EXCEPTION;
-    }
-
+    labels->l    = (C8_Label*) calloc(C8_LABEL_CEILING, sizeof(C8_Label));
     labels->len  = 0;
     labels->ceil = C8_LABEL_CEILING;
     return 0;
@@ -194,15 +189,10 @@ C8_STATIC int c8_initialize_labels(C8_LabelList* labels) {
  *
  * @param symbols symbol list to initialize
  *
- * @return 0 if success, exception code otherwise
+ * @return 0
  */
 C8_STATIC int c8_initialize_symbols(C8_SymbolList* symbols) {
-    symbols->s = (C8_Symbol*) calloc(C8_SYMBOL_CEILING, sizeof(C8_Symbol));
-    if (!symbols->s) {
-        C8_EXCEPTION(C8_MEMORY_ALLOCATION_EXCEPTION, "At function %s", __func__);
-        return C8_MEMORY_ALLOCATION_EXCEPTION;
-    }
-
+    symbols->s    = (C8_Symbol*) calloc(C8_SYMBOL_CEILING, sizeof(C8_Symbol));
     symbols->len  = 0;
     symbols->ceil = C8_SYMBOL_CEILING;
     return 0;

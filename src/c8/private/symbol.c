@@ -57,19 +57,11 @@ C8_InstructionFormat c8_formats[] = {
     { C8_I_XOR, 0x8003, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
     { C8_I_ADD, 0x8004, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
     { C8_I_SUB, 0x8005, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
-    { C8_I_SHR,
-      0x8006,
-      2,
-      { C8_SYM_V, C8_SYM_V },
-      { 0x0F00, 0x00F0 } }, // must be before below variant for decoding
-    { C8_I_SHR, 0x8006, 1, { C8_SYM_V }, { 0x0F00 } },
+    { C8_I_SHR, 0x8006, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } }, // For decoding
+    { C8_I_SHR, 0x8006, 1, { C8_SYM_V }, { 0x0F00 } }, // For encoding
     { C8_I_SUBN, 0x8007, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
-    { C8_I_SHL,
-      0x800E,
-      2,
-      { C8_SYM_V, C8_SYM_V },
-      { 0x0F00, 0x00F0 } }, // must be before below variant for decoding
-    { C8_I_SHL, 0x800E, 1, { C8_SYM_V }, { 0x0F00 } },
+    { C8_I_SHL, 0x800E, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } }, // For decoding
+    { C8_I_SHL, 0x800E, 1, { C8_SYM_V }, { 0x0F00 } }, // For encoding
     { C8_I_SNE, 0x9000, 2, { C8_SYM_V, C8_SYM_V }, { 0x0F00, 0x00F0 } },
     { C8_I_LD, 0xA000, 2, { C8_SYM_I, C8_SYM_INT12 }, { 0x0000, 0x0FFF } },
     { C8_I_JP_V0, 0xB000, 1, { C8_SYM_INT12 }, { 0x0FFF } }, // For decoding
@@ -401,6 +393,7 @@ int c8_resolve_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
  *
  * @param symbols symbols to search
  * @param labels labels to search
+ * @return 0 on success, C8_SYNTAX_ERROR_EXCEPTION on failure
  */
 int c8_substitute_labels(C8_SymbolList* symbols, C8_LabelList* labels) {
     for (int i = 0; i < symbols->len; i++) {
