@@ -117,8 +117,6 @@ Macros</h2></td></tr>
 <tr class="separator:a403ffac146be66c1fe6ba938d22b026b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe9ff3e16df954c93e8e38ce43c692c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#abe9ff3e16df954c93e8e38ce43c692c3">C8_STACK_UNDERFLOW_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;A stack underflow occurred during execution.&quot;</td></tr>
 <tr class="separator:abe9ff3e16df954c93e8e38ce43c692c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64d6ccc3c8165d80fa110d9b9fd3305d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a64d6ccc3c8165d80fa110d9b9fd3305d">C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;Failed to allocate memory.&quot;</td></tr>
-<tr class="separator:a64d6ccc3c8165d80fa110d9b9fd3305d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3b411658aac2fa37907fffdd63df956"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#ac3b411658aac2fa37907fffdd63df956">C8_IO_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;A file I/O error occurred during execution.&quot;</td></tr>
 <tr class="separator:ac3b411658aac2fa37907fffdd63df956"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33614b30cf35a9a999f34f3056fbe3fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="exception_8c.html#a33614b30cf35a9a999f34f3056fbe3fb">C8_INVALID_STATE_EXCEPTION_MESSAGE</a>&#160;&#160;&#160;&quot;The c8 instance is in an invalid state.&quot;</td></tr>
@@ -212,20 +210,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define C8_IO_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;A file I/O error occurred during execution.&quot;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a64d6ccc3c8165d80fa110d9b9fd3305d" name="a64d6ccc3c8165d80fa110d9b9fd3305d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64d6ccc3c8165d80fa110d9b9fd3305d">&#9670;&#160;</a></span>C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define C8_MEMORY_ALLOCATION_EXCEPTION_MESSAGE&#160;&#160;&#160;&quot;Failed to allocate memory.&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -333,22 +317,20 @@ Variables</h2></td></tr>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ac5f761b8a4f85aa71f898a4eea85fce8">C8_SYNTAX_ERROR_EXCEPTION</a>,  <span class="stringliteral">&quot;A syntax error was encountered in the input file.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627">C8_STACK_OVERFLOW_EXCEPTION</a>,  <span class="stringliteral">&quot;A stack overflow occurred during execution.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880">C8_STACK_UNDERFLOW_EXCEPTION</a>,  <span class="stringliteral">&quot;A stack underflow occurred during execution.&quot;</span>  },</div>
-<div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a526c94418797d663a630f29b4fda9838">C8_MEMORY_ALLOCATION_EXCEPTION</a>,  <span class="stringliteral">&quot;Failed to allocate memory.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a1ec38c66296de28fda68a7444e4a6b35">C8_IO_EXCEPTION</a>,  <span class="stringliteral">&quot;A file I/O error occurred during execution.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714">C8_INVALID_STATE_EXCEPTION</a>,  <span class="stringliteral">&quot;The c8 instance is in an invalid state.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ad9b280a6e9931243eb9725175fd2bed5">C8_INVALID_PARAMETER_EXCEPTION</a>,  <span class="stringliteral">&quot;An invalid parameter was passed to a function.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a500b085601a623c03df828509099651c">C8_GRAPHICS_EXCEPTION</a>,  <span class="stringliteral">&quot;An error occurred while rendering graphics.&quot;</span>  },</div>
 <div class="line">    { <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a6c49d1e64c7f97e4e90be6b109019ba5">C8_AUDIO_EXCEPTION</a>,  <span class="stringliteral">&quot;An error occurred while playing audio.&quot;</span>  },</div>
 <div class="line">}</div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a1ec38c66296de28fda68a7444e4a6b35"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a1ec38c66296de28fda68a7444e4a6b35">C8_IO_EXCEPTION</a></div><div class="ttdeci">@ C8_IO_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:35</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a500b085601a623c03df828509099651c"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a500b085601a623c03df828509099651c">C8_GRAPHICS_EXCEPTION</a></div><div class="ttdeci">@ C8_GRAPHICS_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:38</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a526c94418797d663a630f29b4fda9838"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a526c94418797d663a630f29b4fda9838">C8_MEMORY_ALLOCATION_EXCEPTION</a></div><div class="ttdeci">@ C8_MEMORY_ALLOCATION_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:34</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a6c49d1e64c7f97e4e90be6b109019ba5"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a6c49d1e64c7f97e4e90be6b109019ba5">C8_AUDIO_EXCEPTION</a></div><div class="ttdeci">@ C8_AUDIO_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:39</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a1ec38c66296de28fda68a7444e4a6b35"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a1ec38c66296de28fda68a7444e4a6b35">C8_IO_EXCEPTION</a></div><div class="ttdeci">@ C8_IO_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:34</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a500b085601a623c03df828509099651c"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a500b085601a623c03df828509099651c">C8_GRAPHICS_EXCEPTION</a></div><div class="ttdeci">@ C8_GRAPHICS_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:37</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a6c49d1e64c7f97e4e90be6b109019ba5"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a6c49d1e64c7f97e4e90be6b109019ba5">C8_AUDIO_EXCEPTION</a></div><div class="ttdeci">@ C8_AUDIO_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:38</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627">C8_STACK_OVERFLOW_EXCEPTION</a></div><div class="ttdeci">@ C8_STACK_OVERFLOW_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:32</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714">C8_INVALID_STATE_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_STATE_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:36</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714">C8_INVALID_STATE_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_STATE_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:35</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880">C8_STACK_UNDERFLOW_EXCEPTION</a></div><div class="ttdeci">@ C8_STACK_UNDERFLOW_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:33</div></div>
 <div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ac5f761b8a4f85aa71f898a4eea85fce8"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ac5f761b8a4f85aa71f898a4eea85fce8">C8_SYNTAX_ERROR_EXCEPTION</a></div><div class="ttdeci">@ C8_SYNTAX_ERROR_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:31</div></div>
-<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ad9b280a6e9931243eb9725175fd2bed5"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ad9b280a6e9931243eb9725175fd2bed5">C8_INVALID_PARAMETER_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_PARAMETER_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:37</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480ad9b280a6e9931243eb9725175fd2bed5"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ad9b280a6e9931243eb9725175fd2bed5">C8_INVALID_PARAMETER_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_PARAMETER_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:36</div></div>
 </div><!-- fragment -->
 </div>
 </div>

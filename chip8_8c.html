@@ -226,7 +226,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>pointer to initialized <code><a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a></code>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to initialized <code><a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a></code>, or NULL on failure. </dd></dl>
 
 </div>
 </div>
@@ -264,7 +264,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if success </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if success, C8_IO_EXCEPTION or C8_INVALID_PARAMETER_EXCEPTION if failure </dd></dl>
 
 </div>
 </div>
@@ -302,7 +302,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if success, non-zero if failure </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if success, C8_INVALID_PARAMETER_EXCEPTION if failure </dd></dl>
 
 </div>
 </div>
@@ -347,7 +347,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if success, non-zero exception code if failure </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if success, C8_INVALID_PARAMETER_EXCEPTION if failure </dd></dl>
 
 </div>
 </div>
@@ -385,7 +385,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 if success, exception code on error. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if success, C8_IO_EXCEPTION or C8_INVALID_PARAMETER_EXCEPTION on error. </dd></dl>
 
 </div>
 </div>
@@ -412,6 +412,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if success, exception code on failure </dd></dl>
 
 </div>
 </div>
@@ -438,7 +439,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int 0 on success, non-zero on failure </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>int 0 on success, C8_INVALID_STATE_EXCEPTION on failure </dd></dl>
 
 </div>
 </div>

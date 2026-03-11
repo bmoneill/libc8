@@ -6,7 +6,6 @@ var exception_8h =
       [ "C8_SYNTAX_ERROR_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ac5f761b8a4f85aa71f898a4eea85fce8", null ],
       [ "C8_STACK_OVERFLOW_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a7a4e9149a0f517bfb220a4b37d7f5627", null ],
       [ "C8_STACK_UNDERFLOW_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ab6f587eefcc47cdb4cc6a12775661880", null ],
-      [ "C8_MEMORY_ALLOCATION_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a526c94418797d663a630f29b4fda9838", null ],
       [ "C8_IO_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a1ec38c66296de28fda68a7444e4a6b35", null ],
       [ "C8_INVALID_STATE_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714", null ],
       [ "C8_INVALID_PARAMETER_EXCEPTION", "exception_8h.html#a7c3781ed13680e20a5bf0907e4223480ad9b280a6e9931243eb9725175fd2bed5", null ],

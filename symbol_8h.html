@@ -1369,8 +1369,6 @@ Variables</h2></td></tr>
 
 <p>Populate label list from lines. </p>
 <p>This function scans through the lines of code and identifies label definitions. It checks each line for a label definition (ending with a colon) and adds it to the label list.</p>
-<p>If a duplicate label definition is found, it throws a <code>C8_DUPLICATE_LABEL_EXCEPTION</code>.</p>
-<p>If too many labels are defined, it throws a <code>C8_TOO_MANY_LABELS_EXCEPTION</code>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">labels</td><td>label list to populate</td></tr>
@@ -1487,6 +1485,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, C8_SYNTAX_ERROR_EXCEPTION on failure </dd></dl>
 
 </div>
 </div>
