@@ -178,7 +178,7 @@ void c8_set_fonts(C8* c8, C8_SmallFont small, C8_BigFont big) {
  * @param c8 `C8` to set fonts
  * @param s string to get fonts from (comma-separated `fontNames` names)
  *
- * @return 0 if success, exception code otherwise
+ * @return 0 if success, C8_INVALID_PARAMETER_EXCEPTION otherwise
  */
 int c8_set_fonts_s(C8* c8, char* s) {
     int         len   = strlen(s);
@@ -213,7 +213,7 @@ int c8_set_fonts_s(C8* c8, char* s) {
  * @param c8 `C8` to set font from
  * @param s string to get font from
  *
- * @return 0 if success, exception code otherwise
+ * @return 0 if success, C8_INVALID_PARAMETER_EXCEPTION otherwise
  */
 int c8_set_small_font(C8* c8, const char* s) {
     int f = -1;
@@ -239,7 +239,7 @@ int c8_set_small_font(C8* c8, const char* s) {
  * @param c8 `C8` to set font from
  * @param s string to get font from
  *
- * @return 0 if success, exception code otherwise
+ * @return 0 if success, C8_INVALID_PARAMETER_EXCEPTION otherwise
  */
 int c8_set_big_font(C8* c8, const char* s) {
     int f = -1;
