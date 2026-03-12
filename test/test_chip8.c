@@ -179,7 +179,4 @@ void test_c8_validate_WithInvalidDisplayMode(void) {
     free(c8_allocd);
 }
 
-void test_c8_version(void) {
-    // TODO
-    TEST_ASSERT_EQUAL_STRING(C8_VERSION, c8_version());
-}
+void test_c8_version(void) { TEST_ASSERT_EQUAL_STRING(C8_VERSION, c8_version()); }

@@ -287,7 +287,6 @@ void test_c8_parse_word_WhereWordIsInvalid(void) {
 }
 
 void test_c8_put16(void) {
-    // TODO
     c8_put16(bytecode, 0xABCD, 0);
     TEST_ASSERT_EQUAL_INT(0xAB, bytecode[0]);
     TEST_ASSERT_EQUAL_INT(0xCD, bytecode[1]);

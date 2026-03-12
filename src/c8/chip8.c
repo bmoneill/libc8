@@ -291,7 +291,7 @@ int c8_simulate(C8* c8) {
             }
 
             if (c8->st > 0) {
-                c8->st--; // TODO sound
+                c8->st--;
             }
 
             if (c8->st == 0) {
