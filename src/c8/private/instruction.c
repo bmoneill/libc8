@@ -762,7 +762,7 @@ C8_STATIC C8_INLINE int c8_i_subn_vx_vy(C8* c8, uint8_t x, uint8_t y) {
 C8_STATIC C8_INLINE int c8_i_shl_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
     c8->V[x]   = c8->V[y] << 1;
-    c8->V[0xF] = (c8->V[y] >> 7) & 1;
+    c8->V[0xF] = c8->V[x] >> 7 & 1;
     return 2;
 }
 

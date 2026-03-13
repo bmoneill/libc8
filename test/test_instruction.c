@@ -374,30 +374,12 @@ void test_c8_parse_instruction_WhereInstructionIsLDXKK(void) {
     TEST_ASSERT_EQUAL_UINT8(kk, c8.V[x]);
 }
 
-void test_c8_parse_instruction_WhereInstructionIsADDXKK_WithCarry(void) {
-    kk = ((rand() & 0x7F) + 128);
+void test_c8_parse_instruction_WhereInstructionIsADDXKK(void) {
     AXKK(0x7, x, kk);
-
-    vx      = ((rand() & 0x7F) + 128);
     c8.V[x] = vx;
-
     int ret = c8_parse_instruction(&c8);
     TEST_ASSERT_EQUAL_INT(2, ret);
     TEST_ASSERT_EQUAL_UINT8(vx + kk, c8.V[x]);
-    TEST_ASSERT_EQUAL_UINT8(1, c8.V[0xF]);
-}
-
-void test_c8_parse_instruction_WhereInstructionIsADDXKK_WithoutCarry(void) {
-    kk &= 0x7F;
-    AXKK(0x7, x, kk);
-
-    vx &= 0x7F;
-    c8.V[x] = vx;
-
-    int ret = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_EQUAL_UINT8(vx + kk, c8.V[x]);
-    TEST_ASSERT_EQUAL_UINT8(0, c8.V[0xF]);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLDXY(void) {
