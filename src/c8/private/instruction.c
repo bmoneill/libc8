@@ -912,7 +912,7 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_skp_vx(C8* c8, uint8_t x) {
-    if (c8->key[c8->V[x]]) {
+    if (c8->key[c8->V[x] & 0xF]) {
         c8->pc += 2;
     }
     return 2;
@@ -930,7 +930,7 @@ C8_STATIC C8_INLINE int c8_i_skp_vx(C8* c8, uint8_t x) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_sknp_vx(C8* c8, uint8_t x) {
-    if (!c8->key[c8->V[x]]) {
+    if (!c8->key[c8->V[x] & 0xF]) {
         c8->pc += 2;
     }
     return 2;
@@ -1040,7 +1040,7 @@ C8_STATIC C8_INLINE int c8_i_add_i_vx(C8* c8, uint8_t x) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_ld_f_vx(C8* c8, uint8_t x) {
-    c8->I = C8_FONT_START + (c8->V[x] * 5);
+    c8->I = C8_FONT_START + ((c8->V[x] & 0xF) * 5);
     return 2;
 }
 
