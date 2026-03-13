@@ -597,14 +597,5 @@ int c8_shift(uint16_t fmt) {
             return table[i][1];
         }
     }
-
-    // Unorthodox shift
-    // FIXME remove this?
-    int shift = 0;
-    while ((fmt & 1) == 0) {
-        fmt >>= 1;
-        shift++;
-    }
-
-    return shift;
+    return 0; // Unreachable for valid fmt values
 }
