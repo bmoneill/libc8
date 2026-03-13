@@ -54,12 +54,14 @@ C8* c8_init(const char* path, int flags) {
     c8->mode         = C8_MODE_CHIP8;
 
     if (path != NULL && c8_load_rom(c8, path) != 0) {
+        free(c8);
         return NULL;
     }
 
     c8_set_fonts(c8, 0, 0);
 
-    if (!c8_init_graphics()) {
+    if (c8_init_graphics()) {
+        free(c8);
         return NULL;
     }
 
