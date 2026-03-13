@@ -295,7 +295,7 @@ int c8_simulate(C8* c8) {
             }
 
             if (c8->st == 0) {
-                c8_sound_play();
+                c8_sound_stop();
             }
 
             if (c8->draw) {
