@@ -572,7 +572,6 @@ C8_STATIC C8_INLINE int c8_i_ld_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
  * @brief `ADD Vx, kk` instruction (`7xkk`)
  *
  * This instruction adds the value `kk` to the value in register Vx.
- * If the result exceeds 255, it sets the carry flag in VF.
  *
  * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
@@ -581,7 +580,6 @@ C8_STATIC C8_INLINE int c8_i_ld_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_add_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
-    c8->V[0xF] = CARRIES(c8->V[x], kk);
     c8->V[x] += kk;
     return 2;
 }
