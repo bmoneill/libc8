@@ -526,8 +526,8 @@ void test_c8_parse_instruction_WhereInstructionIsSHRXY_WithoutFlag(void) {
 void test_c8_parse_instruction_WhereInstructionIsSUBNXY_WithFlag(void) {
     AXYB(0x8, x, y, 7);
 
-    vx = (vy & 0x7F) + 128;
-    vy &= 0x7F;
+    vx      = 200;
+    vy      = 128;
     c8.V[x] = vx;
     c8.V[y] = vy;
 
@@ -540,8 +540,8 @@ void test_c8_parse_instruction_WhereInstructionIsSUBNXY_WithFlag(void) {
 void test_c8_parse_instruction_WhereInstructionIsSUBNXY_WithoutFlag(void) {
     AXYB(0x8, x, y, 7);
 
-    vx &= 0x7F;
-    vy      = ((vx & 0x7F) + 128);
+    vx      = 128;
+    vy      = 200;
     c8.V[x] = vx;
     c8.V[y] = vy;
 

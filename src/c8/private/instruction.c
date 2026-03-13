@@ -718,9 +718,8 @@ C8_STATIC C8_INLINE int c8_i_sub_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  */
 C8_STATIC C8_INLINE int c8_i_shr_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
-    uint8_t vf = c8->V[x] & 0x1;
     c8->V[x]   = c8->V[y] >> 1;
-    c8->V[0xF] = vf;
+    c8->V[0xF] = c8->V[x] & 0x1;
     return 2;
 }
 
@@ -737,7 +736,7 @@ C8_STATIC C8_INLINE int c8_i_shr_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_subn_vx_vy(C8* c8, uint8_t x, uint8_t y) {
-    uint8_t vf = x < y;
+    uint8_t vf = c8->V[x] < c8->V[y];
     c8->V[x]   = c8->V[y] - c8->V[x];
     c8->V[0xF] = vf;
     return 2;
@@ -762,9 +761,8 @@ C8_STATIC C8_INLINE int c8_i_subn_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  */
 C8_STATIC C8_INLINE int c8_i_shl_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
-    uint8_t vf = (c8->V[y] >> 7) & 1;
     c8->V[x]   = c8->V[y] << 1;
-    c8->V[0xF] = vf;
+    c8->V[0xF] = (c8->V[y] >> 7) & 1;
     return 2;
 }
 
