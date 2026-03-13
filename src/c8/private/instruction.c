@@ -52,9 +52,6 @@
         y = x;                                                                                     \
     }
 
-#define BORROWS(x, y) ((((int) x) - y) < 0)
-#define CARRIES(x, y) ((((int) x) + y) > UINT8_MAX)
-
 /* instruction groups */
 C8_STATIC int c8_base_instruction(C8*, uint16_t, uint8_t);
 C8_STATIC int c8_bitwise_instruction(C8*, uint16_t, uint8_t, uint8_t, uint8_t);
@@ -676,8 +673,9 @@ C8_STATIC C8_INLINE int c8_i_xor_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_add_vx_vy(C8* c8, uint8_t x, uint8_t y) {
-    c8->V[0xF] = CARRIES(c8->V[x], c8->V[y]);
-    c8->V[x] += c8->V[y];
+    uint16_t sum = c8->V[x] + c8->V[y];
+    c8->V[x]     = sum;
+    c8->V[0xF]   = (sum > 0xFF) ? 1 : 0;
     return 2;
 }
 
@@ -694,8 +692,10 @@ C8_STATIC C8_INLINE int c8_i_add_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_sub_vx_vy(C8* c8, uint8_t x, uint8_t y) {
-    c8->V[0xF] = !BORROWS(c8->V[x], c8->V[y]);
-    c8->V[x] -= c8->V[y];
+    uint8_t result = c8->V[x] - c8->V[y];
+    uint8_t vf     = result <= c8->V[x];
+    c8->V[x]       = result;
+    c8->V[0xF]     = vf;
     return 2;
 }
 
@@ -718,8 +718,9 @@ C8_STATIC C8_INLINE int c8_i_sub_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  */
 C8_STATIC C8_INLINE int c8_i_shr_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
+    uint8_t vf = c8->V[x] & 0x1;
     c8->V[x]   = c8->V[y] >> 1;
-    c8->V[0xF] = c8->V[x] & 0x1;
+    c8->V[0xF] = vf;
     return 2;
 }
 
@@ -736,8 +737,9 @@ C8_STATIC C8_INLINE int c8_i_shr_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_subn_vx_vy(C8* c8, uint8_t x, uint8_t y) {
-    c8->V[0xF] = !BORROWS(c8->V[y], c8->V[x]);
+    uint8_t vf = x < y;
     c8->V[x]   = c8->V[y] - c8->V[x];
+    c8->V[0xF] = vf;
     return 2;
 }
 
@@ -760,8 +762,9 @@ C8_STATIC C8_INLINE int c8_i_subn_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  */
 C8_STATIC C8_INLINE int c8_i_shl_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     QUIRK_SHIFT(c8);
+    uint8_t vf = (c8->V[y] >> 7) & 1;
     c8->V[x]   = c8->V[y] << 1;
-    c8->V[0xF] = (c8->V[x] >> 7) & 1;
+    c8->V[0xF] = vf;
     return 2;
 }
 
