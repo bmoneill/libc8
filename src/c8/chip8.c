@@ -231,7 +231,7 @@ int c8_simulate(C8* c8) {
     c8->pc      = C8_PROG_START;
     c8->running = 1;
 
-    if ((ret = c8_validate(c8)) != 1) {
+    if ((ret = c8_validate(c8)) != 0) {
         return ret;
     }
 
