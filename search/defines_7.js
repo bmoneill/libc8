@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['schip_5fexclusive_0',['SCHIP_EXCLUSIVE',['../instruction_8c.html#adcf8c0905190034ae48a9ab7692113e5',1,'instruction.c']]],
-  ['schip_5fs_1',['SCHIP_S',['../font_8c.html#a1e6dd636151039ea0039ccbab42e360a',1,'font.c']]]
+  ['verbose_0',['VERBOSE',['../instruction_8c.html#a4aaf30eb16fc172dc344ab5f397e6c97',1,'instruction.c']]],
+  ['verbose_5fprint_1',['VERBOSE_PRINT',['../encode_8c.html#a16e027ed946c00a879920dabaf8e8058',1,'encode.c']]],
+  ['vip_5fs_2',['VIP_S',['../font_8c.html#a71e77f0df1f95d5dd9afe6623a5cef94',1,'font.c']]]
 ];
