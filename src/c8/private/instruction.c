@@ -855,43 +855,44 @@ C8_STATIC C8_INLINE int c8_i_rnd_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
-C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b) {
-    c8->V[0xF] = 0;
-    int dw     = C8_LOW_DISPLAY_WIDTH;
-    int dh     = C8_LOW_DISPLAY_HEIGHT;
-    int h      = 8;
-    int ox     = 0;
-    int oy     = 0;
+C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t sprite_width) {
+    c8->V[0xF]         = 0;
+    int display_width  = C8_LOW_DISPLAY_WIDTH;
+    int display_height = C8_LOW_DISPLAY_HEIGHT;
+    int sprite_height  = 8;
+    int output_x       = 0;
+    int output_y       = 0;
 
     if (c8->display.mode == C8_DISPLAYMODE_HIGH) {
-        if (b == 0) {
-            b = 16;
+        if (sprite_width == 0) {
+            sprite_width = 16;
         }
-        dw = C8_HIGH_DISPLAY_WIDTH;
-        dh = C8_HIGH_DISPLAY_HEIGHT;
-        ox = c8->display.x;
-        oy = c8->display.y;
+        display_width  = C8_HIGH_DISPLAY_WIDTH;
+        display_height = C8_HIGH_DISPLAY_HEIGHT;
+        output_x       = c8->display.x;
+        output_y       = c8->display.y;
     }
 
-    for (int i = 0; i < b; i++) {
-        for (int j = 0; j < h; j++) {
-            int dx = (c8->V[x] + j + ox) % dw;
-            int dy = (c8->V[y] + i + oy) % dh;
+    for (int i = 0; i < sprite_width; i++) {
+        for (int j = 0; j < sprite_height; j++) {
+            int display_x = (c8->V[x] + j + output_x) % display_width;
+            int display_y = (c8->V[y] + i + output_y) % display_height;
 
             if (c8->flags & C8_FLAG_QUIRK_DRAW) {
-                if (((dx % dw) + b >= dw) || (dy % dh) + h >= dh) {
+                if (((display_x % display_width) + sprite_width >= display_width)
+                    || (display_y % display_height) + sprite_height >= display_height) {
                     continue;
                 }
             }
 
-            int before = *c8_get_pixel(&c8->display, dx, dy);
+            int before = *c8_get_pixel(&c8->display, display_x, display_y);
             int pix    = c8->mem[c8->I + i];
 
             if (pix & (0x80 >> j)) {
                 if (before) {
                     c8->V[0xF] = 1;
                 }
-                c8_get_pixel(&c8->display, dx, dy)[0] ^= 1;
+                c8_get_pixel(&c8->display, display_x, display_y)[0] ^= 1;
             }
         }
     }
