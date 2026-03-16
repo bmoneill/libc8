@@ -339,7 +339,7 @@ int c8_validate(const C8* c8) {
     }
 
     if (c8->VK < 0 || c8->VK >= 16) {
-        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "VK out of bounds (0-15): VK=%d", c8->VK)
+        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "VK out of bounds (0x0-0xF): VK=0x%X", c8->VK)
         return C8_INVALID_STATE_EXCEPTION;
     }
 
