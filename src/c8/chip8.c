@@ -325,7 +325,7 @@ int c8_validate(const C8* c8) {
 
     if (c8->pc > C8_MEMSIZE) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION,
-                     "PC out of bounds: 0x%04x > 0x%04x",
+                     "PC out of bounds: 0x%04X > 0x%04X",
                      c8->pc,
                      C8_MEMSIZE)
         return C8_INVALID_STATE_EXCEPTION;
