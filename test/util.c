@@ -21,6 +21,8 @@ static const char* paths[] = { TEST_DATA_DIR_1, TEST_DATA_DIR_2, TEST_DATA_DIR_3
 static char        path_buffer[64];
 static char        stdout_buffer[1024];
 
+int                c8_init_graphics(void) { return 0; }
+
 char*              get_path(const char* filename) {
     for (int i = 0; i < 4; i++) {
         sprintf(path_buffer, "%s%s", paths[i], filename);
