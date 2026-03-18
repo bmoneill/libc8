@@ -21,6 +21,8 @@
 
 #define C8_DEBUG(c) (c->flags & C8_FLAG_DEBUG)
 
+C8_STATIC double c8_get_time(void);
+
 /**
  * @brief Deinitialize graphics and free c8
  *
@@ -222,9 +224,10 @@ int c8_load_rom(C8* c8, const char* addr) {
  * @return 0 if success, exception code on failure
  */
 int c8_simulate(C8* c8) {
-    int debugRet;
-    int ret;
-    int step = 1;
+    int    debugRet;
+    int    ret;
+    int    step        = 1;
+    double accumulator = 0.0;
 
     srand(time(NULL));
 
@@ -235,8 +238,17 @@ int c8_simulate(C8* c8) {
         return ret;
     }
 
+    const double refresh_rate = 1.0 / 60.0;
+    double       last         = c8_get_time();
+    double       acc          = 0.0;
     while (c8->running) {
         usleep(1000000 / c8->cs);
+
+        // Get current time
+        double current = c8_get_time();
+        acc += current - last;
+        last  = current;
+
         int t = c8_tick(c8->key);
 
         if (t == -2) {
@@ -278,16 +290,8 @@ int c8_simulate(C8* c8) {
             c8->waitingForKey = 0;
         }
 
-        if (!c8->waitingForKey) {
-            /* Not waiting for key, parse next instruction */
-            ret = c8_parse_instruction(c8);
-
-            if (ret < 0) {
-                return ret;
-            }
-
-            c8->pc += ret;
-
+        if (acc >= refresh_rate) {
+            /* Update timers and draw */
             if (c8->dt > 0) {
                 c8->dt--;
             }
@@ -306,6 +310,18 @@ int c8_simulate(C8* c8) {
                 }
                 c8->draw = 0;
             }
+
+            acc -= refresh_rate;
+        }
+        if (!c8->waitingForKey) {
+            /* Not waiting for key, parse next instruction */
+            ret = c8_parse_instruction(c8);
+
+            if (ret < 0) {
+                return ret;
+            }
+
+            c8->pc += ret;
         }
     }
     return 0;
@@ -360,4 +376,10 @@ int c8_validate(const C8* c8) {
  *
  * @return const char* version string
  */
-const char* c8_version(void) { return C8_VERSION; }
+const char*      c8_version(void) { return C8_VERSION; }
+
+C8_STATIC double c8_get_time(void) {
+    struct timespec ts;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    return ts.tv_sec + ts.tv_nsec * 1e-9;
+}
