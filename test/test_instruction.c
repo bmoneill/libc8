@@ -484,7 +484,7 @@ void test_c8_parse_instruction_WhereInstructionIsSUBXY_WithoutBorrow(void) {
 void test_c8_parse_instruction_WhereInstructionIsSHRXY_WithFlag(void) {
     AXYB(0x8, x, y, 6);
 
-    vy |= 0x3; // b11
+    vy      = 0x3; // b11
     c8.V[y] = vy;
 
     int ret = c8_parse_instruction(&c8);
@@ -496,7 +496,7 @@ void test_c8_parse_instruction_WhereInstructionIsSHRXY_WithFlag(void) {
 void test_c8_parse_instruction_WhereInstructionIsSHRXY_WithoutFlag(void) {
     AXYB(0x8, x, y, 6);
 
-    vy &= 0xFC; // b11111100
+    vy      = 0xFC; // b11111100
     c8.V[y] = vy;
 
     int ret = c8_parse_instruction(&c8);
@@ -536,8 +536,10 @@ void test_c8_parse_instruction_WhereInstructionIsSUBNXY_WithoutFlag(void) {
 void test_c8_parse_instruction_WhereInstructionIsSHLXY_WithFlag(void) {
     AXYB(0x8, x, y, 0xE);
 
-    vy |= 0x40; // b01000000
+    vy      = 0x80; // b10000000
     c8.V[y] = vy;
+
+    printf("%d %d\n", x, y);
 
     int ret = c8_parse_instruction(&c8);
     TEST_ASSERT_EQUAL_INT(2, ret);
@@ -548,7 +550,7 @@ void test_c8_parse_instruction_WhereInstructionIsSHLXY_WithFlag(void) {
 void test_c8_parse_instruction_WhereInstructionIsSHLXY_WithoutFlag(void) {
     AXYB(0x8, x, y, 0xE);
 
-    vy &= 0xF; // b00001111
+    vy      = 0xF; // b00001111
     c8.V[y] = vy;
 
     int ret = c8_parse_instruction(&c8);
