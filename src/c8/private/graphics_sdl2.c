@@ -238,12 +238,6 @@ int c8_render(C8_Display* display, int* colors) {
         return C8_GRAPHICS_EXCEPTION;
     }
 
-    result = SDL_RenderFillRect(c8_renderer, &winRect);
-    if (result == -1) {
-        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
-        return C8_GRAPHICS_EXCEPTION;
-    }
-
     SDL_RenderPresent(c8_renderer);
     return 0;
 }
