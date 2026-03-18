@@ -12,7 +12,9 @@ int         main(int argc, char* argv[]) {
         usage(argv[0]);
     }
 
-    C8* c8 = c8_init(NULL, 0);
+    C8* c8           = c8_init(NULL, 0);
+    c8->display.mode = C8_DISPLAYMODE_LOW;
+    c8->mode         = C8_MODE_CHIP8;
 
     if (!c8) {
         usage(argv[0]);
