@@ -27,7 +27,7 @@
 #define BUILD_INSTRUCTION_ANNN(a, nnn)     (FORMAT_A(a) | FORMAT_NNN(nnn))
 #define AXKK(a, x, kk)                     INSERT_INSTRUCTION(pc, BUILD_INSTRUCTION_AXKK(a, x, kk))
 #define ANNN(a, nnn)                       INSERT_INSTRUCTION(pc, BUILD_INSTRUCTION_ANNN(a, nnn))
-#define AXYB(a, x, y, b) INSERT_INSTRUCTION(pc, BUILD_INSTRUCTION_AXYB(a, x, y, b))
+#define AXYB(a, x, y, b)                   INSERT_INSTRUCTION(pc, BUILD_INSTRUCTION_AXYB(a, x, y, b))
 
 C8             c8;
 uint8_t        x   = 0;
