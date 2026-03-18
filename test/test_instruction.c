@@ -27,7 +27,7 @@
 #define BUILD_INSTRUCTION_ANNN(a, nnn)     (FORMAT_A(a) | FORMAT_NNN(nnn))
 #define AXKK(a, x, kk)                     INSERT_INSTRUCTION(pc, BUILD_INSTRUCTION_AXKK(a, x, kk))
 #define ANNN(a, nnn)                       INSERT_INSTRUCTION(pc, BUILD_INSTRUCTION_ANNN(a, nnn))
-#define AXYB(a, x, y, b)                   INSERT_INSTRUCTION(pc, BUILD_INSTRUCTION_AXYB(a, x, y, b))
+#define AXYB(a, x, y, b) INSERT_INSTRUCTION(pc, BUILD_INSTRUCTION_AXYB(a, x, y, b))
 
 C8             c8;
 uint8_t        x   = 0;
@@ -122,7 +122,7 @@ void       setUp(void) {
         x++;
         x = 0xF ? 0 : x + 1;
         if (x == y) {
-            y++;
+            y = y == 0xE ? 0 : y + 1;
         }
     }
 }
@@ -484,7 +484,7 @@ void test_c8_parse_instruction_WhereInstructionIsSUBXY_WithoutBorrow(void) {
 void test_c8_parse_instruction_WhereInstructionIsSHRXY_WithFlag(void) {
     AXYB(0x8, x, y, 6);
 
-    vy |= 0x2; // b10
+    vy |= 0x3; // b11
     c8.V[y] = vy;
 
     int ret = c8_parse_instruction(&c8);
@@ -496,7 +496,7 @@ void test_c8_parse_instruction_WhereInstructionIsSHRXY_WithFlag(void) {
 void test_c8_parse_instruction_WhereInstructionIsSHRXY_WithoutFlag(void) {
     AXYB(0x8, x, y, 6);
 
-    vy &= 0xFD; // b11111101
+    vy &= 0xFC; // b11111100
     c8.V[y] = vy;
 
     int ret = c8_parse_instruction(&c8);
@@ -548,7 +548,7 @@ void test_c8_parse_instruction_WhereInstructionIsSHLXY_WithFlag(void) {
 void test_c8_parse_instruction_WhereInstructionIsSHLXY_WithoutFlag(void) {
     AXYB(0x8, x, y, 0xE);
 
-    vy &= 0xBF; // b10111111
+    vy &= 0xF; // b00001111
     c8.V[y] = vy;
 
     int ret = c8_parse_instruction(&c8);
