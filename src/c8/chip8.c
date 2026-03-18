@@ -244,11 +244,6 @@ int c8_simulate(C8* c8) {
     while (c8->running) {
         usleep(1000000 / c8->cs);
 
-        // Get current time
-        double current = c8_get_time();
-        acc += current - last;
-        last  = current;
-
         int t = c8_tick(c8->key);
 
         if (t == -2) {
@@ -284,11 +279,10 @@ int c8_simulate(C8* c8) {
             }
         }
 
-        if (t >= 0 && c8->waitingForKey) {
-            /* Waiting for key and a key was pressed */
-            c8->V[c8->VK]     = t;
-            c8->waitingForKey = 0;
-        }
+        /* Get current time */
+        double current = c8_get_time();
+        acc += current - last;
+        last = current;
 
         if (acc >= refresh_rate) {
             /* Update timers and draw */
@@ -313,6 +307,13 @@ int c8_simulate(C8* c8) {
 
             acc -= refresh_rate;
         }
+
+        if (t >= 0 && c8->waitingForKey) {
+            /* Waiting for key and a key was pressed */
+            c8->V[c8->VK]     = t;
+            c8->waitingForKey = 0;
+        }
+
         if (!c8->waitingForKey) {
             /* Not waiting for key, parse next instruction */
             ret = c8_parse_instruction(c8);
