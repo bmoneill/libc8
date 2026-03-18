@@ -856,12 +856,12 @@ C8_STATIC C8_INLINE int c8_i_rnd_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b) {
-    c8->V[0xF]         = 0;
-    int display_width  = C8_LOW_DISPLAY_WIDTH;
-    int display_height = C8_LOW_DISPLAY_HEIGHT;
-    int sprite_width   = 8;
-    int output_x       = 0;
-    int output_y       = 0;
+    uint8_t vf             = 0;
+    int     display_width  = C8_LOW_DISPLAY_WIDTH;
+    int     display_height = C8_LOW_DISPLAY_HEIGHT;
+    int     sprite_width   = 8;
+    int     output_x       = 0;
+    int     output_y       = 0;
 
     if (c8->display.mode == C8_DISPLAYMODE_HIGH) {
         if (b == 0) {
@@ -891,14 +891,15 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
 
             if (pix & (0x80 >> j)) {
                 if (before) {
-                    c8->V[0xF] = 1;
+                    vf = 1;
                 }
                 c8_get_pixel(&c8->display, display_x, display_y)[0] ^= 1;
             }
         }
     }
 
-    c8->draw = 1;
+    c8->V[0xF] = vf;
+    c8->draw   = 1;
     return 2;
 }
 
