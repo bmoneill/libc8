@@ -7,5 +7,6 @@ var instruction_8c =
     [ "SCHIP_EXCLUSIVE", "instruction_8c.html#adcf8c0905190034ae48a9ab7692113e5", null ],
     [ "VERBOSE", "instruction_8c.html#a4aaf30eb16fc172dc344ab5f397e6c97", null ],
     [ "XOCHIP_EXCLUSIVE", "instruction_8c.html#a5e78dccd5a76c7314861b7a9f1c81286", null ],
-    [ "c8_parse_instruction", "instruction_8c.html#ae80c4c97bf5dcad02f450ac800e9a019", null ]
+    [ "c8_parse_instruction", "instruction_8c.html#ae80c4c97bf5dcad02f450ac800e9a019", null ],
+    [ "print_binary", "instruction_8c.html#a38127de4a7d41ea41319433ae09faf56", null ]
 ];

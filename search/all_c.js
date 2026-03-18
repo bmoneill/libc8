@@ -4,5 +4,6 @@ var searchData=
   ['pc_1',['pc',['../structC8.html#af21633fb74a6aa87c93baf3caaa58864',1,'C8']]],
   ['pcount_2',['pcount',['../structC8__InstructionFormat.html#a747fe457bac32c34b78b69f9bfefd6f3',1,'C8_InstructionFormat::pcount()'],['../structC8__Instruction.html#a747fe457bac32c34b78b69f9bfefd6f3',1,'C8_Instruction::pcount()']]],
   ['pmask_3',['pmask',['../structC8__InstructionFormat.html#ab47bcc908fcad9122ec7d5aa4f9630d5',1,'C8_InstructionFormat']]],
-  ['ptype_4',['ptype',['../structC8__InstructionFormat.html#a68911e16317263355bae9e1341d53689',1,'C8_InstructionFormat::ptype()'],['../structC8__Instruction.html#a68911e16317263355bae9e1341d53689',1,'C8_Instruction::ptype()']]]
+  ['print_5fbinary_4',['print_binary',['../instruction_8c.html#a38127de4a7d41ea41319433ae09faf56',1,'instruction.c']]],
+  ['ptype_5',['ptype',['../structC8__InstructionFormat.html#a68911e16317263355bae9e1341d53689',1,'C8_InstructionFormat::ptype()'],['../structC8__Instruction.html#a68911e16317263355bae9e1341d53689',1,'C8_Instruction::ptype()']]]
 ];

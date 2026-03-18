@@ -4,7 +4,6 @@ var structC8 =
     [ "colors", "structC8.html#ab5ab72332d3b382a8d44dcb23c8c610b", null ],
     [ "cs", "structC8.html#ad35c7ed2784f4fb57849237ce534f17e", null ],
     [ "display", "structC8.html#a2c4c524224996adcea130ae3c8d49ec8", null ],
-    [ "draw", "structC8.html#a0dc5e0006521905cc3fd70a61e860572", null ],
     [ "dt", "structC8.html#ada3845993bce1df4701253692c93a98b", null ],
     [ "flags", "structC8.html#ac8bf36fe0577cba66bccda3a6f7e80a4", null ],
     [ "fonts", "structC8.html#a24f62be0e5cb2b7cefd163ec59032090", null ],
