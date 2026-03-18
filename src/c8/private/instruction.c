@@ -1098,7 +1098,7 @@ C8_STATIC C8_INLINE int c8_i_ld_b_vx(C8* c8, uint8_t x) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_ld_ip_vx(C8* c8, uint8_t x) {
-    for (int i = 0; i < x; i++) {
+    for (int i = 0; i < x + 1; i++) {
         c8->mem[c8->I + i] = c8->V[i];
     }
     QUIRK_LOADSTORE(c8);
@@ -1109,7 +1109,7 @@ C8_STATIC C8_INLINE int c8_i_ld_ip_vx(C8* c8, uint8_t x) {
  * @brief `LD Vx, [I]` instruction (`Fx65`)
  *
  * This instruction loads the values from memory starting at address I into
- * registers V0 to Vx. The values are loaded in order from I to I + (x - 1).
+ * registers V0 to Vx. The values are loaded in order from I to I + x.
  *
  * @param c8 the `C8` to execute the instruction from
  * @param x the number of registers to load (0-15)
@@ -1117,7 +1117,7 @@ C8_STATIC C8_INLINE int c8_i_ld_ip_vx(C8* c8, uint8_t x) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_ld_vx_ip(C8* c8, uint8_t x) {
-    for (int i = 0; i < x; i++) {
+    for (int i = 0; i < x + 1; i++) {
         c8->V[i] = c8->mem[c8->I + i];
     }
     QUIRK_LOADSTORE(c8);
