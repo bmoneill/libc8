@@ -298,13 +298,9 @@ int c8_simulate(C8* c8) {
                 c8_sound_stop();
             }
 
-            if (c8->draw) {
-                if (c8_render(&c8->display, c8->colors) < 0) {
-                    return C8_GRAPHICS_EXCEPTION;
-                }
-                c8->draw = 0;
+            if (c8_render(&c8->display, c8->colors) < 0) {
+                return C8_GRAPHICS_EXCEPTION;
             }
-
             acc -= refresh_rate;
         }
 

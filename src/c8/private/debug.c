@@ -196,7 +196,6 @@ C8_STATIC int c8_load_state(C8* c8, const char* path) {
         return C8_IO_EXCEPTION;
     }
 
-    c8->draw = 1;
     fclose(f);
     return c8_validate(c8);
 }

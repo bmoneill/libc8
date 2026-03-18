@@ -96,7 +96,6 @@ typedef struct {
     int        breakpoints[C8_MEMSIZE]; //!< Debug breakpoint map
     int        colors[2]; //!< 24 bit hex colors, background=[0] foreground=[1]
     int        fonts[2]; //!< Font IDs (see font.c)
-    int        draw; //!< Need to draw? (1 or 0)
     int        mode; //!< Interpreter mode (C8_MODE_CHIP8, C8_MODE_SCHIP, C8_MODE_XOCHIP)
 } C8;
 

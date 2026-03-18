@@ -313,7 +313,6 @@ C8_STATIC C8_INLINE int c8_i_scd_b(C8* c8, uint8_t b) {
         c8->display.y -= C8_HIGH_DISPLAY_HEIGHT;
     }
 
-    c8->draw = 1;
     return 2;
 }
 
@@ -327,7 +326,6 @@ C8_STATIC C8_INLINE int c8_i_scd_b(C8* c8, uint8_t b) {
  */
 C8_STATIC C8_INLINE int c8_i_cls(C8* c8) {
     memset(&c8->display.p, 0, C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT);
-    c8->draw = 1;
     return 2;
 }
 
@@ -899,7 +897,6 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
     }
 
     c8->V[0xF] = vf;
-    c8->draw   = 1;
     return 2;
 }
 
