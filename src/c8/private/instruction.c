@@ -851,7 +851,7 @@ C8_STATIC C8_INLINE int c8_i_rnd_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
  * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  * @param y the index of the register Vy (0-15)
- * @param b the number of bytes in the sprite (1-16). Also serves as the width of the sprite.
+ * @param b the number of bytes in the sprite (1-16). Also serves as the height of the sprite.
  *
  * @return 2, the number of bytes to increase the program counter by.
  */
@@ -859,14 +859,14 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
     c8->V[0xF]         = 0;
     int display_width  = C8_LOW_DISPLAY_WIDTH;
     int display_height = C8_LOW_DISPLAY_HEIGHT;
-    int sprite_height  = 8;
+    int sprite_width   = 8;
     int output_x       = 0;
     int output_y       = 0;
 
     if (c8->display.mode == C8_DISPLAYMODE_HIGH) {
         if (b == 0) {
-            b             = 16;
-            sprite_height = 16;
+            b            = 16;
+            sprite_width = 16;
         }
         display_width  = C8_HIGH_DISPLAY_WIDTH;
         display_height = C8_HIGH_DISPLAY_HEIGHT;
@@ -875,13 +875,13 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
     }
 
     for (int i = 0; i < b; i++) {
-        for (int j = 0; j < sprite_height; j++) {
+        for (int j = 0; j < sprite_width; j++) {
             int display_x = (c8->V[x] + j + output_x) % display_width;
             int display_y = (c8->V[y] + i + output_y) % display_height;
 
             if (c8->flags & C8_FLAG_QUIRK_DRAW) {
-                if ((display_x % display_width) + b >= display_width
-                    || (display_y % display_height) + sprite_height >= display_height) {
+                if ((display_x % display_width) + sprite_width >= display_width
+                    || (display_y % display_height) + b >= display_height) {
                     continue;
                 }
             }
