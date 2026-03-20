@@ -70,6 +70,7 @@ available on the GitHub pages site.
 - [S-CHIP 1.1 Reference](http://devernay.free.fr/hacks/chip8/schip.txt)
 - [Octo](https://github.com/JohnEarnest/Octo)
 - [CHIP-8 Extensions and Compatibility](https://chip-8.github.io/extensions/)
+- [Timendus's CHIP-8 Test Suite](https://github.com/Timendus/chip8-test-suite)
 
 ## Bugs
 

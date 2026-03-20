@@ -53,12 +53,12 @@ Big fonts:
 
 The following quirks are available:
 
-- `b`: After `AND`, `OR`, and `XOR`: Clear `VF`.
-- `d`: For `DRW`: Clip sprites at edge of display.
-- `j`: For `JP V0, nnn`: Jump to `nnn + V[(nnn>>8)&0xF]` instead.
-- `l`: After `LD [I], Vx` and `LD Vx, [I]`: Set `I` to address
+- `v`: After `AND`, `OR`, and `XOR`: Clear `VF`.
+- `m`: After `LD [I], Vx` and `LD Vx, [I]`: Set `I` to address
   `I + x + 1`.
+- `j`: For `JP V0, nnn`: Jump to `nnn + V[(nnn>>8)&0xF]` instead.
 - `s`: Before `SHL Vx, Vy` and `SHR Vx, Vy`: Shift `Vx` in place, ignore `Vy`.
+- `c`: Clip sprites at bottom edge of screen instead of wrapping.
 
 ## Debug mode
 
