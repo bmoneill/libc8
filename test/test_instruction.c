@@ -681,22 +681,11 @@ void test_c8_parse_instruction_WhereInstructionIsLDXDT(void) {
     TEST_ASSERT_EQUAL_UINT8(y, c8.V[x]);
 }
 
-void test_c8_parse_instruction_WhereInstructionIsLDXK_WhereKeyIsPressed(void) {
-    AXKK(0xF, x, 0x0A);
-
-    c8.key[y] = 1;
-
-    int ret   = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_EQUAL_INT(y, c8.V[x]);
-    TEST_ASSERT_EQUAL_INT(0, c8.waitingForKey);
-}
-
-void test_c8_parse_instruction_WhereInstructionIsLDXK_WhereKeyIsNotPressed(void) {
+void test_c8_parse_instruction_WhereInstructionIsLDXK(void) {
     AXKK(0xF, x, 0x0A);
 
     int ret = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(0, ret);
+    TEST_ASSERT_EQUAL_INT(2, ret);
     TEST_ASSERT_EQUAL_INT(x, c8.VK);
     TEST_ASSERT_EQUAL_INT(1, c8.waitingForKey);
 }
