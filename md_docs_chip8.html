@@ -134,11 +134,11 @@ Fonts</h1>
 Quirks</h1>
 <p>The following quirks are available:</p>
 <ul>
-<li><code>b</code>: After <code>AND</code>, <code>OR</code>, and <code>XOR</code>: Clear <code>VF</code>.</li>
-<li><code>d</code>: For <code>DRW</code>: Clip sprites at edge of display.</li>
+<li><code>v</code>: After <code>AND</code>, <code>OR</code>, and <code>XOR</code>: Clear <code>VF</code>.</li>
+<li><code>m</code>: After <code>LD [I], Vx</code> and <code>LD Vx, [I]</code>: Set <code>I</code> to address <code>I + x + 1</code>.</li>
 <li><code>j</code>: For <code>JP V0, nnn</code>: Jump to <code>nnn + V[(nnn&gt;&gt;8)&amp;0xF]</code> instead.</li>
-<li><code>l</code>: After <code>LD [I], Vx</code> and <code>LD Vx, [I]</code>: Set <code>I</code> to address <code>I + x + 1</code>.</li>
 <li><code>s</code>: Before <code>SHL Vx, Vy</code> and <code>SHR Vx, Vy</code>: Shift <code>Vx</code> in place, ignore <code>Vy</code>.</li>
+<li><code>c</code>: Clip sprites at bottom edge of screen instead of wrapping.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md4"></a>
 Debug mode</h1>

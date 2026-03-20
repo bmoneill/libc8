@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['waitingforkey_0',['waitingForKey',['../structC8.html#a27ffec7169009f73a39aec4aa34af814',1,'C8']]]
+  ['x_0',['x',['../structC8__Display.html#a0f561e77fa0f040b637f4e04f6cd8078',1,'C8_Display']]]
 ];

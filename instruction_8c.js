@@ -1,12 +1,11 @@
 var instruction_8c =
 [
-    [ "QUIRK_BITWISE", "instruction_8c.html#af76fdbfa99670d79ba7db413c154bcd9", null ],
-    [ "QUIRK_DRAW", "instruction_8c.html#a6719559c31cece2eef6a46d363af3cd7", null ],
-    [ "QUIRK_LOADSTORE", "instruction_8c.html#ad5d8437d6f2b13693540d12748b8e03f", null ],
-    [ "QUIRK_SHIFT", "instruction_8c.html#a48cfa5b68f79e47811a2e47608021f8a", null ],
-    [ "SCHIP_EXCLUSIVE", "instruction_8c.html#adcf8c0905190034ae48a9ab7692113e5", null ],
-    [ "VERBOSE", "instruction_8c.html#a4aaf30eb16fc172dc344ab5f397e6c97", null ],
-    [ "XOCHIP_EXCLUSIVE", "instruction_8c.html#a5e78dccd5a76c7314861b7a9f1c81286", null ],
+    [ "C8_QUIRK_MEMORY", "instruction_8c.html#a0a9fe1ad65512dd5ea336acc35a6427b", null ],
+    [ "C8_QUIRK_SHIFTING", "instruction_8c.html#afe96ff660ae8ded53eeda8d337c256c7", null ],
+    [ "C8_QUIRK_VF_RESET", "instruction_8c.html#a693b77926dee078b3f512de288bfa04b", null ],
+    [ "C8_SCHIP_EXCLUSIVE", "instruction_8c.html#a87c1190b93c5ba06414052391975d2e7", null ],
+    [ "C8_VERBOSE", "instruction_8c.html#a7b3205e6f72a0d69ad1fcc59d51d17c3", null ],
+    [ "C8_XOCHIP_EXCLUSIVE", "instruction_8c.html#ae90d6c9a82244d3b2bfe3898fd99992b", null ],
     [ "c8_parse_instruction", "instruction_8c.html#ae80c4c97bf5dcad02f450ac800e9a019", null ],
     [ "print_binary", "instruction_8c.html#a38127de4a7d41ea41319433ae09faf56", null ]
 ];
