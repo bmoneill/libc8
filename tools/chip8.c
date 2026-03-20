@@ -21,7 +21,8 @@ int         main(int argc, char* argv[]) {
     }
 
     int   opt;
-    char* fontstr = NULL;
+    char* fontstr           = NULL;
+    int   userDefinedQuirks = 0;
 
     /* Parse args */
     while ((opt = getopt(argc, argv, "c:df:p:P:q:svV")) != -1) {
@@ -52,6 +53,7 @@ int         main(int argc, char* argv[]) {
             c8->flags |= C8_FLAG_VERBOSE;
             break;
         case 'q':
+            userDefinedQuirks = 1;
             if (c8_load_quirks(c8, optarg) != 0) {
                 return EXIT_FAILURE;
             }
@@ -62,6 +64,12 @@ int         main(int argc, char* argv[]) {
         default:
             usage(argv[0]);
         }
+    }
+
+    if (!userDefinedQuirks && c8->mode == C8_MODE_CHIP8) {
+        c8_load_quirks(c8, "vmc");
+    } else if (!userDefinedQuirks && c8->mode == C8_MODE_SCHIP) {
+        c8_load_quirks(c8, "csj");
     }
 
     if (fontstr && c8_set_fonts_s(c8, fontstr) != 0) {

@@ -54,12 +54,15 @@ Big fonts:
 
 The following quirks are available:
 
-- `v`: After `AND`, `OR`, and `XOR`: Clear `VF`.
+- `c`: Clip sprites at bottom edge of screen instead of wrapping.
+- `j`: For `JP V0, nnn`: Jump to `nnn + V[(nnn>>8)&0xF]` instead.
 - `m`: After `LD [I], Vx` and `LD Vx, [I]`: Set `I` to address
   `I + x + 1`.
-- `j`: For `JP V0, nnn`: Jump to `nnn + V[(nnn>>8)&0xF]` instead.
 - `s`: Before `SHL Vx, Vy` and `SHR Vx, Vy`: Shift `Vx` in place, ignore `Vy`.
-- `c`: Clip sprites at bottom edge of screen instead of wrapping.
+- `v`: After `AND`, `OR`, and `XOR`: Clear `VF`.
+
+`cmv` quirks are enabled in CHIP-8 mode by default. `cjs` quirks are enabled in
+SCHIP mode by default.
 
 ## Debug mode
 
