@@ -6,7 +6,7 @@ integrated debug mode, utilizing libc8 with SDL2.
 ## Usage
 
 ```shell
-chip8 [-dvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file
+chip8 [-dsvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file
 ```
 
 - `-c` sets the number of instructions to be executed per second (default: 1000).
@@ -18,6 +18,7 @@ chip8 [-dvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] fi
 - `-P` sets the color palette from a string containing two comma-separated 24-bit
   hex codes.
 - `-q` sets the quirks to enable from string with non-separated quirk identifiers
+- `-s` enables SCHIP mode.
 - `-v` enables verbose mode. This will print each instruction that is executed.
 - `-V` prints the version number.
 

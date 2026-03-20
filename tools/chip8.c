@@ -24,7 +24,7 @@ int         main(int argc, char* argv[]) {
     char* fontstr = NULL;
 
     /* Parse args */
-    while ((opt = getopt(argc, argv, "c:df:p:P:q:vV")) != -1) {
+    while ((opt = getopt(argc, argv, "c:df:p:P:q:svV")) != -1) {
         switch (opt) {
         case 'c':
             c8->cs = atoi(optarg);
@@ -44,6 +44,9 @@ int         main(int argc, char* argv[]) {
             if (c8_load_palette_s(c8, optarg) != 0) {
                 return EXIT_FAILURE;
             }
+            break;
+        case 's':
+            c8->mode = C8_MODE_SCHIP;
             break;
         case 'v':
             c8->flags |= C8_FLAG_VERBOSE;
@@ -78,7 +81,7 @@ int         main(int argc, char* argv[]) {
 static void usage(const char* argv0) {
     fprintf(
         stderr,
-        "Usage: %s [-dvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file\n",
+        "Usage: %s [-dsvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file\n",
         argv0);
     exit(EXIT_FAILURE);
 }
