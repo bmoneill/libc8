@@ -973,21 +973,13 @@ C8_STATIC C8_INLINE int c8_i_ld_vx_dt(C8* c8, uint8_t x) {
  * @param c8 the `C8` to execute the instruction from
  * @param x the index of the register Vx (0-15)
  *
- * @return 2 if a key is pressed, 0 if no key is pressed and waitingForKey is set.
+ * @return 0
  */
 C8_STATIC C8_INLINE int c8_i_ld_vx_k(C8* c8, uint8_t x) {
-    // Check if a key is already pressed
-    for (int i = 0; i < 16; i++) {
-        if (c8->key[i]) {
-            c8->V[x] = i;
-            return 2;
-        }
-    }
-
-    // Wait for a key press
+    // Wait for a key release
     c8->VK            = x;
     c8->waitingForKey = 1;
-    return 0;
+    return 2;
 }
 
 /**

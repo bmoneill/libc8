@@ -250,30 +250,31 @@ int c8_render(C8_Display* display, int* colors) {
  *
  * @param key pointer to int arr of keys
  *
- * @return -2 if quitting, -1 if no key was pressed/released, else returns value
- * of key pressed/released.
+ * @return -2 if quitting, -1 if no key was released, else returns value
+ * of key released.
  */
 int c8_tick(int* key) {
     SDL_Event e;
-    int       ret = -1;
+    int       pressed  = -1;
+    int       released = -1;
     while (SDL_PollEvent(&e)) {
         switch (e.type) {
         case SDL_QUIT:
             return -2;
         case SDL_KEYDOWN:
-            if ((ret = c8_get_key(e.key.keysym.sym)) != -1) {
-                key[ret] = 1;
+            if ((pressed = c8_get_key(e.key.keysym.sym)) != -1) {
+                key[pressed] = 1;
             }
             break;
         case SDL_KEYUP:
-            if ((ret = c8_get_key(e.key.keysym.sym)) != -1) {
-                key[ret] = 0;
+            if ((released = c8_get_key(e.key.keysym.sym)) != -1) {
+                key[released] = 0;
             }
             break;
         }
     }
 
-    return ret > 15 ? -1 : ret;
+    return released > 15 ? -1 : released;
 }
 
 /**

@@ -305,7 +305,7 @@ int c8_simulate(C8* c8) {
         }
 
         if (t >= 0 && c8->waitingForKey) {
-            /* Waiting for key and a key was pressed */
+            /* Waiting for key and a key was released */
             c8->V[c8->VK]     = t;
             c8->waitingForKey = 0;
         }
