@@ -883,15 +883,18 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
 
     for (int i = 0; i < b; i++) {
         for (int j = 0; j < sprite_width; j++) {
-            int display_x = (c8->V[x] + j + output_x) % display_width;
-            int display_y = (c8->V[y] + i + output_y) % display_height;
+            int display_x = (c8->V[x] + j + output_x);
+            int display_y = (c8->V[y] + i + output_y);
 
             if (c8->flags & C8_FLAG_QUIRK_CLIPPING) {
-                if ((display_x % display_width) + sprite_width >= display_width
-                    || (display_y % display_height) + b >= display_height) {
+                if ((display_x >= display_width || display_y >= display_height)
+                    && (c8->V[x] < display_width && c8->V[y] < display_height)) {
                     continue;
                 }
             }
+
+            display_x %= display_width;
+            display_y %= display_height;
 
             int before = *c8_get_pixel(&c8->display, display_x, display_y);
             int pix    = c8->mem[c8->I + i];
