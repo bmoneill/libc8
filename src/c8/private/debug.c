@@ -318,23 +318,23 @@ C8_STATIC void c8_print_help(void) { printf("%s", C8_DEBUG_HELP_STRING); }
 C8_STATIC void c8_print_quirks(int flags) {
     int f = 0;
     printf("Quirks: ");
-    if (flags & C8_FLAG_QUIRK_BITWISE) {
+    if (flags & C8_FLAG_QUIRK_VF_RESET) {
         f = 1;
-        printf("b");
+        printf("v");
     }
-    if (flags & C8_FLAG_QUIRK_DRAW) {
+    if (flags & C8_FLAG_QUIRK_MEMORY) {
         f = 1;
-        printf("d");
+        printf("m");
     }
-    if (flags & C8_FLAG_QUIRK_JUMP) {
+    if (flags & C8_FLAG_QUIRK_CLIPPING) {
+        f = 1;
+        printf("c");
+    }
+    if (flags & C8_FLAG_QUIRK_JUMPING) {
         f = 1;
         printf("j");
     }
-    if (flags & C8_FLAG_QUIRK_LOADSTORE) {
-        f = 1;
-        printf("l");
-    }
-    if (flags & C8_FLAG_QUIRK_SHIFT) {
+    if (flags & C8_FLAG_QUIRK_SHIFTING) {
         f = 1;
         printf("s");
     }

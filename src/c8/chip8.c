@@ -156,20 +156,20 @@ int c8_load_palette_f(C8* c8, const char* path) {
 int c8_load_quirks(C8* c8, const char* s) {
     for (size_t i = 0; i < strlen(s); i++) {
         switch (s[i]) {
-        case 'b':
-            c8->flags ^= C8_FLAG_QUIRK_BITWISE;
+        case 'v':
+            c8->flags ^= C8_FLAG_QUIRK_VF_RESET;
             break;
-        case 'd':
-            c8->flags ^= C8_FLAG_QUIRK_DRAW;
+        case 'm':
+            c8->flags ^= C8_FLAG_QUIRK_MEMORY;
             break;
-        case 'j':
-            c8->flags ^= C8_FLAG_QUIRK_JUMP;
-            break;
-        case 'l':
-            c8->flags ^= C8_FLAG_QUIRK_LOADSTORE;
+        case 'c':
+            c8->flags ^= C8_FLAG_QUIRK_CLIPPING;
             break;
         case 's':
-            c8->flags ^= C8_FLAG_QUIRK_SHIFT;
+            c8->flags ^= C8_FLAG_QUIRK_SHIFTING;
+            break;
+        case 'j':
+            c8->flags ^= C8_FLAG_QUIRK_JUMPING;
             break;
         default:
             C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid quirk: %c", s[i]);

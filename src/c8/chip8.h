@@ -48,29 +48,29 @@
 #define C8_FLAG_VERBOSE 0x2
 
 /**
- * @brief Enable the 'b' quirk (see main page/README).
+ * @brief Enable the 'v' quirk (see main page/README).
  */
-#define C8_FLAG_QUIRK_BITWISE 0x4
+#define C8_FLAG_QUIRK_VF_RESET 0x4
 
 /**
- * @brief Enable the 'd' quirk (see main page/README).
+ * @brief Enable the 'm' quirk (see main page/README).
  */
-#define C8_FLAG_QUIRK_DRAW 0x8
+#define C8_FLAG_QUIRK_MEMORY 0x8
 
 /**
- * @brief Enable the 'l' quirk (see main page/README).
+ * @brief Enable the 'c' quirk (see main page/README).
  */
-#define C8_FLAG_QUIRK_LOADSTORE 0x10
+#define C8_FLAG_QUIRK_CLIPPING 0x10
 
 /**
  * @brief Enable the 's' quirk (see main page/README).
  */
-#define C8_FLAG_QUIRK_SHIFT 0x20
+#define C8_FLAG_QUIRK_SHIFTING 0x20
 
 /**
  * @brief Enable the 'j' quirk (see main page/README).
  */
-#define C8_FLAG_QUIRK_JUMP 0x40
+#define C8_FLAG_QUIRK_JUMPING 0x40
 
 /**
   * @struct C8

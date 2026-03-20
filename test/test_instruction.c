@@ -3,6 +3,7 @@
 #include "c8/private/instruction.h"
 
 #include "unity.h"
+#include "util.c"
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -169,9 +170,13 @@ void test_c8_parse_instruction_WhereInstructionIsSCD_InCHIP8Mode(void) {
     AXYB(0, 0, 0xC, b);
     c8.mode = C8_MODE_CHIP8;
 
+    REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, ret);
+    RESTORE_STDERR;
+
+    TEST_ASSERT_EQUAL_INT(2, ret);
     TEST_ASSERT_EQUAL_UINT8(0, c8.display.y);
+    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsSCD_InSCHIPMode(void) {
@@ -187,9 +192,13 @@ void test_c8_parse_instruction_WhereInstructionIsSCR_InCHIP8Mode(void) {
     INSERT_INSTRUCTION(pc, 0x00FB);
     c8.mode = C8_MODE_CHIP8;
 
+    REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, ret);
+    RESTORE_STDERR;
+
+    TEST_ASSERT_EQUAL_INT(2, ret);
     TEST_ASSERT_EQUAL_UINT8(0, c8.display.x);
+    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsSCR_InSCHIPMode(void) {
@@ -207,9 +216,12 @@ void test_c8_parse_instruction_WhereInstructionIsSCL_InCHIP8Mode(void) {
 
     c8.display.x = 4;
 
-    int ret      = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, ret);
+    REDIRECT_STDERR;
+    int ret = c8_parse_instruction(&c8);
+    RESTORE_STDERR;
+    TEST_ASSERT_EQUAL_INT(2, ret);
     TEST_ASSERT_EQUAL_UINT8(4, c8.display.x);
+    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsSCL_InSCHIPMode(void) {
@@ -227,8 +239,11 @@ void test_c8_parse_instruction_WhereInstructionIsEXIT_InCHIP8Mode(void) {
     INSERT_INSTRUCTION(pc, 0x00FD);
     c8.mode = C8_MODE_CHIP8;
 
+    REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, ret);
+    RESTORE_STDERR;
+    TEST_ASSERT_EQUAL_INT(2, ret);
+    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsEXIT_InSCHIPMode(void) {
@@ -243,8 +258,11 @@ void test_c8_parse_instruction_WhereInstructionIsLOW_InCHIP8Mode(void) {
     INSERT_INSTRUCTION(pc, 0x00FE);
     c8.mode = C8_MODE_CHIP8;
 
+    REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, ret);
+    RESTORE_STDERR;
+    TEST_ASSERT_EQUAL_INT(2, ret);
+    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLOW_InSCHIPMode(void) {
@@ -262,8 +280,11 @@ void test_c8_parse_instruction_WhereInstructionIsHIGH_InCHIP8Mode(void) {
     INSERT_INSTRUCTION(pc, 0x00FF);
     c8.mode = C8_MODE_CHIP8;
 
+    REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, ret);
+    RESTORE_STDERR;
+    TEST_ASSERT_EQUAL_INT(2, ret);
+    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsHIGH_InSCHIPMode(void) {
@@ -732,8 +753,12 @@ void test_c8_parse_instruction_WhereInstructionIsLDHFX_InCHIP8Mode(void) {
 
     c8.V[x] = y;
 
+    REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, ret);
+    RESTORE_STDERR;
+
+    TEST_ASSERT_EQUAL_INT(2, ret);
+    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLDHFX_InSCHIPMode(void) {
@@ -794,8 +819,11 @@ void test_c8_parse_instruction_WhereInstructionIsLDRX_InCHIP8Mode(void) {
     AXKK(0xF, x, 0x75);
     c8.mode = C8_MODE_CHIP8;
 
+    REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, ret);
+    RESTORE_STDERR;
+    TEST_ASSERT_EQUAL_INT(2, ret);
+    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLDRX_InSCHIPMode(void) {
@@ -817,8 +845,11 @@ void test_c8_parse_instruction_WhereInstructionIsLDXR_InCHIP8Mode(void) {
     AXKK(0xF, x, 0x85);
     c8.mode = C8_MODE_CHIP8;
 
+    REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
-    TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, ret);
+    RESTORE_STDERR;
+    TEST_ASSERT_EQUAL_INT(2, ret);
+    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLDXR_InSCHIPMode(void) {

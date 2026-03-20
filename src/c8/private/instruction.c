@@ -7,6 +7,7 @@
  */
 #include "instruction.h"
 
+#include "../chip8.h"
 #include "../common.h"
 #include "../decode.h"
 #include "../font.h"
@@ -15,15 +16,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define VERBOSE(c) (c->flags & C8_FLAG_VERBOSE)
+#define C8_VERBOSE(c) (c->flags & C8_FLAG_VERBOSE)
 
-#define SCHIP_EXCLUSIVE(c)                                                                         \
+#define C8_SCHIP_EXCLUSIVE(c)                                                                      \
     if (c->mode == C8_MODE_CHIP8) {                                                                \
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "SCHIP instruction detected in CHIP-8 mode.\n");  \
-        return C8_INVALID_STATE_EXCEPTION;                                                         \
+        return 2;                                                                                  \
     }
 
-#define XOCHIP_EXCLUSIVE(c)                                                                        \
+#define C8_XOCHIP_EXCLUSIVE(c)                                                                     \
     if (c->mode != C8_MODE_XOCHIP) {                                                               \
         const char* modeStr = (c->mode == C8_MODE_CHIP8) ? "CHIP-8" : "SCHIP";                     \
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION,                                                   \
@@ -32,23 +33,18 @@
         return C8_INVALID_STATE_EXCEPTION;                                                         \
     }
 
-#define QUIRK_BITWISE(c)                                                                           \
-    if (c->flags & C8_FLAG_QUIRK_BITWISE) {                                                        \
+#define C8_QUIRK_VF_RESET(c)                                                                       \
+    if (c->flags & C8_FLAG_QUIRK_VF_RESET) {                                                       \
         c->V[0xF] = 0;                                                                             \
     }
 
-#define QUIRK_DRAW(c)                                                                              \
-    if (c->flags & C8_FLAG_QUIRK_DRAW) {                                                           \
-        if ()                                                                                      \
+#define C8_QUIRK_MEMORY(c)                                                                         \
+    if (c->flags & C8_FLAG_QUIRK_MEMORY) {                                                         \
+        c8->I = (c8->I + x + 1) & 0xFFF;                                                           \
     }
 
-#define QUIRK_LOADSTORE(c)                                                                         \
-    if (c->flags & C8_FLAG_QUIRK_LOADSTORE) {                                                      \
-        c->I += x + 1;                                                                             \
-    }
-
-#define QUIRK_SHIFT(c)                                                                             \
-    if (c->flags & C8_FLAG_QUIRK_SHIFT) {                                                          \
+#define C8_QUIRK_SHIFTING(c)                                                                       \
+    if (c->flags & C8_FLAG_QUIRK_SHIFTING) {                                                       \
         y = x;                                                                                     \
     }
 
@@ -128,7 +124,7 @@ int c8_parse_instruction(C8* c8) {
     uint16_t in = (((uint16_t) c8->mem[c8->pc]) << 8) | c8->mem[c8->pc + 1];
     C8_EXPAND(in);
 
-    if (VERBOSE(c8)) {
+    if (C8_VERBOSE(c8)) {
         printf("%04x: %s\n", c8->pc, c8_decode_instruction(in, NULL));
     }
 
@@ -307,7 +303,7 @@ C8_STATIC C8_INLINE int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint
  * or C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
 C8_STATIC C8_INLINE int c8_i_scd_b(C8* c8, uint8_t b) {
-    SCHIP_EXCLUSIVE(c8);
+    C8_SCHIP_EXCLUSIVE(c8);
     c8->display.y += b;
     if (c8->display.y > C8_HIGH_DISPLAY_HEIGHT) {
         c8->display.y -= C8_HIGH_DISPLAY_HEIGHT;
@@ -366,7 +362,7 @@ C8_STATIC C8_INLINE int c8_i_ret(C8* c8) {
  * C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
 C8_STATIC C8_INLINE int c8_i_scr(C8* c8) {
-    SCHIP_EXCLUSIVE(c8);
+    C8_SCHIP_EXCLUSIVE(c8);
     c8->display.x += 4;
     if (c8->display.x > C8_HIGH_DISPLAY_WIDTH) {
         c8->display.x -= C8_HIGH_DISPLAY_WIDTH;
@@ -389,7 +385,7 @@ C8_STATIC C8_INLINE int c8_i_scr(C8* c8) {
  * C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
 C8_STATIC C8_INLINE int c8_i_scl(C8* c8) {
-    SCHIP_EXCLUSIVE(c8);
+    C8_SCHIP_EXCLUSIVE(c8);
     if (c8->display.x < 4) {
         c8->display.x += C8_HIGH_DISPLAY_WIDTH;
     }
@@ -410,7 +406,7 @@ C8_STATIC C8_INLINE int c8_i_scl(C8* c8) {
  * @return 0, or C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in SCHIP mode.
  */
 C8_STATIC C8_INLINE int c8_i_exit(C8* c8) {
-    SCHIP_EXCLUSIVE(c8);
+    C8_SCHIP_EXCLUSIVE(c8);
     c8->running = 0;
     return 0;
 }
@@ -429,7 +425,7 @@ C8_STATIC C8_INLINE int c8_i_exit(C8* c8) {
  * C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
 C8_STATIC C8_INLINE int c8_i_low(C8* c8) {
-    SCHIP_EXCLUSIVE(c8);
+    C8_SCHIP_EXCLUSIVE(c8);
     c8->display.mode = C8_DISPLAYMODE_LOW;
     return 2;
 }
@@ -448,7 +444,7 @@ C8_STATIC C8_INLINE int c8_i_low(C8* c8) {
  * C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
 C8_STATIC C8_INLINE int c8_i_high(C8* c8) {
-    SCHIP_EXCLUSIVE(c8);
+    C8_SCHIP_EXCLUSIVE(c8);
     c8->display.mode = C8_DISPLAYMODE_HIGH;
     return 2;
 }
@@ -612,7 +608,7 @@ C8_STATIC C8_INLINE int c8_i_ld_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  */
 C8_STATIC C8_INLINE int c8_i_or_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] |= c8->V[y];
-    QUIRK_BITWISE(c8);
+    C8_QUIRK_VF_RESET(c8);
     return 2;
 }
 
@@ -633,7 +629,7 @@ C8_STATIC C8_INLINE int c8_i_or_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  */
 C8_STATIC C8_INLINE int c8_i_and_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] &= c8->V[y];
-    QUIRK_BITWISE(c8);
+    C8_QUIRK_VF_RESET(c8);
     return 2;
 }
 
@@ -654,7 +650,7 @@ C8_STATIC C8_INLINE int c8_i_and_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  */
 C8_STATIC C8_INLINE int c8_i_xor_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     c8->V[x] = c8->V[x] ^ c8->V[y];
-    QUIRK_BITWISE(c8);
+    C8_QUIRK_VF_RESET(c8);
     return 2;
 }
 
@@ -726,7 +722,7 @@ void print_binary(unsigned int n) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_shr_vx_vy(C8* c8, uint8_t x, uint8_t y) {
-    QUIRK_SHIFT(c8);
+    C8_QUIRK_SHIFTING(c8);
     uint8_t vy = c8->V[y];
     c8->V[x]   = c8->V[y] >> 1;
     c8->V[0xF] = vy & 0x1;
@@ -770,7 +766,7 @@ C8_STATIC C8_INLINE int c8_i_subn_vx_vy(C8* c8, uint8_t x, uint8_t y) {
  * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_shl_vx_vy(C8* c8, uint8_t x, uint8_t y) {
-    QUIRK_SHIFT(c8);
+    C8_QUIRK_SHIFTING(c8);
     uint8_t vy = c8->V[y];
     c8->V[x]   = c8->V[y] << 1;
     c8->V[0xF] = vy >> 7 & 1;
@@ -825,7 +821,7 @@ C8_STATIC C8_INLINE int c8_i_ld_i_nnn(C8* c8, uint16_t nnn) {
  * @return 0, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_jp_v0_nnn(C8* c8, uint16_t nnn) {
-    if (c8->flags & C8_FLAG_QUIRK_JUMP) {
+    if (c8->flags & C8_FLAG_QUIRK_JUMPING) {
         c8->pc = nnn + c8->V[(nnn >> 8) & 0xF];
     } else {
         c8->pc = nnn + c8->V[0];
@@ -890,7 +886,7 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
             int display_x = (c8->V[x] + j + output_x) % display_width;
             int display_y = (c8->V[y] + i + output_y) % display_height;
 
-            if (c8->flags & C8_FLAG_QUIRK_DRAW) {
+            if (c8->flags & C8_FLAG_QUIRK_CLIPPING) {
                 if ((display_x % display_width) + sprite_width >= display_width
                     || (display_y % display_height) + b >= display_height) {
                     continue;
@@ -1074,7 +1070,7 @@ C8_STATIC C8_INLINE int c8_i_ld_f_vx(C8* c8, uint8_t x) {
  * `C8_INVALID_INSTRUCTION_EXCEPTION` if `c8` is in CHIP-8 mode.
  */
 C8_STATIC C8_INLINE int c8_i_ld_hf_vx(C8* c8, uint8_t x) {
-    SCHIP_EXCLUSIVE(c8);
+    C8_SCHIP_EXCLUSIVE(c8);
 
     c8->I = C8_HIGH_FONT_START + (c8->V[x] * 10);
     return 2;
@@ -1114,7 +1110,7 @@ C8_STATIC C8_INLINE int c8_i_ld_ip_vx(C8* c8, uint8_t x) {
     for (int i = 0; i < x + 1; i++) {
         c8->mem[c8->I + i] = c8->V[i];
     }
-    QUIRK_LOADSTORE(c8);
+    C8_QUIRK_MEMORY(c8);
     return 2;
 }
 
@@ -1133,7 +1129,7 @@ C8_STATIC C8_INLINE int c8_i_ld_vx_ip(C8* c8, uint8_t x) {
     for (int i = 0; i < x + 1; i++) {
         c8->V[i] = c8->mem[c8->I + i];
     }
-    QUIRK_LOADSTORE(c8);
+    C8_QUIRK_MEMORY(c8);
     return 2;
 }
 
@@ -1153,7 +1149,7 @@ C8_STATIC C8_INLINE int c8_i_ld_vx_ip(C8* c8, uint8_t x) {
  * or C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
 C8_STATIC C8_INLINE int c8_i_ld_r_vx(C8* c8, uint8_t x) {
-    SCHIP_EXCLUSIVE(c8);
+    C8_SCHIP_EXCLUSIVE(c8);
     for (int i = 0; i < x; i++) {
         c8->R[i] = c8->V[i];
     }
@@ -1176,7 +1172,7 @@ C8_STATIC C8_INLINE int c8_i_ld_r_vx(C8* c8, uint8_t x) {
  * or C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
  */
 C8_STATIC C8_INLINE int c8_i_ld_vx_r(C8* c8, uint8_t x) {
-    SCHIP_EXCLUSIVE(c8);
+    C8_SCHIP_EXCLUSIVE(c8);
 
     for (int i = 0; i < x; i++) {
         c8->V[i] = c8->R[i];

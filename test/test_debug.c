@@ -230,10 +230,9 @@ void test_c8_print_help(void) {
 
 void test_c8_print_quirks(void) {
     REDIRECT_STDOUT;
-    c8_print_quirks(C8_FLAG_QUIRK_BITWISE | C8_FLAG_QUIRK_DRAW | C8_FLAG_QUIRK_JUMP
-                    | C8_FLAG_QUIRK_LOADSTORE | C8_FLAG_QUIRK_SHIFT);
+    c8_print_quirks(C8_FLAG_QUIRK_JUMPING | C8_FLAG_QUIRK_SHIFTING);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("Quirks: bdjls\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("Quirks: js\n", stdout_buffer);
 }
 
 void test_c8_print_r_registers(void) {
@@ -420,7 +419,7 @@ void test_c8_print_value_WhereValueIsFont(void) {
 }
 
 void test_c8_print_value_WhereValueIsQuirks(void) {
-    c8.flags     = C8_FLAG_QUIRK_BITWISE | C8_FLAG_QUIRK_DRAW;
+    c8.flags     = C8_FLAG_QUIRK_SHIFTING | C8_FLAG_QUIRK_JUMPING;
     cmd.arg.type = C8_ARG_QUIRKS;
 
     REDIRECT_STDOUT;
@@ -813,11 +812,11 @@ void test_c8_set_value_WhereValueIsColor(void) {
 void test_c8_set_value_WhereValueIsQuirks(void) {
     cmd.id          = C8_CMD_SET;
     cmd.arg.type    = C8_ARG_QUIRKS;
-    cmd.arg.value.s = "bdj";
+    cmd.arg.value.s = "jcs";
 
     int result      = c8_set_value(&c8, &cmd);
     TEST_ASSERT_EQUAL_INT(0, result);
-    TEST_ASSERT_EQUAL_INT(C8_FLAG_QUIRK_BITWISE | C8_FLAG_QUIRK_DRAW | C8_FLAG_QUIRK_JUMP,
+    TEST_ASSERT_EQUAL_INT(C8_FLAG_QUIRK_JUMPING | C8_FLAG_QUIRK_CLIPPING | C8_FLAG_QUIRK_SHIFTING,
                           c8.flags);
 
     cmd.arg.value.s = "x";
