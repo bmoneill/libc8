@@ -172,9 +172,6 @@ int c8_render(C8_Display* display, int* colors) {
         .h = C8_LOW_DISPLAY_HEIGHT,
     };
 
-    int dx     = 0;
-    int dy     = 0;
-
     int result = SDL_RenderClear(c8_renderer);
     if (result == -1) {
         C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_RenderClear failed: %s", SDL_GetError());
@@ -207,16 +204,11 @@ int c8_render(C8_Display* display, int* colors) {
         return C8_GRAPHICS_EXCEPTION;
     }
 
-    if (display->mode == C8_DISPLAYMODE_HIGH) {
-        dx = display->x;
-        dy = display->y;
-    }
-
     for (int i = 0; i < C8_LOW_DISPLAY_WIDTH; i++) {
         for (int j = 0; j < C8_LOW_DISPLAY_HEIGHT; j++) {
-            if (*c8_get_pixel(display, i + dx, j + dy)) {
-                pix.x  = i * C8_WINDOW_SCALE_X;
-                pix.y  = j * C8_WINDOW_SCALE_Y;
+            if (*c8_get_pixel(display, i, j)) {
+                pix.x  = (i % C8_LOW_DISPLAY_WIDTH) * C8_WINDOW_SCALE_X;
+                pix.y  = (j % C8_LOW_DISPLAY_HEIGHT) * C8_WINDOW_SCALE_Y;
                 result = SDL_RenderFillRect(c8_renderer, &pix);
                 if (result == -1) {
                     C8_EXCEPTION(C8_GRAPHICS_EXCEPTION,

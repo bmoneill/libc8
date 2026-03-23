@@ -11,6 +11,7 @@
 #include "../common.h"
 #include "../decode.h"
 #include "../font.h"
+#include "../graphics.h"
 #include "exception.h"
 
 #include <stdlib.h>
@@ -20,17 +21,15 @@
 
 #define C8_SCHIP_EXCLUSIVE(c)                                                                      \
     if (c->mode == C8_MODE_CHIP8) {                                                                \
-        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION, "SCHIP instruction detected in CHIP-8 mode.\n");  \
+        fprintf(stderr, "SCHIP instruction detected in CHIP-8 mode.\n");                           \
         return 2;                                                                                  \
     }
 
 #define C8_XOCHIP_EXCLUSIVE(c)                                                                     \
     if (c->mode != C8_MODE_XOCHIP) {                                                               \
         const char* modeStr = (c->mode == C8_MODE_CHIP8) ? "CHIP-8" : "SCHIP";                     \
-        C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION,                                                   \
-                     "XOCHIP instruction detected in %s mode.\n",                                  \
-                     modeStr);                                                                     \
-        return C8_INVALID_STATE_EXCEPTION;                                                         \
+        fprintf(stderr, "XOCHIP instruction detected in %s mode.\n", modeStr);                     \
+        return 2;                                                                                  \
     }
 
 #define C8_QUIRK_VF_RESET(c)                                                                       \
@@ -299,16 +298,18 @@ C8_STATIC C8_INLINE int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint
  * @param c8 the `C8` to execute the instruction from
  * @param b the number of pixels to scroll down
  *
- * @return 2, the number of bytes to increase the program counter by,
- * or C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
+ * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_scd_b(C8* c8, uint8_t b) {
     C8_SCHIP_EXCLUSIVE(c8);
-    c8->display.y += b;
-    if (c8->display.y > C8_HIGH_DISPLAY_HEIGHT) {
-        c8->display.y -= C8_HIGH_DISPLAY_HEIGHT;
-    }
 
+    int width
+        = (c8->display.mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_WIDTH : C8_HIGH_DISPLAY_WIDTH;
+    int height
+        = (c8->display.mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_HEIGHT : C8_HIGH_DISPLAY_HEIGHT;
+
+    memcpy(c8->display.p + (width * b), c8->display.p, width * height - (width * b));
+    memset(c8->display.p, 0, width * b);
     return 2;
 }
 
@@ -350,22 +351,30 @@ C8_STATIC C8_INLINE int c8_i_ret(C8* c8) {
 /**
  * @brief `SCR` instruction (`00FB`)
  *
- * This instruction scrolls the display right by 4 pixels. If the current x
- * value is greater than the display width, it wraps around to the left side.
+ * This instruction scrolls the display right by 4 pixels.
  *
  * @note This is a SCHIP instruction. `c8` must be in SCHIP or XO-CHIP mode to
  * execute this instruction.
  *
  * @param c8 the `C8` to execute the instruction from
  *
- * @return 2, the number of bytes to increase the program counter by, or
- * C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
+ * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_scr(C8* c8) {
     C8_SCHIP_EXCLUSIVE(c8);
-    c8->display.x += 4;
-    if (c8->display.x > C8_HIGH_DISPLAY_WIDTH) {
-        c8->display.x -= C8_HIGH_DISPLAY_WIDTH;
+
+    int width
+        = (c8->display.mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_WIDTH : C8_HIGH_DISPLAY_WIDTH;
+    int height
+        = (c8->display.mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_HEIGHT : C8_HIGH_DISPLAY_HEIGHT;
+
+    for (int y = 0; y < height; y++) {
+        for (int x = 4; x < width; x++) {
+            int orig           = y * width + x;
+            int new            = orig - 4;
+            c8->display.p[new] = c8->display.p[orig];
+        }
+        memset(&c8->display.p[y * width + width - 4], 0, 4);
     }
     return 2;
 }
@@ -373,23 +382,31 @@ C8_STATIC C8_INLINE int c8_i_scr(C8* c8) {
 /**
  * @brief `SCL` instruction (`00FC`)
  *
- * This instruction scrolls the display left by 4 pixels. If the x value ends up
- * less than 0, it wraps around to the right side.
+ * This instruction scrolls the display left by 4 pixels.
  *
  * @note This is a SCHIP instruction. `c8` must be in SCHIP or XO-CHIP mode to
  * execute this instruction.
  *
  * @param c8 the `C8` to execute the instruction from
  *
- * @return 2, the number of bytes to increase the program counter by, or
- * C8_INVALID_INSTRUCTION_EXCEPTION if `c8` is in CHIP-8 mode.
+ * @return 2, the number of bytes to increase the program counter by.
  */
 C8_STATIC C8_INLINE int c8_i_scl(C8* c8) {
     C8_SCHIP_EXCLUSIVE(c8);
-    if (c8->display.x < 4) {
-        c8->display.x += C8_HIGH_DISPLAY_WIDTH;
+
+    int width
+        = (c8->display.mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_WIDTH : C8_HIGH_DISPLAY_WIDTH;
+    int height
+        = (c8->display.mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_HEIGHT : C8_HIGH_DISPLAY_HEIGHT;
+
+    for (int y = 0; y < height; y++) {
+        for (int x = width - 4 - 1; x >= 0; x--) {
+            int orig           = y * width + x;
+            int new            = orig + 4;
+            c8->display.p[new] = c8->display.p[orig];
+        }
+        memset(&c8->display.p[y * width], 0, 4);
     }
-    c8->display.x -= 4;
     return 2;
 }
 
@@ -867,8 +884,6 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
     int     display_width  = C8_LOW_DISPLAY_WIDTH;
     int     display_height = C8_LOW_DISPLAY_HEIGHT;
     int     sprite_width   = 8;
-    int     output_x       = 0;
-    int     output_y       = 0;
 
     if (c8->display.mode == C8_DISPLAYMODE_HIGH) {
         if (b == 0) {
@@ -877,14 +892,12 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
         }
         display_width  = C8_HIGH_DISPLAY_WIDTH;
         display_height = C8_HIGH_DISPLAY_HEIGHT;
-        output_x       = c8->display.x;
-        output_y       = c8->display.y;
     }
 
     for (int i = 0; i < b; i++) {
         for (int j = 0; j < sprite_width; j++) {
-            int display_x = (c8->V[x] + j + output_x);
-            int display_y = (c8->V[y] + i + output_y);
+            int display_x = (c8->V[x] + j);
+            int display_y = (c8->V[y] + i);
 
             if (c8->flags & C8_FLAG_QUIRK_CLIPPING) {
                 if ((display_x >= display_width || display_y >= display_height)
