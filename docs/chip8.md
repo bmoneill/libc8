@@ -62,7 +62,7 @@ The following quirks are available:
 - `s`: Before `SHL Vx, Vy` and `SHR Vx, Vy`: Shift `Vx` in place, ignore `Vy`.
 - `v`: After `AND`, `OR`, and `XOR`: Clear `VF`.
 
-`cmv` quirks are enabled in CHIP-8 mode by default. `cjs` quirks are enabled in
+`cmrv` quirks are enabled in CHIP-8 mode by default. `cjrs` quirks are enabled in
 SCHIP mode by default.
 
 ## Debug mode
