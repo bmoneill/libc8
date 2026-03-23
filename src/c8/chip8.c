@@ -37,8 +37,8 @@ void c8_deinit(C8* c8) {
  * @brief Initialize and return a `C8` with the given flags
  *
  * This function allocates memory for a new `C8` with all values set to 0
- * or their default values, adds the font to memory, inititializes the graphics
- * system, and returns a pointer to the `C8`.
+ * or their default values, adds the font to memory, and returns a pointer
+ * to the `C8`.
  *
  * @param path path to ROM file
  * @param flags flags
@@ -52,7 +52,7 @@ C8* c8_init(const char* path, int flags) {
     c8->flags        = flags;
     c8->cs           = C8_CLOCK_SPEED;
     c8->colors[1]    = 0xFFFFFF;
-    c8->display.mode = C8_DISPLAYMODE_HIGH;
+    c8->display.mode = C8_DISPLAYMODE_LOW;
     c8->mode         = C8_MODE_CHIP8;
 
     if (path != NULL && c8_load_rom(c8, path) != 0) {
@@ -61,11 +61,6 @@ C8* c8_init(const char* path, int flags) {
     }
 
     c8_set_fonts(c8, 0, 0);
-
-    if (c8_init_graphics()) {
-        free(c8);
-        return NULL;
-    }
 
     return c8;
 }

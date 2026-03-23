@@ -72,11 +72,18 @@ int         main(int argc, char* argv[]) {
         c8_load_quirks(c8, "csj");
     }
 
+    if (c8_init_graphics()) {
+        free(c8);
+        return EXIT_FAILURE;
+    }
+
     if (fontstr && c8_set_fonts_s(c8, fontstr) != 0) {
+        free(c8);
         return EXIT_FAILURE;
     }
 
     if (c8_load_rom(c8, argv[optind]) != 0) {
+        free(c8);
         return EXIT_FAILURE;
     }
 
