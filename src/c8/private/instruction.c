@@ -53,7 +53,7 @@ C8_STATIC int           c8_bitwise_instruction(C8*, uint16_t, uint8_t, uint8_t, 
 C8_STATIC int           c8_key_instruction(C8*, uint16_t, uint8_t, uint8_t);
 C8_STATIC int           c8_misc_instruction(C8*, uint16_t, uint8_t, uint8_t);
 
-C8_STATIC int           c8_i_scd_b(C8*, uint8_t);
+C8_STATIC C8_INLINE int c8_i_scd_b(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_scu_b(C8*, uint8_t);
 
 /* base (00kk) instructions */
@@ -109,7 +109,6 @@ C8_STATIC C8_INLINE int c8_i_ld_f_vx(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_hf_vx(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_b_vx(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_pit_x(C8*, uint8_t);
-C8_STATIC C8_INLINE int c8_i_snd(C8* c8);
 C8_STATIC C8_INLINE int c8_i_ld_ip_vx(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_vx_ip(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_r_vx(C8*, uint8_t);
@@ -137,7 +136,7 @@ int c8_parse_instruction(C8* c8) {
 
     switch (a) {
     case 0x0:
-        return y == 0xC ? c8_i_scd_b(c8, b) : c8_base_instruction(c8, in, kk);
+        return c8_base_instruction(c8, in, kk);
     case 0x1:
         return c8_i_jp_nnn(c8, nnn);
     case 0x2:
@@ -178,6 +177,13 @@ C8_STATIC C8_INLINE int c8_base_instruction(C8* c8, uint16_t in, uint8_t kk) {
     if (in & 0x0F00) {
         C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION, "Invalid instruction: %04x", in);
         return C8_SYNTAX_ERROR_EXCEPTION;
+    }
+
+    if (C8_Y(in) == 0xC) {
+        return c8_i_scd_b(c8, kk);
+    }
+    if (C8_Y(in) == 0xD) {
+        return c8_i_scu_b(c8, kk);
     }
 
     switch (kk) {
@@ -269,7 +275,15 @@ C8_STATIC C8_INLINE int c8_key_instruction(C8* c8, uint16_t in, uint8_t x, uint8
  * @return The result of the miscellaneous instruction.
  */
 C8_STATIC C8_INLINE int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
+    if (in == 0xF000) {
+        return c8_i_ld_i_word(c8);
+    } else if (in == 0xF002) {
+        return c8_i_snd(c8);
+    }
+
     switch (kk) {
+    case 0x01:
+        return c8_i_pln_x(c8, x);
     case 0x07:
         return c8_i_ld_vx_dt(c8, x);
     case 0x0A:
@@ -286,6 +300,8 @@ C8_STATIC C8_INLINE int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint
         return c8_i_ld_hf_vx(c8, x);
     case 0x33:
         return c8_i_ld_b_vx(c8, x);
+    case 0x3A:
+        return c8_i_pit_x(c8, x);
     case 0x55:
         return c8_i_ld_ip_vx(c8, x);
     case 0x65:
@@ -1246,7 +1262,7 @@ C8_STATIC C8_INLINE int c8_i_ld_b_vx(C8* c8, uint8_t x) {
 }
 
 /**
- * @brief `PIT` instruction (`Fx1E`)
+ * @brief `PIT` instruction (`Fx3A`)
  *
  * This instruction sets the audio pattern playback rate to `4000*2^((Vx-64)/48)Hz`.
  *
