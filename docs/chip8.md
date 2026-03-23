@@ -6,7 +6,7 @@ integrated debug mode, utilizing libc8 with SDL2.
 ## Usage
 
 ```shell
-chip8 [-dsvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file
+chip8 [-dsvV] [-c tickspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file
 ```
 
 - `-c` sets the number of instructions to be executed per second (default: 1000).

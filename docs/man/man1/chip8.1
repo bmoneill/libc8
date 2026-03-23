@@ -7,7 +7,7 @@ This is a CHIP-8 and SCHIP interpreter with an integrated debug mode, utilizing
 libc8 with SDL2.
 .SH USAGE
 .TP
-.B -c clockspeed
+.B -c tickspeed
 Set the number of instructions to be executed per second (default: 1000).
 .TP
 .B -d
@@ -21,7 +21,8 @@ Load the specified comma separated fonts. Big font is optional.
 Load a color palette from a file containing two newline-separated 24-bit hex codes.
 .TP
 .B -P colors
-Load a color palette from a string containing two comma-separated 24-bit hex codes.
+Load a color palette from a string containing two comma-separated 24-bit hex codes prefixed with
+\fB0x\fP or \fBx\fP.
 .TP
 .B -q quirks
 Sets the quirks to enable from a string with non-separated quirk identifiers.
@@ -65,20 +66,23 @@ Big fonts:
 .SH QUIRKS
 The following quirks are available:
 .TP
-.B b
-After \fBAND\fP, \fBOR\fP, and \fBXOR\fP: Clear \fBVF\fP.
-.TP
-.B d
-For \fBDRW\fP: Clip sprites at edge of display.
+.B c
+Clip sprites at bottom edge of screen instead of wrapping.
 .TP
 .B j
-For \fBJP V0, nnn\fP: Jump to \fBnnn + V[(nnn>>8)&0xF\fP instead.
+For \fBJP V0, nnn\fP: Jump to \fBnnn + V[(nnn>>8)&0xF]\fP instead.
 .TP
-.B l
+.B m
 After \fBLD [I], Vx\fP and \fBLD Vx, [I]\fP: Set \fBI\fP to \fBI+x+1\fP.
+.TP
+.B r
+\fBDRW\fP halts execution until the next frame.
 .TP
 .B s
 Before \fBSHL Vx, Vy\fP and \fBSHR Vx, Vy\fP: Shift \fBVx\fP in place, ignore \fBVy\fP.
+.TP
+.B v
+After \fBAND\fP, \fBOR\fP, and \fBXOR\fP: Clear \fBVF\fP.
 .SH DEBUG MODE COMMANDS
 Debug mode can be enabled via the \fB-d\fP flag or by pressing P at any time during execution. It can also be
 disabled at any time by pressing M. The following commands are supported in debug mode:
@@ -142,8 +146,8 @@ Register to store next keypress.
 .B V[x]
 All \fBV\fP registers or value of \fBVx\fP, if given.
 .TP
-.B R[X]
-All \fBR\fP (flag) registers or value of \fBRX\fP, if given.
+.B R[x]
+All \fBR\fP (flag) registers or value of \fBRx\fP, if given.
 .TP
 .B bfont
 Big font name.
