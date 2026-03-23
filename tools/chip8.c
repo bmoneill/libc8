@@ -28,7 +28,7 @@ int         main(int argc, char* argv[]) {
     while ((opt = getopt(argc, argv, "c:df:p:P:q:svV")) != -1) {
         switch (opt) {
         case 'c':
-            c8->cs = atoi(optarg);
+            c8->tickSpeed = atoi(optarg);
             break;
         case 'd':
             c8->flags |= C8_FLAG_DEBUG;

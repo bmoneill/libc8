@@ -46,8 +46,8 @@ void                 setUp(void) {
     memset(buf, 0, BUFLEN);
     memset(&cmd, 0, sizeof(C8_Command));
     memset(&c8, 0, sizeof(C8));
-    c8.pc = 0x200;
-    c8.cs = 1;
+    c8.pc        = 0x200;
+    c8.tickSpeed = 1;
     memset(stdio_buffer, 0, sizeof(stdio_buffer));
 }
 void tearDown(void) {}
@@ -701,7 +701,7 @@ void test_c8_save_state_WhereOutputFileIsValid(void) {
 
     TEST_ASSERT_EQUAL_INT(c8.colors[0], loaded_c8.colors[0]);
     TEST_ASSERT_EQUAL_INT(c8.colors[1], loaded_c8.colors[1]);
-    TEST_ASSERT_EQUAL_INT(c8.cs, loaded_c8.cs);
+    TEST_ASSERT_EQUAL_INT(c8.tickSpeed, loaded_c8.tickSpeed);
 
     TEST_ASSERT_EQUAL_INT(c8.display.mode, loaded_c8.display.mode);
     for (int i = 0; i < C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT; i++) {

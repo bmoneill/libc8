@@ -132,12 +132,12 @@ void test_c8_validate_WithInvalidPC(void) {
 }
 
 void test_c8_validate_WithInvalidCS(void) {
-    C8* c8_allocd = c8_init(NULL, 0);
+    C8* c8_allocd        = c8_init(NULL, 0);
 
-    c8_allocd->cs = 0;
+    c8_allocd->tickSpeed = 0;
     TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, c8_validate(c8_allocd));
 
-    c8_allocd->cs = -1;
+    c8_allocd->tickSpeed = -1;
     TEST_ASSERT_EQUAL_INT(C8_INVALID_STATE_EXCEPTION, c8_validate(c8_allocd));
 
     free(c8_allocd);

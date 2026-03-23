@@ -22,14 +22,14 @@
 #define C8_SCHIP_EXCLUSIVE(c)                                                                      \
     if (c->mode == C8_MODE_CHIP8) {                                                                \
         fprintf(stderr, "SCHIP instruction detected in CHIP-8 mode.\n");                           \
-        return 2;                                                                                  \
+        return C8_INVALID_STATE_EXCEPTION;                                                         \
     }
 
 #define C8_XOCHIP_EXCLUSIVE(c)                                                                     \
     if (c->mode != C8_MODE_XOCHIP) {                                                               \
         const char* modeStr = (c->mode == C8_MODE_CHIP8) ? "CHIP-8" : "SCHIP";                     \
         fprintf(stderr, "XOCHIP instruction detected in %s mode.\n", modeStr);                     \
-        return 2;                                                                                  \
+        return C8_INVALID_STATE_EXCEPTION;                                                         \
     }
 
 #define C8_QUIRK_VF_RESET(c)                                                                       \

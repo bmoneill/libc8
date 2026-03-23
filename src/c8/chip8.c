@@ -50,7 +50,7 @@ C8* c8_init(const char* path, int flags) {
 
     C8* c8           = (C8*) calloc(1, sizeof(C8));
     c8->flags        = flags;
-    c8->cs           = C8_CLOCK_SPEED;
+    c8->tickSpeed    = C8_TICK_SPEED;
     c8->colors[1]    = 0xFFFFFF;
     c8->display.mode = C8_DISPLAYMODE_LOW;
     c8->mode         = C8_MODE_CHIP8;
@@ -237,7 +237,7 @@ int c8_simulate(C8* c8) {
     double       last         = c8_get_time();
     double       acc          = 0.0;
     while (c8->running) {
-        usleep(1000000 / c8->cs);
+        usleep(1000000 / c8->tickSpeed);
 
         int t = c8_tick(c8->key);
 
@@ -297,6 +297,7 @@ int c8_simulate(C8* c8) {
                 return C8_GRAPHICS_EXCEPTION;
             }
             acc -= refresh_rate;
+            c8->waitingForDraw = 0;
         }
 
         if (t >= 0 && c8->waitingForKey) {
@@ -305,7 +306,7 @@ int c8_simulate(C8* c8) {
             c8->waitingForKey = 0;
         }
 
-        if (!c8->waitingForKey) {
+        if (!c8->waitingForKey && !c8->waitingForDraw) {
             /* Not waiting for key, parse next instruction */
             ret = c8_parse_instruction(c8);
 
@@ -339,10 +340,10 @@ int c8_validate(const C8* c8) {
         return C8_INVALID_STATE_EXCEPTION;
     }
 
-    if (c8->cs <= 0) {
+    if (c8->tickSpeed <= 0) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION,
                      "Clock speed cannot be less than or equal to zero: cs=%d",
-                     c8->cs)
+                     c8->tickSpeed)
         return C8_INVALID_STATE_EXCEPTION;
     }
 

@@ -15,7 +15,7 @@
 /**
  * @brief Maximum instructions to execute per second
  */
-#define C8_CLOCK_SPEED 1000
+#define C8_TICK_SPEED 1000
 
 /**
  * @brief Maximum stack size
@@ -88,8 +88,9 @@ typedef struct {
     uint16_t   I; //!< Address register
     int        key[18]; //!< Key press states
     int        VK; //!< Register to store next keypress
-    int        cs; //!< Instructions to execute per second
+    int        tickSpeed; //!< Instructions to execute per second
     int        waitingForKey; //!< Waiting for keypress?
+    int        waitingForDraw; //!< Waiting for draw? (For v quirk)
     int        running; //!< Interpreter running state
     C8_Display display; //!< Graphics display
     int        flags; //!< CLI flags
