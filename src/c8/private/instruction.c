@@ -374,12 +374,12 @@ C8_STATIC C8_INLINE int c8_i_scr(C8* c8) {
         = (c8->display.mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_HEIGHT : C8_HIGH_DISPLAY_HEIGHT;
 
     for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width - 4; x++) {
+        for (int x = width - 4 - 1; x >= 0; x--) {
             int orig           = y * width + x;
             int new            = orig + 4;
             c8->display.p[new] = c8->display.p[orig];
         }
-        memset(&c8->display.p[y * width + width - 4], 0, 4);
+        memset(&c8->display.p[y * width], 0, 4);
     }
     return 2;
 }
@@ -405,12 +405,12 @@ C8_STATIC C8_INLINE int c8_i_scl(C8* c8) {
         = (c8->display.mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_HEIGHT : C8_HIGH_DISPLAY_HEIGHT;
 
     for (int y = 0; y < height; y++) {
-        for (int x = width - 4 - 1; x >= 0; x--) {
+        for (int x = 4; x < width; x++) {
             int orig           = y * width + x;
-            int new            = orig + 4;
+            int new            = orig - 4;
             c8->display.p[new] = c8->display.p[orig];
         }
-        memset(&c8->display.p[y * width], 0, 4);
+        memset(&c8->display.p[y * width + width - 4], 0, 4);
     }
     return 2;
 }
