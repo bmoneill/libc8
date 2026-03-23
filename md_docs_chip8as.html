@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>libc8: chip8as (CHIP-8 Assembler)</title>
+<title>libc8: chip8as</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,20 +90,37 @@ $(document).ready(function(){initNavTree('md_docs_chip8as.html',''); initResizab
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">chip8as (CHIP-8 Assembler) </div></div>
+  <div class="headertitle"><div class="title">chip8as </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This is an assembler for the CHIP-8 and SCHIP, utilizing libc8.</p>
-<h1><a class="anchor" id="autotoc_md6"></a>
-Usage</h1>
+<div class="textblock"><h1 align="center"><b>chip8as</b> </h1>
+<h4 align="center">This is an assembler for the CHIP-8 and SCHIP, utilizing libc8. </h4>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Table of Contents</h2>
+<ul>
+<li>Features</li>
+<li>Usage</li>
+<li>Example Code</li>
+<li>Instructions</li>
+<li>Notes</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Features</h2>
+<ul>
+<li>Label support (<code>mylabel:</code>)</li>
+<li>Support for strings (<code>.DS</code>), 16-bit data words (<code>.DW</code>), and data bytes (<code>.DB</code>)</li>
+<li>Support for hex (<code>0x</code> or <code>x</code> prefixed), and binary (<code>0b</code>) integers</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md10"></a>
+Usage</h2>
 <div class="fragment"><div class="line">chip8as [-vV] [-o outputfile] src</div>
 </div><!-- fragment --><ul>
 <li><code>-o</code> sets an output file (default is <code>a.c8</code>).</li>
 <li><code>-v</code> prints diagnostic messages and the resulting hex-encoded bytecode to standard output.</li>
 <li><code>-V</code> prints the version number.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md7"></a>
-Example Code</h1>
+<h2><a class="anchor" id="autotoc_md11"></a>
+Example Code</h2>
 <div class="fragment"><div class="line">.DS &quot;mystring&quot;</div>
 <div class="line">JP mylabel</div>
 <div class="line"> </div>
@@ -115,10 +132,102 @@ Example Code</h1>
 <div class="line">ADD V1, 0xA</div>
 <div class="line">LD I, mysprite</div>
 <div class="line">DRW V0, V1, 1</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
-Notes</h1>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md12"></a>
+Instructions</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Assembly code   </th><th class="markdownTableHeadNone">Bytecode   </th><th class="markdownTableHeadNone">Notes    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SCD b</code>   </td><td class="markdownTableBodyNone"><code>00Cb</code>   </td><td class="markdownTableBodyNone">SCHIP instruction    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>CLS</code>   </td><td class="markdownTableBodyNone"><code>00E0</code>   </td><td class="markdownTableBodyNone">SCHIP instruction    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>RET</code>   </td><td class="markdownTableBodyNone"><code>00EE</code>   </td><td class="markdownTableBodyNone">SCHIP instruction    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SCR</code>   </td><td class="markdownTableBodyNone"><code>00FB</code>   </td><td class="markdownTableBodyNone">SCHIP instruction    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SCL</code>   </td><td class="markdownTableBodyNone"><code>00FC</code>   </td><td class="markdownTableBodyNone">SCHIP instruction    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>EXIT</code>   </td><td class="markdownTableBodyNone"><code>00FD</code>   </td><td class="markdownTableBodyNone">SCHIP instruction    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>LOW</code>   </td><td class="markdownTableBodyNone"><code>00FE</code>   </td><td class="markdownTableBodyNone">SCHIP instruction    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>HIGH</code>   </td><td class="markdownTableBodyNone"><code>00FF</code>   </td><td class="markdownTableBodyNone">SCHIP instruction    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>JP nnn</code>   </td><td class="markdownTableBodyNone"><code>1nnn</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>CALL nnn</code>   </td><td class="markdownTableBodyNone"><code>2nnn</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SE Vx, kk</code>   </td><td class="markdownTableBodyNone"><code>3xkk</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SNE Vx kk</code>   </td><td class="markdownTableBodyNone"><code>4xkk</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SE Vx, Vy</code>   </td><td class="markdownTableBodyNone"><code>5xy0</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>LD Vx, kk</code>   </td><td class="markdownTableBodyNone"><code>6xkk</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>ADD Vx, kk</code>   </td><td class="markdownTableBodyNone"><code>7xkk</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>LD Vx, Vy</code>   </td><td class="markdownTableBodyNone"><code>8xy0</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>OR Vx, Vy</code>   </td><td class="markdownTableBodyNone"><code>8xy1</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>AND Vx, Vy</code>   </td><td class="markdownTableBodyNone"><code>8xy2</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>XOR Vx, Vy</code>   </td><td class="markdownTableBodyNone"><code>8xy3</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>ADD Vx, Vy</code>   </td><td class="markdownTableBodyNone"><code>8xy4</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SUB Vx, Vy</code>   </td><td class="markdownTableBodyNone"><code>8xy5</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SHR Vx {, Vy}</code>   </td><td class="markdownTableBodyNone"><code>8xy5</code>   </td><td class="markdownTableBodyNone"><code>Vy</code> is optional - it will be set to 0 in resulting bytecode if undefined    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SUBN Vx, Vy</code>   </td><td class="markdownTableBodyNone"><code>8xy7</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SHL Vx {, Vy}</code>   </td><td class="markdownTableBodyNone"><code>8xyE</code>   </td><td class="markdownTableBodyNone"><code>Vy</code> is optional - it will be set to 0 in resulting bytecode if undefined    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SNE Vx, Vy</code>   </td><td class="markdownTableBodyNone"><code>9xy0</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>LD I, nnn</code>   </td><td class="markdownTableBodyNone"><code>Annn</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>JP V0, nnn</code>   </td><td class="markdownTableBodyNone"><code>Bnnn</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>RND Vx, kk</code>   </td><td class="markdownTableBodyNone"><code>Cxkk</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>DRW Vx, Vy, b</code>   </td><td class="markdownTableBodyNone"><code>Dxyb</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SKP Vx</code>   </td><td class="markdownTableBodyNone"><code>Ex9E</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>SKNP Vx</code>   </td><td class="markdownTableBodyNone"><code>ExA1</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>LD Vx, DT</code>   </td><td class="markdownTableBodyNone"><code>Fx07</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>LD Vx, K</code>   </td><td class="markdownTableBodyNone"><code>Fx0A</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>LD DT, Vx</code>   </td><td class="markdownTableBodyNone"><code>Fx15</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>LD ST, Vx</code>   </td><td class="markdownTableBodyNone"><code>Fx18</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>ADD I, Vx</code>   </td><td class="markdownTableBodyNone"><code>Fx1E</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>LD F, Vx</code>   </td><td class="markdownTableBodyNone"><code>Fx29</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>LD HF, Vx</code>   </td><td class="markdownTableBodyNone"><code>Fx30</code>   </td><td class="markdownTableBodyNone">SCHIP instruction    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>LD B, Vx</code>   </td><td class="markdownTableBodyNone"><code>Fx33</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>LD [I], Vx</code>   </td><td class="markdownTableBodyNone"><code>Fx55</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>LD Vx, [I]</code>   </td><td class="markdownTableBodyNone"><code>Fx65</code>   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>LD R, Vx</code>   </td><td class="markdownTableBodyNone"><code>Fx75</code>   </td><td class="markdownTableBodyNone">SCHIP instruction    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>LD Vx, R</code>   </td><td class="markdownTableBodyNone"><code>Fx85</code>   </td><td class="markdownTableBodyNone">SCHIP instruction   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md13"></a>
+Notes</h2>
 <ul>
-<li>Hex integers must be formatted with <code>0x</code>, <code>x</code>, or <code>$</code> prefixes.</li>
+<li>Hex integers, besides V and R register identifiers, must be formatted with <code>0x</code>, <code>x</code>, or <code>$</code> prefixes.</li>
 <li>Binary integers must be formatted with a <code>0b</code> prefix.</li>
 <li>Data bytes may be defined using the <code>.DB</code> symbol.</li>
 <li>16-bit data words may be defined using the <code>.DW</code> symbol.</li>

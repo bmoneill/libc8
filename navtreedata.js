@@ -25,30 +25,29 @@
 var NAVTREE =
 [
   [ "libc8", "index.html", [
-    [ "Building", "index.html#autotoc_md12", [
-      [ "Linux", "index.html#autotoc_md13", null ],
-      [ "SDL2", "index.html#autotoc_md14", null ]
+    [ "chip8 (CHIP-8 Interpreter)", "md_docs_chip8.html", [
+      [ "Table of contents", "index.html#autotoc_md15", null ],
+      [ "Overview", "index.html#autotoc_md16", null ],
+      [ "Terminology", "index.html#autotoc_md17", null ],
+      [ "Building", "index.html#autotoc_md18", [
+        [ "SDL2", "index.html#autotoc_md19", null ]
+      ] ],
+      [ "Testing", "index.html#autotoc_md20", null ],
+      [ "Showcase", "index.html#autotoc_md21", null ],
+      [ "Further Reading", "index.html#autotoc_md22", null ],
+      [ "Bugs", "index.html#autotoc_md23", null ],
+      [ "License", "index.html#autotoc_md24", null ],
+      [ "Table of Contents", "md_docs_chip8.html#autotoc_md1", null ],
+      [ "Usage", "md_docs_chip8.html#autotoc_md2", [
+        [ "Options", "md_docs_chip8.html#autotoc_md3", null ]
+      ] ],
+      [ "Keyboard Layout", "md_docs_chip8.html#autotoc_md4", null ],
+      [ "Fonts", "md_docs_chip8.html#autotoc_md5", null ],
+      [ "Quirks", "md_docs_chip8.html#autotoc_md6", null ],
+      [ "Debug mode", "md_docs_chip8.html#autotoc_md7", null ]
     ] ],
-    [ "Testing", "index.html#autotoc_md15", null ],
-    [ "Showcase", "index.html#autotoc_md16", null ],
-    [ "Documentation", "index.html#autotoc_md17", null ],
-    [ "Further Reading", "index.html#autotoc_md18", null ],
-    [ "Bugs", "index.html#autotoc_md19", null ],
-    [ "License", "index.html#autotoc_md20", null ],
-    [ "c8 (CHIP-8 Interpreter)", "md_docs_chip8.html", [
-      [ "Usage", "md_docs_chip8.html#autotoc_md1", null ],
-      [ "Fonts", "md_docs_chip8.html#autotoc_md2", null ],
-      [ "Quirks", "md_docs_chip8.html#autotoc_md3", null ],
-      [ "Debug mode", "md_docs_chip8.html#autotoc_md4", null ]
-    ] ],
-    [ "chip8as (CHIP-8 Assembler)", "md_docs_chip8as.html", [
-      [ "Usage", "md_docs_chip8as.html#autotoc_md6", null ],
-      [ "Example Code", "md_docs_chip8as.html#autotoc_md7", null ],
-      [ "Notes", "md_docs_chip8as.html#autotoc_md8", null ]
-    ] ],
-    [ "chip8dis (CHIP-8 Disassembler)", "md_docs_chip8dis.html", [
-      [ "Usage", "md_docs_chip8dis.html#autotoc_md10", null ]
-    ] ],
+    [ "chip8as", "md_docs_chip8as.html", null ],
+    [ "chip8dis", "md_docs_chip8dis.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],

@@ -93,19 +93,111 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">libc8 </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml/badge.svg?branch=main" alt="CI Status" style="pointer-events: none;" class="inline"/></a> <a href="https://bmoneill.github.io/libc8"><img src="https://github.com/bmoneill/libc8/actions/workflows/doxygen.yml/badge.svg?branch=main" alt="Doxygen Status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml/badge.svg?branch=main" alt="Clang-format status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml"><img src="https://oneill.sh/coverage/libc8" alt="Coverage" class="inline"/></a></p>
-<p>This is a C library for interpreting, assembling, and disassembling CHIP-8 and SCHIP code, optionally utilizing the <a href="https://www.libsdl.org/">SDL2</a> library for graphics.</p>
-<p>An example <a class="el" href="md_docs_chip8as.html">assembler</a>, <a class="el" href="md_docs_chip8dis.html">disassembler</a>, and <a class="el" href="md_docs_chip8.html">interpreter</a> is located in <code>tools/</code>.</p>
-<h1><a class="anchor" id="autotoc_md12"></a>
-Building</h1>
-<h2><a class="anchor" id="autotoc_md13"></a>
-Linux</h2>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> </p><h1 align="center"><b>libc8</b> </h1>
+<h4 align="center">A C library and TUI toolkit for interpreting, assembling, and disassembling CHIP-8 and SCHIP code, optionally utilizing the <a href="https://www.libsdl.org">SDL2</a> library for graphics. </h4>
+<p><a href="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml/badge.svg?branch=main" alt="CI Status" style="pointer-events: none;" class="inline"/></a> <a href="https://bmoneill.github.io/libc8"><img src="https://github.com/bmoneill/libc8/actions/workflows/doxygen.yml/badge.svg?branch=main" alt="Doxygen Status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml/badge.svg?branch=main" alt="Clang-format status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml"><img src="https://oneill.sh/coverage/libc8" alt="Coverage" class="inline"/></a></p>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Table of contents</h2>
+<ul>
+<li>Overview</li>
+<li>Terminology</li>
+<li>Building<ul>
+<li>SDL2</li>
+</ul>
+</li>
+<li>Testing</li>
+<li>Showcase</li>
+<li>Further reading</li>
+<li>Bugs</li>
+<li>License</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md16"></a>
+Overview</h2>
+<p><code>libc8</code> provides tools for interpreting, assembling, and disassembling CHIP-8 and SCHIP programs. It is also possible to utilize this library in other software (e.g. an arcade program with support for multiple architectures).</p>
+<blockquote class="doxtable">
+<p>&zwj;[!TIP] In-depth overviews of the <a class="el" href="md_docs_chip8.html">interpreter</a>, <a class="el" href="md_docs_chip8as.html">assembler</a>, and <a class="el" href="md_docs_chip8dis.html">disassembler</a> are available in <a href="docs/">docs/</a>. Library documentation is available on the <a href="https://bmoneill.github.io/libc8">GitHub Pages site</a>. </p>
+</blockquote>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Feature   </th><th class="markdownTableHeadNone">Status    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">CHIP-8 instructions fully implemented*   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SCHIP 1.1 instructions fully implemented*   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">XO-CHIP instructions fully implemented   </td><td class="markdownTableBodyNone">❌    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">(Interpreter) Full sound support   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">(Interpreter) Support for common quirks   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">(Interpreter) Custom color palettes   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">(Interpreter) Support for various fonts   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">(Debug mode) Step, continue, and breakpoints   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">(Debug mode) Print attributes such as PC, stack, value at an address, etc.   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">(Debug mode) Set attributes   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">(Debug mode) Load and save program state   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">(Assembler) Strings, 16-bit data words, and data bytes   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">(Assembler) Labels   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">(Disassembler) Address printing   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">(Disassembler) Label generation   </td><td class="markdownTableBodyNone">☑   </td></tr>
+</table>
+<blockquote class="doxtable">
+<p>&zwj;[!NOTE] The interpreter passes all of <a href="https://github.com/Timendus/chip8-test-suite">Timendus's CHIP-8 and SCHIP tests</a> except for the <code>DISP WAIT</code> quirk (identified by <code>r</code> in libc8). </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md17"></a>
+Terminology</h2>
+<blockquote class="doxtable">
+<p>&zwj;[!IMPORTANT] You should also take a look at the quirks section in the <a class="el" href="md_docs_chip8.html">interpreter docs</a> for quirk identifiers and what they mean. </p>
+</blockquote>
+<p>Throughout the code and documentation, shorthand terms are used to refer to specific components and attributes related to CHIP-8. The table below describes some of these terms in detail:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Term   </th><th class="markdownTableHeadNone">Definition    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">A   </td><td class="markdownTableBodyNone">The first nibble (<code>0xF000</code>) in an instruction    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">X   </td><td class="markdownTableBodyNone">The second nibble (<code>0x0F00</code>) in an instruction    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Y   </td><td class="markdownTableBodyNone">The third nibble (<code>0x00F0</code>) in an instruction    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">B   </td><td class="markdownTableBodyNone">The fourth nibble (<code>0x000F</code>) in an instruction    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">KK   </td><td class="markdownTableBodyNone">The second byte (<code>0x00FF</code>) in an instruction    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NNN   </td><td class="markdownTableBodyNone">The last 3 nibbles (<code>0x0FFF</code>) in an instruction    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">I   </td><td class="markdownTableBodyNone">The explicit value of the <code>I</code> register    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">[I]   </td><td class="markdownTableBodyNone">A pointer to memory starting at address <code>I</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">K   </td><td class="markdownTableBodyNone">Register number to store next keypress    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">F   </td><td class="markdownTableBodyNone">Address where font data begins    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">HF   </td><td class="markdownTableBodyNone">Address where high-resolution font data begins    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">R[X]   </td><td class="markdownTableBodyNone">HP-48 flag register   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md18"></a>
+Building</h2>
+<p>Building is only officially supported on Linux, but it should be possible to build on Windows and Mac with minimal difficulty.</p>
+<p>You must have CMake installed with a minimum version of 3.31.6.</p>
 <div class="fragment"><div class="line">cmake -S . -B build</div>
 <div class="line">cmake --build build</div>
 <div class="line">sudo cmake --install build</div>
-</div><!-- fragment --><p>This will build libc8 as well as the example tools.</p>
-<h2><a class="anchor" id="autotoc_md14"></a>
-SDL2</h2>
+</div><!-- fragment --><p>This will build and install libc8 as well as the example tools.</p>
+<h3><a class="anchor" id="autotoc_md19"></a>
+SDL2</h3>
 <p>SDL2 support is enabled by default. To disable it to use another graphics library, run <code>cmake</code> with <code>-DSDL2=OFF</code>. If <code><a class="el" href="chip8_8c.html#a7fa8311797eec907da9f1ae1a770fa00" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a></code> is ever called in your code, you must implement these functions with your preferred graphics library:</p>
 <ul>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5"><code>void c8_deinit_graphics(void)</code></a></li>
@@ -116,23 +208,20 @@ SDL2</h2>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a020c1df5341d906fb19266b94235f884"><code>int c8_tick(int *, int)</code></a></li>
 </ul>
 <p><b>Note</b>: the <code>all</code> and <code>tools</code> targets require <code>SDL2</code> to be <code>ON</code>.</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
-Testing</h1>
+<h2><a class="anchor" id="autotoc_md20"></a>
+Testing</h2>
 <p>Testing is done using <a href="https://cmake.org/cmake/help/latest/manual/ctest.1.html">ctest</a> and <a href="https://github.com/ThrowTheSwitch/Unity">Unity</a>.</p>
 <div class="fragment"><div class="line">git submodule update</div>
 <div class="line">cmake -S . -B build -DTEST=ON -DSDL2=OFF</div>
 <div class="line">cmake --build build</div>
 <div class="line">cd build</div>
 <div class="line">ctest --verbose</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md16"></a>
-Showcase</h1>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md21"></a>
+Showcase</h2>
 <p>The libc8 CHIP-8 interpreter running <a href="https://johnearnest.github.io/chip8Archive/play.html?p=outlaw">Outlaw by John Earnest</a>:</p>
 <p><img src="https://oneill.sh/img/libc8-outlaw.gif" alt="libc8 running outlaw" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md17"></a>
-Documentation</h1>
-<p><a href="https://bmoneill.github.io/libc8">Library documentation for libc8</a> is available on the GitHub pages site.</p>
-<h1><a class="anchor" id="autotoc_md18"></a>
-Further Reading</h1>
+<h2><a class="anchor" id="autotoc_md22"></a>
+Further Reading</h2>
 <ul>
 <li><a href="http://devernay.free.fr/hacks/chip8/C8TECH10.HTM">Cowgod's Chip-8 Technical Reference</a></li>
 <li><a href="http://devernay.free.fr/hacks/chip8/schip.txt">S-CHIP 1.1 Reference</a></li>
@@ -140,11 +229,11 @@ Further Reading</h1>
 <li><a href="https://chip-8.github.io/extensions/">CHIP-8 Extensions and Compatibility</a></li>
 <li><a href="https://github.com/Timendus/chip8-test-suite">Timendus's CHIP-8 Test Suite</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md19"></a>
-Bugs</h1>
+<h2><a class="anchor" id="autotoc_md23"></a>
+Bugs</h2>
 <p>If you find a bug, submit an issue, PR, or email me with a description and/or patch.</p>
-<h1><a class="anchor" id="autotoc_md20"></a>
-License</h1>
+<h2><a class="anchor" id="autotoc_md24"></a>
+License</h2>
 <p>Copyright (c) 2019-2026 Ben O'Neill <a href="#" onclick="location.href='mai'+'lto:'+'ben'+'@o'+'nei'+'ll'+'.sh'; return false;">ben@o<span class="obfuscator">.nosp@m.</span>neil<span class="obfuscator">.nosp@m.</span>l.sh</a>. This work is released under the terms of the MIT License. See [LICENSE](LICENSE) for the license terms. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->

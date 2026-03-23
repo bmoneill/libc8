@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>libc8: c8 (CHIP-8 Interpreter)</title>
+<title>libc8: chip8 (CHIP-8 Interpreter)</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,95 +90,159 @@ $(document).ready(function(){initNavTree('md_docs_chip8.html',''); initResizable
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">c8 (CHIP-8 Interpreter) </div></div>
+  <div class="headertitle"><div class="title">chip8 (CHIP-8 Interpreter) </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This is a fully functional CHIP-8 and SCHIP interpreter with an integrated debug mode, utilizing libc8 with SDL2.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-Usage</h1>
-<div class="fragment"><div class="line">chip8 [-dsvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file</div>
-</div><!-- fragment --><ul>
-<li><code>-c</code> sets the number of instructions to be executed per second (default: 1000).</li>
-<li><code>-d</code> enables debug mode. This can be used to add breakpoints, display the current memory, and step through instructions individually.</li>
-<li><code>-f</code> loads the specified comma-separated fonts. Big font is optional.</li>
-<li><code>-p</code> loads a color palette from a file containing two newline-separated 24-bit hex codes.</li>
-<li><code>-P</code> sets the color palette from a string containing two comma-separated 24-bit hex codes (prefixed by <code>0x</code> or <code>x</code>).</li>
-<li><code>-q</code> sets the quirks to enable from string with non-separated quirk identifiers</li>
-<li><code>-s</code> enables SCHIP mode.</li>
-<li><code>-v</code> enables verbose mode. This will print each instruction that is executed.</li>
-<li><code>-V</code> prints the version number.</li>
+Table of Contents</h1>
+<ul>
+<li>Usage</li>
+<li>Options</li>
+<li>Keyboard Layout</li>
+<li>Fonts</li>
+<li>Quirks</li>
+<li>Debug mode</li>
 </ul>
-<p>Keyboard layout is the following:</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Usage</h1>
+<div class="fragment"><div class="line">chip8 [-dsvV] [-c tickspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>
+Options</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Option   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>-c</code>   </td><td class="markdownTableBodyNone">Sets the number of instructions to be executed per second (<b>default: 1000</b>).    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>-d</code>   </td><td class="markdownTableBodyNone">Enables debug mode. This can be used to add breakpoints, display the current memory, and step through instructions individually.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>-f</code>   </td><td class="markdownTableBodyNone">Loads the specified comma-separated fonts. Big font is optional.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>-p</code>   </td><td class="markdownTableBodyNone">Loads a color palette from a file containing two newline-separated 24-bit hex codes (prefixed by <code>0x</code> or <code>x</code>).    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>-P</code>   </td><td class="markdownTableBodyNone">Sets the color palette from a string containing two comma-separated 24-bit hex codes (prefixed by <code>0x</code> or <code>x</code>).    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>-q</code>   </td><td class="markdownTableBodyNone">Sets the quirks to enable from string with non-separated quirk identifiers    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>-s</code>   </td><td class="markdownTableBodyNone">Enables SCHIP mode.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>-v</code>   </td><td class="markdownTableBodyNone">Enables verbose mode. This will print each instruction that is executed.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>-V</code>   </td><td class="markdownTableBodyNone">Prints the version number.   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Keyboard Layout</h1>
 <div class="fragment"><div class="line">  Key       CHIP-8 keycode</div>
 <div class="line">1 2 3 4        1 2 3 C</div>
 <div class="line">q w e r  ==&gt;   4 5 6 D</div>
 <div class="line">a s d f        7 8 9 E</div>
 <div class="line">z x c v        A 0 B F</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
 Fonts</h1>
 <p>Same as Octo.</p>
-<p>Small fonts:</p>
-<ul>
-<li>octo</li>
-<li>vip</li>
-<li>dream6800</li>
-<li>eti660</li>
-<li>fish</li>
-</ul>
-<p>Big fonts:</p>
-<ul>
-<li>octo</li>
-<li>schip</li>
-<li>fish</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Font   </th><th class="markdownTableHeadNone">Small   </th><th class="markdownTableHeadNone">Big    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">octo   </td><td class="markdownTableBodyNone">☑   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">schip   </td><td class="markdownTableBodyNone">☑   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">fish   </td><td class="markdownTableBodyNone">☑   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">vip   </td><td class="markdownTableBodyNone">☑   </td><td class="markdownTableBodyNone">❌    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">dream6800   </td><td class="markdownTableBodyNone">☑   </td><td class="markdownTableBodyNone">❌    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">eti660   </td><td class="markdownTableBodyNone">☑   </td><td class="markdownTableBodyNone">❌   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Quirks</h1>
 <p>The following quirks are available:</p>
-<ul>
-<li><code>c</code>: Clip sprites at bottom edge of screen instead of wrapping.</li>
-<li><code>j</code>: For <code>JP V0, nnn</code>: Jump to <code>nnn + V[(nnn&gt;&gt;8)&amp;0xF]</code> instead.</li>
-<li><code>m</code>: After <code>LD [I], Vx</code> and <code>LD Vx, [I]</code>: Set <code>I</code> to address <code>I + x + 1</code>.</li>
-<li><code>r</code>: <code>DRW</code> halts execution until the next frame.</li>
-<li><code>s</code>: Before <code>SHL Vx, Vy</code> and <code>SHR Vx, Vy</code>: Shift <code>Vx</code> in place, ignore <code>Vy</code>.</li>
-<li><code>v</code>: After <code>AND</code>, <code>OR</code>, and <code>XOR</code>: Clear <code>VF</code>.</li>
-</ul>
-<p><code>cmrv</code> quirks are enabled in CHIP-8 mode by default. <code>cjrs</code> quirks are enabled in SCHIP mode by default.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Quirk   </th><th class="markdownTableHeadNone">Definition   </th><th class="markdownTableHeadNone">CHIP-8 Default   </th><th class="markdownTableHeadNone">SCHIP Default    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>c</code>   </td><td class="markdownTableBodyNone">Clip sprites at bottom edge of screen instead of wrapping.   </td><td class="markdownTableBodyNone">☑   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>j</code>   </td><td class="markdownTableBodyNone">For <code>JP V0, nnn</code>: Jump to <code>nnn + V[(nnn&gt;&gt;8)&amp;0xF]</code> instead.   </td><td class="markdownTableBodyNone">❌   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>m</code>   </td><td class="markdownTableBodyNone">After <code>LD [I], Vx</code> and <code>LD Vx, [I]</code>: Set <code>I</code> to address <code>I + x + 1</code>.   </td><td class="markdownTableBodyNone">☑   </td><td class="markdownTableBodyNone">❌    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>r</code>   </td><td class="markdownTableBodyNone"><code>DRW</code> halts execution until the next frame.   </td><td class="markdownTableBodyNone">☑   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>s</code>   </td><td class="markdownTableBodyNone">Before <code>SHL Vx, Vy</code> and <code>SHR Vx, Vy</code>: Shift <code>Vx</code> in place, ignore <code>Vy</code>.   </td><td class="markdownTableBodyNone">❌   </td><td class="markdownTableBodyNone">☑    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>v</code>   </td><td class="markdownTableBodyNone">After <code>AND</code>, <code>OR</code>, and <code>XOR</code>: Clear <code>VF</code>.   </td><td class="markdownTableBodyNone">☑   </td><td class="markdownTableBodyNone">❌   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Debug mode</h1>
 <p>Debug mode can be enabled via the <code>-d</code> command-line argument or by pressing P at any time during execution. It can also be disabled at any time by pressing M.</p>
-<p>The following commands are supported in debug mode:</p>
-<ul>
-<li><code>break [ADDRESS]</code>: Add breakpoint to <code>PC</code> or <code>ADDRESS</code>, if given.</li>
-<li><code>rmbreak [ADDRESS]</code>: Remove breakpoint at <code>PC</code> or <code>ADDRESS</code>, if given and exists.</li>
-<li><code>continue</code>: Exit debug mode until next breakpoint or until execution is complete.</li>
-<li><code>help</code>: Print a help string.</li>
-<li><code>load PATH</code>: Load program state from <code>PATH</code>.</li>
-<li><code>loadflags PATH</code>: Load flag registers from <code>PATH</code>.</li>
-<li><code>next</code>: Step to the next instruction.</li>
-<li><code>print [ATTRIBUTE]</code>: Print current value of the given attribute.</li>
-<li><code>quit</code>: Terminate the program.</li>
-<li><code>save PATH</code>: Save program state to <code>PATH</code>.</li>
-<li><code>saveflags PATH</code>: Save flag registers to <code>PATH</code>.</li>
-<li><code>set ATTRIBUTE VALUE</code>: Set the given attribute to the given value.</li>
-</ul>
-<p>Attributes:</p>
-<ul>
-<li><code>PC</code>: Program counter</li>
-<li><code>SP</code>: Stack pointer</li>
-<li><code>DT</code>: Delay timer</li>
-<li><code>ST</code>: Sound timer</li>
-<li><code>I</code>: I value</li>
-<li><code>K</code>: Register to store next keypress</li>
-<li><code>V[x]</code>: All V register values or value of Vx, if given</li>
-<li><code>R[x]</code>: All R (flag) register values or value of Rx, if given</li>
-<li><code>bfont</code>: Big font name</li>
-<li><code>sfont</code>: Small font name</li>
-<li><code>stack</code>: All stack values</li>
-<li><code>bg</code>: Background color</li>
-<li><code>fg</code>: Foreground color</li>
-<li><code>$[address]</code>: Value at given address</li>
-</ul>
-<p>If no argument is given to <code>print</code>, it will print all of the above attributes except for address values. </p>
+<p>The following commands and attributes are supported in debug mode:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Command   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>break [ADDRESS]</code>   </td><td class="markdownTableBodyNone">Add breakpoint to <code>PC</code> or <code>ADDRESS</code>, if given.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>rmbreak [ADDRESS]</code>   </td><td class="markdownTableBodyNone">Remove breakpoint at <code>PC</code> or <code>ADDRESS</code>, if given and exists.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>continue</code>   </td><td class="markdownTableBodyNone">Exit debug mode until next breakpoint or until execution is complete.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>help</code>   </td><td class="markdownTableBodyNone">Print a help string.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>load PATH</code>   </td><td class="markdownTableBodyNone">Load program state from <code>PATH</code>.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>loadflags PATH</code>   </td><td class="markdownTableBodyNone">Load flag registers from <code>PATH</code>.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>next</code>   </td><td class="markdownTableBodyNone">Step to the next instruction.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>print [ATTRIBUTE]</code>   </td><td class="markdownTableBodyNone">Print current value of the given attribute.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>quit</code>   </td><td class="markdownTableBodyNone">Terminate the program.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>save PATH</code>   </td><td class="markdownTableBodyNone">Save program state to <code>PATH</code>.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>saveflags PATH</code>   </td><td class="markdownTableBodyNone">Save flag registers to <code>PATH</code>.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>set ATTRIBUTE VALUE</code>   </td><td class="markdownTableBodyNone">Set the given attribute to the given value.   </td></tr>
+</table>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Attribute   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>PC</code>   </td><td class="markdownTableBodyNone">Program counter    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>SP</code>   </td><td class="markdownTableBodyNone">Stack pointer    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>DT</code>   </td><td class="markdownTableBodyNone">Delay timer    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>ST</code>   </td><td class="markdownTableBodyNone">Sound timer    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>I</code>   </td><td class="markdownTableBodyNone">I value    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>K</code>   </td><td class="markdownTableBodyNone">Register to store next keypress    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>V[x]</code>   </td><td class="markdownTableBodyNone">All V register values or value of Vx, if given    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>R[x]</code>   </td><td class="markdownTableBodyNone">All R (flag) register values or value of Rx, if given    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>bfont</code>   </td><td class="markdownTableBodyNone">Big font name    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>sfont</code>   </td><td class="markdownTableBodyNone">Small font name    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>stack</code>   </td><td class="markdownTableBodyNone">All stack values    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>bg</code>   </td><td class="markdownTableBodyNone">Background color    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>fg</code>   </td><td class="markdownTableBodyNone">Foreground color    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>$[address]</code>   </td><td class="markdownTableBodyNone">Value at given address   </td></tr>
+</table>
+<blockquote class="doxtable">
+<p>&zwj;[!NOTE] If no argument is given to <code>print</code>, it will print all of the above attributes except for address values. </p>
+</blockquote>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
