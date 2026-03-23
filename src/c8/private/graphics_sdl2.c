@@ -165,32 +165,10 @@ int c8_render(C8_Display* display, int* colors) {
         .w = C8_WINDOW_SCALE_X,
         .h = C8_WINDOW_SCALE_Y,
     };
-    SDL_Rect winRect = {
-        .x = 0,
-        .y = 0,
-        .w = C8_LOW_DISPLAY_WIDTH,
-        .h = C8_LOW_DISPLAY_HEIGHT,
-    };
 
     int result = SDL_RenderClear(c8_renderer);
     if (result == -1) {
         C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_RenderClear failed: %s", SDL_GetError());
-        return C8_GRAPHICS_EXCEPTION;
-    }
-
-    result = SDL_SetRenderDrawColor(c8_renderer,
-                                    C8_RGB_R(colors[0]),
-                                    C8_RGB_G(colors[0]),
-                                    C8_RGB_B(colors[0]),
-                                    SDL_ALPHA_OPAQUE);
-    if (result == -1) {
-        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
-        return C8_GRAPHICS_EXCEPTION;
-    }
-
-    result = SDL_RenderFillRect(c8_renderer, &winRect);
-    if (result == -1) {
-        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_RenderFillRect failed: %s", SDL_GetError());
         return C8_GRAPHICS_EXCEPTION;
     }
 
