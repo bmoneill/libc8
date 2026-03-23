@@ -67,20 +67,20 @@ Throughout the code and documentation, shorthand terms are used to refer to spec
 components and attributes related to CHIP-8. The table below describes some
 of these terms in detail:
 
-| Term | Definition                                      |
-| ---- | ----------------------------------------------- |
-| A    | The first nibble (`0xF000`) in an instruction   |
-| X    | The second nibble (`0x0F00`) in an instruction  |
-| Y    | The third nibble (`0x00F0`) in an instruction   |
-| B    | The fourth nibble (`0x000F`) in an instruction  |
-| KK   | The second byte (`0x00FF`) in an instruction    |
-| NNN  | The last 3 nibbles (`0x0FFF`) in an instruction |
-| I    | The explicit value of the `I` register          |
-| [I]  | A pointer to memory starting at address `I`     |
-| K    | Register number to store next keypress          |
-| F    | Address where font data begins                  |
-| HF   | Address where high-resolution font data begins  |
-| R[X] | HP-48 flag register                             |
+| Term   | Definition                                      |
+| ------ | ----------------------------------------------- |
+| `A`    | The first nibble (`0xF000`) in an instruction   |
+| `X`    | The second nibble (`0x0F00`) in an instruction  |
+| `Y`    | The third nibble (`0x00F0`) in an instruction   |
+| `B`    | The fourth nibble (`0x000F`) in an instruction  |
+| `KK`   | The second byte (`0x00FF`) in an instruction    |
+| `NNN`  | The last 3 nibbles (`0x0FFF`) in an instruction |
+| `I`    | The explicit value of the `I` register          |
+| `[I]`  | A pointer to memory starting at address `I`     |
+| `K`    | Register number to store next keypress          |
+| `F`    | Address where font data begins                  |
+| `HF`   | Address where high-resolution font data begins  |
+| `R[X]` | HP-48 flag register                             |
 
 ## Building
 
