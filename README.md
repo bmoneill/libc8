@@ -4,7 +4,8 @@
 
 <h4 align="center">
   A C library and TUI toolkit for interpreting, assembling, and disassembling
-  CHIP-8 and SCHIP code, optionally utilizing the [SDL2](https://www.libsdl.org/)
+  CHIP-8 and SCHIP code, optionally utilizing the
+  <a href="https://www.libsdl.org">SDL2</a>
   library for graphics.
 </h4>
 
