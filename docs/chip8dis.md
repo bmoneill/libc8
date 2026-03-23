@@ -4,7 +4,7 @@ This is a disassembler for the CHIP-8 and SCHIP, utilizing libc8.
 
 ## Usage
 
-```bash
+```properties
 chip8dis [-alV] [-o outputfile] rom
 ```
 
