@@ -1025,6 +1025,10 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
     }
 
     c8->V[0xF] = vf;
+
+    if (c8->flags & C8_FLAG_QUIRK_VBLANK) {
+        c8->waitingForDraw = 1;
+    }
     return 2;
 }
 

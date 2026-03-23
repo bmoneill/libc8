@@ -166,6 +166,9 @@ int c8_load_quirks(C8* c8, const char* s) {
         case 'j':
             c8->flags ^= C8_FLAG_QUIRK_JUMPING;
             break;
+        case 'r':
+            c8->flags ^= C8_FLAG_QUIRK_VBLANK;
+            break;
         default:
             C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid quirk: %c", s[i]);
             return C8_INVALID_PARAMETER_EXCEPTION;
@@ -219,10 +222,9 @@ int c8_load_rom(C8* c8, const char* addr) {
  * @return 0 if success, exception code on failure
  */
 int c8_simulate(C8* c8) {
-    int    debugRet;
-    int    ret;
-    int    step        = 1;
-    double accumulator = 0.0;
+    int debugRet;
+    int ret;
+    int step = 1;
 
     srand(time(NULL));
 
@@ -233,10 +235,25 @@ int c8_simulate(C8* c8) {
         return ret;
     }
 
-    const double refresh_rate = 1.0 / 60.0;
-    double       last         = c8_get_time();
-    double       acc          = 0.0;
+    const double refresh_rate          = 1.0 / 60.0;
+    double       last                  = c8_get_time();
+    double       acc                   = 0.0;
+    int          instructions_executed = 0;
+    int          new_frame             = 0;
     while (c8->running) {
+        double current = c8_get_time();
+        acc += current - last;
+        last = current;
+
+        if (acc >= refresh_rate) {
+            new_frame = 1;
+            acc -= refresh_rate;
+        }
+
+        if (c8->waitingForDraw && !new_frame) {
+            continue;
+        }
+
         usleep(1000000 / c8->tickSpeed);
 
         int t = c8_tick(c8->key);
@@ -245,6 +262,28 @@ int c8_simulate(C8* c8) {
             /* Quit */
             c8->running = 0;
             continue;
+        }
+
+        if (new_frame) {
+            /* Update timers and draw */
+            if (c8->dt > 0) {
+                c8->dt--;
+            }
+
+            if (c8->st > 0) {
+                c8->st--;
+
+                if (c8->st == 0) {
+                    c8_sound_stop();
+                }
+            }
+
+            if (c8_render(&c8->display, c8->colors) < 0) {
+                return C8_GRAPHICS_EXCEPTION;
+            }
+
+            c8->waitingForDraw = 0;
+            new_frame          = 0;
         }
 
         if (c8->key[16]) {
@@ -274,39 +313,13 @@ int c8_simulate(C8* c8) {
             }
         }
 
-        /* Get current time */
-        double current = c8_get_time();
-        acc += current - last;
-        last = current;
-
-        if (acc >= refresh_rate) {
-            /* Update timers and draw */
-            if (c8->dt > 0) {
-                c8->dt--;
-            }
-
-            if (c8->st > 0) {
-                c8->st--;
-            }
-
-            if (c8->st == 0) {
-                c8_sound_stop();
-            }
-
-            if (c8_render(&c8->display, c8->colors) < 0) {
-                return C8_GRAPHICS_EXCEPTION;
-            }
-            acc -= refresh_rate;
-            c8->waitingForDraw = 0;
-        }
-
-        if (t >= 0 && c8->waitingForKey) {
+        if (c8->waitingForKey && t >= 0) {
             /* Waiting for key and a key was released */
             c8->V[c8->VK]     = t;
             c8->waitingForKey = 0;
         }
 
-        if (!c8->waitingForKey && !c8->waitingForDraw) {
+        if (!c8->waitingForKey) {
             /* Not waiting for key, parse next instruction */
             ret = c8_parse_instruction(c8);
 

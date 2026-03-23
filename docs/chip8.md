@@ -58,6 +58,7 @@ The following quirks are available:
 - `j`: For `JP V0, nnn`: Jump to `nnn + V[(nnn>>8)&0xF]` instead.
 - `m`: After `LD [I], Vx` and `LD Vx, [I]`: Set `I` to address
   `I + x + 1`.
+- `r`: `DRW` halts execution until the next frame.
 - `s`: Before `SHL Vx, Vy` and `SHR Vx, Vy`: Shift `Vx` in place, ignore `Vy`.
 - `v`: After `AND`, `OR`, and `XOR`: Clear `VF`.
 

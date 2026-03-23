@@ -15,7 +15,7 @@
 /**
  * @brief Maximum instructions to execute per second
  */
-#define C8_TICK_SPEED 1000
+#define C8_TICK_SPEED (12 * 60)
 
 /**
  * @brief Maximum stack size
@@ -73,6 +73,11 @@
 #define C8_FLAG_QUIRK_JUMPING 0x40
 
 /**
+ * @brief Enable the 'r' quirk (see main page/README).
+ */
+#define C8_FLAG_QUIRK_VBLANK 0x80
+
+/**
   * @struct C8
   * @brief Represents current state of the CHIP-8 interpreter
   */
@@ -90,7 +95,7 @@ typedef struct {
     int        VK; //!< Register to store next keypress
     int        tickSpeed; //!< Instructions to execute per second
     int        waitingForKey; //!< Waiting for keypress?
-    int        waitingForDraw; //!< Waiting for draw? (For v quirk)
+    int        waitingForDraw; //!< Waiting for draw? (For `r` quirk)
     int        running; //!< Interpreter running state
     C8_Display display; //!< Graphics display
     int        flags; //!< CLI flags

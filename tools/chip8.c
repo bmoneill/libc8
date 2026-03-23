@@ -67,9 +67,9 @@ int         main(int argc, char* argv[]) {
     }
 
     if (!userDefinedQuirks && c8->mode == C8_MODE_CHIP8) {
-        c8_load_quirks(c8, "vmc");
+        c8_load_quirks(c8, "vmcr");
     } else if (!userDefinedQuirks && c8->mode == C8_MODE_SCHIP) {
-        c8_load_quirks(c8, "csj");
+        c8_load_quirks(c8, "csjr");
     }
 
     if (c8_init_graphics()) {
