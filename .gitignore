@@ -1,4 +1,4 @@
-build/
+build*
 vgcore*
 gmon.out
 
