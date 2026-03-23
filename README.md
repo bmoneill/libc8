@@ -17,7 +17,7 @@
 ## Table of contents
 
 - [Overview](#overview)
-  - [Important Terms](#important-terms)
+- [Terminology](#terminology)
 - [Features](#features)
   - [Interpreter](#interpreter)
     - [Debug mode](#debug-mode)
@@ -39,7 +39,11 @@ CHIP-8 and SCHIP programs. It is also possible to utilize this library
 in other software (e.g. an arcade program with support for multiple
 architectures).
 
-### Important Terms
+## Terminology
+
+> [!IMPORTANT]
+> You should also take a look at the quirks section in the [interpreter docs](docs/chip8.md)
+> for quirk identifiers and what they mean.
 
 Throughout the code and documentation, jargon is used to refer to specific
 components and attributes related to CHIP-8. The table below describes some
@@ -59,10 +63,6 @@ of these terms in detail:
 | F    | Address where font data begins                  |
 | HF   | Address where high-resolution font data begins  |
 | R[X] | HP-48 flag register                             |
-
-> [!IMPORTANT]
-> You should also take a look at the quirks section in the [interpreter docs](docs/chip8.md)
-> for quirk identifiers and what they mean.
 
 ## Features
 
