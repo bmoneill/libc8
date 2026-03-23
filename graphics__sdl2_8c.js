@@ -7,7 +7,6 @@ var graphics__sdl2_8c =
     [ "C8_RGB_B", "graphics__sdl2_8c.html#a7de0ec774b6ef7f950617ebac19fea60", null ],
     [ "C8_RGB_G", "graphics__sdl2_8c.html#a33e1db365ab3fdadbd9e9afceb7d0ba5", null ],
     [ "C8_RGB_R", "graphics__sdl2_8c.html#a5900d64245d0dd36d7818d4a7e1a8dfb", null ],
-    [ "C8_SET_RENDER_COLOR", "graphics__sdl2_8c.html#a6d8900a6ea5a3fdf8825ab7381ce1802", null ],
     [ "c8_deinit_graphics", "graphics__sdl2_8c.html#a1895f5efe875cbdbf9a61259e26f9ad5", null ],
     [ "c8_init_graphics", "graphics__sdl2_8c.html#a5db679b42f3f7ce5aec081ae83fa8005", null ],
     [ "c8_render", "graphics__sdl2_8c.html#ae41efafd2113eaa0fc49d126930c1b1a", null ],

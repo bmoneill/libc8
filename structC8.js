@@ -2,7 +2,6 @@ var structC8 =
 [
     [ "breakpoints", "structC8.html#a526533d131c3df745a6d0412ea773384", null ],
     [ "colors", "structC8.html#ab5ab72332d3b382a8d44dcb23c8c610b", null ],
-    [ "cs", "structC8.html#ad35c7ed2784f4fb57849237ce534f17e", null ],
     [ "display", "structC8.html#a2c4c524224996adcea130ae3c8d49ec8", null ],
     [ "dt", "structC8.html#ada3845993bce1df4701253692c93a98b", null ],
     [ "flags", "structC8.html#ac8bf36fe0577cba66bccda3a6f7e80a4", null ],
@@ -17,7 +16,9 @@ var structC8 =
     [ "sp", "structC8.html#aed2a8d366be7f4f805ec99d8f41acbe0", null ],
     [ "st", "structC8.html#af5ecc467f3c2db2a077f48ef477e956f", null ],
     [ "stack", "structC8.html#a0004a78051dbbf272e3fdbefa09412c5", null ],
+    [ "tickSpeed", "structC8.html#ac9c117279ba37d3a60350c1607df1e00", null ],
     [ "V", "structC8.html#a7212d8d49da04eaad9ce0feb0d001b4d", null ],
     [ "VK", "structC8.html#a57f26dfd93ea63cc775a320ec0811a10", null ],
+    [ "waitingForDraw", "structC8.html#a21e403143637a5dd618ab1646e60497a", null ],
     [ "waitingForKey", "structC8.html#a27ffec7169009f73a39aec4aa34af814", null ]
 ];

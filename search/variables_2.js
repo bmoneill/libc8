@@ -5,7 +5,7 @@ var searchData=
   ['c8_5fcmds_2',['c8_cmds',['../debug_8c.html#a4a7668668a6a4c82d6a08d33c60dc69e',1,'debug.c']]],
   ['c8_5fexception_3',['c8_exception',['../exception_8c.html#a220454f62a07328378e890bf6f2488b0',1,'c8_exception():&#160;exception.c'],['../exception_8h.html#a220454f62a07328378e890bf6f2488b0',1,'c8_exception():&#160;exception.c']]],
   ['c8_5fexceptions_4',['c8_exceptions',['../exception_8c.html#a01a182af7759f1fb977e2d3140fd80d8',1,'exception.c']]],
-  ['c8_5ffontnames_5',['c8_fontNames',['../font_8h.html#ac677f9c5dce232b0682cafb3c0c29554',1,'c8_fontNames():&#160;font.c'],['../font_8c.html#ac677f9c5dce232b0682cafb3c0c29554',1,'c8_fontNames():&#160;font.c']]],
+  ['c8_5ffontnames_5',['c8_fontNames',['../font_8c.html#ac677f9c5dce232b0682cafb3c0c29554',1,'c8_fontNames():&#160;font.c'],['../font_8h.html#ac677f9c5dce232b0682cafb3c0c29554',1,'c8_fontNames():&#160;font.c']]],
   ['c8_5fformats_6',['c8_formats',['../symbol_8h.html#a6222302c1ea220b15f85a73b33db9a70',1,'c8_formats():&#160;symbol.c'],['../symbol_8c.html#a6222302c1ea220b15f85a73b33db9a70',1,'c8_formats():&#160;symbol.c']]],
   ['c8_5fidentifierstrings_7',['c8_identifierStrings',['../symbol_8h.html#a7db6741810ae8ae021411544250757a1',1,'c8_identifierStrings():&#160;symbol.c'],['../symbol_8c.html#a7db6741810ae8ae021411544250757a1',1,'c8_identifierStrings():&#160;symbol.c']]],
   ['c8_5finstructionstrings_8',['c8_instructionStrings',['../symbol_8h.html#aad872539439157dacd82ef1ab739520d',1,'c8_instructionStrings():&#160;symbol.c'],['../symbol_8c.html#aad872539439157dacd82ef1ab739520d',1,'c8_instructionStrings():&#160;symbol.c']]],
@@ -16,6 +16,5 @@ var searchData=
   ['ceil_13',['ceil',['../structC8__SymbolList.html#ad6444f4012ee91774d9f670320011ad6',1,'C8_SymbolList::ceil()'],['../structC8__LabelList.html#ad6444f4012ee91774d9f670320011ad6',1,'C8_LabelList::ceil()']]],
   ['cmd_14',['cmd',['../structC8__Instruction.html#af58714ecdb75b0edc200a0ca0895b100',1,'C8_Instruction::cmd()'],['../structC8__InstructionFormat.html#af58714ecdb75b0edc200a0ca0895b100',1,'C8_InstructionFormat::cmd()']]],
   ['code_15',['code',['../structC8__Exception.html#a32c8071a6e051a83ad36211201f10ad2',1,'C8_Exception']]],
-  ['colors_16',['colors',['../structC8.html#ab5ab72332d3b382a8d44dcb23c8c610b',1,'C8']]],
-  ['cs_17',['cs',['../structC8.html#ad35c7ed2784f4fb57849237ce534f17e',1,'C8']]]
+  ['colors_16',['colors',['../structC8.html#ab5ab72332d3b382a8d44dcb23c8c610b',1,'C8']]]
 ];

@@ -136,12 +136,15 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a57f26dfd93ea63cc775a320ec0811a10"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8.html#a57f26dfd93ea63cc775a320ec0811a10">VK</a></td></tr>
 <tr class="memdesc:a57f26dfd93ea63cc775a320ec0811a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register to store next keypress.  <br /></td></tr>
 <tr class="separator:a57f26dfd93ea63cc775a320ec0811a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad35c7ed2784f4fb57849237ce534f17e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8.html#ad35c7ed2784f4fb57849237ce534f17e">cs</a></td></tr>
-<tr class="memdesc:ad35c7ed2784f4fb57849237ce534f17e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instructions to execute per second.  <br /></td></tr>
-<tr class="separator:ad35c7ed2784f4fb57849237ce534f17e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9c117279ba37d3a60350c1607df1e00"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8.html#ac9c117279ba37d3a60350c1607df1e00">tickSpeed</a></td></tr>
+<tr class="memdesc:ac9c117279ba37d3a60350c1607df1e00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instructions to execute per second.  <br /></td></tr>
+<tr class="separator:ac9c117279ba37d3a60350c1607df1e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27ffec7169009f73a39aec4aa34af814"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8.html#a27ffec7169009f73a39aec4aa34af814">waitingForKey</a></td></tr>
 <tr class="memdesc:a27ffec7169009f73a39aec4aa34af814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waiting for keypress?  <br /></td></tr>
 <tr class="separator:a27ffec7169009f73a39aec4aa34af814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e403143637a5dd618ab1646e60497a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8.html#a21e403143637a5dd618ab1646e60497a">waitingForDraw</a></td></tr>
+<tr class="memdesc:a21e403143637a5dd618ab1646e60497a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waiting for draw? (For <code>r</code> quirk)  <br /></td></tr>
+<tr class="separator:a21e403143637a5dd618ab1646e60497a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f45113638a0b749a8a205d2cd7fb42b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structC8.html#a2f45113638a0b749a8a205d2cd7fb42b">running</a></td></tr>
 <tr class="memdesc:a2f45113638a0b749a8a205d2cd7fb42b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interpreter running state.  <br /></td></tr>
 <tr class="separator:a2f45113638a0b749a8a205d2cd7fb42b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,22 +199,6 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p>24 bit hex colors, background=[0] foreground=[1] </p>
-
-</div>
-</div>
-<a id="ad35c7ed2784f4fb57849237ce534f17e" name="ad35c7ed2784f4fb57849237ce534f17e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad35c7ed2784f4fb57849237ce534f17e">&#9670;&#160;</a></span>cs</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int cs</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Instructions to execute per second. </p>
 
 </div>
 </div>
@@ -439,6 +426,22 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="ac9c117279ba37d3a60350c1607df1e00" name="ac9c117279ba37d3a60350c1607df1e00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9c117279ba37d3a60350c1607df1e00">&#9670;&#160;</a></span>tickSpeed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tickSpeed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Instructions to execute per second. </p>
+
+</div>
+</div>
 <a id="a7212d8d49da04eaad9ce0feb0d001b4d" name="a7212d8d49da04eaad9ce0feb0d001b4d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7212d8d49da04eaad9ce0feb0d001b4d">&#9670;&#160;</a></span>V</h2>
 
@@ -468,6 +471,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Register to store next keypress. </p>
+
+</div>
+</div>
+<a id="a21e403143637a5dd618ab1646e60497a" name="a21e403143637a5dd618ab1646e60497a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21e403143637a5dd618ab1646e60497a">&#9670;&#160;</a></span>waitingForDraw</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int waitingForDraw</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Waiting for draw? (For <code>r</code> quirk) </p>
 
 </div>
 </div>

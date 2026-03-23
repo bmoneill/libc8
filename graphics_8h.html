@@ -127,12 +127,6 @@ Macros</h2></td></tr>
 <tr class="memitem:a86e1f0d52149e286b68944652beab113"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8h.html#a86e1f0d52149e286b68944652beab113">C8_DEFAULT_WINDOW_HEIGHT</a>&#160;&#160;&#160;400</td></tr>
 <tr class="memdesc:a86e1f0d52149e286b68944652beab113"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default window height.  <br /></td></tr>
 <tr class="separator:a86e1f0d52149e286b68944652beab113"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab70d9202bcfc983806b5c35b4e76670"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8h.html#aab70d9202bcfc983806b5c35b4e76670">C8_WINDOW_SCALE_X</a>&#160;&#160;&#160;(<a class="el" href="graphics_8h.html#a78e81e94e944a8f94ed811f4eeaf3286">C8_DEFAULT_WINDOW_WIDTH</a> / <a class="el" href="graphics_8h.html#a142ae690b02e240e2a678485173ca651">C8_LOW_DISPLAY_WIDTH</a>)</td></tr>
-<tr class="memdesc:aab70d9202bcfc983806b5c35b4e76670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Window scale factor in x direction.  <br /></td></tr>
-<tr class="separator:aab70d9202bcfc983806b5c35b4e76670"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5255936364b46efc6190f78de0bf52b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8h.html#ad5255936364b46efc6190f78de0bf52b">C8_WINDOW_SCALE_Y</a>&#160;&#160;&#160;(<a class="el" href="graphics_8h.html#a86e1f0d52149e286b68944652beab113">C8_DEFAULT_WINDOW_HEIGHT</a> / <a class="el" href="graphics_8h.html#aaa2f365dfe9bf72cf557b796c692bde7">C8_LOW_DISPLAY_HEIGHT</a>)</td></tr>
-<tr class="memdesc:ad5255936364b46efc6190f78de0bf52b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Window scale factor in y direction.  <br /></td></tr>
-<tr class="separator:ad5255936364b46efc6190f78de0bf52b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93b44cde84096f87611becabba3a61ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graphics_8h.html#a93b44cde84096f87611becabba3a61ac">C8_DISPLAYMODE_LOW</a>&#160;&#160;&#160;0</td></tr>
 <tr class="memdesc:a93b44cde84096f87611becabba3a61ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Low resolution display mode.  <br /></td></tr>
 <tr class="separator:a93b44cde84096f87611becabba3a61ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -293,38 +287,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Width of the low-resolution display. </p>
-
-</div>
-</div>
-<a id="aab70d9202bcfc983806b5c35b4e76670" name="aab70d9202bcfc983806b5c35b4e76670"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab70d9202bcfc983806b5c35b4e76670">&#9670;&#160;</a></span>C8_WINDOW_SCALE_X</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define C8_WINDOW_SCALE_X&#160;&#160;&#160;(<a class="el" href="graphics_8h.html#a78e81e94e944a8f94ed811f4eeaf3286">C8_DEFAULT_WINDOW_WIDTH</a> / <a class="el" href="graphics_8h.html#a142ae690b02e240e2a678485173ca651">C8_LOW_DISPLAY_WIDTH</a>)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Window scale factor in x direction. </p>
-
-</div>
-</div>
-<a id="ad5255936364b46efc6190f78de0bf52b" name="ad5255936364b46efc6190f78de0bf52b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5255936364b46efc6190f78de0bf52b">&#9670;&#160;</a></span>C8_WINDOW_SCALE_Y</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define C8_WINDOW_SCALE_Y&#160;&#160;&#160;(<a class="el" href="graphics_8h.html#a86e1f0d52149e286b68944652beab113">C8_DEFAULT_WINDOW_HEIGHT</a> / <a class="el" href="graphics_8h.html#aaa2f365dfe9bf72cf557b796c692bde7">C8_LOW_DISPLAY_HEIGHT</a>)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Window scale factor in y direction. </p>
 
 </div>
 </div>
@@ -528,7 +490,7 @@ Functions</h2></td></tr>
 
 <p>Grab current keypresses and delay execution to match clockspeed. </p>
 <p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
-<p>This function should return 0 on success and a negative value on failure.</p>
+<p>This function should return -2 if quitting, -1 if no key was released, or the key index of the first key released since the last call.</p>
 <p>Grab current keypresses and delay execution to match clockspeed.</p>
 <p>If a relevant key is pressed or released (see <code>keyMap</code> in this file), this function will update <code>key</code> accordingly.</p>
 <dl class="params"><dt>Parameters</dt><dd>

@@ -102,7 +102,7 @@ Usage</h1>
 <li><code>-d</code> enables debug mode. This can be used to add breakpoints, display the current memory, and step through instructions individually.</li>
 <li><code>-f</code> loads the specified comma-separated fonts. Big font is optional.</li>
 <li><code>-p</code> loads a color palette from a file containing two newline-separated 24-bit hex codes.</li>
-<li><code>-P</code> sets the color palette from a string containing two comma-separated 24-bit hex codes.</li>
+<li><code>-P</code> sets the color palette from a string containing two comma-separated 24-bit hex codes (prefixed by <code>0x</code> or <code>x</code>).</li>
 <li><code>-q</code> sets the quirks to enable from string with non-separated quirk identifiers</li>
 <li><code>-s</code> enables SCHIP mode.</li>
 <li><code>-v</code> enables verbose mode. This will print each instruction that is executed.</li>
@@ -138,10 +138,11 @@ Quirks</h1>
 <li><code>c</code>: Clip sprites at bottom edge of screen instead of wrapping.</li>
 <li><code>j</code>: For <code>JP V0, nnn</code>: Jump to <code>nnn + V[(nnn&gt;&gt;8)&amp;0xF]</code> instead.</li>
 <li><code>m</code>: After <code>LD [I], Vx</code> and <code>LD Vx, [I]</code>: Set <code>I</code> to address <code>I + x + 1</code>.</li>
+<li><code>r</code>: <code>DRW</code> halts execution until the next frame.</li>
 <li><code>s</code>: Before <code>SHL Vx, Vy</code> and <code>SHR Vx, Vy</code>: Shift <code>Vx</code> in place, ignore <code>Vy</code>.</li>
 <li><code>v</code>: After <code>AND</code>, <code>OR</code>, and <code>XOR</code>: Clear <code>VF</code>.</li>
 </ul>
-<p><code>cmv</code> quirks are enabled in CHIP-8 mode by default. <code>cjs</code> quirks are enabled in SCHIP mode by default.</p>
+<p><code>cmrv</code> quirks are enabled in CHIP-8 mode by default. <code>cjrs</code> quirks are enabled in SCHIP mode by default.</p>
 <h1><a class="anchor" id="autotoc_md4"></a>
 Debug mode</h1>
 <p>Debug mode can be enabled via the <code>-d</code> command-line argument or by pressing P at any time during execution. It can also be disabled at any time by pressing M.</p>

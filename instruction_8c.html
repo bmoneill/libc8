@@ -216,9 +216,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;mode == <a class="code hl_define" href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a>) {                                                                \</div>
 <div class="line">        fprintf(stderr, <span class="stringliteral">&quot;SCHIP instruction detected in CHIP-8 mode.\n&quot;</span>);                           \</div>
-<div class="line">        <span class="keywordflow">return</span> 2;                                                                                  \</div>
+<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714">C8_INVALID_STATE_EXCEPTION</a>;                                                         \</div>
 <div class="line">    }</div>
 <div class="ttc" id="achip8_8h_html_ace5f100e8d06164b3cb3b0b04e5297f5"><div class="ttname"><a href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a></div><div class="ttdeci">#define C8_MODE_CHIP8</div><div class="ttdoc">CHIP-8 execution mode. SCHIP and XO-CHIP instructions will throw an error.</div><div class="ttdef"><b>Definition:</b> chip8.h:28</div></div>
+<div class="ttc" id="aexception_8h_html_a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714"><div class="ttname"><a href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714">C8_INVALID_STATE_EXCEPTION</a></div><div class="ttdeci">@ C8_INVALID_STATE_EXCEPTION</div><div class="ttdef"><b>Definition:</b> exception.h:35</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -258,7 +259,7 @@ Functions</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (c-&gt;mode != <a class="code hl_define" href="chip8_8h.html#acf75ba93ff6438063ec6a493e004429d">C8_MODE_XOCHIP</a>) {                                                               \</div>
 <div class="line">        <span class="keyword">const</span> <span class="keywordtype">char</span>* modeStr = (c-&gt;mode == <a class="code hl_define" href="chip8_8h.html#ace5f100e8d06164b3cb3b0b04e5297f5">C8_MODE_CHIP8</a>) ? <span class="stringliteral">&quot;CHIP-8&quot;</span> : <span class="stringliteral">&quot;SCHIP&quot;</span>;                     \</div>
 <div class="line">        fprintf(stderr, <span class="stringliteral">&quot;XOCHIP instruction detected in %s mode.\n&quot;</span>, modeStr);                     \</div>
-<div class="line">        <span class="keywordflow">return</span> 2;                                                                                  \</div>
+<div class="line">        <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="exception_8h.html#a7c3781ed13680e20a5bf0907e4223480a9ab69f95295154c6a92b34104b6ae714">C8_INVALID_STATE_EXCEPTION</a>;                                                         \</div>
 <div class="line">    }</div>
 <div class="ttc" id="achip8_8h_html_acf75ba93ff6438063ec6a493e004429d"><div class="ttname"><a href="chip8_8h.html#acf75ba93ff6438063ec6a493e004429d">C8_MODE_XOCHIP</a></div><div class="ttdeci">#define C8_MODE_XOCHIP</div><div class="ttdoc">XO-CHIP execution mode.</div><div class="ttdef"><b>Definition:</b> chip8.h:38</div></div>
 </div><!-- fragment -->

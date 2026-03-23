@@ -111,9 +111,9 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a14abbd12e1df30c3e05395d15bab16f8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8h.html#a14abbd12e1df30c3e05395d15bab16f8">C8_CLOCK_SPEED</a>&#160;&#160;&#160;1000</td></tr>
-<tr class="memdesc:a14abbd12e1df30c3e05395d15bab16f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum instructions to execute per second.  <br /></td></tr>
-<tr class="separator:a14abbd12e1df30c3e05395d15bab16f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaade0fb8f988665e9462f163161be00"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8h.html#aeaade0fb8f988665e9462f163161be00">C8_TICK_SPEED</a>&#160;&#160;&#160;(12 * 60)</td></tr>
+<tr class="memdesc:aeaade0fb8f988665e9462f163161be00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum instructions to execute per second.  <br /></td></tr>
+<tr class="separator:aeaade0fb8f988665e9462f163161be00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3daa3a7dfa3561839b1d71b7691b167e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8h.html#a3daa3a7dfa3561839b1d71b7691b167e">C8_STACK_SIZE</a>&#160;&#160;&#160;16</td></tr>
 <tr class="memdesc:a3daa3a7dfa3561839b1d71b7691b167e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum stack size.  <br /></td></tr>
 <tr class="separator:a3daa3a7dfa3561839b1d71b7691b167e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,6 +147,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a8c687ad6c10c209eb9d7b8255b76c44c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8h.html#a8c687ad6c10c209eb9d7b8255b76c44c">C8_FLAG_QUIRK_JUMPING</a>&#160;&#160;&#160;0x40</td></tr>
 <tr class="memdesc:a8c687ad6c10c209eb9d7b8255b76c44c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable the 'j' quirk (see main page/README).  <br /></td></tr>
 <tr class="separator:a8c687ad6c10c209eb9d7b8255b76c44c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cc1f4e83e74a7c7705ea3fc734d3cd6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chip8_8h.html#a3cc1f4e83e74a7c7705ea3fc734d3cd6">C8_FLAG_QUIRK_VBLANK</a>&#160;&#160;&#160;0x80</td></tr>
+<tr class="memdesc:a3cc1f4e83e74a7c7705ea3fc734d3cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable the 'r' quirk (see main page/README).  <br /></td></tr>
+<tr class="separator:a3cc1f4e83e74a7c7705ea3fc734d3cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -181,22 +184,6 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stuff for simulating and modifying <code>CHIP8</code>s. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a14abbd12e1df30c3e05395d15bab16f8" name="a14abbd12e1df30c3e05395d15bab16f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14abbd12e1df30c3e05395d15bab16f8">&#9670;&#160;</a></span>C8_CLOCK_SPEED</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define C8_CLOCK_SPEED&#160;&#160;&#160;1000</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Maximum instructions to execute per second. </p>
-
-</div>
-</div>
 <a id="a1e452f92855b0431bf69159754d29a68" name="a1e452f92855b0431bf69159754d29a68"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e452f92855b0431bf69159754d29a68">&#9670;&#160;</a></span>C8_FLAG_DEBUG</h2>
 
@@ -274,6 +261,22 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Enable the 's' quirk (see main page/README). </p>
+
+</div>
+</div>
+<a id="a3cc1f4e83e74a7c7705ea3fc734d3cd6" name="a3cc1f4e83e74a7c7705ea3fc734d3cd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cc1f4e83e74a7c7705ea3fc734d3cd6">&#9670;&#160;</a></span>C8_FLAG_QUIRK_VBLANK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define C8_FLAG_QUIRK_VBLANK&#160;&#160;&#160;0x80</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable the 'r' quirk (see main page/README). </p>
 
 </div>
 </div>
@@ -373,6 +376,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="aeaade0fb8f988665e9462f163161be00" name="aeaade0fb8f988665e9462f163161be00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaade0fb8f988665e9462f163161be00">&#9670;&#160;</a></span>C8_TICK_SPEED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define C8_TICK_SPEED&#160;&#160;&#160;(12 * 60)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Maximum instructions to execute per second. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a2d3a7051c6137089c14b4f06b806cec8" name="a2d3a7051c6137089c14b4f06b806cec8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2d3a7051c6137089c14b4f06b806cec8">&#9670;&#160;</a></span>c8_deinit()</h2>
@@ -427,7 +446,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize and return a <code><a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a></code> with the given flags. </p>
-<p>This function allocates memory for a new <code><a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a></code> with all values set to 0 or their default values, adds the font to memory, inititializes the graphics system, and returns a pointer to the <code><a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a></code>.</p>
+<p>This function allocates memory for a new <code><a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a></code> with all values set to 0 or their default values, adds the font to memory, and returns a pointer to the <code><a class="el" href="structC8.html" title="Represents current state of the CHIP-8 interpreter.">C8</a></code>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>path to ROM file </td></tr>

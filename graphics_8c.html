@@ -309,7 +309,7 @@ Functions</h2></td></tr>
 
 <p>Grab current keypresses and delay execution to match clockspeed. </p>
 <p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
-<p>This function should return 0 on success and a negative value on failure. </p>
+<p>This function should return -2 if quitting, -1 if no key was released, or the key index of the first key released since the last call. </p>
 
 </div>
 </div>
