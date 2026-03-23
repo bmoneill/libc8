@@ -16,7 +16,7 @@ An example [assembler](docs/chip8as.md), [disassembler](docs/chip8dis.md), and
 
 ### Linux
 
-```properties
+```bash
 cmake -S . -B build
 cmake --build build
 sudo cmake --install build
@@ -45,7 +45,7 @@ Testing is done using
 [ctest](https://cmake.org/cmake/help/latest/manual/ctest.1.html) and
 [Unity](https://github.com/ThrowTheSwitch/Unity).
 
-```properties
+```bash
 git submodule update
 cmake -S . -B build -DTEST=ON -DSDL2=OFF
 cmake --build build

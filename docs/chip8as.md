@@ -4,7 +4,7 @@ This is an assembler for the CHIP-8 and SCHIP, utilizing libc8.
 
 ## Usage
 
-```properties
+```bash
 chip8as [-vV] [-o outputfile] src
 ```
 
