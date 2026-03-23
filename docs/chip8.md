@@ -5,7 +5,7 @@ integrated debug mode, utilizing libc8 with SDL2.
 
 ## Usage
 
-```shell
+```bash
 chip8 [-dsvV] [-c tickspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file
 ```
 
