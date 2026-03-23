@@ -54,15 +54,21 @@ of these terms in detail:
 | NNN  | The last 3 nibbles (`0x0FFF`) in an instruction |
 | I    | The explicit value of the `I` register          |
 | [I]  | A pointer to memory starting at address `I`     |
+| K    | Register number to store next keypress          |
+| F    | Address where font data begins                  |
+| HF   | Address where high-resolution font data begins  |
+| R[X] | HP-48 flag register                             |
 
-You should also take a look at the quirks section in the [interpreter docs](docs/chip8.md)
-for quirk identifiers and what they mean.
+> [!IMPORTANT]
+> You should also take a look at the quirks section in the [interpreter docs](docs/chip8.md)
+> for quirk identifiers and what they mean.
 
 ## Features
 
 > [!TIP]
 > In-depth overviews of the [interpreter](docs/chip8.md), [assembler](docs/chip8as.md),
-> and [disassembler](docs/chip8dis.md) are available in [docs/](docs/)
+> and [disassembler](docs/chip8dis.md) are available in [docs/](docs/). Library
+> documentation is available on the [GitHub Pages site](https://bmoneill.github.io/libc8).
 
 ### Interpreter
 

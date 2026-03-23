@@ -1,6 +1,10 @@
-# chip8dis (CHIP-8 Disassembler)
+<h1 align="center">
+    <b>chip8dis</b>
+</h1>
 
-This is a disassembler for the CHIP-8 and SCHIP, utilizing libc8.
+<h4 align="center">
+    This is a disassembler for the CHIP-8 and SCHIP, utilizing libc8.
+</h4>
 
 ## Usage
 
