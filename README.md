@@ -66,7 +66,7 @@ architectures).
 > You should also take a look at the quirks section in the [interpreter docs](docs/chip8.md)
 > for quirk identifiers and what they mean.
 
-Throughout the code and documentation, jargon is used to refer to specific
+Throughout the code and documentation, shorthand terms are used to refer to specific
 components and attributes related to CHIP-8. The table below describes some
 of these terms in detail:
 
