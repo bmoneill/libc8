@@ -37,8 +37,8 @@ void c8_deinit(C8* c8) {
  * @brief Initialize and return a `C8` with the given flags
  *
  * This function allocates memory for a new `C8` with all values set to 0
- * or their default values, adds the font to memory, inititializes the graphics
- * system, and returns a pointer to the `C8`.
+ * or their default values, adds the font to memory, and returns a pointer
+ * to the `C8`.
  *
  * @param path path to ROM file
  * @param flags flags
@@ -50,9 +50,9 @@ C8* c8_init(const char* path, int flags) {
 
     C8* c8           = (C8*) calloc(1, sizeof(C8));
     c8->flags        = flags;
-    c8->cs           = C8_CLOCK_SPEED;
+    c8->tickSpeed    = C8_TICK_SPEED;
     c8->colors[1]    = 0xFFFFFF;
-    c8->display.mode = C8_DISPLAYMODE_HIGH;
+    c8->display.mode = C8_DISPLAYMODE_LOW;
     c8->mode         = C8_MODE_CHIP8;
 
     if (path != NULL && c8_load_rom(c8, path) != 0) {
@@ -61,11 +61,6 @@ C8* c8_init(const char* path, int flags) {
     }
 
     c8_set_fonts(c8, 0, 0);
-
-    if (c8_init_graphics()) {
-        free(c8);
-        return NULL;
-    }
 
     return c8;
 }
@@ -171,6 +166,9 @@ int c8_load_quirks(C8* c8, const char* s) {
         case 'j':
             c8->flags ^= C8_FLAG_QUIRK_JUMPING;
             break;
+        case 'r':
+            c8->flags ^= C8_FLAG_QUIRK_VBLANK;
+            break;
         default:
             C8_EXCEPTION(C8_INVALID_PARAMETER_EXCEPTION, "Invalid quirk: %c", s[i]);
             return C8_INVALID_PARAMETER_EXCEPTION;
@@ -224,10 +222,9 @@ int c8_load_rom(C8* c8, const char* addr) {
  * @return 0 if success, exception code on failure
  */
 int c8_simulate(C8* c8) {
-    int    debugRet;
-    int    ret;
-    int    step        = 1;
-    double accumulator = 0.0;
+    int debugRet;
+    int ret;
+    int step = 1;
 
     srand(time(NULL));
 
@@ -238,11 +235,26 @@ int c8_simulate(C8* c8) {
         return ret;
     }
 
-    const double refresh_rate = 1.0 / 60.0;
-    double       last         = c8_get_time();
-    double       acc          = 0.0;
+    const double refresh_rate          = 1.0 / 60.0;
+    double       last                  = c8_get_time();
+    double       acc                   = 0.0;
+    int          instructions_executed = 0;
+    int          new_frame             = 0;
     while (c8->running) {
-        usleep(1000000 / c8->cs);
+        double current = c8_get_time();
+        acc += current - last;
+        last = current;
+
+        if (acc >= refresh_rate) {
+            new_frame = 1;
+            acc -= refresh_rate;
+        }
+
+        if (c8->waitingForDraw && !new_frame) {
+            continue;
+        }
+
+        usleep(1000000 / c8->tickSpeed);
 
         int t = c8_tick(c8->key);
 
@@ -250,6 +262,28 @@ int c8_simulate(C8* c8) {
             /* Quit */
             c8->running = 0;
             continue;
+        }
+
+        if (new_frame) {
+            /* Update timers and draw */
+            if (c8->dt > 0) {
+                c8->dt--;
+            }
+
+            if (c8->st > 0) {
+                c8->st--;
+
+                if (c8->st == 0) {
+                    c8_sound_stop();
+                }
+            }
+
+            if (c8_render(&c8->display, c8->colors) < 0) {
+                return C8_GRAPHICS_EXCEPTION;
+            }
+
+            c8->waitingForDraw = 0;
+            new_frame          = 0;
         }
 
         if (c8->key[16]) {
@@ -279,32 +313,7 @@ int c8_simulate(C8* c8) {
             }
         }
 
-        /* Get current time */
-        double current = c8_get_time();
-        acc += current - last;
-        last = current;
-
-        if (acc >= refresh_rate) {
-            /* Update timers and draw */
-            if (c8->dt > 0) {
-                c8->dt--;
-            }
-
-            if (c8->st > 0) {
-                c8->st--;
-            }
-
-            if (c8->st == 0) {
-                c8_sound_stop();
-            }
-
-            if (c8_render(&c8->display, c8->colors) < 0) {
-                return C8_GRAPHICS_EXCEPTION;
-            }
-            acc -= refresh_rate;
-        }
-
-        if (t >= 0 && c8->waitingForKey) {
+        if (c8->waitingForKey && t >= 0) {
             /* Waiting for key and a key was released */
             c8->V[c8->VK]     = t;
             c8->waitingForKey = 0;
@@ -344,10 +353,10 @@ int c8_validate(const C8* c8) {
         return C8_INVALID_STATE_EXCEPTION;
     }
 
-    if (c8->cs <= 0) {
+    if (c8->tickSpeed <= 0) {
         C8_EXCEPTION(C8_INVALID_STATE_EXCEPTION,
                      "Clock speed cannot be less than or equal to zero: cs=%d",
-                     c8->cs)
+                     c8->tickSpeed)
         return C8_INVALID_STATE_EXCEPTION;
     }
 

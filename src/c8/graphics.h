@@ -43,16 +43,6 @@
 #define C8_DEFAULT_WINDOW_HEIGHT 400
 
 /**
- * @brief Window scale factor in x direction.
- */
-#define C8_WINDOW_SCALE_X (C8_DEFAULT_WINDOW_WIDTH / C8_LOW_DISPLAY_WIDTH)
-
-/**
- * @brief Window scale factor in y direction.
- */
-#define C8_WINDOW_SCALE_Y (C8_DEFAULT_WINDOW_HEIGHT / C8_LOW_DISPLAY_HEIGHT)
-
-/**
  * @brief Low resolution display mode.
  */
 #define C8_DISPLAYMODE_LOW 0

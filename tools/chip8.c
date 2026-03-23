@@ -28,7 +28,7 @@ int         main(int argc, char* argv[]) {
     while ((opt = getopt(argc, argv, "c:df:p:P:q:svV")) != -1) {
         switch (opt) {
         case 'c':
-            c8->cs = atoi(optarg);
+            c8->tickSpeed = atoi(optarg);
             break;
         case 'd':
             c8->flags |= C8_FLAG_DEBUG;
@@ -67,16 +67,23 @@ int         main(int argc, char* argv[]) {
     }
 
     if (!userDefinedQuirks && c8->mode == C8_MODE_CHIP8) {
-        c8_load_quirks(c8, "vmc");
+        c8_load_quirks(c8, "vmcr");
     } else if (!userDefinedQuirks && c8->mode == C8_MODE_SCHIP) {
-        c8_load_quirks(c8, "csj");
+        c8_load_quirks(c8, "csjr");
+    }
+
+    if (c8_init_graphics()) {
+        free(c8);
+        return EXIT_FAILURE;
     }
 
     if (fontstr && c8_set_fonts_s(c8, fontstr) != 0) {
+        free(c8);
         return EXIT_FAILURE;
     }
 
     if (c8_load_rom(c8, argv[optind]) != 0) {
+        free(c8);
         return EXIT_FAILURE;
     }
 

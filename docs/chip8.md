@@ -16,7 +16,7 @@ chip8 [-dsvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] f
 - `-p` loads a color palette from a file containing two newline-separated 24-bit
   hex codes.
 - `-P` sets the color palette from a string containing two comma-separated 24-bit
-  hex codes.
+  hex codes (prefixed by `0x` or `x`).
 - `-q` sets the quirks to enable from string with non-separated quirk identifiers
 - `-s` enables SCHIP mode.
 - `-v` enables verbose mode. This will print each instruction that is executed.
@@ -58,10 +58,11 @@ The following quirks are available:
 - `j`: For `JP V0, nnn`: Jump to `nnn + V[(nnn>>8)&0xF]` instead.
 - `m`: After `LD [I], Vx` and `LD Vx, [I]`: Set `I` to address
   `I + x + 1`.
+- `r`: `DRW` halts execution until the next frame.
 - `s`: Before `SHL Vx, Vy` and `SHR Vx, Vy`: Shift `Vx` in place, ignore `Vy`.
 - `v`: After `AND`, `OR`, and `XOR`: Clear `VF`.
 
-`cmv` quirks are enabled in CHIP-8 mode by default. `cjs` quirks are enabled in
+`cmrv` quirks are enabled in CHIP-8 mode by default. `cjrs` quirks are enabled in
 SCHIP mode by default.
 
 ## Debug mode

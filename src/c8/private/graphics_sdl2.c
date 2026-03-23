@@ -157,38 +157,9 @@ int c8_init_graphics(void) {
  * @return 0 on success, non-zero on failure
  */
 int c8_render(C8_Display* display, int* colors) {
-    SDL_Rect pix = {
-        .x = 0,
-        .y = 0,
-        .w = C8_WINDOW_SCALE_X,
-        .h = C8_WINDOW_SCALE_Y,
-    };
-    SDL_Rect winRect = {
-        .x = 0,
-        .y = 0,
-        .w = C8_LOW_DISPLAY_WIDTH,
-        .h = C8_LOW_DISPLAY_HEIGHT,
-    };
-
     int result = SDL_RenderClear(c8_renderer);
     if (result == -1) {
         C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_RenderClear failed: %s", SDL_GetError());
-        return C8_GRAPHICS_EXCEPTION;
-    }
-
-    result = SDL_SetRenderDrawColor(c8_renderer,
-                                    C8_RGB_R(colors[0]),
-                                    C8_RGB_G(colors[0]),
-                                    C8_RGB_B(colors[0]),
-                                    SDL_ALPHA_OPAQUE);
-    if (result == -1) {
-        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_SetRenderDrawColor failed: %s", SDL_GetError());
-        return C8_GRAPHICS_EXCEPTION;
-    }
-
-    result = SDL_RenderFillRect(c8_renderer, &winRect);
-    if (result == -1) {
-        C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "SDL_RenderFillRect failed: %s", SDL_GetError());
         return C8_GRAPHICS_EXCEPTION;
     }
 
@@ -202,19 +173,25 @@ int c8_render(C8_Display* display, int* colors) {
         return C8_GRAPHICS_EXCEPTION;
     }
 
-    int width
+    // Width and height of the graphics buffer to draw (not scaled to window)
+    int display_width
         = (display->mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_WIDTH : C8_HIGH_DISPLAY_WIDTH;
-    int height
+    int display_height
         = (display->mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_HEIGHT : C8_HIGH_DISPLAY_HEIGHT;
 
-    int scale_x = C8_DEFAULT_WINDOW_WIDTH / width;
-    int scale_y = C8_DEFAULT_WINDOW_HEIGHT / height;
+    int window_width, window_height;
+    SDL_GetWindowSize(c8_window, &window_width, &window_height);
 
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
+    int      scale_x = window_width / display_width;
+    int      scale_y = window_height / display_height;
+
+    SDL_Rect pix     = { 0, 0, scale_x, scale_y };
+
+    for (int i = 0; i < display_width; i++) {
+        for (int j = 0; j < display_height; j++) {
             if (*c8_get_pixel(display, i, j)) {
-                pix.x  = (i % width) * scale_x;
-                pix.y  = (j % height) * scale_y;
+                pix.x  = (i % display_width) * scale_x;
+                pix.y  = (j % display_height) * scale_y;
                 result = SDL_RenderFillRect(c8_renderer, &pix);
                 if (result == -1) {
                     C8_EXCEPTION(C8_GRAPHICS_EXCEPTION,

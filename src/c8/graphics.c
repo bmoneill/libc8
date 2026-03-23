@@ -86,7 +86,8 @@ __attribute__((weak)) int c8_render(C8_Display* display, int* colors) {
  * default. This can also be overridden by the user when compiling without
  * SDL2 support.
  *
- * This function should return 0 on success and a negative value on failure.
+ * This function should return -2 if quitting, -1 if no key was released, or
+ * the key index of the first key released since the last call.
  */
 __attribute__((weak)) int c8_tick(int* key) {
     C8_EXCEPTION(C8_GRAPHICS_EXCEPTION, "%s not implemented.", __func__);

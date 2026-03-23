@@ -22,14 +22,14 @@
 #define C8_SCHIP_EXCLUSIVE(c)                                                                      \
     if (c->mode == C8_MODE_CHIP8) {                                                                \
         fprintf(stderr, "SCHIP instruction detected in CHIP-8 mode.\n");                           \
-        return 2;                                                                                  \
+        return C8_INVALID_STATE_EXCEPTION;                                                         \
     }
 
 #define C8_XOCHIP_EXCLUSIVE(c)                                                                     \
     if (c->mode != C8_MODE_XOCHIP) {                                                               \
         const char* modeStr = (c->mode == C8_MODE_CHIP8) ? "CHIP-8" : "SCHIP";                     \
         fprintf(stderr, "XOCHIP instruction detected in %s mode.\n", modeStr);                     \
-        return 2;                                                                                  \
+        return C8_INVALID_STATE_EXCEPTION;                                                         \
     }
 
 #define C8_QUIRK_VF_RESET(c)                                                                       \
@@ -48,12 +48,13 @@
     }
 
 /* instruction groups */
-C8_STATIC int c8_base_instruction(C8*, uint16_t, uint8_t);
-C8_STATIC int c8_bitwise_instruction(C8*, uint16_t, uint8_t, uint8_t, uint8_t);
-C8_STATIC int c8_key_instruction(C8*, uint16_t, uint8_t, uint8_t);
-C8_STATIC int c8_misc_instruction(C8*, uint16_t, uint8_t, uint8_t);
+C8_STATIC int           c8_base_instruction(C8*, uint16_t, uint8_t);
+C8_STATIC int           c8_bitwise_instruction(C8*, uint16_t, uint8_t, uint8_t, uint8_t);
+C8_STATIC int           c8_key_instruction(C8*, uint16_t, uint8_t, uint8_t);
+C8_STATIC int           c8_misc_instruction(C8*, uint16_t, uint8_t, uint8_t);
 
-C8_STATIC int c8_i_scd_b(C8*, uint8_t);
+C8_STATIC C8_INLINE int c8_i_scd_b(C8*, uint8_t);
+C8_STATIC C8_INLINE int c8_i_scu_b(C8*, uint8_t);
 
 /* base (00kk) instructions */
 C8_STATIC C8_INLINE int c8_i_cls(C8*);
@@ -69,6 +70,8 @@ C8_STATIC C8_INLINE int c8_i_call_nnn(C8*, uint16_t);
 C8_STATIC C8_INLINE int c8_i_se_vx_kk(C8*, uint8_t, uint8_t);
 C8_STATIC C8_INLINE int c8_i_sne_vx_kk(C8*, uint8_t, uint8_t);
 C8_STATIC C8_INLINE int c8_i_se_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC C8_INLINE int c8_i_ld_i_vx_vy(C8*, uint8_t, uint8_t);
+C8_STATIC C8_INLINE int c8_i_ld_vx_vy_i(C8*, uint8_t, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_vx_kk(C8*, uint8_t, uint8_t);
 C8_STATIC C8_INLINE int c8_i_add_vx_kk(C8*, uint8_t, uint8_t);
 
@@ -94,6 +97,9 @@ C8_STATIC C8_INLINE int c8_i_skp_vx(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_sknp_vx(C8*, uint8_t);
 
 /* misc (Fxkk) instructions */
+C8_STATIC C8_INLINE int c8_i_ld_i_word(C8*);
+C8_STATIC C8_INLINE int c8_i_pln_x(C8*, uint8_t);
+C8_STATIC C8_INLINE int c8_i_snd(C8*);
 C8_STATIC C8_INLINE int c8_i_ld_vx_dt(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_vx_k(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_dt_vx(C8*, uint8_t);
@@ -102,6 +108,7 @@ C8_STATIC C8_INLINE int c8_i_add_i_vx(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_f_vx(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_hf_vx(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_b_vx(C8*, uint8_t);
+C8_STATIC C8_INLINE int c8_i_pit_x(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_ip_vx(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_vx_ip(C8*, uint8_t);
 C8_STATIC C8_INLINE int c8_i_ld_r_vx(C8*, uint8_t);
@@ -129,7 +136,7 @@ int c8_parse_instruction(C8* c8) {
 
     switch (a) {
     case 0x0:
-        return y == 0xC ? c8_i_scd_b(c8, b) : c8_base_instruction(c8, in, kk);
+        return c8_base_instruction(c8, in, kk);
     case 0x1:
         return c8_i_jp_nnn(c8, nnn);
     case 0x2:
@@ -170,6 +177,13 @@ C8_STATIC C8_INLINE int c8_base_instruction(C8* c8, uint16_t in, uint8_t kk) {
     if (in & 0x0F00) {
         C8_EXCEPTION(C8_SYNTAX_ERROR_EXCEPTION, "Invalid instruction: %04x", in);
         return C8_SYNTAX_ERROR_EXCEPTION;
+    }
+
+    if (C8_Y(in) == 0xC) {
+        return c8_i_scd_b(c8, kk);
+    }
+    if (C8_Y(in) == 0xD) {
+        return c8_i_scu_b(c8, kk);
     }
 
     switch (kk) {
@@ -261,7 +275,15 @@ C8_STATIC C8_INLINE int c8_key_instruction(C8* c8, uint16_t in, uint8_t x, uint8
  * @return The result of the miscellaneous instruction.
  */
 C8_STATIC C8_INLINE int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint8_t kk) {
+    if (in == 0xF000) {
+        return c8_i_ld_i_word(c8);
+    } else if (in == 0xF002) {
+        return c8_i_snd(c8);
+    }
+
     switch (kk) {
+    case 0x01:
+        return c8_i_pln_x(c8, x);
     case 0x07:
         return c8_i_ld_vx_dt(c8, x);
     case 0x0A:
@@ -278,6 +300,8 @@ C8_STATIC C8_INLINE int c8_misc_instruction(C8* c8, uint16_t in, uint8_t x, uint
         return c8_i_ld_hf_vx(c8, x);
     case 0x33:
         return c8_i_ld_b_vx(c8, x);
+    case 0x3A:
+        return c8_i_pit_x(c8, x);
     case 0x55:
         return c8_i_ld_ip_vx(c8, x);
     case 0x65:
@@ -315,6 +339,32 @@ C8_STATIC C8_INLINE int c8_i_scd_b(C8* c8, uint8_t b) {
 
     memcpy(c8->display.p + (width * b), c8->display.p, width * height - (width * b));
     memset(c8->display.p, 0, width * b);
+    return 2;
+}
+
+/**
+ * @brief `SCU b` instruction (`00Db`)
+ *
+ * This instruction scrolls the display up by `b` pixels.
+ *
+ * @note This is a XO-CHIP instruction. `c8` must be in XO-CHIP mode to
+ * execute this instruction.
+ *
+ * @param c8 the `C8` to execute the instruction from
+ * @param b the number of pixels to scroll up
+ *
+ * @return 2, the number of bytes to increase the program counter by.
+ */
+C8_STATIC C8_INLINE int c8_i_scu_b(C8* c8, uint8_t b) {
+    C8_SCHIP_EXCLUSIVE(c8);
+
+    int width
+        = (c8->display.mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_WIDTH : C8_HIGH_DISPLAY_WIDTH;
+    int height
+        = (c8->display.mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_HEIGHT : C8_HIGH_DISPLAY_HEIGHT;
+
+    memcpy(c8->display.p, c8->display.p + (width * b), width * height - (width * b));
+    memset(c8->display.p + (width * (height - b)), 0, width * b);
     return 2;
 }
 
@@ -561,6 +611,54 @@ C8_STATIC C8_INLINE int c8_i_sne_vx_kk(C8* c8, uint8_t x, uint8_t kk) {
 C8_STATIC C8_INLINE int c8_i_se_vx_vy(C8* c8, uint8_t x, uint8_t y) {
     if (c8->V[x] == c8->V[y]) {
         c8->pc += 2;
+    }
+    return 2;
+}
+
+/**
+ * @brief `LD [I], Vx, Vy` instruction (`5xy2`)
+ *
+ * This instruction saves the values in registers Vx-Vy to memory starting at the
+ * address I.
+
+ * @note This is a XO-CHIP instruction. `c8` must be in XO-CHIP mode to execute
+ * this instruction.
+ *
+ * @param c8 the `C8` to execute the instruction from
+ * @param x the index of the register Vx (0-15)
+ * @param y the index of the register Vy (0-15)
+ *
+ * @return 2, the number of bytes to increase the program counter by.
+ */
+C8_STATIC C8_INLINE int c8_i_ld_i_vx_vy(C8* c8, uint8_t x, uint8_t y) {
+    C8_XOCHIP_EXCLUSIVE(c8);
+
+    for (int i = x; i <= y; i++) {
+        c8->mem[c8->I + x] = c8->V[i];
+    }
+    return 2;
+}
+
+/**
+ * @brief `LD Vx, Vy, [I]` instruction (`5xy3`)
+ *
+ * This instruction loads values from memory to the registers Vx-Vy starting at the
+ * address I.
+
+ * @note This is a XO-CHIP instruction. `c8` must be in XO-CHIP mode to execute
+ * this instruction.
+ *
+ * @param c8 the `C8` to execute the instruction from
+ * @param x the index of the register Vx (0-15)
+ * @param y the index of the register Vy (0-15)
+ *
+ * @return 2, the number of bytes to increase the program counter by.
+ */
+C8_STATIC C8_INLINE int c8_i_ld_vx_vy_i(C8* c8, uint8_t x, uint8_t y) {
+    C8_XOCHIP_EXCLUSIVE(c8);
+
+    for (int i = x; i <= y; i++) {
+        c8->V[i] = c8->mem[c8->I + x];
     }
     return 2;
 }
@@ -927,6 +1025,10 @@ C8_STATIC C8_INLINE int c8_i_drw_vx_vy_b(C8* c8, uint8_t x, uint8_t y, uint8_t b
     }
 
     c8->V[0xF] = vf;
+
+    if (c8->flags & C8_FLAG_QUIRK_VBLANK) {
+        c8->waitingForDraw = 1;
+    }
     return 2;
 }
 
@@ -963,6 +1065,61 @@ C8_STATIC C8_INLINE int c8_i_sknp_vx(C8* c8, uint8_t x) {
     if (!c8->key[c8->V[x] & 0xF]) {
         c8->pc += 2;
     }
+    return 2;
+}
+
+/**
+ * @brief `LD I, NNNN` instruction (`F000` `NNNN`)
+ *
+ * This instruction loads the value of the address register I with a 16-bit
+ * value defined in the next two bytes.
+ *
+ * @note This is a XO-CHIP instruction. `c8` must be in XO-CHIP mode to execute
+ * this instruction.
+ *
+ * @param c8 the `C8` to execute the instruction from
+ *
+ * @return 4, the number of bytes to increase the program counter by.
+ */
+C8_STATIC C8_INLINE int c8_i_ld_i_word(C8* c8) {
+    C8_XOCHIP_EXCLUSIVE(c8);
+    c8->I = (c8->mem[c8->pc + 2] << 8) | c8->mem[c8->pc + 3];
+    return 4;
+}
+
+/**
+ * @brief `PLN x` instruction (`Fx01`)
+
+ * This instruction selects zero or more drawing planes by bitmask (0 <= n <= 3).
+ *
+ * @param c8 the `C8` to execute the instruction from
+ * @param x the bitmask to apply (0-3)
+ *
+ * @note This is a XO-CHIP instruction. `c8` must be in XO-CHIP mode to execute
+ * this instruction.
+ *
+ * @return 2, the number of bytes to increase the program counter by.
+ */
+C8_STATIC C8_INLINE int c8_i_pln_x(C8* c8, uint8_t x) {
+    // TODO implement
+    return 2;
+}
+
+/**
+ * @brief `SND` instruction (`F002`)
+ *
+ * This instruction stores 16 bits starting at `[I]` into the audio pattern
+ * buffer.
+ *
+ * @param c8 the `C8` to execute the instruction from
+ *
+ * @note This is a XO-CHIP instruction. `c8` must be in XO-CHIP mode to execute
+ * this instruction.
+ *
+ * @return 2, the number of bytes to increase the program counter by.
+ */
+C8_STATIC C8_INLINE int c8_i_snd(C8* c8) {
+    // TODO implement
     return 2;
 }
 
@@ -1105,6 +1262,24 @@ C8_STATIC C8_INLINE int c8_i_ld_b_vx(C8* c8, uint8_t x) {
     c8->mem[c8->I]     = (c8->V[x] / 100) % 10; // hundreds
     c8->mem[c8->I + 1] = (c8->V[x] / 10) % 10; // tens
     c8->mem[c8->I + 2] = c8->V[x] % 10; // ones
+    return 2;
+}
+
+/**
+ * @brief `PIT` instruction (`Fx3A`)
+ *
+ * This instruction sets the audio pattern playback rate to `4000*2^((Vx-64)/48)Hz`.
+ *
+ * @param c8 the `C8` to execute the instruction from
+ * @param x the index of the register Vx (0-15)
+
+ * @note This is a XO-CHIP instruction. `c8` must be in XO-CHIP mode to execute
+ * this instruction.
+ *
+ * @return 2, the number of bytes to increase the program counter by.
+ */
+C8_STATIC C8_INLINE int c8_i_pit_x(C8* c8, uint8_t x) {
+    // TODO implement
     return 2;
 }
 

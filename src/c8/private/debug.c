@@ -69,7 +69,7 @@ C8_DebugState c8_debug_repl(C8* c8) {
     char       buf[64];
     C8_Command cmd;
     int        c;
-    int        i;
+    int        i = 0;
 
     printf("debug > ");
     while ((c = getchar()) != EOF) {
