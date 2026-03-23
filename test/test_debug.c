@@ -48,7 +48,7 @@ void                 setUp(void) {
     memset(&c8, 0, sizeof(C8));
     c8.pc = 0x200;
     c8.cs = 1;
-    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    memset(stdio_buffer, 0, sizeof(stdio_buffer));
 }
 void tearDown(void) {}
 
@@ -218,21 +218,21 @@ void test_c8_parse_arg_WhereCommandIsSet_WhereArgIsEmpty(void) {
     RESTORE_STDOUT;
 
     TEST_ASSERT_EQUAL_INT(0, result);
-    TEST_ASSERT_EQUAL_STRING("Not enough arguments.\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("Not enough arguments.\n", stdio_buffer);
 }
 
 void test_c8_print_help(void) {
     REDIRECT_STDOUT;
     c8_print_help();
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING(C8_DEBUG_HELP_STRING, stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING(C8_DEBUG_HELP_STRING, stdio_buffer);
 }
 
 void test_c8_print_quirks(void) {
     REDIRECT_STDOUT;
     c8_print_quirks(C8_FLAG_QUIRK_JUMPING | C8_FLAG_QUIRK_SHIFTING);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("Quirks: js\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("Quirks: js\n", stdio_buffer);
 }
 
 void test_c8_print_r_registers(void) {
@@ -246,7 +246,7 @@ void test_c8_print_r_registers(void) {
     c8_print_r_registers(&c8);
     RESTORE_STDOUT;
 
-    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING(buf, stdio_buffer);
 }
 
 void test_c8_print_v_registers(void) {
@@ -260,7 +260,7 @@ void test_c8_print_v_registers(void) {
     c8_print_v_registers(&c8);
     RESTORE_STDOUT;
 
-    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING(buf, stdio_buffer);
 }
 
 void test_c8_print_stack(void) {
@@ -279,7 +279,7 @@ void test_c8_print_stack(void) {
     c8_print_stack(&c8);
     RESTORE_STDOUT;
 
-    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING(buf, stdio_buffer);
 }
 
 void test_c8_print_value_WhereValueIsNone(void) {
@@ -289,7 +289,7 @@ void test_c8_print_value_WhereValueIsNone(void) {
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
 
-    TEST_ASSERT_GREATER_THAN_INT(0, strlen(stdout_buffer));
+    TEST_ASSERT_GREATER_THAN_INT(0, strlen(stdio_buffer));
 }
 
 void test_c8_print_value_WhereValueIsSP(void) {
@@ -299,7 +299,7 @@ void test_c8_print_value_WhereValueIsSP(void) {
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
 
-    TEST_ASSERT_EQUAL_STRING("SP: 00\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("SP: 00\n", stdio_buffer);
 }
 
 void test_c8_print_value_WhereValueIsV(void) {
@@ -312,22 +312,22 @@ void test_c8_print_value_WhereValueIsV(void) {
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
 
-    memcpy(buf, stdout_buffer, strlen(stdout_buffer));
+    memcpy(buf, stdio_buffer, strlen(stdio_buffer));
 
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
 
-    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING(buf, stdio_buffer);
 
     // Print single V register
-    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    memset(stdio_buffer, 0, sizeof(stdio_buffer));
     cmd.arg.value.i = 0;
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
 
-    TEST_ASSERT_EQUAL_STRING("V0: 00\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("V0: 00\n", stdio_buffer);
 }
 
 void test_c8_print_value_WhereValueIsR(void) {
@@ -338,13 +338,13 @@ void test_c8_print_value_WhereValueIsR(void) {
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
 
-    memcpy(buf, stdout_buffer, strlen(stdout_buffer));
+    memcpy(buf, stdio_buffer, strlen(stdio_buffer));
 
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
 
-    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING(buf, stdio_buffer);
 }
 
 void test_c8_print_value_WhereValueIsInternalRegister(void) {
@@ -353,39 +353,39 @@ void test_c8_print_value_WhereValueIsInternalRegister(void) {
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("PC: $200\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("PC: $200\n", stdio_buffer);
 
     // DT
-    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    memset(stdio_buffer, 0, sizeof(stdio_buffer));
     cmd.arg.type = C8_ARG_DT;
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("DT: 00\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("DT: 00\n", stdio_buffer);
 
     // ST
-    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    memset(stdio_buffer, 0, sizeof(stdio_buffer));
     cmd.arg.type = C8_ARG_ST;
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("ST: 00\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("ST: 00\n", stdio_buffer);
 
     // I
-    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    memset(stdio_buffer, 0, sizeof(stdio_buffer));
     cmd.arg.type = C8_ARG_I;
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("I:  000\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("I:  000\n", stdio_buffer);
 
     // VK
-    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    memset(stdio_buffer, 0, sizeof(stdio_buffer));
     cmd.arg.type = C8_ARG_VK;
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("VK: V0\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("VK: V0\n", stdio_buffer);
 }
 
 void test_c8_print_value_WhereValueIsColor(void) {
@@ -393,14 +393,14 @@ void test_c8_print_value_WhereValueIsColor(void) {
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("BG: 000000\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("BG: 000000\n", stdio_buffer);
 
-    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    memset(stdio_buffer, 0, sizeof(stdio_buffer));
     cmd.arg.type = C8_ARG_FG;
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("FG: 000000\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("FG: 000000\n", stdio_buffer);
 }
 
 void test_c8_print_value_WhereValueIsFont(void) {
@@ -408,14 +408,14 @@ void test_c8_print_value_WhereValueIsFont(void) {
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("BFONT: octo\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("BFONT: octo\n", stdio_buffer);
 
-    memset(stdout_buffer, 0, sizeof(stdout_buffer));
+    memset(stdio_buffer, 0, sizeof(stdio_buffer));
     cmd.arg.type = C8_ARG_SFONT;
     REDIRECT_STDOUT;
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("SFONT: octo\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("SFONT: octo\n", stdio_buffer);
 }
 
 void test_c8_print_value_WhereValueIsQuirks(void) {
@@ -426,14 +426,14 @@ void test_c8_print_value_WhereValueIsQuirks(void) {
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
 
-    memcpy(buf, stdout_buffer, strlen(stdout_buffer));
-    buf[strlen(stdout_buffer)] = '\0';
+    memcpy(buf, stdio_buffer, strlen(stdio_buffer));
+    buf[strlen(stdio_buffer)] = '\0';
 
     REDIRECT_STDOUT;
     c8_print_quirks(c8.flags);
     RESTORE_STDOUT;
 
-    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING(buf, stdio_buffer);
 }
 
 void test_c8_print_value_WhereValueIsStack(void) {
@@ -443,14 +443,14 @@ void test_c8_print_value_WhereValueIsStack(void) {
     c8_print_value(&c8, &cmd);
     RESTORE_STDOUT;
 
-    memcpy(buf, stdout_buffer, strlen(stdout_buffer));
-    buf[strlen(stdout_buffer)] = '\0';
+    memcpy(buf, stdio_buffer, strlen(stdio_buffer));
+    buf[strlen(stdio_buffer)] = '\0';
 
     REDIRECT_STDOUT;
     c8_print_stack(&c8);
     RESTORE_STDOUT;
 
-    TEST_ASSERT_EQUAL_STRING(buf, stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING(buf, stdio_buffer);
 }
 
 void test_c8_print_value_WhereValueIsAddr(void) {
@@ -514,7 +514,7 @@ void test_c8_run_command_WhereCommandIsHelp(void) {
     int result = c8_run_command(&c8, &cmd);
     RESTORE_STDOUT;
     TEST_ASSERT_EQUAL_INT(0, result);
-    TEST_ASSERT_EQUAL_STRING(C8_DEBUG_HELP_STRING, stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING(C8_DEBUG_HELP_STRING, stdio_buffer);
 }
 
 void test_c8_run_command_WhereCommandIsLoad(void) {
@@ -526,8 +526,8 @@ void test_c8_run_command_WhereCommandIsLoad(void) {
     int result = c8_run_command(&c8, &cmd);
     RESTORE_STDOUT;
     TEST_ASSERT_EQUAL_INT(0, result);
-    printf("%s\n", stdout_buffer);
-    TEST_ASSERT_EQUAL_INT(0, strlen(stdout_buffer));
+    printf("%s\n", stdio_buffer);
+    TEST_ASSERT_EQUAL_INT(0, strlen(stdio_buffer));
 }
 
 void test_c8_run_command_WhereCommandIsLoad_WhereFileIsInvalid(void) {
@@ -539,7 +539,7 @@ void test_c8_run_command_WhereCommandIsLoad_WhereFileIsInvalid(void) {
     int result = c8_run_command(&c8, &cmd);
     RESTORE_STDOUT;
     TEST_ASSERT_EQUAL_INT(0, result);
-    TEST_ASSERT_EQUAL_STRING("Failed to load state from foo.bin\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("Failed to load state from foo.bin\n", stdio_buffer);
 }
 
 void test_c8_run_command_WhereCommandIsSave(void) {
@@ -551,8 +551,8 @@ void test_c8_run_command_WhereCommandIsSave(void) {
     int result = c8_run_command(&c8, &cmd);
     RESTORE_STDOUT;
     TEST_ASSERT_EQUAL_INT(0, result);
-    printf("%s\n", stdout_buffer);
-    TEST_ASSERT_EQUAL_INT(0, strlen(stdout_buffer));
+    printf("%s\n", stdio_buffer);
+    TEST_ASSERT_EQUAL_INT(0, strlen(stdio_buffer));
 }
 
 void test_c8_run_command_WhereCommandIsSave_WhereFileIsInvalid(void) {
@@ -564,7 +564,7 @@ void test_c8_run_command_WhereCommandIsSave_WhereFileIsInvalid(void) {
     int result = c8_run_command(&c8, &cmd);
     RESTORE_STDOUT;
     TEST_ASSERT_EQUAL_INT(0, result);
-    TEST_ASSERT_EQUAL_STRING("Invalid file\nFailed to save state to /foo.bin\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("Invalid file\nFailed to save state to /foo.bin\n", stdio_buffer);
 }
 
 void test_c8_run_command_WhereCommandIsLoadFlags(void) {
@@ -576,14 +576,14 @@ void test_c8_run_command_WhereCommandIsLoadFlags(void) {
     int result = c8_run_command(&c8, &cmd);
     RESTORE_STDOUT;
     TEST_ASSERT_EQUAL_INT(0, result);
-    TEST_ASSERT_EQUAL_INT(0, strlen(stdout_buffer));
+    TEST_ASSERT_EQUAL_INT(0, strlen(stdio_buffer));
 
     cmd.arg.value.s = "empty.txt";
     REDIRECT_STDOUT;
     result = c8_run_command(&c8, &cmd);
     RESTORE_STDOUT;
     TEST_ASSERT_EQUAL_INT(0, result);
-    TEST_ASSERT_EQUAL_STRING("Failed to load flags from empty.txt\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("Failed to load flags from empty.txt\n", stdio_buffer);
 }
 
 void test_c8_run_command_WhereCommandIsSaveFlags(void) {
@@ -595,8 +595,8 @@ void test_c8_run_command_WhereCommandIsSaveFlags(void) {
     int result = c8_run_command(&c8, &cmd);
     RESTORE_STDOUT;
     TEST_ASSERT_EQUAL_INT(0, result);
-    printf("%s\n", stdout_buffer);
-    TEST_ASSERT_EQUAL_INT(0, strlen(stdout_buffer));
+    printf("%s\n", stdio_buffer);
+    TEST_ASSERT_EQUAL_INT(0, strlen(stdio_buffer));
 }
 
 void test_c8_run_command_WhereCommandIsSaveFlags_WhereFileIsInvalid(void) {
@@ -608,7 +608,7 @@ void test_c8_run_command_WhereCommandIsSaveFlags_WhereFileIsInvalid(void) {
     int result = c8_run_command(&c8, &cmd);
     RESTORE_STDOUT;
     TEST_ASSERT_EQUAL_INT(0, result);
-    TEST_ASSERT_EQUAL_STRING("Invalid file\nFailed to save flags to /foo.bin\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("Invalid file\nFailed to save flags to /foo.bin\n", stdio_buffer);
 }
 
 void test_c8_run_command_WhereCommandIsNext(void) {
@@ -704,8 +704,6 @@ void test_c8_save_state_WhereOutputFileIsValid(void) {
     TEST_ASSERT_EQUAL_INT(c8.cs, loaded_c8.cs);
 
     TEST_ASSERT_EQUAL_INT(c8.display.mode, loaded_c8.display.mode);
-    TEST_ASSERT_EQUAL_INT(c8.display.x, loaded_c8.display.x);
-    TEST_ASSERT_EQUAL_INT(c8.display.y, loaded_c8.display.y);
     for (int i = 0; i < C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT; i++) {
         TEST_ASSERT_EQUAL_INT(c8.display.p[i], loaded_c8.display.p[i]);
     }

@@ -13,5 +13,5 @@ void test_c8_handle_exception(void) {
     c8_handle_exception(C8_AUDIO_EXCEPTION);
     RESTORE_STDERR;
     const char* expected = "libc8: " C8_AUDIO_EXCEPTION_MESSAGE "\nlibc8: Hello\n";
-    TEST_ASSERT_EQUAL_STRING(expected, stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING(expected, stdio_buffer);
 }

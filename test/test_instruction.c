@@ -168,24 +168,55 @@ void test_c8_parse_instruction_WhereInstructionIsRET_WhereSPIsZero(void) {
 
 void test_c8_parse_instruction_WhereInstructionIsSCD_InCHIP8Mode(void) {
     AXYB(0, 0, 0xC, b);
-    c8.mode = C8_MODE_CHIP8;
+    c8.mode         = C8_MODE_CHIP8;
+
+    c8.display.p[0] = 1;
 
     REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
     RESTORE_STDERR;
 
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_EQUAL_UINT8(0, c8.display.y);
-    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
+    TEST_ASSERT_EQUAL_UINT8(1, c8.display.p[0]);
+    TEST_ASSERT_NOT_EMPTY(stdio_buffer);
 }
 
-void test_c8_parse_instruction_WhereInstructionIsSCD_InSCHIPMode(void) {
+void test_c8_parse_instruction_WhereInstructionIsSCD_InSCHIPMode_InLowDisplayMode(void) {
     AXYB(0, 0, 0xC, b);
-    c8.mode = C8_MODE_SCHIP;
+    c8.mode         = C8_MODE_SCHIP;
+    c8.display.mode = C8_DISPLAYMODE_LOW;
+
+    memset(c8.display.p, 1, C8_LOW_DISPLAY_WIDTH * b);
 
     int ret = c8_parse_instruction(&c8);
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_EQUAL_UINT8(b, c8.display.y);
+
+    for (int i = 0; i < C8_LOW_DISPLAY_WIDTH * b; i++) {
+        TEST_ASSERT_EQUAL_UINT8(0, c8.display.p[i]);
+    }
+
+    for (int i = C8_LOW_DISPLAY_WIDTH * b; i < (C8_LOW_DISPLAY_WIDTH * b) * 2; i++) {
+        TEST_ASSERT_EQUAL_UINT8(1, c8.display.p[i]);
+    }
+}
+
+void test_c8_parse_instruction_WhereInstructionIsSCD_InSCHIPMode_InHighDisplayMode(void) {
+    AXYB(0, 0, 0xC, b);
+    c8.mode         = C8_MODE_SCHIP;
+    c8.display.mode = C8_DISPLAYMODE_HIGH;
+
+    memset(c8.display.p, 1, C8_HIGH_DISPLAY_WIDTH * b);
+
+    int ret = c8_parse_instruction(&c8);
+    TEST_ASSERT_EQUAL_INT(2, ret);
+
+    for (int i = 0; i < C8_HIGH_DISPLAY_WIDTH * b; i++) {
+        TEST_ASSERT_EQUAL_UINT8(0, c8.display.p[i]);
+    }
+
+    for (int i = C8_HIGH_DISPLAY_WIDTH * b; i < (C8_HIGH_DISPLAY_WIDTH * b) * 2; i++) {
+        TEST_ASSERT_EQUAL_UINT8(1, c8.display.p[i]);
+    }
 }
 
 void test_c8_parse_instruction_WhereInstructionIsSCR_InCHIP8Mode(void) {
@@ -195,44 +226,74 @@ void test_c8_parse_instruction_WhereInstructionIsSCR_InCHIP8Mode(void) {
     REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
     RESTORE_STDERR;
-
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_EQUAL_UINT8(0, c8.display.x);
-    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
+    TEST_ASSERT_NOT_EMPTY(stdio_buffer);
 }
 
-void test_c8_parse_instruction_WhereInstructionIsSCR_InSCHIPMode(void) {
+void test_c8_parse_instruction_WhereInstructionIsSCR_InSCHIPMode_InLowDisplayMode(void) {
     INSERT_INSTRUCTION(pc, 0x00FB);
-    c8.mode = C8_MODE_SCHIP;
+    c8.mode         = C8_MODE_SCHIP;
+    c8.display.mode = C8_DISPLAYMODE_LOW;
+    memset(c8.display.p, 1, C8_LOW_DISPLAY_WIDTH * C8_LOW_DISPLAY_HEIGHT);
 
     int ret = c8_parse_instruction(&c8);
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_EQUAL_UINT8(4, c8.display.x);
+
+    for (int y = 0; y < C8_LOW_DISPLAY_HEIGHT; y++) {
+        for (int x = 0; x < 4; x++) {
+            TEST_ASSERT_EQUAL_UINT8(0, c8.display.p[y * C8_LOW_DISPLAY_WIDTH + x]);
+        }
+    }
 }
 
-void test_c8_parse_instruction_WhereInstructionIsSCL_InCHIP8Mode(void) {
-    INSERT_INSTRUCTION(pc, 0x00FC);
-    c8.mode      = C8_MODE_CHIP8;
+void test_c8_parse_instruction_WhereInstructionIsSCR_InSCHIPMode_InHighDisplayMode(void) {
+    INSERT_INSTRUCTION(pc, 0x00FB);
+    c8.mode         = C8_MODE_SCHIP;
+    c8.display.mode = C8_DISPLAYMODE_HIGH;
+    memset(c8.display.p, 1, C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT);
 
-    c8.display.x = 4;
-
-    REDIRECT_STDERR;
     int ret = c8_parse_instruction(&c8);
-    RESTORE_STDERR;
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_EQUAL_UINT8(4, c8.display.x);
-    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
+
+    for (int y = 0; y < C8_HIGH_DISPLAY_HEIGHT; y++) {
+        for (int x = 0; x < 4; x++) {
+            TEST_ASSERT_EQUAL_UINT8(0, c8.display.p[y * C8_HIGH_DISPLAY_WIDTH + x]);
+        }
+    }
 }
 
-void test_c8_parse_instruction_WhereInstructionIsSCL_InSCHIPMode(void) {
+void test_c8_parse_instruction_WhereInstructionIsSCL_InSCHIPMode_InLowDisplayMode(void) {
     INSERT_INSTRUCTION(pc, 0x00FC);
-    c8.mode      = C8_MODE_SCHIP;
+    c8.mode         = C8_MODE_SCHIP;
+    c8.display.mode = C8_DISPLAYMODE_LOW;
 
-    c8.display.x = 4;
+    memset(c8.display.p, 1, C8_LOW_DISPLAY_WIDTH * C8_LOW_DISPLAY_HEIGHT);
 
-    int ret      = c8_parse_instruction(&c8);
+    int ret = c8_parse_instruction(&c8);
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_EQUAL_UINT8(0, c8.display.x);
+
+    for (int y = 0; y < C8_LOW_DISPLAY_HEIGHT; y++) {
+        for (int x = C8_LOW_DISPLAY_WIDTH - 4; x < C8_LOW_DISPLAY_WIDTH; x++) {
+            TEST_ASSERT_EQUAL_UINT8(0, c8.display.p[y * C8_LOW_DISPLAY_WIDTH + x]);
+        }
+    }
+}
+
+void test_c8_parse_instruction_WhereInstructionIsSCL_InSCHIPMode_InHighDisplayMode(void) {
+    INSERT_INSTRUCTION(pc, 0x00FC);
+    c8.mode         = C8_MODE_SCHIP;
+    c8.display.mode = C8_DISPLAYMODE_HIGH;
+
+    memset(c8.display.p, 1, C8_HIGH_DISPLAY_WIDTH * C8_HIGH_DISPLAY_HEIGHT);
+
+    int ret = c8_parse_instruction(&c8);
+    TEST_ASSERT_EQUAL_INT(2, ret);
+
+    for (int y = 0; y < C8_HIGH_DISPLAY_HEIGHT; y++) {
+        for (int x = C8_HIGH_DISPLAY_WIDTH - 4; x < C8_HIGH_DISPLAY_WIDTH; x++) {
+            TEST_ASSERT_EQUAL_UINT8(0, c8.display.p[y * C8_HIGH_DISPLAY_WIDTH + x]);
+        }
+    }
 }
 
 void test_c8_parse_instruction_WhereInstructionIsEXIT_InCHIP8Mode(void) {
@@ -243,7 +304,7 @@ void test_c8_parse_instruction_WhereInstructionIsEXIT_InCHIP8Mode(void) {
     int ret = c8_parse_instruction(&c8);
     RESTORE_STDERR;
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
+    TEST_ASSERT_NOT_EMPTY(stdio_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsEXIT_InSCHIPMode(void) {
@@ -262,7 +323,7 @@ void test_c8_parse_instruction_WhereInstructionIsLOW_InCHIP8Mode(void) {
     int ret = c8_parse_instruction(&c8);
     RESTORE_STDERR;
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
+    TEST_ASSERT_NOT_EMPTY(stdio_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLOW_InSCHIPMode(void) {
@@ -284,7 +345,7 @@ void test_c8_parse_instruction_WhereInstructionIsHIGH_InCHIP8Mode(void) {
     int ret = c8_parse_instruction(&c8);
     RESTORE_STDERR;
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
+    TEST_ASSERT_NOT_EMPTY(stdio_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsHIGH_InSCHIPMode(void) {
@@ -747,7 +808,7 @@ void test_c8_parse_instruction_WhereInstructionIsLDHFX_InCHIP8Mode(void) {
     RESTORE_STDERR;
 
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
+    TEST_ASSERT_NOT_EMPTY(stdio_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLDHFX_InSCHIPMode(void) {
@@ -812,7 +873,7 @@ void test_c8_parse_instruction_WhereInstructionIsLDRX_InCHIP8Mode(void) {
     int ret = c8_parse_instruction(&c8);
     RESTORE_STDERR;
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
+    TEST_ASSERT_NOT_EMPTY(stdio_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLDRX_InSCHIPMode(void) {
@@ -838,7 +899,7 @@ void test_c8_parse_instruction_WhereInstructionIsLDXR_InCHIP8Mode(void) {
     int ret = c8_parse_instruction(&c8);
     RESTORE_STDERR;
     TEST_ASSERT_EQUAL_INT(2, ret);
-    TEST_ASSERT_NOT_EMPTY(stdout_buffer);
+    TEST_ASSERT_NOT_EMPTY(stdio_buffer);
 }
 
 void test_c8_parse_instruction_WhereInstructionIsLDXR_InSCHIPMode(void) {

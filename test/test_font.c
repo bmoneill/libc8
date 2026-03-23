@@ -72,5 +72,5 @@ void test_c8_print_fonts(void) {
     REDIRECT_STDOUT;
     c8_print_fonts(&c8);
     RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("SFONT: octo\tBFONT: fish\n", stdout_buffer);
+    TEST_ASSERT_EQUAL_STRING("SFONT: octo\tBFONT: fish\n", stdio_buffer);
 }

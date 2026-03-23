@@ -3,12 +3,12 @@
 
 #define REDIRECT_STDOUT                                                                            \
     freopen("/dev/null", "a", stdout);                                                             \
-    setbuf(stdout, stdout_buffer);
+    setbuf(stdout, stdio_buffer);
 #define RESTORE_STDOUT freopen("/dev/tty", "w", stdout);
 
 #define REDIRECT_STDERR                                                                            \
     freopen("/dev/null", "a", stderr);                                                             \
-    setbuf(stderr, stdout_buffer);
+    setbuf(stderr, stdio_buffer);
 #define RESTORE_STDERR freopen("/dev/tty", "w", stderr);
 
 #define TEST_DATA_DIR_1 "test/data/"
@@ -19,7 +19,7 @@
 
 static const char* paths[] = { TEST_DATA_DIR_1, TEST_DATA_DIR_2, TEST_DATA_DIR_3, TEST_DATA_DIR_4 };
 static char        path_buffer[64];
-static char        stdout_buffer[1024];
+static char        stdio_buffer[1024];
 
 int                c8_init_graphics(void) { return 0; }
 
