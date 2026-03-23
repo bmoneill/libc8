@@ -1,20 +1,59 @@
-# libc8
+<h1 align="center">
+  <b>libc8</b>
+</h1>
+
+<h4 align="center">
+  A C library and TUI toolkit for interpreting, assembling, and disassembling
+  CHIP-8 and SCHIP code, optionally utilizing the [SDL2](https://www.libsdl.org/)
+  library for graphics.
+</h4>
 
 [![CI Status](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml/badge.svg?branch=main)](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml)
 [![Doxygen Status](https://github.com/bmoneill/libc8/actions/workflows/doxygen.yml/badge.svg?branch=main)](https://bmoneill.github.io/libc8)
 [![Clang-format status](https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml/badge.svg?branch=main)](https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml)
 [![Coverage](https://oneill.sh/coverage/libc8)](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml)
 
-This is a C library for interpreting, assembling, and disassembling CHIP-8 and
-SCHIP code, optionally utilizing the [SDL2](https://www.libsdl.org/) library
-for graphics.
+## Features
 
-An example [assembler](docs/chip8as.md), [disassembler](docs/chip8dis.md), and
-[interpreter](docs/chip8.md) is located in `tools/`.
+> [!TIP]
+> In-depth overviews of the [interpreter](docs/chip8.md), [assembler](docs/chip8as.md),
+> and [disassembler](docs/chip8dis.md) are available in [docs/](docs/)
+
+### Interpreter
+
+- CHIP-8 and SCHIP 1.1 instructions fully implemented
+- Full sound support
+- User-configurable quirk support (common quirks are enabled by default)
+- Custom color palette support
+- Support for various fonts (all [Octo](https://github.com/JohnEarnest/octo) fonts)
+
+The interpreter passes all of [Timendus's CHIP-8 and SCHIP tests](https://github.com/Timendus/chip8-test-suite)
+except for the `DISP WAIT` quirk (identified by `r` in libc8).
+
+### Interpreter (debug mode)
+
+- Step
+- Continue
+- Load/save program state and flag registers
+- Print relevant attributes
+
+### Assembler
+
+- Strings, 16-bit words, and bytes
+- Support for binary and hex encoded values
+- Labels
+
+### Disassembler
+
+- Address printing
+- Label generation
 
 ## Building
 
-### Linux
+Building is only officially supported on Linux, but it should be possible to
+build on Windows and Mac with minimal difficulty.
+
+You must have CMake installed with a minimum version of 3.31.6.
 
 ```bash
 cmake -S . -B build
@@ -22,7 +61,7 @@ cmake --build build
 sudo cmake --install build
 ```
 
-This will build libc8 as well as the example tools.
+This will build and install libc8 as well as the example tools.
 
 ### SDL2
 
