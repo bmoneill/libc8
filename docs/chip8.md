@@ -107,6 +107,6 @@ The following commands and attributes are supported in debug mode:
 | `fg`         | Foreground color                                      |
 | `$[address]` | Value at given address                                |
 
-> ![NOTE]
+> [!NOTE]
 > If no argument is given to `print`, it will print all of the above attributes
 > except for address values.

@@ -18,11 +18,6 @@
 
 - [Overview](#overview)
 - [Terminology](#terminology)
-- [Features](#features)
-  - [Interpreter](#interpreter)
-    - [Debug mode](#debug-mode)
-  - [Assembler](#assembler)
-  - [Disassembler](#disassembler)
 - [Building](#building)
   - [SDL2](#sdl2)
 - [Testing](#testing)
@@ -38,6 +33,33 @@
 CHIP-8 and SCHIP programs. It is also possible to utilize this library
 in other software (e.g. an arcade program with support for multiple
 architectures).
+
+> [!TIP]
+> In-depth overviews of the [interpreter](docs/chip8.md), [assembler](docs/chip8as.md),
+> and [disassembler](docs/chip8dis.md) are available in [docs/](docs/). Library
+> documentation is available on the [GitHub Pages site](https://bmoneill.github.io/libc8).
+
+| Feature                                                                    | Status |
+| -------------------------------------------------------------------------- | ------ |
+| CHIP-8 instructions fully implemented\*                                    | ☑     |
+| SCHIP 1.1 instructions fully implemented\*                                 | ☑     |
+| XO-CHIP instructions fully implemented                                     | ❌     |
+| (Interpreter) Full sound support                                           | ☑     |
+| (Interpreter) Support for common quirks                                    | ☑     |
+| (Interpreter) Custom color palettes                                        | ☑     |
+| (Interpreter) Support for various fonts                                    | ☑     |
+| (Debug mode) Step, continue, and breakpoints                               | ☑     |
+| (Debug mode) Print attributes such as PC, stack, value at an address, etc. | ☑     |
+| (Debug mode) Set attributes                                                | ☑     |
+| (Debug mode) Load and save program state                                   | ☑     |
+| (Assembler) Strings, 16-bit data words, and data bytes                     | ☑     |
+| (Assembler) Labels                                                         | ☑     |
+| (Disassembler) Address printing                                            | ☑     |
+| (Disassembler) Label generation                                            | ☑     |
+
+> [!NOTE]
+> The interpreter passes all of [Timendus's CHIP-8 and SCHIP tests](https://github.com/Timendus/chip8-test-suite)
+> except for the `DISP WAIT` quirk (identified by `r` in libc8).
 
 ## Terminology
 
@@ -63,42 +85,6 @@ of these terms in detail:
 | F    | Address where font data begins                  |
 | HF   | Address where high-resolution font data begins  |
 | R[X] | HP-48 flag register                             |
-
-## Features
-
-> [!TIP]
-> In-depth overviews of the [interpreter](docs/chip8.md), [assembler](docs/chip8as.md),
-> and [disassembler](docs/chip8dis.md) are available in [docs/](docs/). Library
-> documentation is available on the [GitHub Pages site](https://bmoneill.github.io/libc8).
-
-### Interpreter
-
-- CHIP-8 and SCHIP 1.1 instructions fully implemented
-- Full sound support
-- User-configurable quirk support (common quirks are enabled by default)
-- Custom color palette support
-- Support for various fonts (all [Octo](https://github.com/JohnEarnest/octo) fonts)
-
-The interpreter passes all of [Timendus's CHIP-8 and SCHIP tests](https://github.com/Timendus/chip8-test-suite)
-except for the `DISP WAIT` quirk (identified by `r` in libc8).
-
-#### Debug mode
-
-- Step
-- Continue
-- Load/save program state and flag registers
-- Print relevant attributes
-
-### Assembler
-
-- Strings, 16-bit words, and bytes
-- Support for binary and hex encoded values
-- Labels
-
-### Disassembler
-
-- Address printing
-- Label generation
 
 ## Building
 
