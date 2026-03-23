@@ -1,18 +1,15 @@
-<h1 align="center">
-  <b>libc8</b>
-</h1>
-
-<h4 align="center">
-  A C library and TUI toolkit for interpreting, assembling, and disassembling
-  CHIP-8 and SCHIP code, optionally utilizing the
-  <a href="https://www.libsdl.org">SDL2</a>
-  library for graphics.
-</h4>
-
-[![CI Status](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml/badge.svg?branch=main)](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml)
-[![Doxygen Status](https://github.com/bmoneill/libc8/actions/workflows/doxygen.yml/badge.svg?branch=main)](https://bmoneill.github.io/libc8)
-[![Clang-format status](https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml/badge.svg?branch=main)](https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml)
-[![Coverage](https://oneill.sh/coverage/libc8)](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml)
+<div align="center">
+    <h1><b>libc8</b></h1>
+    <h4>
+        A C library and TUI toolkit for interpreting, assembling, and disassembling
+        CHIP-8 and SCHIP code, optionally utilizing the
+        <a href="https://www.libsdl.org">SDL2</a> library for graphics.
+    </h4>
+    <a href="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml/badge.svg?branch=main" alt="CI Status"></a>
+    <a href="https://bmoneill.github.io/libc8"><img src="https://github.com/bmoneill/libc8/actions/workflows/doxygen.yml/badge.svg?branch=main" alt="Doxygen Status"></a>
+    <a href="https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml/badge.svg?branch=main" alt="Clang-format status"></a>
+    <a href="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml"><img src="https://oneill.sh/coverage/libc8" alt="Coverage"></a>
+</div>
 
 ## Table of contents
 
