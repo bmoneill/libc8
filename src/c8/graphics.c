@@ -103,5 +103,8 @@ __attribute__((weak)) int c8_tick(int* key) {
  * @return pointer to value of (x,y) in `display`
  */
 uint8_t* c8_get_pixel(C8_Display* display, int x, int y) {
-    return &display->p[y * C8_LOW_DISPLAY_WIDTH + x];
+    int width
+        = (display->mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_WIDTH : C8_HIGH_DISPLAY_WIDTH;
+    x %= width;
+    return &display->p[y * width + x];
 }

@@ -204,11 +204,19 @@ int c8_render(C8_Display* display, int* colors) {
         return C8_GRAPHICS_EXCEPTION;
     }
 
-    for (int i = 0; i < C8_LOW_DISPLAY_WIDTH; i++) {
-        for (int j = 0; j < C8_LOW_DISPLAY_HEIGHT; j++) {
+    int width
+        = (display->mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_WIDTH : C8_HIGH_DISPLAY_WIDTH;
+    int height
+        = (display->mode == C8_DISPLAYMODE_LOW) ? C8_LOW_DISPLAY_HEIGHT : C8_HIGH_DISPLAY_HEIGHT;
+
+    int scale_x = C8_DEFAULT_WINDOW_WIDTH / width;
+    int scale_y = C8_DEFAULT_WINDOW_HEIGHT / height;
+
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
             if (*c8_get_pixel(display, i, j)) {
-                pix.x  = (i % C8_LOW_DISPLAY_WIDTH) * C8_WINDOW_SCALE_X;
-                pix.y  = (j % C8_LOW_DISPLAY_HEIGHT) * C8_WINDOW_SCALE_Y;
+                pix.x  = (i % width) * scale_x;
+                pix.y  = (j % height) * scale_y;
                 result = SDL_RenderFillRect(c8_renderer, &pix);
                 if (result == -1) {
                     C8_EXCEPTION(C8_GRAPHICS_EXCEPTION,
