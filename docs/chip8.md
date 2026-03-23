@@ -16,7 +16,7 @@ chip8 [-dsvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] f
 - `-p` loads a color palette from a file containing two newline-separated 24-bit
   hex codes.
 - `-P` sets the color palette from a string containing two comma-separated 24-bit
-  hex codes.
+  hex codes (prefixed by `0x` or `x`).
 - `-q` sets the quirks to enable from string with non-separated quirk identifiers
 - `-s` enables SCHIP mode.
 - `-v` enables verbose mode. This will print each instruction that is executed.
