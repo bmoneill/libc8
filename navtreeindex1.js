@@ -69,8 +69,6 @@ var NAVTREEINDEX1 =
 "structC8__Command.html#a591c7189799febe1d8ba14ec7545068d":[10,0,3,0],
 "structC8__Command.html#af6fba413ff6b32a68f565711efd3ad5d":[10,0,3,1],
 "structC8__Display.html":[10,0,4],
-"structC8__Display.html#a0f561e77fa0f040b637f4e04f6cd8078":[10,0,4,2],
-"structC8__Display.html#a17f97f62d93bc8cfb4a2b5d273a2aa72":[10,0,4,3],
 "structC8__Display.html#a37e90f5e3bd99fac2021fb3a326607d4":[10,0,4,0],
 "structC8__Display.html#a7b9b2e0f3539aa84729fe17c869c2669":[10,0,4,1],
 "structC8__Exception.html":[10,0,5],

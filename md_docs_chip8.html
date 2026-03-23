@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('md_docs_chip8.html',''); initResizable
 <div class="textblock"><p>This is a fully functional CHIP-8 and SCHIP interpreter with an integrated debug mode, utilizing libc8 with SDL2.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Usage</h1>
-<div class="fragment"><div class="line">chip8 [-dvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file</div>
+<div class="fragment"><div class="line">chip8 [-dsvV] [-c clockspeed] [-f small,big] [-p file] [-P colors] [-q quirks] file</div>
 </div><!-- fragment --><ul>
 <li><code>-c</code> sets the number of instructions to be executed per second (default: 1000).</li>
 <li><code>-d</code> enables debug mode. This can be used to add breakpoints, display the current memory, and step through instructions individually.</li>
@@ -104,6 +104,7 @@ Usage</h1>
 <li><code>-p</code> loads a color palette from a file containing two newline-separated 24-bit hex codes.</li>
 <li><code>-P</code> sets the color palette from a string containing two comma-separated 24-bit hex codes.</li>
 <li><code>-q</code> sets the quirks to enable from string with non-separated quirk identifiers</li>
+<li><code>-s</code> enables SCHIP mode.</li>
 <li><code>-v</code> enables verbose mode. This will print each instruction that is executed.</li>
 <li><code>-V</code> prints the version number.</li>
 </ul>
@@ -134,12 +135,13 @@ Fonts</h1>
 Quirks</h1>
 <p>The following quirks are available:</p>
 <ul>
-<li><code>v</code>: After <code>AND</code>, <code>OR</code>, and <code>XOR</code>: Clear <code>VF</code>.</li>
-<li><code>m</code>: After <code>LD [I], Vx</code> and <code>LD Vx, [I]</code>: Set <code>I</code> to address <code>I + x + 1</code>.</li>
-<li><code>j</code>: For <code>JP V0, nnn</code>: Jump to <code>nnn + V[(nnn&gt;&gt;8)&amp;0xF]</code> instead.</li>
-<li><code>s</code>: Before <code>SHL Vx, Vy</code> and <code>SHR Vx, Vy</code>: Shift <code>Vx</code> in place, ignore <code>Vy</code>.</li>
 <li><code>c</code>: Clip sprites at bottom edge of screen instead of wrapping.</li>
+<li><code>j</code>: For <code>JP V0, nnn</code>: Jump to <code>nnn + V[(nnn&gt;&gt;8)&amp;0xF]</code> instead.</li>
+<li><code>m</code>: After <code>LD [I], Vx</code> and <code>LD Vx, [I]</code>: Set <code>I</code> to address <code>I + x + 1</code>.</li>
+<li><code>s</code>: Before <code>SHL Vx, Vy</code> and <code>SHR Vx, Vy</code>: Shift <code>Vx</code> in place, ignore <code>Vy</code>.</li>
+<li><code>v</code>: After <code>AND</code>, <code>OR</code>, and <code>XOR</code>: Clear <code>VF</code>.</li>
 </ul>
+<p><code>cmv</code> quirks are enabled in CHIP-8 mode by default. <code>cjs</code> quirks are enabled in SCHIP mode by default.</p>
 <h1><a class="anchor" id="autotoc_md4"></a>
 Debug mode</h1>
 <p>Debug mode can be enabled via the <code>-d</code> command-line argument or by pressing P at any time during execution. It can also be disabled at any time by pressing M.</p>
