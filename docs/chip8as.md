@@ -15,7 +15,7 @@ chip8as [-vV] [-o outputfile] src
 
 ## Example Code
 
-```
+```asm
 .DS "mystring"
 JP mylabel
 
