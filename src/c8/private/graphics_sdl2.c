@@ -19,8 +19,6 @@
 #define C8_RGB_G(i) ((i >> 8) & 0xFF)
 #define C8_RGB_B(i) (i & 0xFF)
 
-#define C8_SET_RENDER_COLOR()
-
 #define C8_AUDIO_CHANNEL     1
 #define C8_AUDIO_SAMPLE_RATE 44100
 #define C8_AUDIO_WAVE_FREQ   440
