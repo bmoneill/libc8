@@ -22,7 +22,6 @@
   - [SDL2](#sdl2)
 - [Testing](#testing)
 - [Showcase](#showcase)
-- [Documentation](#documentation)
 - [Further reading](#further-reading)
 - [Bugs](#bugs)
 - [License](#license)
@@ -135,11 +134,6 @@ ctest --verbose
 The libc8 CHIP-8 interpreter running [Outlaw by John Earnest](https://johnearnest.github.io/chip8Archive/play.html?p=outlaw):
 
 ![libc8 running outlaw](https://oneill.sh/img/libc8-outlaw.gif)
-
-## Documentation
-
-[Library documentation for libc8](https://bmoneill.github.io/libc8) is
-available on the GitHub pages site.
 
 ## Further Reading
 

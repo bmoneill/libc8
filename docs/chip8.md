@@ -50,10 +50,10 @@ Same as Octo.
 | --------- | ----- | --- |
 | octo      | ☑    | ☑  |
 | schip     | ☑    | ☑  |
+| fish      | ☑    | ☑  |
 | vip       | ☑    | ❌  |
 | dream6800 | ☑    | ❌  |
 | eti660    | ☑    | ❌  |
-| fish      | ☑    | ☑  |
 
 ## Quirks
 
