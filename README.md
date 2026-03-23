@@ -13,6 +13,51 @@
 [![Clang-format status](https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml/badge.svg?branch=main)](https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml)
 [![Coverage](https://oneill.sh/coverage/libc8)](https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml)
 
+## Table of contents
+
+- [Overview](#overview)
+  - [Important Terms](#important-terms)
+- [Features](#features)
+  - [Interpreter](#interpreter)
+    - [Debug mode](#debug-mode)
+  - [Assembler](#assembler)
+  - [Disassembler](#disassembler)
+- [Building](#building)
+  - [SDL2](#sdl2)
+- [Testing](#testing)
+- [Showcase](#showcase)
+- [Documentation](#documentation)
+- [Further reading](#further-reading)
+- [Bugs](#bugs)
+- [License](#license)
+
+## Overview
+
+`libc8` provides tools for interpreting, assembling, and disassembling
+CHIP-8 and SCHIP programs. It is also possible to utilize this library
+in other software (e.g. an arcade program with support for multiple
+architectures).
+
+### Important Terms
+
+Throughout the code and documentation, jargon is used to refer to specific
+components and attributes related to CHIP-8. The table below describes some
+of these terms in detail:
+
+| Term | Definition                                      |
+| ---- | ----------------------------------------------- |
+| A    | The first nibble (`0xF000`) in an instruction   |
+| X    | The second nibble (`0x0F00`) in an instruction  |
+| Y    | The third nibble (`0x00F0`) in an instruction   |
+| B    | The fourth nibble (`0x000F`) in an instruction  |
+| KK   | The second byte (`0x00FF`) in an instruction    |
+| NNN  | The last 3 nibbles (`0x0FFF`) in an instruction |
+| I    | The explicit value of the `I` register          |
+| [I]  | A pointer to memory starting at address `I`     |
+
+You should also take a look at the quirks section in the [interpreter docs](docs/chip8.md)
+for quirk identifiers and what they mean.
+
 ## Features
 
 > [!TIP]
@@ -30,7 +75,7 @@
 The interpreter passes all of [Timendus's CHIP-8 and SCHIP tests](https://github.com/Timendus/chip8-test-suite)
 except for the `DISP WAIT` quirk (identified by `r` in libc8).
 
-### Interpreter (debug mode)
+#### Debug mode
 
 - Step
 - Continue
