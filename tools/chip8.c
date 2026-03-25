@@ -78,12 +78,12 @@ int         main(int argc, char* argv[]) {
     }
 
     if (fontstr && c8_set_fonts_s(c8, fontstr) != 0) {
-        free(c8);
+        c8_deinit(c8);
         return EXIT_FAILURE;
     }
 
     if (c8_load_rom(c8, argv[optind]) != 0) {
-        free(c8);
+        c8_deinit(c8);
         return EXIT_FAILURE;
     }
 

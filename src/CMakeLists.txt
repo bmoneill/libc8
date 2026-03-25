@@ -51,6 +51,11 @@ if(SDL2)
     find_package(SDL2 REQUIRED)
     find_package(SDL2_mixer REQUIRED)
     list(APPEND LIBRARY_PRIVATE_SRC "${LIBRARY_BASE_PATH}/c8/private/graphics_sdl2.c")
+elseif(NCURSES)
+    if(X11)
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DX11")
+    endif()
+    list(APPEND LIBRARY_PRIVATE_SRC "${LIBRARY_BASE_PATH}/c8/private/graphics_ncurses.c")
 endif()
 
 
@@ -70,6 +75,12 @@ if(SDL2)
     else()
         # Fallback: attempt to link the common "sdl2" and "sdl2_mixer" library names if imported targets aren't available
         target_link_libraries(${LIBRARY_NAME} PRIVATE sdl2 sdl2_mixer)
+    endif()
+elseif(NCURSES)
+    target_link_libraries(${LIBRARY_NAME} PRIVATE ncurses)
+
+    if(X11)
+        target_link_libraries(${LIBRARY_NAME} PRIVATE X11)
     endif()
 endif()
 

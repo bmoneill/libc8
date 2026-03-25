@@ -6,6 +6,7 @@
 
 #include "chip8.h"
 
+#include "common.h"
 #include "font.h"
 
 #include "private/debug.h"
@@ -13,6 +14,7 @@
 #include "private/instruction.h"
 #include "private/util.h"
 
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,6 +24,7 @@
 #define C8_DEBUG(c) (c->flags & C8_FLAG_DEBUG)
 
 C8_STATIC double c8_get_time(void);
+C8_STATIC void   c8_handle_signal(int);
 
 /**
  * @brief Deinitialize graphics and free c8
@@ -47,6 +50,8 @@ void c8_deinit(C8* c8) {
  */
 C8* c8_init(const char* path, int flags) {
     int res;
+
+    signal(SIGINT, c8_handle_signal);
 
     C8* c8           = (C8*) calloc(1, sizeof(C8));
     c8->flags        = flags;
@@ -240,6 +245,7 @@ int c8_simulate(C8* c8) {
     double       acc                   = 0.0;
     int          instructions_executed = 0;
     int          new_frame             = 0;
+
     while (c8->running) {
         double current = c8_get_time();
         acc += current - last;
@@ -388,4 +394,9 @@ C8_STATIC double c8_get_time(void) {
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
     return ts.tv_sec + ts.tv_nsec * 1e-9;
+}
+
+C8_STATIC void c8_handle_signal(int sig) {
+    c8_deinit_graphics();
+    exit(0);
 }
