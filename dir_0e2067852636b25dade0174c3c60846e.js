@@ -4,6 +4,7 @@ var dir_0e2067852636b25dade0174c3c60846e =
     [ "debug.h", "debug_8h.html", "debug_8h" ],
     [ "exception.c", "exception_8c.html", "exception_8c" ],
     [ "exception.h", "exception_8h.html", "exception_8h" ],
+    [ "graphics_ncurses.c", "graphics__ncurses_8c.html", "graphics__ncurses_8c" ],
     [ "graphics_sdl2.c", "graphics__sdl2_8c.html", "graphics__sdl2_8c" ],
     [ "instruction.c", "instruction_8c.html", "instruction_8c" ],
     [ "instruction.h", "instruction_8h.html", "instruction_8h" ],

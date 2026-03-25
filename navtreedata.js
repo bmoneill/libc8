@@ -30,7 +30,7 @@ var NAVTREE =
       [ "Overview", "index.html#autotoc_md16", null ],
       [ "Terminology", "index.html#autotoc_md17", null ],
       [ "Building", "index.html#autotoc_md18", [
-        [ "SDL2", "index.html#autotoc_md19", null ]
+        [ "Graphics", "index.html#autotoc_md19", null ]
       ] ],
       [ "Testing", "index.html#autotoc_md20", null ],
       [ "Showcase", "index.html#autotoc_md21", null ],
@@ -73,7 +73,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"graphics__sdl2_8c.html#a89d7ee7c385bff7707a860505780bbf9"
+"graphics__sdl2_8c.html#a2becc8d2fb6ea7320ac26ee56beb46c6",
+"util_8h.html#aca82f40ee5a3c5e68502c2194b32140a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

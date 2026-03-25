@@ -412,6 +412,15 @@ Functions</h2></td></tr>
 <p>Render graphics. </p>
 <p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
 <p>This function should return 0 on success and a negative value on failure.</p>
+<p>Render the given display to the ncurses window.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">display</td><td><code><a class="el" href="structC8__Display.html" title="Represents a graphics display.">C8_Display</a></code> to render </td></tr>
+    <tr><td class="paramname">colors</td><td>colors to render (UNUSED) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on failure</dd></dl>
 <p>Render the given display to the SDL2 window.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -444,6 +453,8 @@ Functions</h2></td></tr>
 <p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
 <p>This function should return 0 on success and a negative value on failure.</p>
 <p>Stop sound.</p>
+<dl class="section return"><dt>Returns</dt><dd>0 if successful, error code otherwise.</dd></dl>
+<p>Stop sound.</p>
 <dl class="section return"><dt>Returns</dt><dd>0 if successful, error code otherwise. </dd></dl>
 
 </div>
@@ -467,6 +478,8 @@ Functions</h2></td></tr>
 <p>Play sound. </p>
 <p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
 <p>This function should return 0 on success and a negative value on failure.</p>
+<p>Play sound.</p>
+<dl class="section return"><dt>Returns</dt><dd>0 if successful, error code otherwise.</dd></dl>
 <p>Play sound.</p>
 <dl class="section return"><dt>Returns</dt><dd>0 if successful, error code otherwise. </dd></dl>
 
@@ -492,7 +505,16 @@ Functions</h2></td></tr>
 <p>This function is weak and is overridden by internal/graphics_sdl.c by default. This can also be overridden by the user when compiling without SDL2 support.</p>
 <p>This function should return -2 if quitting, -1 if no key was released, or the key index of the first key released since the last call.</p>
 <p>Grab current keypresses and delay execution to match clockspeed.</p>
-<p>If a relevant key is pressed or released (see <code>keyMap</code> in this file), this function will update <code>key</code> accordingly.</p>
+<p>If a relevant key is pressed or released (see <code>c8_keyMap</code> in this file), this function will update <code>keys</code> accordingly.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">keys</td><td>pointer to int arr of keys</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>-2 if quitting, -1 if no key was released, else returns value of key released.</dd></dl>
+<p>Grab current keypresses and delay execution to match clockspeed.</p>
+<p>If a relevant key is pressed or released (see <code>c8_keyMap</code> in this file), this function will update <code>key</code> accordingly.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>pointer to int arr of keys</td></tr>

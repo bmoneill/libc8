@@ -101,7 +101,7 @@ Table of contents</h2>
 <li>Overview</li>
 <li>Terminology</li>
 <li>Building<ul>
-<li>SDL2</li>
+<li>Graphics</li>
 </ul>
 </li>
 <li>Testing</li>
@@ -196,8 +196,13 @@ Building</h2>
 <div class="line">sudo cmake --install build</div>
 </div><!-- fragment --><p>This will build and install libc8 as well as the example tools.</p>
 <h3><a class="anchor" id="autotoc_md19"></a>
-SDL2</h3>
-<p>SDL2 support is enabled by default. To disable it to use another graphics library, run <code>cmake</code> with <code>-DSDL2=OFF</code>. If <code><a class="el" href="chip8_8c.html#a7fa8311797eec907da9f1ae1a770fa00" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a></code> is ever called in your code, you must implement these functions with your preferred graphics library:</p>
+Graphics</h3>
+<p>Graphics may be rendered using SDL2 or ncurses. SDL2 is the default graphics library. To use ncurses, you must add the following flags to cmake: <code>-DSDL2=OFF -DNCURSES=ON</code>. The ncurses-based graphical environment has no support for colors or sound.</p>
+<p>The terminal environment does not allow for very good keyboard event handling, so keyboard input in ncurses by default is very unreliable. If you are using X11, the X11 flag (<code>-DX11=ON</code>) may be set in order to get somewhat reliable key event handling.</p>
+<blockquote class="doxtable">
+<p>&zwj;[!WARNING] The X11 flag will change the keyboard delay rate for your <b>entire desktop</b>. This means that, while <code>chip8</code> is running (and after if it exits improperly), <b>all keyboard input</b> throughout your X11 session will have an <b>unusably high repeat rate for normal keyboard use</b>. </p>
+</blockquote>
+<p>If you would like to use a different graphics library, run <code>cmake</code> with <code>-DSDL2=OFF</code> and modify <code>Graphics_Required</code> in [CMakeLists.txt]. If <code><a class="el" href="chip8_8c.html#a7fa8311797eec907da9f1ae1a770fa00" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a></code> is ever called in your code, you must implement these functions with your preferred graphics library:</p>
 <ul>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5"><code>void c8_deinit_graphics(void)</code></a></li>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4"><code>int c8_init_graphics(void)</code></a></li>
