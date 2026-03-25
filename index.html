@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> </p><div align="center"> <h1><b>libc8</b></h1>
-</div><div align="center"> <h4>A C library and TUI toolkit for interpreting, assembling, and disassembling CHIP-8 and SCHIP code, optionally utilizing the <a href="https://www.libsdl.org">SDL2</a> library for graphics. </h4>
+</div><div align="center"> <h4>A C library and TUI toolkit for interpreting, assembling, and disassembling CHIP-8 and SCHIP code. </h4>
 </div><div align="center"> <a href="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml/badge.svg?branch=main" alt="CI Status" style="pointer-events: none;" class="inline"/></a> <a href="https://bmoneill.github.io/libc8"><img src="https://github.com/bmoneill/libc8/actions/workflows/doxygen.yml/badge.svg?branch=main" alt="Doxygen Status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/clang-format.yml/badge.svg?branch=main" alt="Clang-format status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml"><img src="https://oneill.sh/coverage/libc8" alt="Coverage" class="inline"/></a> </div><h2><a class="anchor" id="autotoc_md15"></a>
 Table of contents</h2>
 <ul>
@@ -202,7 +202,7 @@ Graphics</h3>
 <blockquote class="doxtable">
 <p>&zwj;[!WARNING] The X11 flag will change the keyboard delay rate for your <b>entire desktop</b>. This means that, while <code>chip8</code> is running (and after if it exits improperly), <b>all keyboard input</b> throughout your X11 session will have an <b>unusably high repeat rate for normal keyboard use</b>. </p>
 </blockquote>
-<p>If you would like to use a different graphics library, run <code>cmake</code> with <code>-DSDL2=OFF</code> and modify <code>Graphics_Required</code> in [CMakeLists.txt]. If <code><a class="el" href="chip8_8c.html#a7fa8311797eec907da9f1ae1a770fa00" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a></code> is ever called in your code, you must implement these functions with your preferred graphics library:</p>
+<p>If you would like to use a different graphics library, run <code>cmake</code> with <code>-DSDL2=OFF</code> and modify <code>Graphics_Required</code> in <a href="CMakeLists.txt">CMakeLists.txt</a>. If <code><a class="el" href="chip8_8c.html#a7fa8311797eec907da9f1ae1a770fa00" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a></code> is ever called in your code, you must implement these functions with your preferred graphics library:</p>
 <ul>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5"><code>void c8_deinit_graphics(void)</code></a></li>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4"><code>int c8_init_graphics(void)</code></a></li>
