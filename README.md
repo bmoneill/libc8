@@ -2,8 +2,7 @@
     <h1><b>libc8</b></h1>
     <h4>
         A C library and TUI toolkit for interpreting, assembling, and disassembling
-        CHIP-8 and SCHIP code, optionally utilizing the
-        <a href="https://www.libsdl.org">SDL2</a> library for graphics.
+        CHIP-8 and SCHIP code.
     </h4>
     <a href="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml"><img src="https://github.com/bmoneill/libc8/actions/workflows/cmake-single-platform.yml/badge.svg?branch=main" alt="CI Status"></a>
     <a href="https://bmoneill.github.io/libc8"><img src="https://github.com/bmoneill/libc8/actions/workflows/doxygen.yml/badge.svg?branch=main" alt="Doxygen Status"></a>
@@ -115,9 +114,9 @@ handling.
 > **unusably high repeat rate for normal keyboard use**.
 
 If you would like to use a different graphics library, run `cmake` with `-DSDL2=OFF`
-and modify `Graphics_Required` in [CMakeLists.txt]. If `c8_simulate()` is ever
-called in your code, you must implement these functions with your preferred
-graphics library:
+and modify `Graphics_Required` in [CMakeLists.txt](CMakeLists.txt). If
+`c8_simulate()` is ever called in your code, you must implement these functions
+with your preferred graphics library:
 
 - [`void c8_deinit_graphics(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5)
 - [`int c8_init_graphics(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4)
