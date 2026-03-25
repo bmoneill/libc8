@@ -50,59 +50,62 @@ DRW V0, V1, 1
 
 ## Instructions
 
-| Assembly code   | Bytecode | Notes                                                                     |
-| --------------- | -------- | ------------------------------------------------------------------------- |
-| `SCD b`         | `00Cb`   | SCHIP instruction                                                         |
-| `CLS`           | `00E0`   | SCHIP instruction                                                         |
-| `RET`           | `00EE`   | SCHIP instruction                                                         |
-| `SCR`           | `00FB`   | SCHIP instruction                                                         |
-| `SCL`           | `00FC`   | SCHIP instruction                                                         |
-| `EXIT`          | `00FD`   | SCHIP instruction                                                         |
-| `LOW`           | `00FE`   | SCHIP instruction                                                         |
-| `HIGH`          | `00FF`   | SCHIP instruction                                                         |
-| `JP nnn`        | `1nnn`   |                                                                           |
-| `CALL nnn`      | `2nnn`   |                                                                           |
-| `SE Vx, kk`     | `3xkk`   |                                                                           |
-| `SNE Vx kk`     | `4xkk`   |                                                                           |
-| `SE Vx, Vy`     | `5xy0`   |                                                                           |
-| `LD Vx, kk`     | `6xkk`   |                                                                           |
-| `ADD Vx, kk`    | `7xkk`   |                                                                           |
-| `LD Vx, Vy`     | `8xy0`   |                                                                           |
-| `OR Vx, Vy`     | `8xy1`   |                                                                           |
-| `AND Vx, Vy`    | `8xy2`   |                                                                           |
-| `XOR Vx, Vy`    | `8xy3`   |                                                                           |
-| `ADD Vx, Vy`    | `8xy4`   |                                                                           |
-| `SUB Vx, Vy`    | `8xy5`   |                                                                           |
-| `SHR Vx {, Vy}` | `8xy5`   | `Vy` is optional - it will be set to 0 in resulting bytecode if undefined |
-| `SUBN Vx, Vy`   | `8xy7`   |                                                                           |
-| `SHL Vx {, Vy}` | `8xyE`   | `Vy` is optional - it will be set to 0 in resulting bytecode if undefined |
-| `SNE Vx, Vy`    | `9xy0`   |                                                                           |
-| `LD I, nnn`     | `Annn`   |                                                                           |
-| `JP V0, nnn`    | `Bnnn`   |                                                                           |
-| `RND Vx, kk`    | `Cxkk`   |                                                                           |
-| `DRW Vx, Vy, b` | `Dxyb`   |                                                                           |
-| `SKP Vx`        | `Ex9E`   |                                                                           |
-| `SKNP Vx`       | `ExA1`   |                                                                           |
-| `LD Vx, DT`     | `Fx07`   |                                                                           |
-| `LD Vx, K`      | `Fx0A`   |                                                                           |
-| `LD DT, Vx`     | `Fx15`   |                                                                           |
-| `LD ST, Vx`     | `Fx18`   |                                                                           |
-| `ADD I, Vx`     | `Fx1E`   |                                                                           |
-| `LD F, Vx`      | `Fx29`   |                                                                           |
-| `LD HF, Vx`     | `Fx30`   | SCHIP instruction                                                         |
-| `LD B, Vx`      | `Fx33`   |                                                                           |
-| `LD [I], Vx`    | `Fx55`   |                                                                           |
-| `LD Vx, [I]`    | `Fx65`   |                                                                           |
-| `LD R, Vx`      | `Fx75`   | SCHIP instruction                                                         |
-| `LD Vx, R`      | `Fx85`   | SCHIP instruction                                                         |
+| Assembly code   | Bytecode  | Notes                                                                     |
+| --------------- | --------- | ------------------------------------------------------------------------- |
+| `.DB byte`      | `ax`      | Special instruction                                                       |
+| `.DW word`      | `axyb`    | Special instruction                                                       |
+| `.DS "string"`  | `axyb`... | Special instruction. String will be stored as ASCII-encoded bytes.        |
+| `SCD b`         | `00Cb`    | SCHIP instruction                                                         |
+| `CLS`           | `00E0`    | SCHIP instruction                                                         |
+| `RET`           | `00EE`    | SCHIP instruction                                                         |
+| `SCR`           | `00FB`    | SCHIP instruction                                                         |
+| `SCL`           | `00FC`    | SCHIP instruction                                                         |
+| `EXIT`          | `00FD`    | SCHIP instruction                                                         |
+| `LOW`           | `00FE`    | SCHIP instruction                                                         |
+| `HIGH`          | `00FF`    | SCHIP instruction                                                         |
+| `JP nnn`        | `1nnn`    |                                                                           |
+| `CALL nnn`      | `2nnn`    |                                                                           |
+| `SE Vx, kk`     | `3xkk`    |                                                                           |
+| `SNE Vx kk`     | `4xkk`    |                                                                           |
+| `SE Vx, Vy`     | `5xy0`    |                                                                           |
+| `LD Vx, kk`     | `6xkk`    |                                                                           |
+| `ADD Vx, kk`    | `7xkk`    |                                                                           |
+| `LD Vx, Vy`     | `8xy0`    |                                                                           |
+| `OR Vx, Vy`     | `8xy1`    |                                                                           |
+| `AND Vx, Vy`    | `8xy2`    |                                                                           |
+| `XOR Vx, Vy`    | `8xy3`    |                                                                           |
+| `ADD Vx, Vy`    | `8xy4`    |                                                                           |
+| `SUB Vx, Vy`    | `8xy5`    |                                                                           |
+| `SHR Vx {, Vy}` | `8xy5`    | `Vy` is optional - it will be set to 0 in resulting bytecode if undefined |
+| `SUBN Vx, Vy`   | `8xy7`    |                                                                           |
+| `SHL Vx {, Vy}` | `8xyE`    | `Vy` is optional - it will be set to 0 in resulting bytecode if undefined |
+| `SNE Vx, Vy`    | `9xy0`    |                                                                           |
+| `LD I, nnn`     | `Annn`    |                                                                           |
+| `JP V0, nnn`    | `Bnnn`    |                                                                           |
+| `RND Vx, kk`    | `Cxkk`    |                                                                           |
+| `DRW Vx, Vy, b` | `Dxyb`    |                                                                           |
+| `SKP Vx`        | `Ex9E`    |                                                                           |
+| `SKNP Vx`       | `ExA1`    |                                                                           |
+| `LD Vx, DT`     | `Fx07`    |                                                                           |
+| `LD Vx, K`      | `Fx0A`    |                                                                           |
+| `LD DT, Vx`     | `Fx15`    |                                                                           |
+| `LD ST, Vx`     | `Fx18`    |                                                                           |
+| `ADD I, Vx`     | `Fx1E`    |                                                                           |
+| `LD F, Vx`      | `Fx29`    |                                                                           |
+| `LD HF, Vx`     | `Fx30`    | SCHIP instruction                                                         |
+| `LD B, Vx`      | `Fx33`    |                                                                           |
+| `LD [I], Vx`    | `Fx55`    |                                                                           |
+| `LD Vx, [I]`    | `Fx65`    |                                                                           |
+| `LD R, Vx`      | `Fx75`    | SCHIP instruction                                                         |
+| `LD Vx, R`      | `Fx85`    | SCHIP instruction                                                         |
 
 ## Notes
 
-- Hex integers, besides V and R register identifiers, must be formatted with
-  `0x`, `x`, or `$` prefixes.
+- Hex integers, besides V register identifiers, must be formatted with `0x`,
+  `x`, or `$` prefixes.
 - Binary integers must be formatted with a `0b` prefix.
-- Data bytes may be defined using the `.DB` symbol.
-- 16-bit data words may be defined using the `.DW` symbol.
-- Strings may be defined using the `.DS` symbol.
+- Data bytes and strings are **not** padded. If a `.DB` or `.DS` contains an odd
+  number of bytes, following bytecode will be offset (the first byte of
+  following instructions will be at odd-numbered addresses).
 - Commas are optional for instruction parameters.
 - This assembler is not case sensitive.
