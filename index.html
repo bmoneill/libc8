@@ -113,9 +113,7 @@ Table of contents</h2>
 <h2><a class="anchor" id="autotoc_md16"></a>
 Overview</h2>
 <p><code>libc8</code> provides tools for interpreting, assembling, and disassembling CHIP-8 and SCHIP programs. It is also possible to utilize this library in other software (e.g. an arcade program with support for multiple architectures).</p>
-<blockquote class="doxtable">
-<p>&zwj;[!TIP] In-depth overviews of the <a class="el" href="md_docs_chip8.html">interpreter</a>, <a class="el" href="md_docs_chip8as.html">assembler</a>, and <a class="el" href="md_docs_chip8dis.html">disassembler</a> are available in <a href="docs/">docs/</a>. Library documentation is available on the <a href="https://bmoneill.github.io/libc8">GitHub Pages site</a>. </p>
-</blockquote>
+<p>In-depth overviews of the <a class="el" href="md_docs_chip8.html">interpreter</a>, <a class="el" href="md_docs_chip8as.html">assembler</a>, and <a class="el" href="md_docs_chip8dis.html">disassembler</a> are available in <a href="docs/">docs/</a>. Library documentation is available on the <a href="https://bmoneill.github.io/libc8">GitHub Pages site</a>.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Feature   </th><th class="markdownTableHeadNone">Status    </th></tr>
@@ -155,9 +153,6 @@ Overview</h2>
 </blockquote>
 <h2><a class="anchor" id="autotoc_md17"></a>
 Terminology</h2>
-<blockquote class="doxtable">
-<p>&zwj;[!IMPORTANT] You should also take a look at the quirks section in the <a class="el" href="md_docs_chip8.html">interpreter docs</a> for quirk identifiers and what they mean. </p>
-</blockquote>
 <p>Throughout the code and documentation, shorthand terms are used to refer to specific components and attributes related to CHIP-8. The table below describes some of these terms in detail:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -187,6 +182,7 @@ Terminology</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code>R[X]</code>   </td><td class="markdownTableBodyNone">HP-48 flag register   </td></tr>
 </table>
+<p>You should also take a look at the quirks section in the <a class="el" href="md_docs_chip8.html">interpreter docs</a> for quirk identifiers and what they mean.</p>
 <h2><a class="anchor" id="autotoc_md18"></a>
 Building</h2>
 <p>Building is only officially supported on Linux, but it should be possible to build on Windows and Mac with minimal difficulty.</p>
@@ -200,7 +196,7 @@ Graphics</h3>
 <p>Graphics may be rendered using SDL2 or ncurses. SDL2 is the default graphics library. To use ncurses, you must add the following flags to cmake: <code>-DSDL2=OFF -DNCURSES=ON</code>. The ncurses-based graphical environment has no support for colors or sound.</p>
 <p>The terminal environment does not allow for very good keyboard event handling, so keyboard input in ncurses by default is very unreliable. If you are using X11, the X11 flag (<code>-DX11=ON</code>) may be set in order to get somewhat reliable key event handling.</p>
 <blockquote class="doxtable">
-<p>&zwj;[!WARNING] The X11 flag will change the keyboard delay rate for your <b>entire desktop</b>. This means that, while <code>chip8</code> is running (and after if it exits improperly), <b>all keyboard input</b> throughout your X11 session will have an <b>unusably high repeat rate for normal keyboard use</b>. </p>
+<p>&zwj;[!CAUTION] The X11 flag will change the keyboard delay rate for your <b>entire desktop</b>. This means that, while <code>chip8</code> is running (and after if it exits improperly), <b>all keyboard input</b> throughout your X11 session will have an <b>unusably high repeat rate for normal keyboard use</b>. </p>
 </blockquote>
 <p>If you would like to use a different graphics library, run <code>cmake</code> with <code>-DSDL2=OFF</code> and modify <code>Graphics_Required</code> in <a href="CMakeLists.txt">CMakeLists.txt</a>. If <code><a class="el" href="chip8_8c.html#a7fa8311797eec907da9f1ae1a770fa00" title="Main interpreter simulation loop. Exits when c8-&gt;running is 0.">c8_simulate()</a></code> is ever called in your code, you must implement these functions with your preferred graphics library:</p>
 <ul>
