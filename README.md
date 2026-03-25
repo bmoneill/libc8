@@ -29,10 +29,9 @@ CHIP-8 and SCHIP programs. It is also possible to utilize this library
 in other software (e.g. an arcade program with support for multiple
 architectures).
 
-> [!TIP]
-> In-depth overviews of the [interpreter](docs/chip8.md), [assembler](docs/chip8as.md),
-> and [disassembler](docs/chip8dis.md) are available in [docs/](docs/). Library
-> documentation is available on the [GitHub Pages site](https://bmoneill.github.io/libc8).
+In-depth overviews of the [interpreter](docs/chip8.md), [assembler](docs/chip8as.md),
+and [disassembler](docs/chip8dis.md) are available in [docs/](docs/). Library
+documentation is available on the [GitHub Pages site](https://bmoneill.github.io/libc8).
 
 | Feature                                                                       | Status |
 | ----------------------------------------------------------------------------- | ------ |
@@ -58,10 +57,6 @@ architectures).
 
 ## Terminology
 
-> [!IMPORTANT]
-> You should also take a look at the quirks section in the [interpreter docs](docs/chip8.md)
-> for quirk identifiers and what they mean.
-
 Throughout the code and documentation, shorthand terms are used to refer to specific
 components and attributes related to CHIP-8. The table below describes some
 of these terms in detail:
@@ -80,6 +75,9 @@ of these terms in detail:
 | `F`    | Address where font data begins                  |
 | `HF`   | Address where high-resolution font data begins  |
 | `R[X]` | HP-48 flag register                             |
+
+You should also take a look at the quirks section in the [interpreter docs](docs/chip8.md)
+for quirk identifiers and what they mean.
 
 ## Building
 
@@ -107,7 +105,7 @@ keyboard input in ncurses by default is very unreliable. If you are using X11,
 the X11 flag (`-DX11=ON`) may be set in order to get somewhat reliable key event
 handling.
 
-> [!WARNING]
+> [!CAUTION]
 > The X11 flag will change the keyboard delay rate for your **entire desktop**.
 > This means that, while `chip8` is running (and after if it exits improperly),
 > **all keyboard input** throughout your X11 session will have an
