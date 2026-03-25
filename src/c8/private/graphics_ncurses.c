@@ -111,10 +111,10 @@ int c8_deinit_graphics(void) {
 }
 
 /**
- * Render the given display to the SDL2 window.
+ * Render the given display to the ncurses window.
  *
  * @param display `C8_Display` to render
- * @param colors colors to render
+ * @param colors colors to render (UNUSED)
  * @return 0 on success, non-zero on failure
  */
 int c8_render(C8_Display* display, int* colors) {
@@ -148,12 +148,12 @@ int c8_render(C8_Display* display, int* colors) {
 }
 
 /**
- * @brief Process keypresses and delay based on clockspeed.
+ * @brief Process keypresses.
  *
- * If a relevant key is pressed or released (see `keyMap` in this file), this
- * function will update `key` accordingly.
+ * If a relevant key is pressed or released (see `c8_keyMap` in this file), this
+ * function will update `keys` accordingly.
  *
- * @param key pointer to int arr of keys
+ * @param keys pointer to int arr of keys
  *
  * @return -2 if quitting, -1 if no key was released, else returns value
  * of key released.
@@ -189,9 +189,9 @@ int c8_tick(int* keys) {
 }
 
 /**
- * @brief Convert the given SDL Keycode to a CHIP-8 keycode.
+ * @brief Convert the given character to a CHIP-8 keycode.
  *
- * @param k the SDL_Keycode
+ * @param c the character to convert
  *
  * @return the CHIP-8 keycode, or -1 if no match is found.
  */

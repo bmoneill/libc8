@@ -218,9 +218,9 @@ int c8_render(C8_Display* display, int* colors) {
 }
 
 /**
- * @brief Process keypresses and delay based on clockspeed.
+ * @brief Process keypresses.
  *
- * If a relevant key is pressed or released (see `keyMap` in this file), this
+ * If a relevant key is pressed or released (see `c8_keyMap` in this file), this
  * function will update `key` accordingly.
  *
  * @param key pointer to int arr of keys
