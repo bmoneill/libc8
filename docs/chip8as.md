@@ -51,8 +51,8 @@ main:
 
 | Assembly code   | Bytecode  | Notes                                                                     |
 | --------------- | --------- | ------------------------------------------------------------------------- |
-| `.DB byte`      | `ax`      | Special instruction                                                       |
-| `.DW word`      | `axyb`    | Special instruction                                                       |
+| `.DB ax`        | `ax`      | Special instruction                                                       |
+| `.DW axyb`      | `axyb`    | Special instruction                                                       |
 | `.DS "string"`  | `axyb`... | Special instruction. String will be stored as ASCII-encoded bytes.        |
 | `SCD b`         | `00Cb`    | SCHIP instruction                                                         |
 | `CLS`           | `00E0`    | SCHIP instruction                                                         |
