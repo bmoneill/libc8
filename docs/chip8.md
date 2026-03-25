@@ -47,26 +47,26 @@ z x c v        A 0 B F
 Same as Octo.
 
 | Font      | Small | Big |
-| --------- | ----- | --- |
-| octo      | ☑    | ☑  |
-| schip     | ☑    | ☑  |
-| fish      | ☑    | ☑  |
-| vip       | ☑    | ❌  |
-| dream6800 | ☑    | ❌  |
-| eti660    | ☑    | ❌  |
+| --------- | :---: | :-: |
+| octo      |  ☑   | ☑  |
+| schip     |  ☑   | ☑  |
+| fish      |  ☑   | ☑  |
+| vip       |  ☑   | ❌  |
+| dream6800 |  ☑   | ❌  |
+| eti660    |  ☑   | ❌  |
 
 ## Quirks
 
 The following quirks are available:
 
 | Quirk | Definition                                                              | CHIP-8 Default | SCHIP Default |
-| ----- | ----------------------------------------------------------------------- | -------------- | ------------- |
-| `c`   | Clip sprites at bottom edge of screen instead of wrapping.              | ☑             | ☑            |
-| `j`   | For `JP V0, nnn`: Jump to `nnn + V[(nnn>>8)&0xF]` instead.              | ❌             | ☑            |
-| `m`   | After `LD [I], Vx` and `LD Vx, [I]`: Set `I` to address `I + x + 1`.    | ☑             | ❌            |
-| `r`   | `DRW` halts execution until the next frame.                             | ☑             | ☑            |
-| `s`   | Before `SHL Vx, Vy` and `SHR Vx, Vy`: Shift `Vx` in place, ignore `Vy`. | ❌             | ☑            |
-| `v`   | After `AND`, `OR`, and `XOR`: Clear `VF`.                               | ☑             | ❌            |
+| ----- | ----------------------------------------------------------------------- | :------------: | :-----------: |
+| `c`   | Clip sprites at bottom edge of screen instead of wrapping.              |       ☑       |      ☑       |
+| `j`   | For `JP V0, nnn`: Jump to `nnn + V[(nnn>>8)&0xF]` instead.              |       ❌       |      ☑       |
+| `m`   | After `LD [I], Vx` and `LD Vx, [I]`: Set `I` to address `I + x + 1`.    |       ☑       |      ❌       |
+| `r`   | `DRW` halts execution until the next frame.                             |       ☑       |      ☑       |
+| `s`   | Before `SHL Vx, Vy` and `SHR Vx, Vy`: Shift `Vx` in place, ignore `Vy`. |       ❌       |      ☑       |
+| `v`   | After `AND`, `OR`, and `XOR`: Clear `VF`.                               |       ☑       |      ❌       |
 
 ## Debug mode
 
