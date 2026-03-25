@@ -16,7 +16,7 @@
 - [Overview](#overview)
 - [Terminology](#terminology)
 - [Building](#building)
-  - [SDL2](#sdl2)
+  - [Graphics](#graphics)
 - [Testing](#testing)
 - [Showcase](#showcase)
 - [Further reading](#further-reading)
@@ -97,11 +97,27 @@ sudo cmake --install build
 
 This will build and install libc8 as well as the example tools.
 
-### SDL2
+### Graphics
 
-SDL2 support is enabled by default. To disable it to use another graphics
-library, run `cmake` with `-DSDL2=OFF`. If `c8_simulate()` is ever called in your
-code, you must implement these functions with your preferred graphics library:
+Graphics may be rendered using SDL2 or ncurses. SDL2 is the default graphics library.
+To use ncurses, you must add the following flags to cmake: `-DSDL2=OFF -DNCURSES=ON`.
+The ncurses-based graphical environment has no support for colors or sound.
+
+The terminal environment does not allow for very good keyboard event handling, so
+keyboard input in ncurses by default is very unreliable. If you are using X11,
+the X11 flag (`-DX11=ON`) may be set in order to get somewhat reliable key event
+handling.
+
+> [!WARNING]
+> The X11 flag will change the keyboard delay rate for your **entire desktop**.
+> This means that, while `chip8` is running (and after if it exits improperly),
+> **all keyboard input** throughout your X11 session will have an
+> **unusably high repeat rate for normal keyboard use**.
+
+If you would like to use a different graphics library, run `cmake` with `-DSDL2=OFF`
+and modify `Graphics_Required` in [CMakeLists.txt]. If `c8_simulate()` is ever
+called in your code, you must implement these functions with your preferred
+graphics library:
 
 - [`void c8_deinit_graphics(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a2e8bbd8d2fd84b5deada3dd3bdc03ab5)
 - [`int c8_init_graphics(void)`](https://bmoneill.github.io/libc8/graphics_8h.html#a10c02b36be48214fec64cc6a9d4f20e4)
