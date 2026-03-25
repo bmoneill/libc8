@@ -121,17 +121,16 @@ Usage</h2>
 </ul>
 <h2><a class="anchor" id="autotoc_md11"></a>
 Example Code</h2>
-<div class="fragment"><div class="line">.DS &quot;mystring&quot;</div>
-<div class="line">JP mylabel</div>
+<div class="fragment"><div class="line">JP main ; jump to main label</div>
 <div class="line"> </div>
 <div class="line">mysprite:</div>
-<div class="line">.DW 0x1234</div>
+<div class="line">.DW 0x1234 ; sprite to draw</div>
 <div class="line"> </div>
-<div class="line">mylabel:</div>
-<div class="line">ADD V0, 1</div>
-<div class="line">ADD V1, 0xA</div>
-<div class="line">LD I, mysprite</div>
-<div class="line">DRW V0, V1, 1</div>
+<div class="line">main:</div>
+<div class="line">  ADD V0, 1 ; set x coordinate</div>
+<div class="line">  ADD V1, 0xA ; set y coordinate</div>
+<div class="line">  LD I, mysprite ; load sprite</div>
+<div class="line">  DRW V0, V1, 1 ; draw sprite</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md12"></a>
 Instructions</h2>
 <table class="markdownTable">
@@ -236,6 +235,7 @@ Notes</h2>
 <li>Hex integers, besides V register identifiers, must be formatted with <code>0x</code>, <code>x</code>, or <code>$</code> prefixes.</li>
 <li>Binary integers must be formatted with a <code>0b</code> prefix.</li>
 <li>Data bytes and strings are <b>not</b> padded. If a <code>.DB</code> or <code>.DS</code> contains an odd number of bytes, following bytecode will be offset (the first byte of following instructions will be at odd-numbered addresses).</li>
+<li>Single-line comments start with <code>;</code></li>
 <li>Commas are optional for instruction parameters.</li>
 <li>This assembler is not case sensitive. </li>
 </ul>
