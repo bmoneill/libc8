@@ -185,9 +185,6 @@ int c8_tick(int* keys) {
 
     memcpy(keys, current_keys, sizeof(current_keys));
 
-    if (released != -1) {
-        fprintf(stderr, "RELEASED: %d\n", released);
-    }
     return released;
 }
 
