@@ -35,17 +35,16 @@ chip8as [-vV] [-o outputfile] src
 ## Example Code
 
 ```asm
-.DS "mystring"
-JP mylabel
+JP main ; jump to main label
 
 mysprite:
-.DW 0x1234
+.DW 0x1234 ; sprite to draw
 
-mylabel:
-ADD V0, 1
-ADD V1, 0xA
-LD I, mysprite
-DRW V0, V1, 1
+main:
+  ADD V0, 1 ; set x coordinate
+  ADD V1, 0xA ; set y coordinate
+  LD I, mysprite ; load sprite
+  DRW V0, V1, 1 ; draw sprite
 ```
 
 ## Instructions
@@ -107,5 +106,6 @@ DRW V0, V1, 1
 - Data bytes and strings are **not** padded. If a `.DB` or `.DS` contains an odd
   number of bytes, following bytecode will be offset (the first byte of
   following instructions will be at odd-numbered addresses).
+- Single-line comments start with `;`
 - Commas are optional for instruction parameters.
 - This assembler is not case sensitive.
