@@ -81,10 +81,15 @@ for quirk identifiers and what they mean.
 
 ## Building
 
-Building is only officially supported on Linux, but it should be possible to
-build on Windows and Mac with minimal difficulty.
+Building is only officially supported on Linux and macOS, but it should be
+possible to build on Windows with minimal difficulty.
 
-You must have CMake installed with a minimum version of 3.31.6.
+You must have CMake installed with a minimum version of 3.31.6, SDL2, and
+a C99-compatible C compiler (e.g. GCC or Clang).
+
+On macOS, the build system assumes you have installed SDL2 using Homebrew.
+If you have installed SDL2 in a different way, add the flag `-DHOMEBREW=OFF`
+to your initial `cmake` command.
 
 ```bash
 cmake -S . -B build

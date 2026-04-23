@@ -9,7 +9,7 @@ add_subdirectory(docs/man)
 # defaults
 option(SDL2 "Enable SDL2 support" ON)
 option(TEST "Build tests" OFF)
-
+option(HOMEBREW "(if on macOS) SDL2 installed using Homebrew" ON)
 
 # Store git commit hash in GIT_COMMIT_HASH
 execute_process(
