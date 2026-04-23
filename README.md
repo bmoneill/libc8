@@ -35,21 +35,21 @@ documentation is available on the [GitHub Pages site](https://bmoneill.github.io
 
 | Feature                                                                       | Status |
 | ----------------------------------------------------------------------------- | :----: |
-| CHIP-8 instructions fully implemented\*                                       |   ☑   |
-| SCHIP 1.1 instructions fully implemented\*                                    |   ☑   |
+| CHIP-8 instructions fully implemented\*                                       |   ☑    |
+| SCHIP 1.1 instructions fully implemented\*                                    |   ☑    |
 | XO-CHIP instructions fully implemented                                        |   ❌   |
-| **Interpreter**: Full sound support                                           |   ☑   |
-| **Interpreter**: Support for common quirks                                    |   ☑   |
-| **Interpreter**: Custom color palettes                                        |   ☑   |
-| **Interpreter**: Support for various fonts                                    |   ☑   |
-| **Debug mode**: Step, continue, and breakpoints                               |   ☑   |
-| **Debug mode**: Print attributes such as PC, stack, value at an address, etc. |   ☑   |
-| **Debug mode**: Set attributes                                                |   ☑   |
-| **Debug mode**: Load and save program state                                   |   ☑   |
-| **Assembler**: Strings, 16-bit data words, and data bytes                     |   ☑   |
-| **Assembler**: Labels                                                         |   ☑   |
-| **Disassembler**: Address printing                                            |   ☑   |
-| **Disassembler**: Label generation                                            |   ☑   |
+| **Interpreter**: Full sound support                                           |   ☑    |
+| **Interpreter**: Support for common quirks                                    |   ☑    |
+| **Interpreter**: Custom color palettes                                        |   ☑    |
+| **Interpreter**: Support for various fonts                                    |   ☑    |
+| **Debug mode**: Step, continue, and breakpoints                               |   ☑    |
+| **Debug mode**: Print attributes such as PC, stack, value at an address, etc. |   ☑    |
+| **Debug mode**: Set attributes                                                |   ☑    |
+| **Debug mode**: Load and save program state                                   |   ☑    |
+| **Assembler**: Strings, 16-bit data words, and data bytes                     |   ☑    |
+| **Assembler**: Labels                                                         |   ☑    |
+| **Disassembler**: Address printing                                            |   ☑    |
+| **Disassembler**: Label generation                                            |   ☑    |
 
 > [!NOTE]
 > The interpreter passes all of [Timendus's CHIP-8 and SCHIP tests](https://github.com/Timendus/chip8-test-suite)
@@ -81,10 +81,15 @@ for quirk identifiers and what they mean.
 
 ## Building
 
-Building is only officially supported on Linux, but it should be possible to
-build on Windows and Mac with minimal difficulty.
+Building is only officially supported on Linux and macOS, but it should be
+possible to build on Windows with minimal difficulty.
 
-You must have CMake installed with a minimum version of 3.31.6.
+You must have CMake installed with a minimum version of 3.31.6, SDL2, and
+a C99-compatible C compiler (e.g. GCC or Clang).
+
+On macOS, the build system assumes you have installed SDL2 using Homebrew.
+If you have installed SDL2 in a different way, add the flag `-DHOMEBREW=OFF`
+to your initial `cmake` command.
 
 ```bash
 cmake -S . -B build

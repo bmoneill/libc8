@@ -10,9 +10,15 @@
 #include "../graphics.h"
 #include "exception.h"
 
+#ifdef APPLE
+#include <SDL.h>
+#include <SDL_audio.h>
+#include <SDL_mixer.h>
+#else
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_audio.h>
 #include <SDL2/SDL_mixer.h>
+#endif
 #include <stdint.h>
 
 #define C8_RGB_R(i) ((i >> 12) & 0xFF)
