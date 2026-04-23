@@ -35,21 +35,21 @@ documentation is available on the [GitHub Pages site](https://bmoneill.github.io
 
 | Feature                                                                       | Status |
 | ----------------------------------------------------------------------------- | ------ |
-| CHIP-8 instructions fully implemented\*                                       | ☑     |
-| SCHIP 1.1 instructions fully implemented\*                                    | ☑     |
+| CHIP-8 instructions fully implemented\*                                       | ☑      |
+| SCHIP 1.1 instructions fully implemented\*                                    | ☑      |
 | XO-CHIP instructions fully implemented                                        | ❌     |
-| **Interpreter**: Full sound support                                           | ☑     |
-| **Interpreter**: Support for common quirks                                    | ☑     |
-| **Interpreter**: Custom color palettes                                        | ☑     |
-| **Interpreter**: Support for various fonts                                    | ☑     |
-| **Debug mode**: Step, continue, and breakpoints                               | ☑     |
-| **Debug mode**: Print attributes such as PC, stack, value at an address, etc. | ☑     |
-| **Debug mode**: Set attributes                                                | ☑     |
-| **Debug mode**: Load and save program state                                   | ☑     |
-| **Assembler**: Strings, 16-bit data words, and data bytes                     | ☑     |
-| **Assembler**: Labels                                                         | ☑     |
-| **Disassembler**: Address printing                                            | ☑     |
-| **Disassembler**: Label generation                                            | ☑     |
+| **Interpreter**: Full sound support                                           | ☑      |
+| **Interpreter**: Support for common quirks                                    | ☑      |
+| **Interpreter**: Custom color palettes                                        | ☑      |
+| **Interpreter**: Support for various fonts                                    | ☑      |
+| **Debug mode**: Step, continue, and breakpoints                               | ☑      |
+| **Debug mode**: Print attributes such as PC, stack, value at an address, etc. | ☑      |
+| **Debug mode**: Set attributes                                                | ☑      |
+| **Debug mode**: Load and save program state                                   | ☑      |
+| **Assembler**: Strings, 16-bit data words, and data bytes                     | ☑      |
+| **Assembler**: Labels                                                         | ☑      |
+| **Disassembler**: Address printing                                            | ☑      |
+| **Disassembler**: Label generation                                            | ☑      |
 
 > [!NOTE]
 > The interpreter passes all of [Timendus's CHIP-8 and SCHIP tests](https://github.com/Timendus/chip8-test-suite)
