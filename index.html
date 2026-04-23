@@ -185,8 +185,9 @@ Terminology</h2>
 <p>You should also take a look at the quirks section in the <a class="el" href="md_docs_chip8.html">interpreter docs</a> for quirk identifiers and what they mean.</p>
 <h2><a class="anchor" id="autotoc_md18"></a>
 Building</h2>
-<p>Building is only officially supported on Linux, but it should be possible to build on Windows and Mac with minimal difficulty.</p>
-<p>You must have CMake installed with a minimum version of 3.31.6.</p>
+<p>Building is only officially supported on Linux and macOS, but it should be possible to build on Windows with minimal difficulty.</p>
+<p>You must have CMake installed with a minimum version of 3.31.6, SDL2, and a C99-compatible C compiler (e.g. GCC or Clang).</p>
+<p>On macOS, the build system assumes you have installed SDL2 using Homebrew. If you have installed SDL2 in a different way, add the flag <code>-DHOMEBREW=OFF</code> to your initial <code>cmake</code> command.</p>
 <div class="fragment"><div class="line">cmake -S . -B build</div>
 <div class="line">cmake --build build</div>
 <div class="line">sudo cmake --install build</div>
