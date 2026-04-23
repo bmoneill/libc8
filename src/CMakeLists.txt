@@ -63,6 +63,10 @@ add_library (
  ${LIBRARY_NAME} SHARED ${LIBRARY_PUBLIC_SRC} ${LIBRARY_PRIVATE_SRC}
 )
 
+if(APPLE)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DAPPLE")
+endif()
+
 if(TEST)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DTEST")
     target_compile_options(${LIBRARY_NAME} PRIVATE "-fprofile-arcs" "-ftest-coverage")
@@ -70,12 +74,7 @@ if(TEST)
 endif()
 
 if(SDL2)
-    if(TARGET SDL2::SDL2 AND TARGET SDL2_mixer::SDL2_mixer)
-        target_link_libraries(${LIBRARY_NAME} PRIVATE SDL2::SDL2 SDL2_mixer::SDL2_mixer)
-    else()
-        # Fallback: attempt to link the common "sdl2" and "sdl2_mixer" library names if imported targets aren't available
-        target_link_libraries(${LIBRARY_NAME} PRIVATE sdl2 sdl2_mixer)
-    endif()
+    target_link_libraries(${LIBRARY_NAME} PRIVATE SDL2::SDL2 SDL2_mixer::SDL2_mixer)
 elseif(NCURSES)
     target_link_libraries(${LIBRARY_NAME} PRIVATE ncurses)
 
