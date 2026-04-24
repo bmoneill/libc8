@@ -87,12 +87,22 @@ possible to build on Windows with minimal difficulty.
 You must have CMake installed with a minimum version of 3.31.6, SDL2, and
 a C99-compatible C compiler (e.g. GCC or Clang).
 
-On macOS, the build system assumes you have installed SDL2 using Homebrew.
-If you have installed SDL2 in a different way, add the flag `-DHOMEBREW=OFF`
-to your initial `cmake` command.
+### Flags
+
+- `-DTEST=ON` - Build the test suite.
+- `-DTOOLS=OFF` - Do not build the example tools (`chip8`, `chip8as`, and `chip8dis`).
+- `-DSDL2=OFF` - Do not use SDL2 for graphics (required for NCURSES or custom graphics).
+- `-DNCURSES=ON` - Use ncurses for graphics instead of SDL2.
+- `-DX11=ON` - Use X11 for keyboard event handling (used alongside NCURSES).
+  This will change the keyboard delay rate for your entire desktop, so use with
+  caution.
+- `-DHOMEBREW=OFF` - Do not assume SDL2 is installed via Homebrew if you are using
+  macOS.
+
+### Linux / macOS Build Instructions
 
 ```bash
-cmake -S . -B build
+cmake -S . -B build # flags...
 cmake --build build
 sudo cmake --install build
 ```
