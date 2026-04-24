@@ -118,35 +118,35 @@ Overview</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Feature   </th><th class="markdownTableHeadCenter">Status    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">CHIP-8 instructions fully implemented*   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone">CHIP-8 instructions fully implemented*   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">SCHIP 1.1 instructions fully implemented*   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone">SCHIP 1.1 instructions fully implemented*   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">XO-CHIP instructions fully implemented   </td><td class="markdownTableBodyCenter">❌    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Interpreter</b>: Full sound support   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Interpreter</b>: Full sound support   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Interpreter</b>: Support for common quirks   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Interpreter</b>: Support for common quirks   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Interpreter</b>: Custom color palettes   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Interpreter</b>: Custom color palettes   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Interpreter</b>: Support for various fonts   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Interpreter</b>: Support for various fonts   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Debug mode</b>: Step, continue, and breakpoints   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Debug mode</b>: Step, continue, and breakpoints   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Debug mode</b>: Print attributes such as PC, stack, value at an address, etc.   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Debug mode</b>: Print attributes such as PC, stack, value at an address, etc.   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Debug mode</b>: Set attributes   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Debug mode</b>: Set attributes   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Debug mode</b>: Load and save program state   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Debug mode</b>: Load and save program state   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Assembler</b>: Strings, 16-bit data words, and data bytes   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Assembler</b>: Strings, 16-bit data words, and data bytes   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Assembler</b>: Labels   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Assembler</b>: Labels   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Disassembler</b>: Address printing   </td><td class="markdownTableBodyCenter">☑    </td></tr>
+<td class="markdownTableBodyNone"><b>Disassembler</b>: Address printing   </td><td class="markdownTableBodyCenter">✅    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>Disassembler</b>: Label generation   </td><td class="markdownTableBodyCenter">☑   </td></tr>
+<td class="markdownTableBodyNone"><b>Disassembler</b>: Label generation   </td><td class="markdownTableBodyCenter">✅   </td></tr>
 </table>
 <blockquote class="doxtable">
 <p>&zwj;[!NOTE] The interpreter passes all of <a href="https://github.com/Timendus/chip8-test-suite">Timendus's CHIP-8 and SCHIP tests</a> except for the <code>DISP WAIT</code> quirk (identified by <code>r</code> in libc8). </p>
@@ -224,7 +224,7 @@ Graphics</h3>
 Testing</h2>
 <p>Testing is done using <a href="https://cmake.org/cmake/help/latest/manual/ctest.1.html">ctest</a> and <a href="https://github.com/ThrowTheSwitch/Unity">Unity</a>.</p>
 <div class="fragment"><div class="line">git submodule update</div>
-<div class="line">cmake -S . -B build -DTEST=ON -DSDL2=OFF</div>
+<div class="line">cmake -S . -B build -DTEST=ON</div>
 <div class="line">cmake --build build</div>
 <div class="line">cd build</div>
 <div class="line">ctest --verbose</div>
