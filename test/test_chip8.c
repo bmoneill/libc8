@@ -12,7 +12,7 @@ char buf[1024];
 
 void setUp(void) { memset(&c8, 0, sizeof(c8)); }
 
-void tearDown(void) { memset(c8_exception, 0, 8192); }
+void tearDown(void) { memset(c8_exception, 0, sizeof(c8_exception)); }
 
 void test_c8_init_WithValidPath(void) {
     char* path      = get_path("1dcell.ch8");
