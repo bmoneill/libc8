@@ -187,12 +187,23 @@ Terminology</h2>
 Building</h2>
 <p>Building is only officially supported on Linux and macOS, but it should be possible to build on Windows with minimal difficulty.</p>
 <p>You must have CMake installed with a minimum version of 3.31.6, SDL2, and a C99-compatible C compiler (e.g. GCC or Clang).</p>
-<p>On macOS, the build system assumes you have installed SDL2 using Homebrew. If you have installed SDL2 in a different way, add the flag <code>-DHOMEBREW=OFF</code> to your initial <code>cmake</code> command.</p>
-<div class="fragment"><div class="line">cmake -S . -B build</div>
+<h3><a class="anchor" id="autotoc_md19"></a>
+Flags</h3>
+<ul>
+<li><code>-DTEST=ON</code> - Build the test suite.</li>
+<li><code>-DTOOLS=OFF</code> - Do not build the example tools (<code>chip8</code>, <code>chip8as</code>, and <code>chip8dis</code>).</li>
+<li><code>-DSDL2=OFF</code> - Do not use SDL2 for graphics (required for NCURSES or custom graphics).</li>
+<li><code>-DNCURSES=ON</code> - Use ncurses for graphics instead of SDL2.</li>
+<li><code>-DX11=ON</code> - Use X11 for keyboard event handling (used alongside NCURSES). This will change the keyboard delay rate for your entire desktop, so use with caution.</li>
+<li><code>-DHOMEBREW=OFF</code> - Do not assume SDL2 is installed via Homebrew if you are using macOS.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md20"></a>
+Linux / macOS Build Instructions</h3>
+<div class="fragment"><div class="line">cmake -S . -B build # flags...</div>
 <div class="line">cmake --build build</div>
 <div class="line">sudo cmake --install build</div>
 </div><!-- fragment --><p>This will build and install libc8 as well as the example tools.</p>
-<h3><a class="anchor" id="autotoc_md19"></a>
+<h3><a class="anchor" id="autotoc_md21"></a>
 Graphics</h3>
 <p>Graphics may be rendered using SDL2 or ncurses. SDL2 is the default graphics library. To use ncurses, you must add the following flags to cmake: <code>-DSDL2=OFF -DNCURSES=ON</code>. The ncurses-based graphical environment has no support for colors or sound.</p>
 <p>The terminal environment does not allow for very good keyboard event handling, so keyboard input in ncurses by default is very unreliable. If you are using X11, the X11 flag (<code>-DX11=ON</code>) may be set in order to get somewhat reliable key event handling.</p>
@@ -209,7 +220,7 @@ Graphics</h3>
 <li><a href="https://bmoneill.github.io/libc8/graphics_8h.html#a020c1df5341d906fb19266b94235f884"><code>int c8_tick(int *, int)</code></a></li>
 </ul>
 <p><b>Note</b>: the <code>all</code> and <code>tools</code> targets require <code>SDL2</code> to be <code>ON</code>.</p>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 Testing</h2>
 <p>Testing is done using <a href="https://cmake.org/cmake/help/latest/manual/ctest.1.html">ctest</a> and <a href="https://github.com/ThrowTheSwitch/Unity">Unity</a>.</p>
 <div class="fragment"><div class="line">git submodule update</div>
@@ -217,11 +228,11 @@ Testing</h2>
 <div class="line">cmake --build build</div>
 <div class="line">cd build</div>
 <div class="line">ctest --verbose</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md21"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md23"></a>
 Showcase</h2>
 <p>The libc8 CHIP-8 interpreter running <a href="https://johnearnest.github.io/chip8Archive/play.html?p=outlaw">Outlaw by John Earnest</a>:</p>
 <p><img src="https://oneill.sh/img/libc8-outlaw.gif" alt="libc8 running outlaw" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md22"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 Further Reading</h2>
 <ul>
 <li><a href="http://devernay.free.fr/hacks/chip8/C8TECH10.HTM">Cowgod's Chip-8 Technical Reference</a></li>
@@ -230,10 +241,10 @@ Further Reading</h2>
 <li><a href="https://chip-8.github.io/extensions/">CHIP-8 Extensions and Compatibility</a></li>
 <li><a href="https://github.com/Timendus/chip8-test-suite">Timendus's CHIP-8 Test Suite</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md23"></a>
+<h2><a class="anchor" id="autotoc_md25"></a>
 Bugs</h2>
 <p>If you find a bug, submit an issue, PR, or email me with a description and/or patch.</p>
-<h2><a class="anchor" id="autotoc_md24"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 License</h2>
 <p>Copyright (c) 2019-2026 Ben O'Neill <a href="#" onclick="location.href='mai'+'lto:'+'ben'+'@o'+'nei'+'ll'+'.sh'; return false;">ben@o<span class="obfuscator">.nosp@m.</span>neil<span class="obfuscator">.nosp@m.</span>l.sh</a>. This work is released under the terms of the MIT License. See [LICENSE](LICENSE) for the license terms. </p>
 </div></div><!-- PageDoc -->

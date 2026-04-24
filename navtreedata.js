@@ -30,13 +30,15 @@ var NAVTREE =
       [ "Overview", "index.html#autotoc_md16", null ],
       [ "Terminology", "index.html#autotoc_md17", null ],
       [ "Building", "index.html#autotoc_md18", [
-        [ "Graphics", "index.html#autotoc_md19", null ]
+        [ "Flags", "index.html#autotoc_md19", null ],
+        [ "Linux / macOS Build Instructions", "index.html#autotoc_md20", null ],
+        [ "Graphics", "index.html#autotoc_md21", null ]
       ] ],
-      [ "Testing", "index.html#autotoc_md20", null ],
-      [ "Showcase", "index.html#autotoc_md21", null ],
-      [ "Further Reading", "index.html#autotoc_md22", null ],
-      [ "Bugs", "index.html#autotoc_md23", null ],
-      [ "License", "index.html#autotoc_md24", null ],
+      [ "Testing", "index.html#autotoc_md22", null ],
+      [ "Showcase", "index.html#autotoc_md23", null ],
+      [ "Further Reading", "index.html#autotoc_md24", null ],
+      [ "Bugs", "index.html#autotoc_md25", null ],
+      [ "License", "index.html#autotoc_md26", null ],
       [ "Table of Contents", "md_docs_chip8.html#autotoc_md1", null ],
       [ "Usage", "md_docs_chip8.html#autotoc_md2", [
         [ "Options", "md_docs_chip8.html#autotoc_md3", null ]
@@ -74,7 +76,7 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "graphics__sdl2_8c.html#a2becc8d2fb6ea7320ac26ee56beb46c6",
-"util_8h.html#aca82f40ee5a3c5e68502c2194b32140a"
+"util_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
