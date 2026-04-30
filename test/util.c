@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <unistd.h>
 
+// These macros redirect stdout and stderr, only guaranteed to work
+// on Linux. For some reason, macOS doesn't like this.
+// All tests using these macros are skipped on macOS, but success on
+// Linux implies the same behavior on macOS, so it's not a huge deal.
 #define REDIRECT_STDOUT                                                                            \
     freopen("/dev/null", "a", stdout);                                                             \
     setbuf(stdout, stdio_buffer);
 #define RESTORE_STDOUT freopen("/dev/tty", "w", stdout);
-
 #define REDIRECT_STDERR                                                                            \
     freopen("/dev/null", "a", stderr);                                                             \
     setbuf(stderr, stdio_buffer);

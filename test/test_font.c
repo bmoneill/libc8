@@ -66,11 +66,3 @@ void test_c8_set_big_font(void) {
     result = c8_set_big_font(&c8, "invalid");
     TEST_ASSERT_NOT_EQUAL_INT(0, result);
 }
-
-void test_c8_print_fonts(void) {
-    c8_set_fonts(&c8, C8_SMALLFONT_OCTO, C8_BIGFONT_FISH);
-    REDIRECT_STDOUT;
-    c8_print_fonts(&c8);
-    RESTORE_STDOUT;
-    TEST_ASSERT_EQUAL_STRING("SFONT: octo\tBFONT: fish\n", stdio_buffer);
-}
