@@ -1,29 +1,18 @@
-#include "c8/private/debug.h"
-
-#include "c8/chip8.h"
-#include "c8/font.h"
-#include "c8/graphics.h"
-#include "c8/private/exception.h"
-#include "unity.h"
+#include "test_debug.h"
 #include "util.c"
 
-#include <stdint.h>
-#include <stdio.h>
-#include <string.h>
+void setUp(void) {
+    memset(buf, 0, DEBUG_BUFFER_LENGTH);
+    memset(&cmd, 0, sizeof(C8_Command));
+    memset(&c8, 0, sizeof(C8));
+    c8.pc        = 0x200;
+    c8.tickSpeed = 1;
+    memset(stdio_buffer, 0, sizeof(stdio_buffer));
+}
 
-#define BUFLEN 128
+void tearDown(void) {}
 
-#define TEST_COMMAND(s, cmdid, argtype)                                                            \
-    strcpy(buf, s);                                                                                \
-    TEST_ASSERT_EQUAL_INT(0, c8_get_command(&cmd, buf));                                           \
-    TEST_ASSERT_EQUAL_INT(cmdid, cmd.id);                                                          \
-    TEST_ASSERT_EQUAL_INT(argtype, cmd.arg.type);
-
-char       buf[BUFLEN];
-C8_Command cmd;
-C8         c8;
-
-void       test_c8_parse_arg_WhereCommandIsSet_WhereArgIsEmpty(void) {
+void test_c8_parse_arg_WhereCommandIsSet_WhereArgIsEmpty(void) {
     cmd.id = C8_CMD_SET;
 
     REDIRECT_STDOUT;
