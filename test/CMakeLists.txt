@@ -31,6 +31,6 @@ add_libc8_test(symbol)
 add_libc8_test(util)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  add_libc8_test(test_debug_linux)
-  add_libc8_test(test_font_linux)
+  add_libc8_test(debug_linux)
+  add_libc8_test(font_linux)
 endif()
