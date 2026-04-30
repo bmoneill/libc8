@@ -180,10 +180,10 @@ C8_STATIC C8_INLINE int c8_base_instruction(C8* c8, uint16_t in, uint8_t kk) {
     }
 
     if (C8_Y(in) == 0xC) {
-        return c8_i_scd_b(c8, kk);
+        return c8_i_scd_b(c8, kk & 0xF);
     }
     if (C8_Y(in) == 0xD) {
-        return c8_i_scu_b(c8, kk);
+        return c8_i_scu_b(c8, kk & 0xF);
     }
 
     switch (kk) {
