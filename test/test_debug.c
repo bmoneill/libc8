@@ -1,7 +1,11 @@
 #include "test_debug.h"
 #include "util.c"
 
-void setUp(void) {
+char       buf[DEBUG_BUFFER_LENGTH];
+C8_Command cmd;
+C8         c8;
+
+void       setUp(void) {
     memset(buf, 0, DEBUG_BUFFER_LENGTH);
     memset(&cmd, 0, sizeof(C8_Command));
     memset(&c8, 0, sizeof(C8));

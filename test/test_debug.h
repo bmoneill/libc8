@@ -22,10 +22,6 @@
 
 #define DEBUG_BUFFER_LENGTH 128
 
-char                 buf[DEBUG_BUFFER_LENGTH];
-C8_Command           cmd;
-C8                   c8;
-
 extern int           c8_get_command(C8_Command*, char*);
 extern int           c8_load_file_arg(C8_Command*, char*);
 extern int           c8_load_flags(C8*, const char*);
